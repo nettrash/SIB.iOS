@@ -2,11 +2,12 @@
 //  Address+CoreDataProperties.swift
 //  sib-lite
 //
-//  Created by Иван Алексеев on 23.09.17.
+//  Created by Иван Алексеев on 11.10.2017.
 //  Copyright © 2017 NETTRASH. All rights reserved.
 //
 //
 
+import Foundation
 import CoreData
 
 

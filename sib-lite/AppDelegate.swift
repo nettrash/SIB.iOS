@@ -12,17 +12,28 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-	var window: UIWindow?
+	var window: UIWindow?;
+	
+	public var model: ModelRoot?
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		model = ModelRoot(self);
+		if (model!.Addresses.count < 1) {
+			model!.add("SbdcLQ5rj5rFEh43KwjJ6G5cmPeH1csSuA")
+		} else {
+			model!.refresh()
+		}
+		
 		return true
 	}
 
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+		
+		model!.refresh()
 	}
 
 	func applicationDidEnterBackground(_ application: UIApplication) {

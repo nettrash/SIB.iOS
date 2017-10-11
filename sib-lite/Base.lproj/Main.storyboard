@@ -17,12 +17,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="Background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Tto-yS-Wb3">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="Background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Tto-yS-Wb3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="symbol.png" translatesAutoresizingMaskIntoConstraints="NO" id="9nt-IB-Iny">
+                                <rect key="frame" x="37" y="183" width="300" height="300"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VLj-Ve-6tL">
+                                <rect key="frame" x="169" y="491" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Tto-yS-Wb3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0nf-Dd-Rs2"/>
+                            <constraint firstItem="VLj-Ve-6tL" firstAttribute="top" secondItem="9nt-IB-Iny" secondAttribute="bottom" constant="8" symbolic="YES" id="3DF-aA-yM8"/>
+                            <constraint firstItem="VLj-Ve-6tL" firstAttribute="centerX" secondItem="9nt-IB-Iny" secondAttribute="centerX" id="B7y-BX-Gp4"/>
+                            <constraint firstItem="9nt-IB-Iny" firstAttribute="centerY" secondItem="Tto-yS-Wb3" secondAttribute="centerY" id="c8R-gO-3oK"/>
+                            <constraint firstItem="9nt-IB-Iny" firstAttribute="centerX" secondItem="Tto-yS-Wb3" secondAttribute="centerX" id="d2R-kD-fIa"/>
+                            <constraint firstItem="Tto-yS-Wb3" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="i00-vC-LPZ"/>
+                            <constraint firstItem="Tto-yS-Wb3" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="kcH-1S-jHb"/>
+                            <constraint firstItem="Tto-yS-Wb3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="tVr-xF-INh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -33,5 +48,6 @@
     </scenes>
     <resources>
         <image name="Background.jpg" width="3840" height="2160"/>
+        <image name="symbol.png" width="300" height="300"/>
     </resources>
 </document>
