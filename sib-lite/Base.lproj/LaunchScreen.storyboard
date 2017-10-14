@@ -20,11 +20,16 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="Background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="goD-gd-qLr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="symbol.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Me-Yl-T8R">
+                                <rect key="frame" x="37" y="183" width="300" height="300"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="0Me-Yl-T8R" firstAttribute="centerX" secondItem="goD-gd-qLr" secondAttribute="centerX" id="9we-EU-mEv"/>
                             <constraint firstItem="goD-gd-qLr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="LZj-4T-9HV"/>
                             <constraint firstItem="goD-gd-qLr" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="VOX-q8-SWt"/>
+                            <constraint firstItem="0Me-Yl-T8R" firstAttribute="centerY" secondItem="goD-gd-qLr" secondAttribute="centerY" id="im7-F6-vsd"/>
                             <constraint firstItem="goD-gd-qLr" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="jQ5-g8-4W6"/>
                             <constraint firstItem="goD-gd-qLr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="z9K-bu-o3L"/>
                         </constraints>
@@ -38,5 +43,6 @@
     </scenes>
     <resources>
         <image name="Background.jpg" width="3840" height="2160"/>
+        <image name="symbol.png" width="300" height="300"/>
     </resources>
 </document>

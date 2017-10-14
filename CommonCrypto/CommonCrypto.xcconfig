@@ -1,0 +1,3 @@
+MODULEMAP_FILE[sdk=iphoneos*]        = /Volumes/NETTRASH DATA/Develop/iOS/sib-lite/CommonCrypto/iphoneos.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = /Volumes/NETTRASH DATA/Develop/iOS/sib-lite/CommonCrypto/iphonesimulator.modulemap
+MODULEMAP_FILE[sdk=macosx*]          = /Volumes/NETTRASH DATA/Develop/iOS/sib-lite/CommonCrypto/macosx.modulemap

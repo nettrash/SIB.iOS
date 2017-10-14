@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,14 +41,119 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="dYl-ZK-dA8" kind="presentation" identifier="root-address-add" modalTransitionStyle="coverVertical" id="PEh-IC-80e"/>
+                        <segue destination="vts-pe-VKX" kind="show" identifier="balance" id="uDN-6K-Ulo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
+        <!--Balance View Controller-->
+        <scene sceneID="yF6-hF-3Pw">
+            <objects>
+                <viewController id="vts-pe-VKX" customClass="BalanceViewController" customModule="sib_lite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sGo-GA-Zah">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="background_block-first.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hWk-v1-0In">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="geP-U4-Epy"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NcN-Ux-Wzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1080.8" y="133.5832083958021"/>
+        </scene>
+        <!--Add Address View Controller-->
+        <scene sceneID="Q7C-gb-g3P">
+            <objects>
+                <viewController id="dYl-ZK-dA8" customClass="AddAddressViewController" customModule="sib_lite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Ol-VZ-tKV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="background-user.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="15R-m6-pJy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <textField opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Укажите адрес SIB" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T8Z-d3-SDT">
+                                <rect key="frame" x="0.0" y="114" width="375" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="JLy-lY-0yg"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="dYl-ZK-dA8" id="pKQ-6H-wgY"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавить адрес" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahe-VQ-9V0">
+                                <rect key="frame" x="65" y="41" width="245" height="65"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrU-WC-4iH">
+                                <rect key="frame" x="313" y="164" width="46" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Scan.png"/>
+                                <connections>
+                                    <segue destination="gdP-Sw-8eU" kind="presentation" identifier="Scan" modalTransitionStyle="crossDissolve" id="Eft-dN-Voz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="15R-m6-pJy" firstAttribute="leading" secondItem="oYu-Ow-Fol" secondAttribute="leading" id="4aU-Xf-zXO"/>
+                            <constraint firstItem="ahe-VQ-9V0" firstAttribute="centerX" secondItem="T8Z-d3-SDT" secondAttribute="centerX" id="Dbs-2r-ePa"/>
+                            <constraint firstItem="15R-m6-pJy" firstAttribute="bottom" secondItem="oYu-Ow-Fol" secondAttribute="bottom" id="IPm-vo-93h"/>
+                            <constraint firstItem="oYu-Ow-Fol" firstAttribute="bottom" secondItem="T8Z-d3-SDT" secondAttribute="bottom" constant="511" id="IiN-v4-YMB"/>
+                            <constraint firstItem="T8Z-d3-SDT" firstAttribute="leading" secondItem="4Ol-VZ-tKV" secondAttribute="leadingMargin" constant="-16" id="WwE-EI-qpZ"/>
+                            <constraint firstItem="T8Z-d3-SDT" firstAttribute="top" secondItem="ahe-VQ-9V0" secondAttribute="bottom" constant="8" symbolic="YES" id="bUr-qg-8FU"/>
+                            <constraint firstItem="ahe-VQ-9V0" firstAttribute="top" secondItem="oYu-Ow-Fol" secondAttribute="top" constant="21" id="cOx-nn-azN"/>
+                            <constraint firstItem="15R-m6-pJy" firstAttribute="top" secondItem="4Ol-VZ-tKV" secondAttribute="top" id="hoK-fw-jHk"/>
+                            <constraint firstItem="ahe-VQ-9V0" firstAttribute="centerX" secondItem="15R-m6-pJy" secondAttribute="centerX" id="l49-8h-oCg"/>
+                            <constraint firstItem="15R-m6-pJy" firstAttribute="trailing" secondItem="4Ol-VZ-tKV" secondAttribute="trailing" id="n7H-98-j0u"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oYu-Ow-Fol"/>
+                    </view>
+                    <connections>
+                        <outlet property="textFieldAddress" destination="T8Z-d3-SDT" id="qLR-DA-y23"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OkT-1i-tAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1080.8" y="896.40179910044981"/>
+        </scene>
+        <!--Scan View Controller-->
+        <scene sceneID="BqY-w7-SHW">
+            <objects>
+                <viewController id="gdP-Sw-8eU" customClass="ScanViewController" customModule="sib_lite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c2W-mr-dZ6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="cuo-5o-OZD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nj6-pY-vnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2106" y="896"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Background.jpg" width="3840" height="2160"/>
+        <image name="Scan.png" width="46" height="46"/>
+        <image name="background-user.jpg" width="1920" height="1280"/>
+        <image name="background_block-first.jpg" width="2048" height="1661"/>
         <image name="symbol.png" width="300" height="300"/>
     </resources>
 </document>

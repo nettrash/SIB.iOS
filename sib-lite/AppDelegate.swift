@@ -12,20 +12,14 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-	var window: UIWindow?;
+	var window: UIWindow?
 	
 	public var model: ModelRoot?
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-		model = ModelRoot(self);
-		if (model!.Addresses.count < 1) {
-			model!.add("SbdcLQ5rj5rFEh43KwjJ6G5cmPeH1csSuA")
-		} else {
-			model!.refresh()
-		}
-		
+		model = ModelRoot(self)
 		return true
 	}
 
