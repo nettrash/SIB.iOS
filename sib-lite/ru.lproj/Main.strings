@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "Ввести руками"; ObjectID = "BkR-Mz-76O"; */
+"BkR-Mz-76O.normalTitle" = "Ввести руками";
+
+/* Class = "UITextField"; placeholder = "Укажите адрес SIB"; ObjectID = "T8Z-d3-SDT"; */
+"T8Z-d3-SDT.placeholder" = "Укажите адрес SIB";
+
+/* Class = "UILabel"; text = "Добавить адрес"; ObjectID = "ahe-VQ-9V0"; */
+"ahe-VQ-9V0.text" = "Добавить адрес";

@@ -15,6 +15,7 @@
 		E50165DC1F7657A200855FBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50165DA1F7657A200855FBC /* LaunchScreen.storyboard */; };
 		E50165E71F7657A200855FBC /* sib_liteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50165E61F7657A200855FBC /* sib_liteTests.swift */; };
 		E50165F21F7657A200855FBC /* sib_liteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50165F11F7657A200855FBC /* sib_liteUITests.swift */; };
+		E55E17F31F94DD7500B5AC3C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E55E17F21F94DD7400B5AC3C /* Info.plist */; };
 		E56DECE41F8F6FB3002DADE9 /* background_form.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECD81F8F6FB1002DADE9 /* background_form.jpg */; };
 		E56DECE51F8F6FB3002DADE9 /* footer_img2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECD91F8F6FB2002DADE9 /* footer_img2.jpg */; };
 		E56DECE61F8F6FB3002DADE9 /* background_block-fail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECDA1F8F6FB2002DADE9 /* background_block-fail.jpg */; };
@@ -38,6 +39,8 @@
 		E579F15E1F922D4E00FA19E8 /* Scan.png in Resources */ = {isa = PBXBuildFile; fileRef = E579F15C1F922D4E00FA19E8 /* Scan.png */; };
 		E579F1601F922EFE00FA19E8 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E579F15F1F922EFE00FA19E8 /* ScanViewController.swift */; };
 		E579F1621F922F7700FA19E8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E579F1611F922F7700FA19E8 /* AVFoundation.framework */; };
+		E579F1651F937EE400FA19E8 /* Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E579F1631F937EE300FA19E8 /* Close@2x.png */; };
+		E579F1661F937EE400FA19E8 /* Close.png in Resources */ = {isa = PBXBuildFile; fileRef = E579F1641F937EE400FA19E8 /* Close.png */; };
 		E5BC8D951F90DC3800BE78A9 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BC8D941F90DC3700BE78A9 /* LocalAuthentication.framework */; };
 		E5BC8D971F90DC6000BE78A9 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BC8D961F90DC5F00BE78A9 /* CoreFoundation.framework */; };
 		E5BC8D991F90DCC400BE78A9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BC8D981F90DCC400BE78A9 /* Security.framework */; };
@@ -111,13 +114,17 @@
 		E50165D61F7657A200855FBC /* sib_lite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sib_lite.xcdatamodel; sourceTree = "<group>"; };
 		E50165D81F7657A200855FBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E50165DB1F7657A200855FBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E50165DD1F7657A200855FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50165E21F7657A200855FBC /* sib-liteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sib-liteTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50165E61F7657A200855FBC /* sib_liteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sib_liteTests.swift; sourceTree = "<group>"; };
 		E50165E81F7657A200855FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50165ED1F7657A200855FBC /* sib-liteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sib-liteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50165F11F7657A200855FBC /* sib_liteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sib_liteUITests.swift; sourceTree = "<group>"; };
 		E50165F31F7657A200855FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E55E17F21F94DD7400B5AC3C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E56D3C141F94AF9800D7B458 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		E56D3C151F94AF9800D7B458 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E56D3C161F94AFC300D7B458 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		E56D3C171F94AFC300D7B458 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E56DECD81F8F6FB1002DADE9 /* background_form.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_form.jpg; sourceTree = "<group>"; };
 		E56DECD91F8F6FB2002DADE9 /* footer_img2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = footer_img2.jpg; sourceTree = "<group>"; };
 		E56DECDA1F8F6FB2002DADE9 /* background_block-fail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background_block-fail.jpg"; sourceTree = "<group>"; };
@@ -142,6 +149,8 @@
 		E579F15C1F922D4E00FA19E8 /* Scan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Scan.png; sourceTree = "<group>"; };
 		E579F15F1F922EFE00FA19E8 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		E579F1611F922F7700FA19E8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E579F1631F937EE300FA19E8 /* Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Close@2x.png"; sourceTree = "<group>"; };
+		E579F1641F937EE400FA19E8 /* Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Close.png; sourceTree = "<group>"; };
 		E5BC8D941F90DC3700BE78A9 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		E5BC8D961F90DC5F00BE78A9 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E5BC8D981F90DCC400BE78A9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -248,8 +257,8 @@
 				E50165D21F7657A200855FBC /* Main.storyboard */,
 				E50165D81F7657A200855FBC /* Assets.xcassets */,
 				E50165DA1F7657A200855FBC /* LaunchScreen.storyboard */,
-				E50165DD1F7657A200855FBC /* Info.plist */,
 				E50165D51F7657A200855FBC /* sib_lite.xcdatamodeld */,
+				E55E17F21F94DD7400B5AC3C /* Info.plist */,
 			);
 			path = "sib-lite";
 			sourceTree = "<group>";
@@ -296,6 +305,8 @@
 		E56EC0B91F765E9600EDE756 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				E579F1641F937EE400FA19E8 /* Close.png */,
+				E579F1631F937EE300FA19E8 /* Close@2x.png */,
 				E579F15C1F922D4E00FA19E8 /* Scan.png */,
 				E579F15B1F922D4E00FA19E8 /* Scan@2x.png */,
 				E56DECDA1F8F6FB2002DADE9 /* background_block-fail.jpg */,
@@ -530,11 +541,12 @@
 			};
 			buildConfigurationList = E50165C61F7657A200855FBC /* Build configuration list for PBXProject "sib-lite" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
+				ru,
 			);
 			mainGroup = E50165C21F7657A200855FBC;
 			productRefGroup = E50165CC1F7657A200855FBC /* Products */;
@@ -560,8 +572,10 @@
 				E50165DC1F7657A200855FBC /* LaunchScreen.storyboard in Resources */,
 				E56EC0BB1F765EC700EDE756 /* Background.jpg in Resources */,
 				E56DECE61F8F6FB3002DADE9 /* background_block-fail.jpg in Resources */,
+				E579F1651F937EE400FA19E8 /* Close@2x.png in Resources */,
 				E5DEEF1A1F8E68CC00D8441D /* symbol@2x.png in Resources */,
 				E56DECEB1F8F6FB3002DADE9 /* background_block-success.jpg in Resources */,
+				E55E17F31F94DD7500B5AC3C /* Info.plist in Resources */,
 				E56DECE51F8F6FB3002DADE9 /* footer_img2.jpg in Resources */,
 				E56DECEF1F8F6FB3002DADE9 /* wait.gif in Resources */,
 				E5DEEF191F8E68CC00D8441D /* symbol.png in Resources */,
@@ -572,6 +586,7 @@
 				E50165D91F7657A200855FBC /* Assets.xcassets in Resources */,
 				E56DECEA1F8F6FB3002DADE9 /* background-user.jpg in Resources */,
 				E56DECEE1F8F6FB3002DADE9 /* background_method_pay.jpg in Resources */,
+				E579F1661F937EE400FA19E8 /* Close.png in Resources */,
 				E56DECED1F8F6FB3002DADE9 /* background_user__email.jpg in Resources */,
 				E579F15D1F922D4E00FA19E8 /* Scan@2x.png in Resources */,
 				E50165D41F7657A200855FBC /* Main.storyboard in Resources */,
@@ -693,6 +708,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				E50165D31F7657A200855FBC /* Base */,
+				E56D3C141F94AF9800D7B458 /* ru */,
+				E56D3C161F94AFC300D7B458 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -701,6 +718,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				E50165DB1F7657A200855FBC /* Base */,
+				E56D3C151F94AF9800D7B458 /* ru */,
+				E56D3C171F94AFC300D7B458 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -712,6 +731,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -769,6 +789,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -140,13 +140,29 @@
                     <view key="view" contentMode="scaleToFill" id="c2W-mr-dZ6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkR-Mz-76O">
+                                <rect key="frame" x="106" y="617" width="162" height="30"/>
+                                <state key="normal" title="Ввести руками">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BkR-Mz-76O" firstAttribute="leading" secondItem="cuo-5o-OZD" secondAttribute="leading" constant="106" id="elM-Hw-CFU"/>
+                            <constraint firstItem="BkR-Mz-76O" firstAttribute="centerX" secondItem="c2W-mr-dZ6" secondAttribute="centerX" id="qL1-BB-o8a"/>
+                            <constraint firstAttribute="bottom" secondItem="BkR-Mz-76O" secondAttribute="bottom" constant="20" symbolic="YES" id="rfZ-kv-IhZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cuo-5o-OZD"/>
                     </view>
+                    <connections>
+                        <outlet property="btnClose" destination="BkR-Mz-76O" id="IQy-KY-PJU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nj6-pY-vnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2106" y="896"/>
+            <point key="canvasLocation" x="2104.8000000000002" y="895.50224887556226"/>
         </scene>
     </scenes>
     <resources>
