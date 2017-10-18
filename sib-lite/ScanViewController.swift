@@ -9,14 +9,19 @@
 import UIKit
 import AVFoundation
 
-class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDelegate {
 	
 	@IBOutlet var btnClose: UIButton!
 	var captureSession: AVCaptureSession!
 	var previewLayer: AVCaptureVideoPreviewLayer!
+	var configured: Bool = false
+	var address: String? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		if (!configured) {
+			configure()
+		}
 	}
 	
 	func failed() {
@@ -29,9 +34,13 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		address = nil;
+		
 		switch (AVCaptureDevice.authorizationStatus(for: .video)) {
 			case .authorized:
-				requestAccessResult(true)
+				if (captureSession?.isRunning == false) {
+					captureSession.startRunning()
+			}
 			case .notDetermined:
 				AVCaptureDevice.requestAccess(for: .video, completionHandler: requestAccessResult)
 			default:
@@ -41,50 +50,57 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 	
 	public func requestAccessResult(_ granted: Bool) -> Void {
 		if (granted) {
-			view.backgroundColor = UIColor.black
-			captureSession = AVCaptureSession()
-			
-			guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-			let videoInput: AVCaptureDeviceInput
-			
-			do {
-				videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-			} catch {
-				return
+			if (!configured) {
+				configure()
 			}
-			
-			if (captureSession.canAddInput(videoInput)) {
-				captureSession.addInput(videoInput)
-			} else {
-				failed()
-				return
-			}
-			
-			let metadataOutput = AVCaptureMetadataOutput()
-			
-			if (captureSession.canAddOutput(metadataOutput)) {
-				captureSession.addOutput(metadataOutput)
-				
-				metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-				metadataOutput.metadataObjectTypes = [.qr]
-			} else {
-				failed()
-				return
-			}
-			
-			previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-			previewLayer.frame = view.layer.bounds
-			previewLayer.videoGravity = .resizeAspectFill
-			view.layer.addSublayer(previewLayer)
-			
-			view.bringSubview(toFront: btnClose)
-			
 			if (captureSession?.isRunning == false) {
 				captureSession.startRunning()
 			}
-	} else {
+		} else {
 			failed()
 		}
+	}
+	
+	func configure() -> Void {
+		view.backgroundColor = UIColor.black
+		captureSession = AVCaptureSession()
+		
+		guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+		let videoInput: AVCaptureDeviceInput
+		
+		do {
+			videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+		} catch {
+			return
+		}
+		
+		if (captureSession.canAddInput(videoInput)) {
+			captureSession.addInput(videoInput)
+		} else {
+			failed()
+			return
+		}
+		
+		let metadataOutput = AVCaptureMetadataOutput()
+		
+		if (captureSession.canAddOutput(metadataOutput)) {
+			captureSession.addOutput(metadataOutput)
+			
+			metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+			metadataOutput.metadataObjectTypes = [.qr]
+		} else {
+			failed()
+			return
+		}
+		
+		previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+		previewLayer.frame = view.layer.bounds
+		previewLayer.videoGravity = .resizeAspectFill
+		view.layer.addSublayer(previewLayer)
+		
+		view.bringSubview(toFront: btnClose)
+		
+		configured = true;
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -95,21 +111,46 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 		}
 	}
 	
-	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+	public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
 		captureSession.stopRunning()
 		
 		if let metadataObject = metadataObjects.first {
-			guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-			guard let stringValue = readableObject.stringValue else { return }
+			guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {
+				captureSession.startRunning()
+				return
+			}
+			guard let stringValue = readableObject.stringValue else {
+				captureSession.startRunning()
+				return
+			}
 			AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-			found(code: stringValue)
+			if (!found(code: stringValue)) {
+				captureSession.startRunning()
+				return
+			}
 		}
 		
-		dismiss(animated: true)
+		//dismiss(animated: true)
+		performSegue(withIdentifier: "unwindSegueToAddAddress", sender: self)
 	}
 	
-	func found(code: String) {
-		print(code)
+	func found(code: String) -> Bool {
+		if (!code.hasPrefix("sibcoin:")) { return false }
+		
+		let qDelIndex = code.index(of: ":")
+		var qStartIndex = qDelIndex ?? code.startIndex
+		if (qDelIndex != nil) {
+			qStartIndex = code.index(after: qDelIndex!)
+		}
+		let qEndIndex = code.endIndex
+		let q = code[qStartIndex..<qEndIndex]
+		let query = String(q)
+		
+		let qAndIndex = query.index(of: "&") ?? query.endIndex
+		let qAddress = query[..<qAndIndex]
+		address = String(qAddress)
+		
+		return sibAddress.verify(address)
 	}
 	
 	override var prefersStatusBarHidden: Bool {
@@ -119,6 +160,12 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .portrait
 	}
+	
+	@IBAction func btnClose_Click(_ sender: Any?) {
+		captureSession.stopRunning()
+		performSegue(withIdentifier: "unwindSegueToAddAddress", sender: self)
+	}
+
 }
 
 

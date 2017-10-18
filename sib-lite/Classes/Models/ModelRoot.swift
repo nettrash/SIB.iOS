@@ -11,10 +11,15 @@ import CoreData;
 
 public class ModelRoot: NSObject {
 
-	public var Addresses: [Address]
+	public var Addresses: [Address] = [Address]()
+	
+	public var Balance: Double = 0
+	
+	public var Dimension: BalanceDimension = .SIB
+	
+	public var HistoryItems: History = History()
 	
 	init(_ app: AppDelegate) {
-		Addresses = [Address]()
 		super.init()
 		reload(app)
 	}
@@ -26,15 +31,17 @@ public class ModelRoot: NSObject {
 		} catch {
 			Addresses = [Address]()
 		}
-
 	}
 	
 	func refresh() {
-		//Обновляе
+		//Обновляем
 		NSLog("%i", Addresses.count)
 	}
 	
 	func add(_ address: String) {
+		for  a in Addresses {
+			if (a.address == address) { return }
+		}
 		let app = (UIApplication.shared.delegate as! AppDelegate)
 		let moc = app.persistentContainer.viewContext
 		let a = NSEntityDescription.insertNewObject(forEntityName: "Address", into: moc) as! Address

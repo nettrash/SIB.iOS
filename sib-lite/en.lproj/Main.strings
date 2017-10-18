@@ -1,9 +1,24 @@
 
+/* Class = "UILabel"; text = "0.0000"; ObjectID = "8iA-U7-KMJ"; */
+"8iA-U7-KMJ.text" = "0.0000";
+
 /* Class = "UIButton"; normalTitle = "Ввести руками"; ObjectID = "BkR-Mz-76O"; */
-"BkR-Mz-76O.normalTitle" = "Enter manual";
+"BkR-Mz-76O.normalTitle" = "Manual input";
+
+/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[0] = "SIB"; ObjectID = "IbY-ks-fih"; */
+"IbY-ks-fih.segmentTitles[0]" = "SIB";
+
+/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[1] = "mSIB"; ObjectID = "IbY-ks-fih"; */
+"IbY-ks-fih.segmentTitles[1]" = "mSIB";
+
+/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[2] = "µSIB"; ObjectID = "IbY-ks-fih"; */
+"IbY-ks-fih.segmentTitles[2]" = "µSIB";
+
+/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[3] = "ivans"; ObjectID = "IbY-ks-fih"; */
+"IbY-ks-fih.segmentTitles[3]" = "ivans";
 
 /* Class = "UITextField"; placeholder = "Укажите адрес SIB"; ObjectID = "T8Z-d3-SDT"; */
-"T8Z-d3-SDT.placeholder" = "Enter SIB Address";
+"T8Z-d3-SDT.placeholder" = "SIB Address";
 
 /* Class = "UILabel"; text = "Добавить адрес"; ObjectID = "ahe-VQ-9V0"; */
 "ahe-VQ-9V0.text" = "Add address";

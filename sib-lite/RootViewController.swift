@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RootViewController: UIViewController {
+class RootViewController: BaseViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -24,9 +24,27 @@ class RootViewController: UIViewController {
 			performSegue(withIdentifier: "balance", sender: self)
 		}
 	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if (segue.identifier == "root-address-add") {
+			let dst = segue.destination as! AddAddressViewController
+			dst.availibleCancel = false
+			dst.unwindIdentifiers["address-add"] = "unwindSegueToRoot"
+		}
+	}
+	
+	@IBAction func unwindToRoot(unwindSegue: UIStoryboardSegue) {
+		if (unwindSegue.source is AddAddressViewController) {
+			let app = UIApplication.shared.delegate as! AppDelegate
+			let src = unwindSegue.source as! AddAddressViewController
+			app.model!.add(src.textFieldAddress.text!)
+			performSegue(withIdentifier: "balance", sender: self)
+		}
 	}
 
 }
