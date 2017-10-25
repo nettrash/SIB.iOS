@@ -143,6 +143,8 @@
 		E50165ED1F7657A200855FBC /* sib-liteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sib-liteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50165F11F7657A200855FBC /* sib_liteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sib_liteUITests.swift; sourceTree = "<group>"; };
 		E50165F31F7657A200855FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E531B5FE1FA0EFAD00DA76E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		E531B6001FA0EFDB00DA76E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		E54A70A91F97978300AA422B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		E54A70AB1F979C0E00AA422B /* HistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
 		E54A70AD1F97C37A00AA422B /* HistoryItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItemType.swift; sourceTree = "<group>"; };
@@ -183,8 +185,6 @@
 		E579F1641F937EE400FA19E8 /* Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Close.png; sourceTree = "<group>"; };
 		E5865C0C1F962CAA00580954 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E5865C0E1F96384900580954 /* BalanceDimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceDimension.swift; sourceTree = "<group>"; };
-		E5865C111F9662D900580954 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		E5865C131F9662F300580954 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		E5865C1D1F96682200580954 /* SIBLogo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SIBLogo.xcassets; sourceTree = "<group>"; };
 		E5865C1F1F966ADE00580954 /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
 		E5865C201F966ADE00580954 /* ActionButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButton@2x.png"; sourceTree = "<group>"; };
@@ -800,8 +800,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				E50165D31F7657A200855FBC /* Base */,
-				E5865C111F9662D900580954 /* en */,
-				E5865C131F9662F300580954 /* ru */,
+				E531B5FE1FA0EFAD00DA76E6 /* en */,
+				E531B6001FA0EFDB00DA76E6 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

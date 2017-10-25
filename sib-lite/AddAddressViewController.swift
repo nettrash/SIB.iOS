@@ -18,7 +18,12 @@ class AddAddressViewController: BaseViewController, UITextFieldDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		
+		for v in self.view.subviews {
+			if (v is UIButton) {
+				v.layer.cornerRadius = 4
+			}
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -26,6 +31,7 @@ class AddAddressViewController: BaseViewController, UITextFieldDelegate {
 		btnCancel.isHidden = !availibleCancel
 		textFieldAddress.becomeFirstResponder()
 	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.

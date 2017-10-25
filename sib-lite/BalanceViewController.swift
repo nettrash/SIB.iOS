@@ -99,6 +99,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 				UIView.animate(withDuration: 0.15, animations: { () -> Void in
 					self.btnAction.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 1)
 					self.btnAddAddress.alpha = self.btnAddAddress.alpha == 0 ? 1 : 0
+					self.imgVertical.alpha = self.imgVertical.alpha == 0 ? self.btnAddAddress.alpha : 0
 				}, completion: { (_ success: Bool) -> Void in
 					UIView.animate(withDuration: 0.10, animations: { () -> Void in
 						self.btnAction.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 1.50)
@@ -108,7 +109,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 							self.btnAction.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
 							self.imgActionInfo.alpha = self.imgActionInfo.alpha == 0 ? 1 : 0
 							self.btnBuy.alpha = self.btnBuy.alpha == 0 ? 1 : 0
-							self.imgVertical.alpha = self.imgVertical.alpha == 0 ? 0.6 : 0
+							self.imgVertical.alpha = self.imgVertical.alpha == 0 ? self.btnAddAddress.alpha : self.imgVertical.alpha
 						}, completion: { (_ success: Bool) -> Void in
 							
 						})

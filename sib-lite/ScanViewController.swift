@@ -12,6 +12,8 @@ import AVFoundation
 class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDelegate {
 	
 	@IBOutlet var btnClose: UIButton!
+	@IBOutlet var imgLogo: UIImageView!
+	
 	var captureSession: AVCaptureSession!
 	var previewLayer: AVCaptureVideoPreviewLayer!
 	var configured: Bool = false
@@ -99,7 +101,8 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		view.layer.addSublayer(previewLayer)
 		
 		view.bringSubview(toFront: btnClose)
-		
+		view.bringSubview(toFront: imgLogo)
+
 		configured = true;
 	}
 	
