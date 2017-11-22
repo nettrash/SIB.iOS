@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BalanceViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class BalanceViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ModelRootDelegate {
 	
 	let app = UIApplication.shared.delegate as! AppDelegate
 	
@@ -21,15 +21,19 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBOutlet var btnRequisites: UIButton!
 	@IBOutlet var btnBuy: UIButton!
 	@IBOutlet var tblHistory: UITableView!
+	@IBOutlet var aiRefresh: UIActivityIndicatorView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		app.model?.delegate = self
 		refreshBalanceView()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		prepareActionMenu()
+		refreshBalanceView()
+		app.model!.refresh()
 	}
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -84,9 +88,13 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			lblBalance.text = String(format: "%.2f", app.model!.Balance * 1000 * 1000)
 			scDimension.selectedSegmentIndex = 2
 		case .ivans:
-			lblBalance.text = String(format: "%.2f", app.model!.Balance * 1000 * 1000 * 100)
+			lblBalance.text = String(format: "%.0f", app.model!.Balance * 1000 * 1000 * 100)
 			scDimension.selectedSegmentIndex = 3
 		}
+	}
+	
+	@IBAction func refreshBalanceClick(_ sender: Any?) {
+		app.model!.refresh()
 	}
 	
 	@IBAction func toggleMenu(_ sender: Any?) {
@@ -148,7 +156,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		return 1;
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return app.model!.HistoryItems.Items.count > 3 ? 3 : app.model!.HistoryItems.Items.count
+		return app.model!.HistoryItems.Items.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -174,5 +182,51 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 
 	//UITableViewDelegate
+	
+	//ModelRootDelegate
+	func startBalanceUpdate() {
+		DispatchQueue.main.async {
+			UIView.animate(withDuration: 0.35, animations: { () -> Void in
+				self.lblBalance.alpha = 0.4
+				self.lblBalance.font = self.lblBalance.font.withSize(18)
+				UIView.transition(with: self.lblBalance,
+				                  duration: 0.35,
+				                  options: UIViewAnimationOptions.transitionFlipFromTop,
+				                  animations: { [weak self] in
+									self?.lblBalance.text = NSLocalizedString("reloadBalance", comment: "")
+					}, completion: nil)
+			}, completion: { (_ success: Bool) -> Void in })
+		}
+	}
+	
+	func stopBalanceUpdate() {
+		DispatchQueue.main.async {
+			UIView.animate(withDuration: 0.35, animations: { () -> Void in
+				self.lblBalance.alpha = 1
+				self.lblBalance.font = self.lblBalance.font.withSize(56)
+				UIView.transition(with: self.lblBalance,
+				                  duration: 0.35,
+				                  options: UIViewAnimationOptions.transitionFlipFromBottom,
+				                  animations: { [weak self] in
+									self?.refreshBalanceView()
+					}, completion: nil)
+			}, completion: { (_ success: Bool) -> Void in })
+		}
+	}
+	
+	func startHistoryUpdate() {
+		DispatchQueue.main.async {
+			self.app.model!.HistoryItems.Items = [];
+			self.tblHistory.reloadData()
+			self.aiRefresh.startAnimating()
+		}
+	}
+	
+	func stopHistoryUpdate() {
+		DispatchQueue.main.async {
+			self.aiRefresh.stopAnimating()
+			self.tblHistory.reloadData()
+		}
+	}
 }
 

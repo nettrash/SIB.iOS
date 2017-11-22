@@ -90,4 +90,8 @@ class sibAddress: NSObject {
 			return false
 		}
 	}
+	
+	static func forKey(_ key: Data) -> String {
+		return ""
+	}
 }

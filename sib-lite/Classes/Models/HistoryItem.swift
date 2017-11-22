@@ -51,7 +51,7 @@ public class HistoryItem: NSObject {
 		case .µSIB:
 			return String(format: "%.2f", amount * 1000 * 1000)
 		case .ivans:
-			return String(format: "%.2f", amount * 1000 * 1000 * 100)
+			return String(format: "%.0f", amount * 1000 * 1000 * 100)
 		}
 	}
 }

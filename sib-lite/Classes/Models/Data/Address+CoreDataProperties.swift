@@ -17,8 +17,7 @@ extension Address {
         return NSFetchRequest<Address>(entityName: "Address")
     }
 
-    @NSManaged public var address: String?
-    @NSManaged public var ballance: NSDecimalNumber?
-    @NSManaged public var update_date: NSDate?
-
+    @NSManaged public var address: String
+	@NSManaged public var type: Int16
+	
 }

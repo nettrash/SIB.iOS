@@ -5,5 +5,13 @@
       <ContextState
          contextName = "static sibAddress.decodeBase58(_:):sibAddress.swift">
       </ContextState>
+      <ContextState
+         contextName = "BigInteger.fromBytes(_:):BigInteger.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self._numberData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

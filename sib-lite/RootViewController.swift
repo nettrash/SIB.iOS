@@ -19,7 +19,7 @@ class RootViewController: BaseViewController {
 		super.viewDidAppear(animated)
 		let app = UIApplication.shared.delegate as! AppDelegate
 		if (app.model!.Addresses.count < 1) {
-			performSegue(withIdentifier: "root-address-add", sender: self)
+			performSegue(withIdentifier: "create-wallet", sender: self)
 		} else {
 			performSegue(withIdentifier: "balance", sender: self)
 		}
@@ -31,10 +31,9 @@ class RootViewController: BaseViewController {
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if (segue.identifier == "root-address-add") {
-			let dst = segue.destination as! AddAddressViewController
-			dst.availibleCancel = false
-			dst.unwindIdentifiers["address-add"] = "unwindSegueToRoot"
+		if (segue.identifier == "create-wallet") {
+			let dst = segue.destination as! CreateWalletViewController
+			dst.unwindIdentifiers["create-wallet"] = "unwindSegueToRoot"
 		}
 	}
 	
