@@ -181,15 +181,18 @@ public class ModelRoot: NSObject {
 		}
 	}
 	
-	func add(_ address: String, _ type: Int16 = 0, refreshAfter: Bool = true) {
+	func add(_ privateKey: Data, _ publicKey: Data, _ address: String, _ wif: String, _ compressed: Bool, refreshAfter: Bool = true) {
 		for  a in Addresses {
 			if (a.address == address) { return }
 		}
 		let app = (UIApplication.shared.delegate as! AppDelegate)
 		let moc = app.persistentContainer.viewContext
 		let a = NSEntityDescription.insertNewObject(forEntityName: "Address", into: moc) as! Address
+		a.privateKey = NSData.init(base64Encoded: privateKey.base64EncodedData())!
+		a.publicKey = NSData.init(base64Encoded: publicKey.base64EncodedData())!
 		a.address = address
-		a.type = type
+		a.wif = wif
+		a.compressed = compressed
 		try! moc.save()
 		if (refreshAfter) {
 			reload(app)

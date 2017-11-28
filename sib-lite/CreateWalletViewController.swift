@@ -33,6 +33,10 @@ class CreateWalletViewController: BaseViewController, UITextFieldDelegate {
 	}
 	
 	@IBAction func createClick(_ sender: Any?) -> Void {
+		registerWallet()
+	}
+	
+	func registerWallet() -> Void {
 		let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		app.model!.SIB?.initialize(textFieldSecret.text!)
 	}

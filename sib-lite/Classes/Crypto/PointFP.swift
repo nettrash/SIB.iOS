@@ -22,7 +22,7 @@ public class PointFP : NSObject {
 		curve = c
 		x = biX
 		y = biY
-		z = BigInteger(Data([1]))
+		z = BigInteger(1)
 		zinv = nil
 		compressed = compress
 	}
@@ -39,7 +39,7 @@ public class PointFP : NSObject {
 
 	private func _isInfinity() -> Bool {
 		if x == nil && y == nil { return true }
-		return z!.equals(BigInteger(Data([0]))) && !y!.toBigInteger().equals(BigInteger(Data([0])))
+		return z!.equals(BigInteger(0)) && !y!.toBigInteger().equals(BigInteger(0))
 	}
 	
 	public func negate() -> PointFP {
@@ -50,13 +50,13 @@ public class PointFP : NSObject {
 		if _isInfinity() { return self }
 		if k.signum() == 0 { return curve!.infinity! }
 		let e = k
-		let h = e.multiply(BigInteger(Data([3])))
+		let h = e.multiply(BigInteger(3))
 		let neg = negate()
 		var R = self
-		for i in h.bitLength-2...0 {
+		for i in (1...h.bitLength-2).reversed() {
 			R = R.twice()
-			let hBit = h.testBit(i)
-			let eBit = e.testBit(i)
+			let hBit: Bool = h.testBit(i)
+			let eBit: Bool = e.testBit(i)
 			
 			if hBit != eBit {
 				R = R.add(hBit ? self : neg)
@@ -68,21 +68,21 @@ public class PointFP : NSObject {
 	public func twice() -> PointFP {
 		if _isInfinity() { return self }
 		if y!.toBigInteger().signum() == 0 { return curve!.infinity! }
-		let three = BigInteger(Data([3]))
+		let three = BigInteger(3)
 		let x1 = x!.toBigInteger()
 		let y1 = y!.toBigInteger()
 		let y1z1 = y1.multiply(z!)
 		let y1sqz1 = y1z1.multiply(y1).mod(curve!.q!)
 		let a = curve!.a!.toBigInteger()
 		var w = x1.square().multiply(three)
-		if !BigInteger(Data([0])).equals(a) {
+		if !BigInteger(0).equals(a) {
 			w = w.add(z!.square().multiply(a))
 		}
 		w = w.mod(curve!.q!)
 		let x3 = w.square().subtract(x1.shiftLeft(3).multiply(y1sqz1)).shiftLeft(1).multiply(y1z1).mod(curve!.q!)
 		let y3 = w.multiply(three).multiply(x1).subtract(y1sqz1.shiftLeft(1)).shiftLeft(2).multiply(y1sqz1).subtract(w.square().multiply(w)).mod(curve!.q!)
 		let z3 = y1z1.square().multiply(y1z1).shiftLeft(3).mod(curve!.q!)
-		return PointFP(curve!, curve!.fromBigInteger(x3), curve!.fromBigInteger(y3), z3, true)
+		return PointFP(curve!, curve!.fromBigInteger(x3), curve!.fromBigInteger(y3), z3, false)
 	}
 	
 	public func add(_ b: PointFP) -> PointFP {
@@ -90,13 +90,13 @@ public class PointFP : NSObject {
 		if b._isInfinity() { return self }
 		let u = b.y!.toBigInteger().multiply(z!).subtract(y!.toBigInteger().multiply(b.z!)).mod(curve!.q!)
 		let v = b.x!.toBigInteger().multiply(z!).subtract(x!.toBigInteger().multiply(b.z!)).mod(curve!.q!)
-		if BigInteger(Data([0])).equals(v) {
-			if BigInteger(Data([0])).equals(u) {
+		if BigInteger(0).equals(v) {
+			if BigInteger(0).equals(u) {
 				return twice()
 			}
 			return curve!.infinity!
 		}
-		let three = BigInteger(Data([3]))
+		let three = BigInteger(3)
 		let x1 = x!.toBigInteger()
 		let y1 = y!.toBigInteger()
 		//let x2 = b.x!.toBigInteger()
@@ -110,6 +110,24 @@ public class PointFP : NSObject {
 		let y3 = x1v2.multiply(three).multiply(u).subtract(y1.multiply(v3)).subtract(zu2.multiply(u)).multiply(b.z!).add(u.multiply(v3)).mod(curve!.q!)
 		let z3 = v3.multiply(z!).multiply(b.z!).mod(curve!.q!)
 		
-		return PointFP(curve!, curve!.fromBigInteger(x3), curve!.fromBigInteger(y3), z3, true)
+		return PointFP(curve!, curve!.fromBigInteger(x3), curve!.fromBigInteger(y3), z3, false)
+	}
+	
+	public func getX() -> FieldElementFP {
+		if zinv == nil {
+			zinv = z!.modInverse(curve!.q!)
+		}
+		var r = x!.toBigInteger().multiply(zinv!)
+		r = curve!.reduce(r)
+		return curve!.fromBigInteger(r)
+	}
+	
+	public func getY() -> FieldElementFP {
+		if zinv == nil {
+			zinv = z!.modInverse(curve!.q!)
+		}
+		var r = y!.toBigInteger().multiply(zinv!)
+		r = curve!.reduce(r)
+		return curve!.fromBigInteger(r)
 	}
 }

@@ -41,7 +41,7 @@ class RootViewController: BaseViewController {
 		if (unwindSegue.source is AddAddressViewController) {
 			let app = UIApplication.shared.delegate as! AppDelegate
 			let src = unwindSegue.source as! AddAddressViewController
-			app.model!.add(src.textFieldAddress.text!)
+			//app.model!.add(src.textFieldAddress.text!)
 			performSegue(withIdentifier: "balance", sender: self)
 		}
 	}

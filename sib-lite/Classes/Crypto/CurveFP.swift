@@ -50,4 +50,8 @@ public class CurveFP : NSObject {
 	public func fromBigInteger(_ v: BigInteger) -> FieldElementFP {
 		return FieldElementFP(q!, v)
 	}
+	
+	public func reduce(_ r: BigInteger) -> BigInteger {
+		return reducer!.reduce(r)
+	}
 }

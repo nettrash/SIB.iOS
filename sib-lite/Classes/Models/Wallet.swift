@@ -26,6 +26,7 @@ public class Wallet : NSObject {
 	private var PrivateKey: Data?
 	private var PublicKey: Data?
 	private var Address: String?
+	private var WIF: String?
 	
 	private let appDelegate: AppDelegate?
 	
@@ -46,14 +47,17 @@ public class Wallet : NSObject {
 		let privateKeyBigInteger: BigInteger = BigInteger(PrivateKey!)
 		let curve: EllipticCurve = EllipticCurve()
 		let curvePt: PointFP = curve.G!.multiply(privateKeyBigInteger)
-		let x = curvePt.x!.toBigInteger()
-		let y = curvePt.y!.toBigInteger()
+		let x = curvePt.getX().toBigInteger()
+		let y = curvePt.getY().toBigInteger()
 		
 		if Compressed {
+			var a = EllipticCurve.integerToBytes(x, 32)
 			if y.isEven() {
-				return Data(EllipticCurve.integerToBytes(x, 32).shifted(by: -0x02))
+				a.insert(0x02, at: 0)
+				return Data(a)
 			} else {
-				return Data(EllipticCurve.integerToBytes(x, 32).shifted(by: -0x03))
+				a.insert(0x03, at: 0)
+				return Data(a)
 			}
 		} else {
 			return Data(EllipticCurve.integerToBytes(x, 32) + EllipticCurve.integerToBytes(y, 32))
@@ -66,5 +70,6 @@ public class Wallet : NSObject {
 		PrivateKey = sha256(sourceForPrivateKeyData)
 		PublicKey = generatePublicKey()
 		Address = sibAddress.forKey(PublicKey!)
+		WIF = sibAddress.wifFromPrivateKey(PrivateKey!)
 	}
 }

@@ -2,7 +2,7 @@
 //  Address+CoreDataProperties.swift
 //  sib-lite
 //
-//  Created by Иван Алексеев on 11.10.2017.
+//  Created by Иван Алексеев on 28.11.2017.
 //  Copyright © 2017 NETTRASH. All rights reserved.
 //
 //
@@ -17,7 +17,10 @@ extension Address {
         return NSFetchRequest<Address>(entityName: "Address")
     }
 
+    @NSManaged public var privateKey: NSData
+    @NSManaged public var publicKey: NSData
     @NSManaged public var address: String
-	@NSManaged public var type: Int16
-	
+    @NSManaged public var wif: String
+    @NSManaged public var compressed: Bool
+
 }

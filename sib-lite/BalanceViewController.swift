@@ -51,7 +51,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBAction func unwindToBalance(unwindSegue: UIStoryboardSegue) {
 		if (unwindSegue.source is AddAddressViewController) {
 			let src = unwindSegue.source as! AddAddressViewController
-			app.model!.add(src.textFieldAddress.text!)
+			//app.model!.add(src.textFieldAddress.text!)
 		}
 	}
 	

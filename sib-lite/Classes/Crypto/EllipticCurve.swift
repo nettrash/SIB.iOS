@@ -19,10 +19,10 @@ public class EllipticCurve : NSObject {
 		super.init()
 		
 		let p: BigInteger = BigInteger(Data("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F".hexa2Bytes))
-		let a: BigInteger = BigInteger(Data([0]))
-		let b: BigInteger = BigInteger(Data([7]))
+		let a: BigInteger = BigInteger(0)
+		let b: BigInteger = BigInteger(7)
 		N = BigInteger(Data("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141".hexa2Bytes))
-		H = BigInteger(Data([1]))
+		H = BigInteger(1)
 		curve = CurveFP(p, a, b)
 		G = curve?.decodePoint(("04" +
 						   "79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798" +
