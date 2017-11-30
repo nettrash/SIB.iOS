@@ -1,51 +1,24 @@
-
-/* Class = "UILabel"; text = "0.0000"; ObjectID = "8iA-U7-KMJ"; */
 "8iA-U7-KMJ.text" = "0.0000";
-
-/* Class = "UIButton"; normalTitle = "Ввести руками"; ObjectID = "BkR-Mz-76O"; */
 "BkR-Mz-76O.normalTitle" = "ВВЕСТИ РУКАМИ";
-
-/* Class = "UIButton"; normalTitle = "сканировать"; ObjectID = "DrU-WC-4iH"; */
 "DrU-WC-4iH.normalTitle" = "сканировать";
-
-/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[0] = "SIB"; ObjectID = "IbY-ks-fih"; */
 "IbY-ks-fih.segmentTitles[0]" = "SIB";
-
-/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[1] = "mSIB"; ObjectID = "IbY-ks-fih"; */
 "IbY-ks-fih.segmentTitles[1]" = "mSIB";
-
-/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[2] = "µSIB"; ObjectID = "IbY-ks-fih"; */
 "IbY-ks-fih.segmentTitles[2]" = "µSIB";
-
-/* Class = "UISegmentedControl"; IbY-ks-fih.segmentTitles[3] = "ивашки"; ObjectID = "IbY-ks-fih"; */
 "IbY-ks-fih.segmentTitles[3]" = "ивашки";
-
-/* Class = "UILabel"; text = "- 0.00 SIB"; ObjectID = "K4F-zs-aIp"; */
 "K4F-zs-aIp.text" = "- 0.00 SIB";
-
-/* Class = "UILabel"; text = "+ 0.00 SIB"; ObjectID = "P4j-U6-AM4"; */
 "P4j-U6-AM4.text" = "+ 0.00 SIB";
-
-/* Class = "UILabel"; text = "2017-10-17"; ObjectID = "PJW-gP-tek"; */
 "PJW-gP-tek.text" = "2017-10-17";
-
-/* Class = "UITextField"; placeholder = "укажите адрес червонцев"; ObjectID = "T8Z-d3-SDT"; */
 "T8Z-d3-SDT.placeholder" = "укажите адрес червонцев";
-
-/* Class = "UIButton"; normalTitle = "Добавить адрес"; ObjectID = "TP5-pH-om6"; */
-"TP5-pH-om6.normalTitle" = "Добавить адрес";
-
-/* Class = "UILabel"; text = "Добавить адрес"; ObjectID = "ahe-VQ-9V0"; */
+"TP5-pH-om6.normalTitle" = "Пополнить";
 "ahe-VQ-9V0.text" = "Добавить адрес";
-
-/* Class = "UILabel"; text = "2017-10-17"; ObjectID = "hDm-SM-dWB"; */
 "hDm-SM-dWB.text" = "2017-10-17";
-
-/* Class = "UIButton"; normalTitle = "История операций"; ObjectID = "wJJ-yD-nnW"; */
-"wJJ-yD-nnW.normalTitle" = "История операций";
-
-/* Class = "UIButton"; normalTitle = "отмена"; ObjectID = "xnC-CU-xCN"; */
+"wJJ-yD-nnW.normalTitle" = "Вывести";
 "xnC-CU-xCN.normalTitle" = "отмена";
-
-/* Class = "UIButton"; normalTitle = "Реквизиты пополнениия"; ObjectID = "zcb-vT-kvq"; */
-"zcb-vT-kvq.normalTitle" = "Реквизиты пополнениия";
+"zcb-vT-kvq.normalTitle" = "Перевести";
+"fCB-sh-hn6.text" = "нет операций";
+"ips-zv-hTO.text" = "Адрес";
+"y67-jG-bbf.text" = "Создать кошелёк";
+"7WB-rZ-rY9.placeholder" = "секретная фраза";
+"g3f-km-vGj.normalTitle" = "создать";
+"FFr-Dd-tIX.text" = "PIN-код";
+"IoT-us-Yg3.text" = "PIN-код";

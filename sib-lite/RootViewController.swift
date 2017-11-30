@@ -10,6 +10,8 @@ import UIKit
 
 class RootViewController: BaseViewController {
 
+	var Checked: Bool = false
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
@@ -21,7 +23,12 @@ class RootViewController: BaseViewController {
 		if (app.model!.Addresses.count < 1) {
 			performSegue(withIdentifier: "create-wallet", sender: self)
 		} else {
-			performSegue(withIdentifier: "balance", sender: self)
+			if app.model!.existsPIN() && !Checked {
+				performSegue(withIdentifier: "check-pin", sender: self)
+			} else {
+				Checked = false
+				performSegue(withIdentifier: "balance", sender: self)
+			}
 		}
 	}
 	
@@ -35,14 +42,22 @@ class RootViewController: BaseViewController {
 			let dst = segue.destination as! CreateWalletViewController
 			dst.unwindIdentifiers["create-wallet"] = "unwindSegueToRoot"
 		}
+		if (segue.identifier == "check-pin") {
+			let dst = segue.destination as! CheckPINViewController
+			dst.unwindIdentifiers["check-pin"] = "unwindSegueToRoot"
+		}
 	}
 	
 	@IBAction func unwindToRoot(unwindSegue: UIStoryboardSegue) {
-		if (unwindSegue.source is AddAddressViewController) {
+		if (unwindSegue.source is SetPINViewController) {
 			let app = UIApplication.shared.delegate as! AppDelegate
-			let src = unwindSegue.source as! AddAddressViewController
-			//app.model!.add(src.textFieldAddress.text!)
-			performSegue(withIdentifier: "balance", sender: self)
+			let src = unwindSegue.source as! SetPINViewController
+			app.model!.storewallet()
+			app.model!.setPIN(src.PIN0)
+		}
+		if (unwindSegue.source is CheckPINViewController) {
+			let src = unwindSegue.source as! CheckPINViewController
+			Checked = src.Checked
 		}
 	}
 

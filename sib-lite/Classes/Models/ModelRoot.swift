@@ -98,10 +98,8 @@ public class ModelRoot: NSObject {
 					self.Balance = Double(value?.Value ?? 0) / Double(100000000.00)
 					self.isRefresh = false
 					self.delegate?.stopBalanceUpdate()
-					DispatchQueue.main.sync {
-						let app = (UIApplication.shared.delegate as! AppDelegate)
-						self.reload(app)
-						//Запрашиваем баланс
+					DispatchQueue.main.async {
+						//Запрашиваем историю
 						self._loadTransactionsData()
 					}
 				}
@@ -181,6 +179,10 @@ public class ModelRoot: NSObject {
 		}
 	}
 	
+	func storewallet() -> Void {
+		add(self.SIB!.PrivateKey!, self.SIB!.PublicKey!, self.SIB!.Address!, self.SIB!.WIF!, self.SIB!.Compressed)
+	}
+	
 	func add(_ privateKey: Data, _ publicKey: Data, _ address: String, _ wif: String, _ compressed: Bool, refreshAfter: Bool = true) {
 		for  a in Addresses {
 			if (a.address == address) { return }
@@ -198,6 +200,37 @@ public class ModelRoot: NSObject {
 			reload(app)
 			refresh()
 		}
+	}
+
+	func setPIN(_ pin: String?) -> Void {
+		if pin == nil { return }
+		if pin!.count != 4 { return }
+		let defs = UserDefaults.standard
+		defs.set(pin, forKey: "PIN")
+	}
+	
+	func existsPIN() -> Bool {
+		let defs = UserDefaults.standard
+		if let pin = defs.string(forKey: "PIN") {
+			if pin.count == 4 {
+				return true
+			} else {
+				return false
+			}
+		}
+		return false
+	}
+	
+	func checkPIN(_ epin: String) -> Bool {
+		let defs = UserDefaults.standard
+		if let pin = defs.string(forKey: "PIN") {
+			if pin.count == 4 && pin == epin {
+				return true
+			} else {
+				return false
+			}
+		}
+		return false
 	}
 
 	func MD5(_ string: String) -> Data {

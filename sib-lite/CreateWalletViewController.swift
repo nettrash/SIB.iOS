@@ -14,16 +14,11 @@ class CreateWalletViewController: BaseViewController, UITextFieldDelegate {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		for v in self.view.subviews {
-			if (v is UIButton) {
-				v.layer.cornerRadius = 4
-			}
-		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+		textFieldSecret.text = NSUUID().uuidString
 		textFieldSecret.becomeFirstResponder()
 	}
 	
@@ -39,8 +34,16 @@ class CreateWalletViewController: BaseViewController, UITextFieldDelegate {
 	func registerWallet() -> Void {
 		let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		app.model!.SIB?.initialize(textFieldSecret.text!)
+		performSegue(withIdentifier: "create-pin", sender: self)
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if (segue.identifier == "create-pin") {
+			let dst = segue.destination as! SetPINViewController
+			dst.unwindIdentifiers = self.unwindIdentifiers
+		}
+	}
+
 	// UITextFieldDelegate
 	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 		return true;
@@ -69,18 +72,18 @@ class CreateWalletViewController: BaseViewController, UITextFieldDelegate {
 		return true;
 	}
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	}
-	
 	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
 		return true;
 	}
 	
 	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		
-		if (sibAddress.verify(textField.text)) {
-			performSegue(withIdentifier: unwindIdentifiers["create-wallet"]!, sender: self)
-		}
+		registerWallet()
+		
+//		if (sibAddress.verify(textField.text)) {
+//			performSegue(withIdentifier: unwindIdentifiers["create-wallet"]!, sender: self)
+//		}
+		
 		return false
 	}
 	

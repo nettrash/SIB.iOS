@@ -25,6 +25,7 @@
 		E52C9DC21FB8D71E00DEC76E /* forest-002.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52C9DBF1FB8D71C00DEC76E /* forest-002.jpg */; };
 		E52C9DC31FB8D71E00DEC76E /* winter-001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52C9DC01FB8D71D00DEC76E /* winter-001.jpg */; };
 		E52C9DC41FB8D71E00DEC76E /* forest-001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52C9DC11FB8D71D00DEC76E /* forest-001.jpg */; };
+		E53BA4051FCE8791007386AE /* ReceiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53BA4041FCE8791007386AE /* ReceiveViewController.swift */; };
 		E53EA69D1FCDAEFE0073EDC6 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53EA69C1FCDAEFE0073EDC6 /* RIPEMD160.swift */; };
 		E546C8BE1FC3177800892D32 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E546C8BD1FC3177800892D32 /* ArrayExtensions.swift */; };
 		E54A70AA1F97978300AA422B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A70A91F97978300AA422B /* History.swift */; };
@@ -38,6 +39,7 @@
 		E553B7561F9747B7002A86B2 /* RedArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E553B7531F9747B6002A86B2 /* RedArrowDown@2x.png */; };
 		E553B7571F9747B7002A86B2 /* RedArrowDown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E553B7541F9747B6002A86B2 /* RedArrowDown@3x.png */; };
 		E55E17F31F94DD7500B5AC3C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E55E17F21F94DD7400B5AC3C /* Info.plist */; };
+		E5611F291FD0A66A00B17097 /* ApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */; };
 		E56D300B1FBC92E7003DE186 /* BigInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56D300A1FBC92E7003DE186 /* BigInteger.swift */; };
 		E56DECE41F8F6FB3002DADE9 /* background_form.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECD81F8F6FB1002DADE9 /* background_form.jpg */; };
 		E56DECE51F8F6FB3002DADE9 /* footer_img2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECD91F8F6FB2002DADE9 /* footer_img2.jpg */; };
@@ -78,6 +80,8 @@
 		E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */; };
 		E5AA3C801FBDD5850032BDE8 /* PointFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7F1FBDD5850032BDE8 /* PointFP.swift */; };
 		E5AA3C821FBDD58F0032BDE8 /* Barret.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C811FBDD58F0032BDE8 /* Barret.swift */; };
+		E5B6E7DE1FCE0A88009E32BC /* SetPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E7DD1FCE0A88009E32BC /* SetPINViewController.swift */; };
+		E5B6E7E01FCE1B42009E32BC /* CheckPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E7DF1FCE1B42009E32BC /* CheckPINViewController.swift */; };
 		E5B725FC1FA12F6F00F9004A /* BalanceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B725FB1FA12F6F00F9004A /* BalanceResponse.swift */; };
 		E5B725FF1FA14DF700F9004A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B726011FA14DF700F9004A /* Localizable.strings */; };
 		E5B728DA1F96AEFE00E5F179 /* ActionInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B728D71F96AEFD00E5F179 /* ActionInfo.png */; };
@@ -178,6 +182,8 @@
 		E52C9DC11FB8D71D00DEC76E /* forest-001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "forest-001.jpg"; sourceTree = "<group>"; };
 		E531B5FE1FA0EFAD00DA76E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E531B6001FA0EFDB00DA76E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		E53BA4041FCE8791007386AE /* ReceiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveViewController.swift; sourceTree = "<group>"; };
+		E53BA4061FCEB347007386AE /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		E53EA69C1FCDAEFE0073EDC6 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		E546C8BD1FC3177800892D32 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		E54A70A91F97978300AA422B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -191,6 +197,7 @@
 		E553B7531F9747B6002A86B2 /* RedArrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedArrowDown@2x.png"; sourceTree = "<group>"; };
 		E553B7541F9747B6002A86B2 /* RedArrowDown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedArrowDown@3x.png"; sourceTree = "<group>"; };
 		E55E17F21F94DD7400B5AC3C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationExtension.swift; sourceTree = "<group>"; };
 		E56D300A1FBC92E7003DE186 /* BigInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigInteger.swift; sourceTree = "<group>"; };
 		E56D3C151F94AF9800D7B458 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E56D3C171F94AFC300D7B458 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -234,6 +241,8 @@
 		E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveFP.swift; sourceTree = "<group>"; };
 		E5AA3C7F1FBDD5850032BDE8 /* PointFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointFP.swift; sourceTree = "<group>"; };
 		E5AA3C811FBDD58F0032BDE8 /* Barret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barret.swift; sourceTree = "<group>"; };
+		E5B6E7DD1FCE0A88009E32BC /* SetPINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPINViewController.swift; sourceTree = "<group>"; };
+		E5B6E7DF1FCE1B42009E32BC /* CheckPINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPINViewController.swift; sourceTree = "<group>"; };
 		E5B725FB1FA12F6F00F9004A /* BalanceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceResponse.swift; sourceTree = "<group>"; };
 		E5B726001FA14DF700F9004A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5B726021FA14DF900F9004A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -348,6 +357,9 @@
 				E56DECF21F8F76BA002DADE9 /* AddAddressViewController.swift */,
 				E579F15F1F922EFE00FA19E8 /* ScanViewController.swift */,
 				E52C9DB11FB8D4ED00DEC76E /* CreateWalletViewController.swift */,
+				E5B6E7DD1FCE0A88009E32BC /* SetPINViewController.swift */,
+				E5B6E7DF1FCE1B42009E32BC /* CheckPINViewController.swift */,
+				E53BA4041FCE8791007386AE /* ReceiveViewController.swift */,
 				E50165D21F7657A200855FBC /* Main.storyboard */,
 				E50165D81F7657A200855FBC /* Assets.xcassets */,
 				E50165DA1F7657A200855FBC /* LaunchScreen.storyboard */,
@@ -395,6 +407,7 @@
 		E56EC0B61F765A9000EDE756 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E53BA4061FCEB347007386AE /* CoreImage.framework */,
 				E579F1611F922F7700FA19E8 /* AVFoundation.framework */,
 				E5BC8D981F90DCC400BE78A9 /* Security.framework */,
 				E5BC8D961F90DC5F00BE78A9 /* CoreFoundation.framework */,
@@ -514,6 +527,7 @@
 				E5AA3C7B1FBDCF660032BDE8 /* StringExtensions.swift */,
 				E546C8BD1FC3177800892D32 /* ArrayExtensions.swift */,
 				E58159DA1FC3F96C002117E8 /* IntegerExtensions.swift */,
+				E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -826,12 +840,14 @@
 				E5865C0D1F962CAA00580954 /* BaseViewController.swift in Sources */,
 				E5AA3C7C1FBDCF660032BDE8 /* StringExtensions.swift in Sources */,
 				E5DEEF161F8E4C0A00D8441D /* Address+CoreDataProperties.swift in Sources */,
+				E5611F291FD0A66A00B17097 /* ApplicationExtension.swift in Sources */,
 				E5DEEF151F8E4C0A00D8441D /* Address+CoreDataClass.swift in Sources */,
 				E58159DB1FC3F96C002117E8 /* IntegerExtensions.swift in Sources */,
 				E5B725FC1FA12F6F00F9004A /* BalanceResponse.swift in Sources */,
 				E5AA3C821FBDD58F0032BDE8 /* Barret.swift in Sources */,
 				E53EA69D1FCDAEFE0073EDC6 /* RIPEMD160.swift in Sources */,
 				E5E4AC7D1FBB4B5400BAAF46 /* Wallet.swift in Sources */,
+				E53BA4051FCE8791007386AE /* ReceiveViewController.swift in Sources */,
 				E54A70AE1F97C37A00AA422B /* HistoryItemType.swift in Sources */,
 				E54A70AA1F97978300AA422B /* History.swift in Sources */,
 				E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */,
@@ -841,6 +857,8 @@
 				E52C9DB21FB8D4ED00DEC76E /* CreateWalletViewController.swift in Sources */,
 				E56D300B1FBC92E7003DE186 /* BigInteger.swift in Sources */,
 				E56DECF11F8F7629002DADE9 /* BalanceViewController.swift in Sources */,
+				E5B6E7E01FCE1B42009E32BC /* CheckPINViewController.swift in Sources */,
+				E5B6E7DE1FCE0A88009E32BC /* SetPINViewController.swift in Sources */,
 				E5AA3C801FBDD5850032BDE8 /* PointFP.swift in Sources */,
 				E54A70AC1F979C0E00AA422B /* HistoryItem.swift in Sources */,
 				E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */,

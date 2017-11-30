@@ -16,17 +16,17 @@ public class Wallet : NSObject {
 	private let KeyTypePrivate: UInt8 = 0x80
 	private let KeyTypeMultisign: UInt8 = 0x28
 	
-	private let Ticker: String = "SIB"
-	private let URIScheme: String = "sibcoin:"
+	public let Ticker: String = "SIB"
+	public let URIScheme: String = "sibcoin:"
 	
 	private let OperationReturnMax: Int8 = 40
 	
-	private let Compressed: Bool = true
+	public let Compressed: Bool = true
 	
-	private var PrivateKey: Data?
-	private var PublicKey: Data?
-	private var Address: String?
-	private var WIF: String?
+	public var PrivateKey: Data?
+	public var PublicKey: Data?
+	public var Address: String?
+	public var WIF: String?
 	
 	private let appDelegate: AppDelegate?
 	

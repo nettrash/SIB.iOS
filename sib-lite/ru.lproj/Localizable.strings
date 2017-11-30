@@ -6,3 +6,6 @@
   Copyright © 2017 NETTRASH. All rights reserved.
 */
 "reloadBalance" = "обновление";
+"setPIN0" = "Задайте PIN-код";
+"setPIN1" = "Повторите его";
+"enterPIN" = "Введите PIN-код";

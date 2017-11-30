@@ -6,3 +6,6 @@
   Copyright © 2017 NETTRASH. All rights reserved.
 */
 "reloadBalance" = "loading";
+"setPIN0" = "Create PIN-code";
+"setPIN1" = "Repeat PIN-code";
+"enterPIN" = "Enter PIN-code";

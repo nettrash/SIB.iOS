@@ -22,10 +22,12 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBOutlet var btnBuy: UIButton!
 	@IBOutlet var tblHistory: UITableView!
 	@IBOutlet var aiRefresh: UIActivityIndicatorView!
+	@IBOutlet var lblNoOps: UILabel!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		app.model?.delegate = self
+		self.lblNoOps.isHidden = true
 		refreshBalanceView()
 	}
 
@@ -41,10 +43,15 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		imgActionInfo.alpha = 1.0
 		if (segue.identifier == "add-address") {
 			let dst = segue.destination as! AddAddressViewController
 			dst.availibleCancel = true;
 			dst.unwindIdentifiers["address-add"] = "unwindSegueToBalance"
+		}
+		if (segue.identifier == "receive-sib") {
+			let dst = segue.destination as! ReceiveViewController
+			dst.unwindIdentifiers["receive-sib"] = "unwindSegueToBalance"
 		}
 	}
 
@@ -53,10 +60,18 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			let src = unwindSegue.source as! AddAddressViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
+		if (unwindSegue.source is ReceiveViewController) {
+			let src = unwindSegue.source as! ReceiveViewController
+			//app.model!.add(src.textFieldAddress.text!)
+		}
 	}
 	
 	@IBAction func addAddress(_ sender: Any?) {
 		performSegue(withIdentifier: "add-address", sender: self)
+	}
+	
+	@IBAction func receiveSIB(_ sender: Any?) {
+		performSegue(withIdentifier: "receive-sib", sender: self)
 	}
 
 	@IBAction func segmentControlValueChanged(_ sender: Any?) {
@@ -186,6 +201,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	//ModelRootDelegate
 	func startBalanceUpdate() {
 		DispatchQueue.main.async {
+			self.lblNoOps.isHidden = true
+		}
+		DispatchQueue.main.async {
 			UIView.animate(withDuration: 0.35, animations: { () -> Void in
 				self.lblBalance.alpha = 0.4
 				self.lblBalance.font = self.lblBalance.font.withSize(18)
@@ -226,6 +244,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		DispatchQueue.main.async {
 			self.aiRefresh.stopAnimating()
 			self.tblHistory.reloadData()
+			self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0
 		}
 	}
 }
