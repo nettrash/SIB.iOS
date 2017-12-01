@@ -33,7 +33,7 @@ class CreateWalletViewController: BaseViewController, UITextFieldDelegate {
 	
 	func registerWallet() -> Void {
 		let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		app.model!.SIB?.initialize(textFieldSecret.text!)
+		app.model!.SIB!.initialize(textFieldSecret.text!)
 		performSegue(withIdentifier: "create-pin", sender: self)
 	}
 	

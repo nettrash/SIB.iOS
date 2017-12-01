@@ -9,3 +9,5 @@
 "setPIN0" = "Create PIN-code";
 "setPIN1" = "Repeat PIN-code";
 "enterPIN" = "Enter PIN-code";
+"BiometricPIN" = "Check PIN";
+"SIBLogoImageName" = "SIBLogoEn";

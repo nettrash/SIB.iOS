@@ -61,7 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 						v.removeFromSuperview()
 					}
 				}
-				(vc as! CheckPINViewController).tfPIN0.becomeFirstResponder()
+				if !(vc as! CheckPINViewController).Checked {
+					(vc as! CheckPINViewController).tfPIN0.becomeFirstResponder()
+				}
 			}
 		}
 		

@@ -13,4 +13,12 @@ class BaseViewController: UIViewController {
 	
 	public var unwindIdentifiers: [String:String] = [String:String]()
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		for v in view.subviews {
+			if v is SIBLogoImageView {
+				(v as! SIBLogoImageView).image = UIImage(named: NSLocalizedString("SIBLogoImageName", comment: "SIBLogoImageName"))
+			}
+		}
+	}
 }

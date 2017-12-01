@@ -9,3 +9,5 @@
 "setPIN0" = "Задайте PIN-код";
 "setPIN1" = "Повторите его";
 "enterPIN" = "Введите PIN-код";
+"BiometricPIN" = "Проверка входа";
+"SIBLogoImageName" = "SIBLogo";

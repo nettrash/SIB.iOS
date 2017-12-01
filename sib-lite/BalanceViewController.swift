@@ -33,9 +33,11 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		prepareActionMenu()
-		refreshBalanceView()
-		app.model!.refresh()
+		DispatchQueue.main.async {
+			self.prepareActionMenu()
+			self.refreshBalanceView()
+			self.app.model!.refresh()
+		}
 	}
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -109,7 +111,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	@IBAction func refreshBalanceClick(_ sender: Any?) {
-		app.model!.refresh()
+		DispatchQueue.main.async {
+			self.app.model!.refresh()
+		}
 	}
 	
 	@IBAction func toggleMenu(_ sender: Any?) {

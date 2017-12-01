@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import LocalAuthentication
 
 class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 	
@@ -20,25 +21,38 @@ class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 	@IBOutlet var tfPIN2: UITextField!
 	@IBOutlet var tfPIN3: UITextField!
 	@IBOutlet var lblMode: UILabel!
+	var authenticationContext: LAContext!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		for v in self.view.subviews {
-			if (v is UITextField) {
-				v.layer.cornerRadius = 4
-			}
-		}
+		authenticationContext = LAContext()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		setupEnterPIN()
+		DispatchQueue.main.async {
+			self.tryBiometric()
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	func tryBiometric() -> Void {
+		let err: NSErrorPointer = nil
+		if authenticationContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: err) {
+			authenticationContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: NSLocalizedString("BiometricPIN", comment: "BiometricInfo"), reply: { (_ result: Bool, _ err: Error?) in
+					if result {
+						self.checkPassed()
+					} else {
+						self.setupEnterPIN()
+					}
+			})
+		} else {
+			setupEnterPIN()
+		}
 	}
 	
 	func setupEnterPIN() -> Void {
@@ -51,6 +65,11 @@ class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 		tfPIN2.text = ""
 		tfPIN3.text = ""
 		tfPIN0.becomeFirstResponder()
+	}
+	
+	func checkPassed() -> Void {
+		Checked = true
+		performSegue(withIdentifier: unwindIdentifiers["check-pin"]!, sender: self)
 	}
 	
 	// UITextFieldDelegate
@@ -101,8 +120,7 @@ class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 			PIN0 = PIN0 + txtAfterUpdate
 			let app = UIApplication.shared.delegate as! AppDelegate
 			if app.model!.checkPIN(PIN0) {
-				Checked = true
-				performSegue(withIdentifier: unwindIdentifiers["check-pin"]!, sender: self)
+				checkPassed()
 			} else {
 				setupEnterPIN()
 			}
