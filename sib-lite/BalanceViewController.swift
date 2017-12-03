@@ -49,11 +49,15 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		if (segue.identifier == "add-address") {
 			let dst = segue.destination as! AddAddressViewController
 			dst.availibleCancel = true;
-			dst.unwindIdentifiers["address-add"] = "unwindSegueToBalance"
+			dst.unwindIdentifiers["add-address"] = "unwindSegueToBalance"
 		}
 		if (segue.identifier == "receive-sib") {
 			let dst = segue.destination as! ReceiveViewController
 			dst.unwindIdentifiers["receive-sib"] = "unwindSegueToBalance"
+		}
+		if (segue.identifier == "send-sib") {
+			let dst = segue.destination as! SendViewController
+			dst.unwindIdentifiers["send-sib"] = "unwindSegueToBalance"
 		}
 	}
 
@@ -66,6 +70,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			let src = unwindSegue.source as! ReceiveViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
+		if (unwindSegue.source is SendViewController) {
+			let src = unwindSegue.source as! ReceiveViewController
+			//app.model!.add(src.textFieldAddress.text!)
+		}
 	}
 	
 	@IBAction func addAddress(_ sender: Any?) {
@@ -74,6 +82,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	@IBAction func receiveSIB(_ sender: Any?) {
 		performSegue(withIdentifier: "receive-sib", sender: self)
+	}
+	
+	@IBAction func sendSIB(_ sender: Any?) {
+		performSegue(withIdentifier: "send-sib", sender: self)
 	}
 
 	@IBAction func segmentControlValueChanged(_ sender: Any?) {

@@ -32,6 +32,10 @@
 		E54A70AC1F979C0E00AA422B /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A70AB1F979C0E00AA422B /* HistoryItem.swift */; };
 		E54A70AE1F97C37A00AA422B /* HistoryItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A70AD1F97C37A00AA422B /* HistoryItemType.swift */; };
 		E54A7ECA1FBED37B008346CD /* FieldElementFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A7EC91FBED37B008346CD /* FieldElementFP.swift */; };
+		E54B1DB71FD2DC690028EC96 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54B1DB61FD2DC690028EC96 /* SendViewController.swift */; };
+		E54B1DBB1FD31F160028EC96 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = E54B1DB81FD31F0D0028EC96 /* camera.png */; };
+		E54B1DBC1FD31F160028EC96 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E54B1DB91FD31F110028EC96 /* camera@2x.png */; };
+		E54B1DBD1FD31F160028EC96 /* camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E54B1DBA1FD31F140028EC96 /* camera@3x.png */; };
 		E553B74F1F974722002A86B2 /* GreenArrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E553B74C1F974720002A86B2 /* GreenArrowUp@2x.png */; };
 		E553B7501F974722002A86B2 /* GreenArrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = E553B74D1F974721002A86B2 /* GreenArrowUp.png */; };
 		E553B7511F974722002A86B2 /* GreenArrowUp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E553B74E1F974721002A86B2 /* GreenArrowUp@3x.png */; };
@@ -197,6 +201,10 @@
 		E54A70AB1F979C0E00AA422B /* HistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
 		E54A70AD1F97C37A00AA422B /* HistoryItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItemType.swift; sourceTree = "<group>"; };
 		E54A7EC91FBED37B008346CD /* FieldElementFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldElementFP.swift; sourceTree = "<group>"; };
+		E54B1DB61FD2DC690028EC96 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
+		E54B1DB81FD31F0D0028EC96 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		E54B1DB91FD31F110028EC96 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		E54B1DBA1FD31F140028EC96 /* camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@3x.png"; sourceTree = "<group>"; };
 		E553B74C1F974720002A86B2 /* GreenArrowUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GreenArrowUp@2x.png"; sourceTree = "<group>"; };
 		E553B74D1F974721002A86B2 /* GreenArrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenArrowUp.png; sourceTree = "<group>"; };
 		E553B74E1F974721002A86B2 /* GreenArrowUp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GreenArrowUp@3x.png"; sourceTree = "<group>"; };
@@ -380,6 +388,7 @@
 				E5B6E7DD1FCE0A88009E32BC /* SetPINViewController.swift */,
 				E5B6E7DF1FCE1B42009E32BC /* CheckPINViewController.swift */,
 				E53BA4041FCE8791007386AE /* ReceiveViewController.swift */,
+				E54B1DB61FD2DC690028EC96 /* SendViewController.swift */,
 				E50165D21F7657A200855FBC /* Main.storyboard */,
 				E50165D81F7657A200855FBC /* Assets.xcassets */,
 				E50165DA1F7657A200855FBC /* LaunchScreen.storyboard */,
@@ -441,6 +450,9 @@
 		E56EC0B91F765E9600EDE756 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				E54B1DB81FD31F0D0028EC96 /* camera.png */,
+				E54B1DB91FD31F110028EC96 /* camera@2x.png */,
+				E54B1DBA1FD31F140028EC96 /* camera@3x.png */,
 				E5C0C5001FD19CA50039D1BC /* action.png */,
 				E5C0C5011FD19CAF0039D1BC /* action@2x.png */,
 				E5C0C5021FD19CB80039D1BC /* action@3x.png */,
@@ -771,6 +783,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E54B1DBB1FD31F160028EC96 /* camera.png in Resources */,
 				E579F15E1F922D4E00FA19E8 /* Scan.png in Resources */,
 				E58B4A181F97F3A70023B5E1 /* Vertical.png in Resources */,
 				E5B725FF1FA14DF700F9004A /* Localizable.strings in Resources */,
@@ -781,6 +794,7 @@
 				E5C0C5041FD19CC10039D1BC /* action@2x.png in Resources */,
 				E56EC0BB1F765EC700EDE756 /* Background.jpg in Resources */,
 				E5C0C5181FD1AD760039D1BC /* ActionInfo@3x.png in Resources */,
+				E54B1DBC1FD31F160028EC96 /* camera@2x.png in Resources */,
 				E56DECE61F8F6FB3002DADE9 /* background_block-fail.jpg in Resources */,
 				E5865C221F966ADF00580954 /* ActionButton@2x.png in Resources */,
 				E5C0C4FD1FD18FD10039D1BC /* back@3x.png in Resources */,
@@ -828,6 +842,7 @@
 				E5C0C4FF1FD18FD10039D1BC /* back.png in Resources */,
 				E5865C1E1F96682200580954 /* Images.xcassets in Resources */,
 				E56DECE41F8F6FB3002DADE9 /* background_form.jpg in Resources */,
+				E54B1DBD1FD31F160028EC96 /* camera@3x.png in Resources */,
 				E52C9DC31FB8D71E00DEC76E /* winter-001.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -899,6 +914,7 @@
 				E579F1601F922EFE00FA19E8 /* ScanViewController.swift in Sources */,
 				E5865C0F1F96384900580954 /* BalanceDimension.swift in Sources */,
 				E56EC0BF1F76610000EDE756 /* ModelRoot.swift in Sources */,
+				E54B1DB71FD2DC690028EC96 /* SendViewController.swift in Sources */,
 				E56DECF31F8F76BA002DADE9 /* AddAddressViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

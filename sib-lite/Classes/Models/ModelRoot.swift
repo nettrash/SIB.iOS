@@ -16,6 +16,14 @@ public class ModelRoot: NSObject {
 	
 	public var Addresses: [Address] = [Address]()
 	
+	public var AddressesForIncoming: [Address] {
+		return Addresses.filter { $0.type == 0 }
+	}
+	
+	public var AddressesForGetChange: [Address] {
+		return Addresses.filter { $0.type == 1 }
+	}
+
 	public var Balance: Double = 0
 	
 	public var isRefresh: Bool = false

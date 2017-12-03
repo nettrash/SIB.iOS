@@ -15,6 +15,9 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	@IBOutlet var imgQR: UIImageView!
 	@IBOutlet var aiWait: UIActivityIndicatorView!
 	
+	var address: String = ""
+	var addressUrl: String = ""
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
@@ -23,7 +26,9 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		super.viewDidAppear(animated)
 		
 		let app = UIApplication.shared.delegate as! AppDelegate
-		tfAddress.text = app.model!.Addresses[0].address
+		address = app.model!.Addresses[app.model!.Addresses.count-1].address
+		addressUrl = app.model!.SIB!.URIScheme + address
+		tfAddress.text = address
 		DispatchQueue.main.async {
 			self.refreshQR()
 		}
@@ -34,14 +39,9 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		self.view.endEditing(true)
-	}
-	
 	@IBAction func shareAddress(_ sender: Any?) -> Void {
-		let app = UIApplication.shared.delegate as! AppDelegate
 		let activityViewController : UIActivityViewController = UIActivityViewController(
-			activityItems: [app.model!.Addresses[0].address, imgQR.image!], applicationActivities: nil)
+			activityItems: [address, imgQR.image!], applicationActivities: nil)
 	
 		activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
 	
@@ -61,8 +61,7 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	}
 	
 	func refreshQR() -> Void {
-		let app = UIApplication.shared.delegate as! AppDelegate
-		let data = (app.model!.SIB!.URIScheme + app.model!.Addresses[0].address).data(using: String.Encoding.ascii)
+		let data = addressUrl.data(using: String.Encoding.ascii)
 		let filter = CIFilter(name: "CIQRCodeGenerator")
 	
 		filter!.setValue(data, forKey: "inputMessage")
@@ -79,8 +78,7 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		
 		aiWait.stopAnimating()
 	}
-	
-	
+		
 	@IBAction func closeClick(_ sender: Any?) -> Void {
 		performSegue(withIdentifier: unwindIdentifiers["receive-sib"]!, sender: self)
 	}

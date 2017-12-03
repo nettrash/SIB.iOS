@@ -20,7 +20,10 @@ public class History: NSObject {
 	}
 	
 	func load(_ txs: [Any], addresses: [Address]) {
-		let addrs = addresses.map { (_ a: Address) -> String in
+		let addrsIn = addresses.filter { $0.type == 0 }.map { (_ a: Address) -> String in
+			a.address
+		}
+		let addrsChange = addresses.filter { $0.type == 1 }.map { (_ a: Address) -> String in
 			a.address
 		}
 		Items = txs.map({ (_ t: Any) -> HistoryItem in
@@ -42,15 +45,27 @@ public class History: NSObject {
 					((a as? [String: Any])!["OrderN"] as! UInt32) < ((b as? [String: Any])!["OrderN"] as! UInt32)
 					})
 				
+				var outInAmount: Double = 0
+				var outChangeAmount: Double = 0
+				var outExternalAmount: Double = 0
+				
 				for out in OutSorted! {
 					let o = out as? [String: Any]
 					let oa = o!["Addresses"] as? [String]
 					let os = o!["Amount"] as? Double
 					for oai in oa! {
-						if addrs.contains(oai) {
-							return HistoryItem(type: .Incoming, date: txDate, amount: os! / Double(100000000))
+						if addrsIn.contains(oai) {
+							outInAmount += os!
+							continue
 						}
+						if addrsChange.contains(oai) {
+							outChangeAmount += os!
+							continue
+						}
+						outExternalAmount += os!
 					}
+					
+					return HistoryItem(type: (outExternalAmount > 0 ? .Outgoing : .Incoming), date: txDate, amount: (outExternalAmount > 0 ? outExternalAmount : outInAmount) / Double(100000000))
 				}
 			}
 			
