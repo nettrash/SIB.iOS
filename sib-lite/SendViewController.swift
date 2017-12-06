@@ -19,7 +19,7 @@ class SendViewController : BaseViewController, UITextFieldDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		let app = UIApplication.shared.delegate as! AppDelegate
-		lblBalance.text = String(format: "%.2f", app.model!.Balance)
+		lblBalance.text = String(format: "%.2f", app.model!.Balance) + " SIB"
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -35,9 +35,13 @@ class SendViewController : BaseViewController, UITextFieldDelegate {
 		performSegue(withIdentifier: unwindIdentifiers["send-sib"]!, sender: self)
 	}
 	
+	func checkValid() -> Bool {
+		return sibAddress.verify(tfAddress.text)
+	}
+	
 	// UITextFieldDelegate
 	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		return false;
+		return true;
 	}
 	
 	public func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -57,18 +61,43 @@ class SendViewController : BaseViewController, UITextFieldDelegate {
 	}
 	
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-		return false
+		let textFieldText: NSString = (textField.text ?? "") as NSString
+		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
+		
+		if textField == tfAddress {
+			if (sibAddress.verify(txtAfterUpdate)) {
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
+				textField.text = txtAfterUpdate
+				tfAmount.becomeFirstResponder()
+				return false
+			} else {
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
+			}
+		}
+		
+		if textField == tfAmount || textField == tfCommission {
+			let app = UIApplication.shared.delegate as! AppDelegate
+			let amount = Double(tfAmount.text!)
+			let commission = Double(tfCommission.text!)
+			if app.model!.Balance < (amount ?? 0) + (commission ?? 0) {
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
+			} else {
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
+			}
+		}
+		
+		return true;
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 	}
 	
 	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
-		return false;
+		return true;
 	}
 	
 	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		return false
+		return checkValid()
 	}
 	
 }

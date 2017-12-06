@@ -71,7 +71,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			//app.model!.add(src.textFieldAddress.text!)
 		}
 		if (unwindSegue.source is SendViewController) {
-			let src = unwindSegue.source as! ReceiveViewController
+			let src = unwindSegue.source as! SendViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
 	}
@@ -206,6 +206,13 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			let cell = tableView.dequeueReusableCell(withIdentifier: "OutgoingTransaction", for: indexPath)
 			
 			cell.detailTextLabel?.text = "- " + item.getAmount(app.model!.Dimension)
+			cell.textLabel?.text = item.getDate()
+			
+			return cell
+		case .Unknown:
+			let cell = tableView.dequeueReusableCell(withIdentifier: "UnknownTransaction", for: indexPath)
+			
+			cell.detailTextLabel?.text = "? " + item.getAmount(app.model!.Dimension)
 			cell.textLabel?.text = item.getDate()
 			
 			return cell

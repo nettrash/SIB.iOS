@@ -64,14 +64,14 @@ public class History: NSObject {
 						}
 						outExternalAmount += os!
 					}
-					
-					return HistoryItem(type: (outExternalAmount > 0 ? .Outgoing : .Incoming), date: txDate, amount: (outExternalAmount > 0 ? outExternalAmount : outInAmount) / Double(100000000))
 				}
+				
+				return HistoryItem(type: (outInAmount == 0 ? .Outgoing : .Incoming), date: txDate, amount: (outInAmount == 0 ? outExternalAmount : outInAmount) / Double(100000000))
 			}
 			
 			//let In = tx?["In"] as? [Any]
 			
-			return HistoryItem(type: .Outgoing, date: txDate, amount: txAmount)
+			return HistoryItem(type: .Unknown, date: txDate, amount: txAmount)
 		})
 	}
 }

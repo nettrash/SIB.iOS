@@ -79,6 +79,9 @@
 		E58B4A181F97F3A70023B5E1 /* Vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A151F97F3A60023B5E1 /* Vertical.png */; };
 		E58B4A191F97F3A70023B5E1 /* Vertical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */; };
 		E58B4A1A1F97F3A70023B5E1 /* Vertical@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */; };
+		E5A20A811FD5826A004B3907 /* sibTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A801FD5826A004B3907 /* sibTransaction.swift */; };
+		E5A20A831FD5890C004B3907 /* sibTransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */; };
+		E5A20A851FD5891B004B3907 /* sibTransactionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */; };
 		E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C781FBDC26F0032BDE8 /* EllipticCurve.swift */; };
 		E5AA3C7C1FBDCF660032BDE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7B1FBDCF660032BDE8 /* StringExtensions.swift */; };
 		E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */; };
@@ -251,6 +254,9 @@
 		E58B4A151F97F3A60023B5E1 /* Vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vertical.png; sourceTree = "<group>"; };
 		E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@2x.png"; sourceTree = "<group>"; };
 		E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@3x.png"; sourceTree = "<group>"; };
+		E5A20A801FD5826A004B3907 /* sibTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransaction.swift; sourceTree = "<group>"; };
+		E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionInput.swift; sourceTree = "<group>"; };
+		E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionOutput.swift; sourceTree = "<group>"; };
 		E5AA3C781FBDC26F0032BDE8 /* EllipticCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurve.swift; sourceTree = "<group>"; };
 		E5AA3C7B1FBDCF660032BDE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveFP.swift; sourceTree = "<group>"; };
@@ -429,6 +435,9 @@
 			isa = PBXGroup;
 			children = (
 				E56DECF51F8F8106002DADE9 /* sibAddress.swift */,
+				E5A20A801FD5826A004B3907 /* sibTransaction.swift */,
+				E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */,
+				E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */,
 			);
 			path = SIB;
 			sourceTree = "<group>";
@@ -895,9 +904,11 @@
 				E5AA3C821FBDD58F0032BDE8 /* Barret.swift in Sources */,
 				E53EA69D1FCDAEFE0073EDC6 /* RIPEMD160.swift in Sources */,
 				E5E4AC7D1FBB4B5400BAAF46 /* Wallet.swift in Sources */,
+				E5A20A851FD5891B004B3907 /* sibTransactionOutput.swift in Sources */,
 				E53BA4051FCE8791007386AE /* ReceiveViewController.swift in Sources */,
 				E54A70AE1F97C37A00AA422B /* HistoryItemType.swift in Sources */,
 				E54A70AA1F97978300AA422B /* History.swift in Sources */,
+				E5A20A831FD5890C004B3907 /* sibTransactionInput.swift in Sources */,
 				E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */,
 				E546C8BE1FC3177800892D32 /* ArrayExtensions.swift in Sources */,
 				E56DECF61F8F8106002DADE9 /* sibAddress.swift in Sources */,
@@ -913,6 +924,7 @@
 				E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */,
 				E579F1601F922EFE00FA19E8 /* ScanViewController.swift in Sources */,
 				E5865C0F1F96384900580954 /* BalanceDimension.swift in Sources */,
+				E5A20A811FD5826A004B3907 /* sibTransaction.swift in Sources */,
 				E56EC0BF1F76610000EDE756 /* ModelRoot.swift in Sources */,
 				E54B1DB71FD2DC690028EC96 /* SendViewController.swift in Sources */,
 				E56DECF31F8F76BA002DADE9 /* AddAddressViewController.swift in Sources */,

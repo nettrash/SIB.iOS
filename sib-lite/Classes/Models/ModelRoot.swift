@@ -36,6 +36,8 @@ public class ModelRoot: NSObject {
 	
 	public var SIB: Wallet?
 	
+	public var needNewAddress: Bool = false
+	
 	init(_ app: AppDelegate) {
 		super.init()
 		SIB = Wallet(app)
@@ -46,6 +48,9 @@ public class ModelRoot: NSObject {
 		do {
 			let moc = app.persistentContainer.viewContext
 			Addresses = try moc.fetch(Address.fetchRequest()) as! [Address]
+			if (AddressesForIncoming.count > 0) {
+				_needNewAddressCheck()
+			}
 		} catch {
 			Addresses = [Address]()
 		}
@@ -186,7 +191,58 @@ public class ModelRoot: NSObject {
 			task.resume()
 		}
 	}
-	
+
+	private func _needNewAddressCheck() {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let d = Date()
+			let dateFormatter = DateFormatter()
+			dateFormatter.dateFormat = "yyyyMMddhh"
+			dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+			let md5src = "\(ServiceName)\(ServiceSecret)\(dateFormatter.string(from: d))"
+			let md5digest = self.MD5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			let json: [String:String] = ["address": self.AddressesForIncoming[self.AddressesForIncoming.count-1].address]
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/hasInput")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Bool]] {
+					print(responseJSON)
+					//Обрабатываем результат
+					if responseJSON["InputExistsResult"]?["Success"] ?? false {
+						self.needNewAddress = responseJSON["InputExistsResult"]!["Exists"]!
+					}
+				}
+			}
+			
+			task.resume()
+		}
+	}
+
 	func storewallet() -> Void {
 		add(self.SIB!.PrivateKey!, self.SIB!.PublicKey!, self.SIB!.Address!, self.SIB!.WIF!, self.SIB!.Compressed)
 	}

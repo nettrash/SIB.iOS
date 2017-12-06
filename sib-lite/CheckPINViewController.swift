@@ -56,15 +56,17 @@ class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 	}
 	
 	func setupEnterPIN() -> Void {
-		Count += 1
-		Checked = false
-		PIN0 = ""
-		lblMode.text = NSLocalizedString("enterPIN", comment: "enterPIN")
-		tfPIN0.text = ""
-		tfPIN1.text = ""
-		tfPIN2.text = ""
-		tfPIN3.text = ""
-		tfPIN0.becomeFirstResponder()
+		DispatchQueue.main.async {
+			self.Count += 1
+			self.Checked = false
+			self.PIN0 = ""
+			self.lblMode.text = NSLocalizedString("enterPIN", comment: "enterPIN")
+			self.tfPIN0.text = ""
+			self.tfPIN1.text = ""
+			self.tfPIN2.text = ""
+			self.tfPIN3.text = ""
+			self.tfPIN0.becomeFirstResponder()
+		}
 	}
 	
 	func checkPassed() -> Void {

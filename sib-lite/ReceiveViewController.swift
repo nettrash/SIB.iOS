@@ -20,6 +20,12 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		let app = UIApplication.shared.delegate as! AppDelegate
+		if app.model!.needNewAddress {
+			let a = app.model!.AddressesForIncoming[app.model!.AddressesForIncoming.count-1]
+			app.model!.SIB!.initialize(a.address + a.wif)
+			app.model!.add(app.model!.SIB!.PrivateKey!, app.model!.SIB!.PublicKey!, app.model!.SIB!.Address!, app.model!.SIB!.WIF!, app.model!.SIB!.Compressed)
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {

@@ -111,7 +111,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccm-cq-klK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="stL-Vr-wCA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1081" y="-707"/>
+            <point key="canvasLocation" x="1081" y="-611"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -532,7 +532,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hw3-1g-eGB">
-                                <rect key="frame" x="335" y="20" width="40" height="40"/>
+                                <rect key="frame" x="327" y="20" width="40" height="40"/>
                                 <state key="normal" image="camera.png">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -592,14 +592,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="SWK-id-3y7"/>
                                 </constraints>
-                                <state key="normal" title="Перевести">
+                                <state key="normal" title="Отправить перевод">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="SIBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xRW-Yn-4eU" customClass="SIBLogoImageView" customModule="sib_lite" customModuleProvider="target">
                                 <rect key="frame" x="112" y="573" width="253" height="80"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUY-d9-bbw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 SIB" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUY-d9-bbw">
                                 <rect key="frame" x="4" y="219" width="367" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="otu-bF-9ch"/>
@@ -611,7 +611,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Hw3-1g-eGB" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" id="3Li-Bg-Jpm"/>
+                            <constraint firstItem="Hw3-1g-eGB" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" constant="-8" id="3Li-Bg-Jpm"/>
                             <constraint firstItem="VFB-IM-8xe" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" id="3yC-7r-qKZ"/>
                             <constraint firstItem="Hw3-1g-eGB" firstAttribute="top" secondItem="Byo-d8-i5Y" secondAttribute="top" id="5Tb-Or-8MQ"/>
                             <constraint firstItem="0I9-0r-wuF" firstAttribute="leading" secondItem="Byo-d8-i5Y" secondAttribute="leading" id="9GH-cS-pQT"/>

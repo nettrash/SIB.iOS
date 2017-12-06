@@ -11,4 +11,5 @@ import Foundation
 public enum HistoryItemType {
 	case Incoming
 	case Outgoing
+	case Unknown
 }
