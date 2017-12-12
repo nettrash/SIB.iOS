@@ -15,6 +15,8 @@
 		E50165DC1F7657A200855FBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50165DA1F7657A200855FBC /* LaunchScreen.storyboard */; };
 		E50165E71F7657A200855FBC /* sib_liteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50165E61F7657A200855FBC /* sib_liteTests.swift */; };
 		E50165F21F7657A200855FBC /* sib_liteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50165F11F7657A200855FBC /* sib_liteUITests.swift */; };
+		E50FBC421FD7F62500379A26 /* UnspentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */; };
+		E50FBC441FD7F63500379A26 /* Unspent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC431FD7F63500379A26 /* Unspent.swift */; };
 		E52C9DB21FB8D4ED00DEC76E /* CreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52C9DB11FB8D4ED00DEC76E /* CreateWalletViewController.swift */; };
 		E52C9DB91FB8D70C00DEC76E /* bear-006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52C9DB31FB8D70900DEC76E /* bear-006.jpg */; };
 		E52C9DBA1FB8D70C00DEC76E /* bear-001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52C9DB41FB8D70A00DEC76E /* bear-001.jpg */; };
@@ -79,6 +81,7 @@
 		E58B4A181F97F3A70023B5E1 /* Vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A151F97F3A60023B5E1 /* Vertical.png */; };
 		E58B4A191F97F3A70023B5E1 /* Vertical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */; };
 		E58B4A1A1F97F3A70023B5E1 /* Vertical@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */; };
+		E59C7DF61FDD556A00ABFC9A /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C7DF51FDD556A00ABFC9A /* Convert.swift */; };
 		E5A20A811FD5826A004B3907 /* sibTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A801FD5826A004B3907 /* sibTransaction.swift */; };
 		E5A20A831FD5890C004B3907 /* sibTransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */; };
 		E5A20A851FD5891B004B3907 /* sibTransactionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */; };
@@ -112,6 +115,8 @@
 		E5C0C5131FD1AD4A0039D1BC /* ActionInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0C5151FD1AD4A0039D1BC /* ActionInfo@2x.png */; };
 		E5C0C5181FD1AD760039D1BC /* ActionInfo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0C51A1FD1AD760039D1BC /* ActionInfo@3x.png */; };
 		E5C0C51E1FD1B0890039D1BC /* SIBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C0C51D1FD1B0890039D1BC /* SIBLogoImageView.swift */; };
+		E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */; };
+		E5D615AF1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */; };
 		E5DEEF151F8E4C0A00D8441D /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DEEF131F8E4C0A00D8441D /* Address+CoreDataClass.swift */; };
 		E5DEEF161F8E4C0A00D8441D /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */; };
 		E5DEEF191F8E68CC00D8441D /* symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DEEF171F8E68CB00D8441D /* symbol.png */; };
@@ -184,6 +189,8 @@
 		E50165ED1F7657A200855FBC /* sib-liteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sib-liteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50165F11F7657A200855FBC /* sib_liteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sib_liteUITests.swift; sourceTree = "<group>"; };
 		E50165F31F7657A200855FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnspentTransaction.swift; sourceTree = "<group>"; };
+		E50FBC431FD7F63500379A26 /* Unspent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unspent.swift; sourceTree = "<group>"; };
 		E52C9DB11FB8D4ED00DEC76E /* CreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletViewController.swift; sourceTree = "<group>"; };
 		E52C9DB31FB8D70900DEC76E /* bear-006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bear-006.jpg"; sourceTree = "<group>"; };
 		E52C9DB41FB8D70A00DEC76E /* bear-001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bear-001.jpg"; sourceTree = "<group>"; };
@@ -254,6 +261,7 @@
 		E58B4A151F97F3A60023B5E1 /* Vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vertical.png; sourceTree = "<group>"; };
 		E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@2x.png"; sourceTree = "<group>"; };
 		E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@3x.png"; sourceTree = "<group>"; };
+		E59C7DF51FDD556A00ABFC9A /* Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convert.swift; sourceTree = "<group>"; };
 		E5A20A801FD5826A004B3907 /* sibTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransaction.swift; sourceTree = "<group>"; };
 		E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionInput.swift; sourceTree = "<group>"; };
 		E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionOutput.swift; sourceTree = "<group>"; };
@@ -299,6 +307,8 @@
 		E5C0C51B1FD1AD770039D1BC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/ActionInfo@3x.png"; sourceTree = "<group>"; };
 		E5C0C51C1FD1AD790039D1BC /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = "ru.lproj/ActionInfo@3x.png"; sourceTree = "<group>"; };
 		E5C0C51D1FD1B0890039D1BC /* SIBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIBLogoImageView.swift; sourceTree = "<group>"; };
+		E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibWalletType.swift; sourceTree = "<group>"; };
+		E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionInputOutpoint.swift; sourceTree = "<group>"; };
 		E5DEEF131F8E4C0A00D8441D /* Address+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5DEEF171F8E68CB00D8441D /* symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = symbol.png; sourceTree = "<group>"; };
@@ -438,6 +448,8 @@
 				E5A20A801FD5826A004B3907 /* sibTransaction.swift */,
 				E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */,
 				E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */,
+				E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */,
+				E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */,
 			);
 			path = SIB;
 			sourceTree = "<group>";
@@ -521,6 +533,7 @@
 		E56EC0BC1F7660BF00EDE756 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E59C7DF41FDD555700ABFC9A /* Utils */,
 				E5AA3C7A1FBDCF2E0032BDE8 /* Extensions */,
 				E5AA3C771FBDC2490032BDE8 /* Crypto */,
 				E56D30091FBC92CA003DE186 /* Math */,
@@ -543,6 +556,8 @@
 				E54A70AD1F97C37A00AA422B /* HistoryItemType.swift */,
 				E5B725FB1FA12F6F00F9004A /* BalanceResponse.swift */,
 				E5E4AC7C1FBB4B5400BAAF46 /* Wallet.swift */,
+				E50FBC431FD7F63500379A26 /* Unspent.swift */,
+				E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -554,6 +569,14 @@
 				E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		E59C7DF41FDD555700ABFC9A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E59C7DF51FDD556A00ABFC9A /* Convert.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E5AA3C771FBDC2490032BDE8 /* Crypto */ = {
@@ -892,15 +915,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E54A7ECA1FBED37B008346CD /* FieldElementFP.swift in Sources */,
+				E59C7DF61FDD556A00ABFC9A /* Convert.swift in Sources */,
+				E5D615AF1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift in Sources */,
 				E50165D71F7657A200855FBC /* sib_lite.xcdatamodeld in Sources */,
 				E50165D11F7657A200855FBC /* RootViewController.swift in Sources */,
 				E5865C0D1F962CAA00580954 /* BaseViewController.swift in Sources */,
+				E50FBC441FD7F63500379A26 /* Unspent.swift in Sources */,
 				E5AA3C7C1FBDCF660032BDE8 /* StringExtensions.swift in Sources */,
 				E5DEEF161F8E4C0A00D8441D /* Address+CoreDataProperties.swift in Sources */,
 				E5611F291FD0A66A00B17097 /* ApplicationExtension.swift in Sources */,
 				E5DEEF151F8E4C0A00D8441D /* Address+CoreDataClass.swift in Sources */,
 				E58159DB1FC3F96C002117E8 /* IntegerExtensions.swift in Sources */,
 				E5B725FC1FA12F6F00F9004A /* BalanceResponse.swift in Sources */,
+				E50FBC421FD7F62500379A26 /* UnspentTransaction.swift in Sources */,
 				E5AA3C821FBDD58F0032BDE8 /* Barret.swift in Sources */,
 				E53EA69D1FCDAEFE0073EDC6 /* RIPEMD160.swift in Sources */,
 				E5E4AC7D1FBB4B5400BAAF46 /* Wallet.swift in Sources */,
@@ -912,6 +939,7 @@
 				E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */,
 				E546C8BE1FC3177800892D32 /* ArrayExtensions.swift in Sources */,
 				E56DECF61F8F8106002DADE9 /* sibAddress.swift in Sources */,
+				E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */,
 				E50165CF1F7657A200855FBC /* AppDelegate.swift in Sources */,
 				E52C9DB21FB8D4ED00DEC76E /* CreateWalletViewController.swift in Sources */,
 				E56D300B1FBC92E7003DE186 /* BigInteger.swift in Sources */,

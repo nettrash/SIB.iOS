@@ -11,3 +11,6 @@
 "enterPIN" = "Enter PIN-code";
 "BiometricPIN" = "Check PIN";
 "SIBLogoImageName" = "SIBLogoEn";
+"Error" = "Error";
+"Cancel" = "Cancel";
+"SendAmountError" = "Amount + Commission is greather than ";

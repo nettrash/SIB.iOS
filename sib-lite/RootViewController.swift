@@ -52,7 +52,7 @@ class RootViewController: BaseViewController {
 		if (unwindSegue.source is SetPINViewController) {
 			let app = UIApplication.shared.delegate as! AppDelegate
 			let src = unwindSegue.source as! SetPINViewController
-			app.model!.storewallet()
+			app.model!.storeWallet(app.model!.SIB!, true, .Incoming)
 			app.model!.setPIN(src.PIN0)
 		}
 		if (unwindSegue.source is CheckPINViewController) {

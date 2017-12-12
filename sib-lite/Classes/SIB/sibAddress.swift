@@ -133,4 +133,15 @@ class sibAddress: NSObject {
 		d.append(contentsOf: hash.subdata(in: 0..<4))
 		return encodeBase58(d)
 	}
+	
+	static func spendToScript(_ address: String) -> [UInt8] {
+		let addrBytes = try! decodeBase58(address)
+		var retVal: [UInt8] = []
+		retVal.append(118) //OP_DUP
+		retVal.append(169) //HASH_160
+		retVal.append(contentsOf: addrBytes[1..<addrBytes.count-4])
+		retVal.append(136) //OP_EQUALVERIFY
+		retVal.append(172) //OP_CHECKSIG
+		return retVal
+	}
 }

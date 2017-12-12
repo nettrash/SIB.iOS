@@ -33,6 +33,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		app.model?.delegate = self
 		DispatchQueue.main.async {
 			self.prepareActionMenu()
 			self.refreshBalanceView()
@@ -269,6 +270,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			self.tblHistory.reloadData()
 			self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0
 		}
+	}
+	
+	func unspetData(_ unspent: Unspent) {
 	}
 }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,11 +28,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6bY-Sz-LRw">
-                                <rect key="frame" x="85.5" y="81" width="204" height="54"/>
+                                <rect key="frame" x="86" y="81" width="204" height="54"/>
                                 <subviews>
-                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aRf-af-7o1">
+                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aRf-af-7o1">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="bSL-Vq-shU"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -40,9 +43,12 @@
                                             <outlet property="delegate" destination="0qB-3I-hcB" id="6Sz-ju-DNy"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="37E-DQ-yux">
+                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="37E-DQ-yux">
                                         <rect key="frame" x="54" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="HVM-Gz-z4n"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -50,9 +56,12 @@
                                             <outlet property="delegate" destination="0qB-3I-hcB" id="hKN-1U-p4z"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZX-rO-0vm">
+                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZX-rO-0vm">
                                         <rect key="frame" x="108" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="Cgf-Eu-90P"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -60,9 +69,12 @@
                                             <outlet property="delegate" destination="0qB-3I-hcB" id="eC7-Av-jwF"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="am0-1S-53e">
+                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="am0-1S-53e">
                                         <rect key="frame" x="162" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="aQz-JG-SFK"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -242,7 +254,7 @@
                                     <constraint firstAttribute="height" constant="32" id="Zyb-l9-JcK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Вывести" image="Bullet.png"/>
+                                <state key="normal" title="Дополнительно" image="Bullet.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcb-vT-kvq">
                                 <rect key="frame" x="31" y="520" width="250" height="32"/>
@@ -552,7 +564,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="sHe-js-fsq"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <connections>
@@ -565,21 +577,21 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="3AX-YV-caD"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="qSj-MT-dfw" id="qhp-ri-jWv"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="комиссия" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VFB-IM-8xe">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" placeholder="комиссия" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VFB-IM-8xe">
                                 <rect key="frame" x="255" y="119" width="120" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="4CC-QC-eYw"/>
                                     <constraint firstAttribute="width" constant="120" id="4Za-DB-qHp"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="go" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <connections>
@@ -592,9 +604,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="SWK-id-3y7"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Отправить перевод">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendClick:" destination="qSj-MT-dfw" eventType="touchUpInside" id="IEJ-LE-46B"/>
+                                </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="SIBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xRW-Yn-4eU" customClass="SIBLogoImageView" customModule="sib_lite" customModuleProvider="target">
                                 <rect key="frame" x="112" y="573" width="253" height="80"/>
@@ -608,6 +624,19 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uO0-Bv-zAJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="uru-xv-xuY">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uru-xv-xuY" firstAttribute="centerY" secondItem="uO0-Bv-zAJ" secondAttribute="centerY" id="Vk3-RD-WUF"/>
+                                    <constraint firstItem="uru-xv-xuY" firstAttribute="centerX" secondItem="uO0-Bv-zAJ" secondAttribute="centerX" id="nYT-OS-gXU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -615,7 +644,9 @@
                             <constraint firstItem="VFB-IM-8xe" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" id="3yC-7r-qKZ"/>
                             <constraint firstItem="Hw3-1g-eGB" firstAttribute="top" secondItem="Byo-d8-i5Y" secondAttribute="top" id="5Tb-Or-8MQ"/>
                             <constraint firstItem="0I9-0r-wuF" firstAttribute="leading" secondItem="Byo-d8-i5Y" secondAttribute="leading" id="9GH-cS-pQT"/>
+                            <constraint firstItem="uO0-Bv-zAJ" firstAttribute="top" secondItem="aNN-6c-g40" secondAttribute="top" id="Aeu-Sp-Vbv"/>
                             <constraint firstItem="VFB-IM-8xe" firstAttribute="leading" secondItem="a8k-Wh-tNN" secondAttribute="trailing" constant="2" id="Aok-lR-Qif"/>
+                            <constraint firstItem="uO0-Bv-zAJ" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" id="C0j-oF-iuH"/>
                             <constraint firstItem="hmj-Lt-W1w" firstAttribute="top" secondItem="Byo-d8-i5Y" secondAttribute="top" id="EJK-x8-lhY"/>
                             <constraint firstItem="Byo-d8-i5Y" firstAttribute="bottom" secondItem="xRW-Yn-4eU" secondAttribute="bottom" constant="14" id="GVp-HQ-syf"/>
                             <constraint firstItem="tUY-d9-bbw" firstAttribute="leading" secondItem="Byo-d8-i5Y" secondAttribute="leading" constant="4" id="J4T-8M-fOr"/>
@@ -628,6 +659,7 @@
                             <constraint firstItem="Byo-d8-i5Y" firstAttribute="trailing" secondItem="tUY-d9-bbw" secondAttribute="trailing" constant="4" id="WUm-fa-AWN"/>
                             <constraint firstItem="h2O-lE-du2" firstAttribute="top" secondItem="a8k-Wh-tNN" secondAttribute="bottom" constant="8" id="WoK-54-zHj"/>
                             <constraint firstItem="hmj-Lt-W1w" firstAttribute="centerX" secondItem="aNN-6c-g40" secondAttribute="centerX" id="fmk-dK-u2x"/>
+                            <constraint firstItem="uO0-Bv-zAJ" firstAttribute="leading" secondItem="Byo-d8-i5Y" secondAttribute="leading" id="gYb-F3-I7M"/>
                             <constraint firstItem="0I9-0r-wuF" firstAttribute="top" secondItem="Byo-d8-i5Y" secondAttribute="top" id="gbJ-G5-Q0K"/>
                             <constraint firstItem="r9G-Pr-nQs" firstAttribute="leading" secondItem="Byo-d8-i5Y" secondAttribute="leading" id="i29-Cj-tPp"/>
                             <constraint firstItem="r9G-Pr-nQs" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" id="jnq-Le-Xsl"/>
@@ -635,6 +667,7 @@
                             <constraint firstItem="h2O-lE-du2" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" id="lS5-wk-LEh"/>
                             <constraint firstItem="RDb-Mr-rPf" firstAttribute="bottom" secondItem="aNN-6c-g40" secondAttribute="bottom" id="quF-KI-myK"/>
                             <constraint firstItem="a8k-Wh-tNN" firstAttribute="top" secondItem="r9G-Pr-nQs" secondAttribute="bottom" constant="2" id="rla-uR-b5C"/>
+                            <constraint firstItem="uO0-Bv-zAJ" firstAttribute="bottom" secondItem="aNN-6c-g40" secondAttribute="bottom" id="sfQ-Ti-OBZ"/>
                             <constraint firstItem="a8k-Wh-tNN" firstAttribute="leading" secondItem="Byo-d8-i5Y" secondAttribute="leading" id="u5m-bJ-siM"/>
                             <constraint firstItem="RDb-Mr-rPf" firstAttribute="trailing" secondItem="Byo-d8-i5Y" secondAttribute="trailing" id="vgZ-Qc-yX3"/>
                             <constraint firstItem="r9G-Pr-nQs" firstAttribute="top" secondItem="hmj-Lt-W1w" secondAttribute="bottom" constant="14" id="xaG-VR-1kQ"/>
@@ -646,6 +679,7 @@
                         <outlet property="tfAddress" destination="r9G-Pr-nQs" id="aGF-ww-pgu"/>
                         <outlet property="tfAmount" destination="a8k-Wh-tNN" id="Xre-fz-djp"/>
                         <outlet property="tfCommission" destination="VFB-IM-8xe" id="nIq-lx-o9v"/>
+                        <outlet property="vWait" destination="uO0-Bv-zAJ" id="Hb8-1u-Z76"/>
                         <segue destination="2HB-54-Iob" kind="unwind" identifier="unwindSegueToBalance" unwindAction="unwindToBalanceWithUnwindSegue:" id="CYu-p0-aHM"/>
                     </connections>
                 </viewController>
@@ -753,9 +787,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uFV-0X-Ids">
                                 <rect key="frame" x="85.5" y="81" width="204" height="54"/>
                                 <subviews>
-                                    <textField opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I41-ag-sdo">
+                                    <textField opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I41-ag-sdo">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="J9Y-zk-1Jf"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -763,9 +800,12 @@
                                             <outlet property="delegate" destination="K8z-0I-wZS" id="ngb-2L-miW"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Se-5b-NUU">
+                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Se-5b-NUU">
                                         <rect key="frame" x="54" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="iXh-hV-gg2"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -773,9 +813,12 @@
                                             <outlet property="delegate" destination="K8z-0I-wZS" id="UiE-bq-s9M"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Rv-kc-eeQ">
+                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Rv-kc-eeQ">
                                         <rect key="frame" x="108" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="Zvf-2t-SMP"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>
@@ -783,9 +826,12 @@
                                             <outlet property="delegate" destination="K8z-0I-wZS" id="c2x-OZ-uPD"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="❅" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ng-gX-hRH">
+                                    <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ng-gX-hRH">
                                         <rect key="frame" x="162" y="0.0" width="42" height="54"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="ClV-49-aLP"/>
+                                        </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="password"/>

@@ -12,7 +12,7 @@
 "TP5-pH-om6.normalTitle" = "Пополнить";
 "ahe-VQ-9V0.text" = "Добавить адрес";
 "hDm-SM-dWB.text" = "2017-10-17";
-"wJJ-yD-nnW.normalTitle" = "Вывести";
+"wJJ-yD-nnW.normalTitle" = "Дополнительно";
 "xnC-CU-xCN.normalTitle" = "отмена";
 "zcb-vT-kvq.normalTitle" = "Перевести";
 "fCB-sh-hn6.text" = "нет операций";
@@ -27,3 +27,4 @@
 "a8k-Wh-tNN.placeholder" = "сумма";
 "VFB-IM-8xe.placeholder" = "комиссия";
 "h2O-lE-du2.normalTitle" = "Отправить перевод";
+

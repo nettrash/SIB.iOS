@@ -10,7 +10,12 @@ import Foundation
 
 class sibTransactionOutput : NSObject {
 
-	init(address: String, value: Double) {
+	var Amount: BigInteger
+	var ScriptedAddress: [UInt8]
+	
+	init(_ script: [UInt8], _ value: BigInteger) {
+		ScriptedAddress = script
+		Amount = value
 		super.init()
 	}
 }

@@ -11,3 +11,6 @@
 "enterPIN" = "Введите PIN-код";
 "BiometricPIN" = "Проверка входа";
 "SIBLogoImageName" = "SIBLogo";
+"Error" = "Ошибка";
+"Cancel" = "Отмена";
+"SendAmountError" = "Что-то с суммами. Всего можно потратить не более ";

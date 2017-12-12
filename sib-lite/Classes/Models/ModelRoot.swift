@@ -17,11 +17,11 @@ public class ModelRoot: NSObject {
 	public var Addresses: [Address] = [Address]()
 	
 	public var AddressesForIncoming: [Address] {
-		return Addresses.filter { $0.type == 0 }
+		return Addresses.filter { $0.type == sibWalletType.Incoming.rawValue }
 	}
 	
 	public var AddressesForGetChange: [Address] {
-		return Addresses.filter { $0.type == 1 }
+		return Addresses.filter { $0.type == sibWalletType.Change.rawValue }
 	}
 
 	public var Balance: Double = 0
@@ -243,11 +243,72 @@ public class ModelRoot: NSObject {
 		}
 	}
 
-	func storewallet() -> Void {
-		add(self.SIB!.PrivateKey!, self.SIB!.PublicKey!, self.SIB!.Address!, self.SIB!.WIF!, self.SIB!.Compressed)
+	public func getUnspentData() {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let d = Date()
+			let dateFormatter = DateFormatter()
+			dateFormatter.dateFormat = "yyyyMMddhh"
+			dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+			let md5src = "\(ServiceName)\(ServiceSecret)\(dateFormatter.string(from: d))"
+			let md5digest = self.MD5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			let json: [String:Any] = ["addresses": self.Addresses.map { (_ a: Address) -> String in
+				a.address
+				}]
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/unspentTransactions")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.delegate?.stopHistoryUpdate()
+					self.isHistoryRefresh = false
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					let txsResponse = responseJSON["UnspentTransactionsResult"]!
+					let unspent = Unspent()
+					if txsResponse["Success"] as? Bool ?? false {
+						let txs = txsResponse["Items"] as? [Any]
+						if (txs != nil) {
+							unspent.load(txs!)
+						}
+					}
+					//Инициализируем историю
+					self.delegate?.unspetData(unspent)
+				}
+			}
+			
+			task.resume()
+		}
 	}
 	
-	func add(_ privateKey: Data, _ publicKey: Data, _ address: String, _ wif: String, _ compressed: Bool, refreshAfter: Bool = true) {
+	func storeWallet(_ wallet: Wallet, _ refresh: Bool = true, _ walletType: sibWalletType = .Incoming) -> Void {
+		add(wallet.PrivateKey!, wallet.PublicKey!, wallet.Address!, wallet.WIF!, wallet.Compressed, refreshAfter: refresh, walletType: walletType)
+	}
+	
+	func add(_ privateKey: Data, _ publicKey: Data, _ address: String, _ wif: String, _ compressed: Bool, refreshAfter: Bool = true, walletType: sibWalletType = .Incoming) {
 		for  a in Addresses {
 			if (a.address == address) { return }
 		}
@@ -259,6 +320,7 @@ public class ModelRoot: NSObject {
 		a.address = address
 		a.wif = wif
 		a.compressed = compressed
+		a.type = walletType.rawValue
 		try! moc.save()
 		if (refreshAfter) {
 			reload(app)
@@ -316,4 +378,5 @@ protocol ModelRootDelegate {
 	func stopBalanceUpdate()
 	func startHistoryUpdate()
 	func stopHistoryUpdate()
+	func unspetData(_ data: Unspent)
 }
