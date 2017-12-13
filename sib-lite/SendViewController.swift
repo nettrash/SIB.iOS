@@ -33,7 +33,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		let app = UIApplication.shared.delegate as! AppDelegate
-		app.model?.delegate = self
+		app.model!.delegate = self
 		vWait.isHidden = true
 		tfAddress.becomeFirstResponder()
 	}
@@ -60,8 +60,8 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	
 	func verifyData() -> Bool {
 		DispatchQueue.main.sync {
-			_amount = Double(tfAmount.text!)
-			_commission = Double(tfCommission.text!)
+			_amount = Double(tfAmount.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
+			_commission = Double(tfCommission.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
 			_unspentAmount = 0
 			if _unspent?.Items.count ?? 0 > 0 {
 				for u in _unspent!.Items {
@@ -88,14 +88,15 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 			}
 		}
 		tx.addChange(amount: spent - _amount! - _commission!)
-		let app = UIApplication.shared.delegate as! AppDelegate
-		//Вот тут конечно надо брать те закрытые ключи что были для адресов на вход
-		tx.sign(app.model!.AddressesForIncoming[app.model!.AddressesForIncoming.count-1].privateKey as Data)
 		return tx
 	}
 	
 	private func _sendTransaction(_ tx: sibTransaction) -> Void {
-		
+		let app = UIApplication.shared.delegate as! AppDelegate
+		app.model!.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
+		let sign = tx.sign(app.model!.Addresses)
+		//Отправляем sign как rawtx
+		app.model!.broadcastTransaction(sign)
 	}
 	
 	// UITextFieldDelegate
@@ -180,10 +181,12 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	func unspetData(_ data: Unspent) -> Void {
 		_unspent = data
 		if verifyData() {
-			let tx: sibTransaction = _prepareTransaction()
-			_sendTransaction(tx)
-			vWait.isHidden = false;
-			closeClick(nil)
+			DispatchQueue.main.sync {
+				let tx: sibTransaction = self._prepareTransaction()
+				self._sendTransaction(tx)
+				self.vWait.isHidden = false;
+				self.closeClick(nil)
+			}
 		} else {
 			DispatchQueue.main.async {
 				self.vWait.isHidden = true
@@ -194,5 +197,24 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		}
 	}
 	
+	func broadcastTransactionResult(_ result: Bool, _ txid: String?) {
+		print(result)
+		print(txid)
+		self.vWait.isHidden = true
+		if result {
+			DispatchQueue.main.async {
+				let alert = UIAlertController.init(title: NSLocalizedString("SuccessSend", comment: "Успех"), message: NSLocalizedString("SuccessSendMessage", comment: "Success") + txid!, preferredStyle: UIAlertControllerStyle.alert)
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+				self.present(alert, animated: true, completion: nil)
+			}
+		} else {
+			DispatchQueue.main.sync {
+				//Добавить удаление последнего адреса Change
+				let alert = UIAlertController.init(title: NSLocalizedString("ErrorSend", comment: "Ошибка"), message: NSLocalizedString("ErrorSendMessage", comment: "Ошибка"), preferredStyle: UIAlertControllerStyle.alert)
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+				self.present(alert, animated: true, completion: nil)
+			}
+		}
+	}
 }
 

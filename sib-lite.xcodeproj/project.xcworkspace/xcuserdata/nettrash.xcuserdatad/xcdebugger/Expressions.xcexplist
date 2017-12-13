@@ -3,6 +3,57 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "sibTransaction.transactionSign(_:_:):sibTransaction.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sig.hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SendViewController._prepareTransaction():SendViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static sibAddress.spendToScript(_:):sibAddress.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "addrBytes.hexEncodedString()">
+            </PersistentString>
+            <PersistentString
+               value = "addrBytes.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.serializeSign(_:_:):sibTransaction.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sequence.hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BigInteger.modInverse(_:):BigInteger.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BigInteger.dMultiply(_:):BigInteger.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.signInput(_:_:_:):sibTransaction.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.sign(_:):sibTransaction.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.deterministicK(_:_:_:):sibTransaction.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.serialize():sibTransaction.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.addChange(amount:):sibTransaction.swift">
+      </ContextState>
+      <ContextState
          contextName = "static sibAddress.decodeBase58(_:):sibAddress.swift">
       </ContextState>
       <ContextState
@@ -10,6 +61,17 @@
          <PersistentStrings>
             <PersistentString
                value = "self._numberData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SendViewController._sendTransaction(_:):SendViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.transactionHash(_:):sibTransaction.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.hexEncodedString()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -274,5 +274,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	func unspetData(_ unspent: Unspent) {
 	}
+	
+	func broadcastTransactionResult(_ result: Bool, _ txid: String?) {
+	}
 }
 

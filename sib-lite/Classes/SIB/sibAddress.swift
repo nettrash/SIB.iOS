@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CommonCrypto
 
 class sibAddress: NSObject {
 	
@@ -69,15 +68,7 @@ class sibAddress: NSObject {
 		}
 		return chars
 	}
-	
-	private static func sha256(_ data : Data) -> Data {
-		var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
-		data.withUnsafeBytes {
-			_ = CC_SHA256($0, CC_LONG(data.count), &hash)
-		}
-		return Data(bytes: hash)
-	}
-	
+		
 	private static func subArray(_ data: Data, index: Int, length: Int) -> Data {
 		return data.subdata(in: index..<index+length)
 	}
@@ -95,8 +86,8 @@ class sibAddress: NSObject {
 				return false
 			}
 			let decoded = try decodeBase58(address!)
-			let d1 = sha256(subArray(decoded, index: 0, length: 21))
-			let d2 = sha256(d1)
+			let d1 = Crypto.sha256(subArray(decoded, index: 0, length: 21))
+			let d2 = Crypto.sha256(d1)
 			if (decoded[21] != d2[0] ||
 				decoded[22] != d2[1] ||
 				decoded[23] != d2[2] ||
@@ -113,12 +104,12 @@ class sibAddress: NSObject {
 	}
 	
 	static func forKey(_ key: Data) -> String {
-		let keyHash = sha256(key)
+		let keyHash = Crypto.sha256(key)
 		var md = RIPEMD160()
 		md.update(data: keyHash)
 		var hashData = md.finalize()
 		hashData.insert(0x3f, at: 0)
-		let hash = sha256(sha256(hashData))
+		let hash = Crypto.sha256(Crypto.sha256(hashData))
 		hashData.append(contentsOf: hash.subdata(in: 0..<4))
 		return encodeBase58(hashData)
 	}
@@ -129,7 +120,7 @@ class sibAddress: NSObject {
 			d.append(0x01)
 		}
 		d.insert(0x80, at: 0)
-		let hash = sha256(sha256(d))
+		let hash = Crypto.sha256(Crypto.sha256(d))
 		d.append(contentsOf: hash.subdata(in: 0..<4))
 		return encodeBase58(d)
 	}
@@ -139,6 +130,27 @@ class sibAddress: NSObject {
 		var retVal: [UInt8] = []
 		retVal.append(118) //OP_DUP
 		retVal.append(169) //HASH_160
+		let cnt = addrBytes.count - 5
+		if cnt < 76 {
+			retVal.append(UInt8(cnt))
+		} else {
+			if cnt < 0xff {
+				retVal.append(76)
+				retVal.append(UInt8(cnt))
+			} else {
+				if cnt < 0xffff {
+					retVal.append(77)
+					retVal.append(UInt8(cnt & 0xff))
+					retVal.append(UInt8((cnt >> 8) & 0xff))
+				} else {
+					retVal.append(78)
+					retVal.append(UInt8(cnt & 0xff))
+					retVal.append(UInt8((cnt >> 8) & 0xff))
+					retVal.append(UInt8((cnt >> 16) & 0xff))
+					retVal.append(UInt8((cnt >> 24) & 0xff))
+				}
+			}
+		}
 		retVal.append(contentsOf: addrBytes[1..<addrBytes.count-4])
 		retVal.append(136) //OP_EQUALVERIFY
 		retVal.append(172) //OP_CHECKSIG

@@ -58,6 +58,34 @@ public class BigInteger : NSObject {
 		super.init()
 	}
 	
+	init(_ number: String) {
+		//Только положительные
+		_numberData = [Int]()
+		t = 0
+		s = 0
+		
+		super.init()
+		
+		var j = 0
+		var w = 0
+		for i in 0..<number.count {
+			let str = String(number[String.Index(encodedOffset: i)])
+			let x = Int(str)
+			w = w * 10 + x!
+			j = j + 1
+			if j >= 7 {
+				dMultiply(Int(pow(Double(10), 7)))
+				dAddOffset(w, 0)
+				j = 0
+				w = 0
+			}
+		}
+		if j > 0 {
+			dMultiply(Int(pow(Double(10), Double(j))))
+			dAddOffset(w, 0)
+		}
+	}
+
 	private func fromBytes(_ bytes: [UInt8]) -> Void {
 		_numberData = [Int]()
 		
@@ -470,6 +498,16 @@ public class BigInteger : NSObject {
 		return retVal
 	}
 
+	public func dMultiply(_ n: Int) -> Void {
+		if t < _numberData.count {
+			_numberData[t] = am(0, n-1, self, 0, 0, t)
+		} else {
+			_numberData.append(am(0, n-1, self, 0, 0, t))
+		}
+		t = t + 1
+		clamp()
+	}
+	
 	public func dAddOffset(_ n: Int, _ w: Int) -> Void {
 		if n == 0 { return }
 		var ww = w
@@ -497,6 +535,14 @@ public class BigInteger : NSObject {
 		}
 	}
 	
+	public func shiftRight(_ n: Int) -> BigInteger {
+		if n < 0 {
+			return lShift(-n)
+		} else {
+			return rShift(n)
+		}
+	}
+
 	public func div(_ m: BigInteger) throws -> BigInteger {
 		let pm = m.abs()
 		if pm.t <= 0 { throw Exception.DivisionByZero }
@@ -708,7 +754,7 @@ public class BigInteger : NSObject {
 		}
 		j = a.t < n ? a.t : n
 		while i < j {
-			am(0, a._numberData[i], retVal, i, 0, n-i)
+			let _ = am(0, a._numberData[i], retVal, i, 0, n-i)
 			i = i + 1
 		}
 		retVal.clamp()
