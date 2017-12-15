@@ -35,7 +35,11 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		let app = UIApplication.shared.delegate as! AppDelegate
 		app.model!.delegate = self
 		vWait.isHidden = true
-		tfAddress.becomeFirstResponder()
+		if tfAddress.text?.count ?? 0 > 0 {
+			tfAmount.becomeFirstResponder()
+		} else {
+			tfAddress.becomeFirstResponder()
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -43,6 +47,21 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		// Dispose of any resources that can be recreated.
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if (segue.identifier == "scan-address") {
+			let dst = segue.destination as! ScanViewController
+			dst.unwindIdentifiers["scan-address"] = "unwindSegueToSend"
+		}
+	}
+	
+	@IBAction func unwindToSend(unwindSegue: UIStoryboardSegue) {
+		if (unwindSegue.source is ScanViewController) {
+			let dest = unwindSegue.destination as! SendViewController
+			let src = unwindSegue.source as! ScanViewController
+			dest.tfAddress.text = src.address
+		}
+	}
+
 	@IBAction func closeClick(_ sender: Any?) -> Void {
 		performSegue(withIdentifier: unwindIdentifiers["send-sib"]!, sender: self)
 	}
@@ -55,9 +74,15 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		self.view.endEditing(true)
 		vWait.isHidden = false
 		let app = UIApplication.shared.delegate as! AppDelegate
+		app.model!.delegate = self
 		app.model!.getUnspentData()
 	}
 	
+	@IBAction func scanClick(_ sender: Any?) -> Void {
+		self.view.endEditing(true)
+		performSegue(withIdentifier: "scan-address", sender: self)
+	}
+
 	func verifyData() -> Bool {
 		DispatchQueue.main.sync {
 			_amount = Double(tfAmount.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
@@ -95,7 +120,9 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		let app = UIApplication.shared.delegate as! AppDelegate
 		app.model!.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
 		let sign = tx.sign(app.model!.Addresses)
+		print(sign.hexEncodedString())
 		//Отправляем sign как rawtx
+		app.model!.delegate = self
 		app.model!.broadcastTransaction(sign)
 	}
 	
@@ -149,9 +176,6 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		return true;
 	}
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	}
-	
 	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
 		return true;
 	}
@@ -185,7 +209,6 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 				let tx: sibTransaction = self._prepareTransaction()
 				self._sendTransaction(tx)
 				self.vWait.isHidden = false;
-				self.closeClick(nil)
 			}
 		} else {
 			DispatchQueue.main.async {
@@ -197,23 +220,18 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		}
 	}
 	
-	func broadcastTransactionResult(_ result: Bool, _ txid: String?) {
-		print(result)
-		print(txid)
-		self.vWait.isHidden = true
+	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
+		DispatchQueue.main.sync { self.vWait.isHidden = true }
 		if result {
-			DispatchQueue.main.async {
 				let alert = UIAlertController.init(title: NSLocalizedString("SuccessSend", comment: "Успех"), message: NSLocalizedString("SuccessSendMessage", comment: "Success") + txid!, preferredStyle: UIAlertControllerStyle.alert)
-				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil); self.closeClick(nil) }))
 				self.present(alert, animated: true, completion: nil)
-			}
+			
 		} else {
-			DispatchQueue.main.sync {
 				//Добавить удаление последнего адреса Change
-				let alert = UIAlertController.init(title: NSLocalizedString("ErrorSend", comment: "Ошибка"), message: NSLocalizedString("ErrorSendMessage", comment: "Ошибка"), preferredStyle: UIAlertControllerStyle.alert)
+				let alert = UIAlertController.init(title: NSLocalizedString("ErrorSend", comment: "Ошибка"), message: NSLocalizedString("ErrorSendMessage", comment: "Ошибка") + (message ?? ""), preferredStyle: UIAlertControllerStyle.alert)
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 				self.present(alert, animated: true, completion: nil)
-			}
 		}
 	}
 }

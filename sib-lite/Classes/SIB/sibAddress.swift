@@ -48,6 +48,27 @@ class sibAddress: NSObject {
 		return Data(output)
 	}
 	
+	private static func decodeBase58Key(_ input: String) throws -> Data {
+		let base = BigInteger(58)
+		var bi = BigInteger(0)
+		var leadingZerosNum = 0
+		for i in (0..<input.count).reversed() {
+			let alphaIndex = Alphabet.index(of: input[String.Index(encodedOffset: i)])?.encodedOffset
+			if alphaIndex == nil { throw sibAddressError.InvalidCharacter }
+			bi = bi.add(BigInteger(alphaIndex!).multiply(base.power(input.count - 1 - i)))
+			if String(input[String.Index(encodedOffset: i)]) == "1" {
+				leadingZerosNum += 1
+			} else {
+				leadingZerosNum = 0
+			}
+		}
+		var bytes = bi.toByteArrayUnsigned()
+		for _ in 0..<leadingZerosNum {
+			bytes.insert(0, at: 0)
+		}
+		return Data(bytes)
+	}
+
 	private static func encodeBase58(_ data: Data) -> String {
 		let base = BigInteger(58)
 		var bi = BigInteger(data)
@@ -68,7 +89,7 @@ class sibAddress: NSObject {
 		}
 		return chars
 	}
-		
+	
 	private static func subArray(_ data: Data, index: Int, length: Int) -> Data {
 		return data.subdata(in: index..<index+length)
 	}

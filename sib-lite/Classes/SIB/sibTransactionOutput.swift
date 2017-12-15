@@ -14,8 +14,8 @@ class sibTransactionOutput : NSObject {
 	var ScriptedAddress: [UInt8]
 	
 	init(_ script: [UInt8], _ value: BigInteger) {
-		ScriptedAddress = script
-		Amount = value
+		ScriptedAddress = script.map { $0 }
+		Amount = BigInteger("\(value.intValue())")
 		super.init()
 	}
 }

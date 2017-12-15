@@ -142,7 +142,7 @@ public class BigInteger : NSObject {
 		let retVal = BigInteger()
 		var i = 0
 		var c = 0
-		var m = a.t < t ? a.t : t
+		let m = a.t < t ? a.t : t
 		while i < m {
 			c += _numberData[i] + a._numberData[i]
 			retVal._numberData.insert(c & ((1 << 26) - 1), at: i)
@@ -246,7 +246,7 @@ public class BigInteger : NSObject {
 	}
 	
 	public func toByteArray() -> [Int] {
-		var retVal: [Int] = [Int](repeating: 0, count: 33)
+		var retVal: [Int] = [Int](repeating: 0, count: 64)
 		var i = t
 		retVal[0] = Int(s)
 		var p = 26 - (i * 26) % 8
@@ -284,7 +284,7 @@ public class BigInteger : NSObject {
 				}
 			}
 		}
-		return retVal
+		return [Int](retVal[0..<k])
 	}
 	
 	public func toByteArrayUnsigned() -> [UInt8] {
@@ -297,6 +297,18 @@ public class BigInteger : NSObject {
 			ba = [Int](ba[1...])
 		}
 		return ba.map { $0 < 0 ? UInt8($0 & 0xff) : UInt8($0) }
+	}
+	
+	public func toByteArraySigned() -> [UInt8] {
+		var retVal = self.toByteArrayUnsigned()
+		if retVal[0] & 0x80 > 0 {
+			retVal.insert((s < 0 ? 0x80 : 0x00), at: 0)
+		} else {
+			if s < 0 {
+				retVal[0] |= 0x80
+			}
+		}
+		return retVal
 	}
 	
 	public func signum() -> Int {
@@ -332,6 +344,15 @@ public class BigInteger : NSObject {
 	
 	public func equals(_ b: BigInteger) -> Bool {
 		return compareTo(b) == 0
+	}
+	
+	public func power(_ e: Int) -> BigInteger {
+		if e > 0xffffffff || e < 1 { return BigInteger(1) }
+		var retVal = self.clone()
+		for i in 1..<e {
+			retVal = retVal.multiply(self)
+		}
+		return retVal
 	}
 	
 	public func mod(_ a: BigInteger) -> BigInteger {

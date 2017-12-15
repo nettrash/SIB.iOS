@@ -33,7 +33,7 @@ public class HistoryItem: NSObject {
 		if (cal.compare(date, to: d, toGranularity: Calendar.Component.day) == ComparisonResult.orderedSame) {
 			dateFormatter.dateFormat = "hh:mm"
 		} else if (cal.compare(date, to: d, toGranularity: Calendar.Component.month) == ComparisonResult.orderedSame) {
-			dateFormatter.dateFormat = "dd"
+			dateFormatter.dateFormat = "dd MMMM"
 		} else if (cal.compare(date, to: d, toGranularity: Calendar.Component.year) == ComparisonResult.orderedSame) {
 			dateFormatter.dateFormat = "dd MMMM"
 		} else {

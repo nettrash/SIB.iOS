@@ -31,16 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationDidEnterBackground(_ application: UIApplication) {
 		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
 		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-		if window!.rootViewController is RootViewController {
-			let vc = UIApplication.topViewController()
+		let defs = UserDefaults.standard
+		defs.set(Date(), forKey: "backgroundDate")
+		
+		let vc = UIApplication.topViewController()
 			
-			let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
-			let blurEffectView = UIVisualEffectView(effect: blurEffect)
-			blurEffectView.frame = vc!.view.bounds
-			blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-			vc!.view.addSubview(blurEffectView)
-			vc!.view.endEditing(true)
-		}
+		let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
+		let blurEffectView = UIVisualEffectView(effect: blurEffect)
+		blurEffectView.frame = vc!.view.bounds
+		blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		vc!.view.addSubview(blurEffectView)
+		vc!.view.endEditing(true)
 	}
 
 	func applicationWillEnterForeground(_ application: UIApplication) {
@@ -49,18 +50,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func applicationDidBecomeActive(_ application: UIApplication) {
 		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-		
+		let defs = UserDefaults.standard
+		let d: Date? = defs.object(forKey: "backgroundDate") as? Date
+		var timeoutPIN: Bool = true
+		if d != nil {
+			let dd = Date()
+			let components = Calendar.current.dateComponents([.second], from: d!, to: dd)
+			timeoutPIN = components.second! > 15
+		}
+
+		let vc = UIApplication.topViewController()
+		for v in vc!.view.subviews {
+			if v is UIVisualEffectView {
+				v.removeFromSuperview()
+			}
+		}
+
 		//Грузим PIN-код
-		if !firstLaunch && window!.rootViewController is RootViewController {
+		if !firstLaunch && window!.rootViewController is RootViewController && timeoutPIN {
 			if !(UIApplication.topViewController() is CheckPINViewController) {
 				(window!.rootViewController as! RootViewController).dismiss(animated: false, completion: nil)
 			} else {
-				let vc = UIApplication.topViewController()
-				for v in vc!.view.subviews {
-					if v is UIVisualEffectView {
-						v.removeFromSuperview()
-					}
-				}
 				if !(vc as! CheckPINViewController).Checked {
 					(vc as! CheckPINViewController).tfPIN0.becomeFirstResponder()
 				}

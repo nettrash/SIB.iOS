@@ -20,4 +20,11 @@ class sibTransactionInput : NSObject {
 		Sequence = lockTime == 0 ? 4294967295 : 0
 		super.init()
 	}
+	
+	init(_ address: String, _ hash: String, _ index: UInt32, _ script: [UInt8], _ lockTime: UInt32) {
+		outPoint = sibTransactionInputOutpoint(address, hash, index)
+		Script = script.map { $0 }
+		Sequence = lockTime == 0 ? 4294967295 : 0
+		super.init()
+	}
 }

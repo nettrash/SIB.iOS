@@ -22,13 +22,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN-код" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoT-us-Yg3">
-                                <rect key="frame" x="128" y="20" width="119" height="41"/>
+                                <rect key="frame" x="128" y="40" width="119" height="41"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6bY-Sz-LRw">
-                                <rect key="frame" x="86" y="81" width="204" height="54"/>
+                                <rect key="frame" x="86" y="101" width="204" height="54"/>
                                 <subviews>
                                     <textField opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aRf-af-7o1">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="54"/>
@@ -88,7 +88,7 @@
                                 <rect key="frame" x="112" y="573" width="253" height="80"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите PIN-код" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0w-Ly-YDf">
-                                <rect key="frame" x="121" y="153" width="133.5" height="20.5"/>
+                                <rect key="frame" x="121" y="173" width="133.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -99,7 +99,7 @@
                             <constraint firstItem="5PP-Pd-j16" firstAttribute="bottom" secondItem="2Hq-RS-MU9" secondAttribute="bottom" id="6bM-Wf-5bU"/>
                             <constraint firstItem="q0w-Ly-YDf" firstAttribute="centerX" secondItem="2Hq-RS-MU9" secondAttribute="centerX" id="CNr-eT-kOU"/>
                             <constraint firstItem="FoH-fA-Bis" firstAttribute="bottom" secondItem="bGO-qb-F6B" secondAttribute="bottom" constant="14" id="GKP-27-XLu"/>
-                            <constraint firstItem="IoT-us-Yg3" firstAttribute="top" secondItem="FoH-fA-Bis" secondAttribute="top" id="K0r-th-tvi"/>
+                            <constraint firstItem="IoT-us-Yg3" firstAttribute="top" secondItem="FoH-fA-Bis" secondAttribute="top" constant="20" id="K0r-th-tvi"/>
                             <constraint firstItem="5PP-Pd-j16" firstAttribute="leading" secondItem="2Hq-RS-MU9" secondAttribute="leading" id="L1h-Fi-Hfd"/>
                             <constraint firstAttribute="trailing" secondItem="5PP-Pd-j16" secondAttribute="trailing" id="LTC-8C-uN0"/>
                             <constraint firstItem="6bY-Sz-LRw" firstAttribute="centerX" secondItem="2Hq-RS-MU9" secondAttribute="centerX" id="Vkv-1B-hCe"/>
@@ -548,6 +548,9 @@
                                 <state key="normal" image="camera.png">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="scanClick:" destination="qSj-MT-dfw" eventType="touchUpInside" id="220-jb-lix"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Перевод" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmj-Lt-W1w">
                                 <rect key="frame" x="87.5" y="20" width="200" height="41"/>
@@ -558,7 +561,7 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="SNmdtyvBJ88kg1r7vPSYMzt7yV4tkvdeFp" placeholder="адрес получателя" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r9G-Pr-nQs">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="адрес получателя" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r9G-Pr-nQs">
                                 <rect key="frame" x="0.0" y="75" width="375" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -681,6 +684,7 @@
                         <outlet property="tfCommission" destination="VFB-IM-8xe" id="nIq-lx-o9v"/>
                         <outlet property="vWait" destination="uO0-Bv-zAJ" id="Hb8-1u-Z76"/>
                         <segue destination="2HB-54-Iob" kind="unwind" identifier="unwindSegueToBalance" unwindAction="unwindToBalanceWithUnwindSegue:" id="CYu-p0-aHM"/>
+                        <segue destination="gdP-Sw-8eU" kind="show" identifier="scan-address" id="mI3-hK-WYp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YLi-x9-oDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -703,13 +707,13 @@
                                 <rect key="frame" x="112" y="573" width="253" height="80"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Создать кошелёк" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y67-jG-bbf">
-                                <rect key="frame" x="55.5" y="20" width="264" height="41"/>
+                                <rect key="frame" x="55.5" y="40" width="264" height="41"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="секретная фраза" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7WB-rZ-rY9">
-                                <rect key="frame" x="0.0" y="81" width="375" height="42"/>
+                                <rect key="frame" x="0.0" y="101" width="375" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="PUv-im-RL1"/>
@@ -718,11 +722,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                 <connections>
-                                    <outlet property="delegate" destination="dYl-ZK-dA8" id="8xN-eR-x0F"/>
+                                    <outlet property="delegate" destination="I4E-pq-2B2" id="J52-0W-pyb"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3f-km-vGj">
-                                <rect key="frame" x="0.0" y="143" width="375" height="42"/>
+                                <rect key="frame" x="0.0" y="163" width="375" height="42"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Je4-h2-ril"/>
@@ -741,7 +745,7 @@
                             <constraint firstItem="tak-OW-und" firstAttribute="bottom" secondItem="BxT-GU-TyT" secondAttribute="bottom" constant="14" id="D1S-NI-p6e"/>
                             <constraint firstItem="g3f-km-vGj" firstAttribute="centerX" secondItem="bOA-Yn-EFt" secondAttribute="centerX" id="HW6-Dn-ZqP"/>
                             <constraint firstItem="tak-OW-und" firstAttribute="trailing" secondItem="BxT-GU-TyT" secondAttribute="trailing" constant="10" id="JlH-ED-hxr"/>
-                            <constraint firstItem="y67-jG-bbf" firstAttribute="top" secondItem="tak-OW-und" secondAttribute="top" id="TRP-fh-C3T"/>
+                            <constraint firstItem="y67-jG-bbf" firstAttribute="top" secondItem="tak-OW-und" secondAttribute="top" constant="20" id="TRP-fh-C3T"/>
                             <constraint firstItem="7WB-rZ-rY9" firstAttribute="top" secondItem="y67-jG-bbf" secondAttribute="bottom" constant="20" id="V7l-Lm-tkD"/>
                             <constraint firstItem="7WB-rZ-rY9" firstAttribute="centerX" secondItem="bOA-Yn-EFt" secondAttribute="centerX" id="VJz-qZ-sna"/>
                             <constraint firstItem="g3f-km-vGj" firstAttribute="top" secondItem="7WB-rZ-rY9" secondAttribute="bottom" constant="20" id="X78-L7-0QL"/>
@@ -779,13 +783,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN-код" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFr-Dd-tIX">
-                                <rect key="frame" x="128" y="20" width="119" height="41"/>
+                                <rect key="frame" x="128" y="40" width="119" height="41"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uFV-0X-Ids">
-                                <rect key="frame" x="85.5" y="81" width="204" height="54"/>
+                                <rect key="frame" x="85.5" y="101" width="204" height="54"/>
                                 <subviews>
                                     <textField opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="◎" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I41-ag-sdo">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="54"/>
@@ -842,7 +846,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Задайте PIN-код" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtA-VJ-Ogd">
-                                <rect key="frame" x="121" y="153" width="133" height="20.5"/>
+                                <rect key="frame" x="121" y="173" width="133" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -858,7 +862,7 @@
                             <constraint firstItem="dtA-VJ-Ogd" firstAttribute="top" secondItem="uFV-0X-Ids" secondAttribute="bottom" constant="18" id="6Eu-sY-Fyh"/>
                             <constraint firstItem="zuN-qa-Dx1" firstAttribute="leading" secondItem="3Fe-yJ-7yj" secondAttribute="leading" id="HsS-aH-wxF"/>
                             <constraint firstItem="5BA-8i-Oor" firstAttribute="trailing" secondItem="IfH-1K-5jr" secondAttribute="trailing" constant="10" id="PUj-Eg-Arw"/>
-                            <constraint firstItem="FFr-Dd-tIX" firstAttribute="top" secondItem="5BA-8i-Oor" secondAttribute="top" id="S8G-wN-Ok2"/>
+                            <constraint firstItem="FFr-Dd-tIX" firstAttribute="top" secondItem="5BA-8i-Oor" secondAttribute="top" constant="20" id="S8G-wN-Ok2"/>
                             <constraint firstItem="zuN-qa-Dx1" firstAttribute="bottom" secondItem="3Fe-yJ-7yj" secondAttribute="bottom" id="SAt-2m-RlS"/>
                             <constraint firstItem="FFr-Dd-tIX" firstAttribute="centerX" secondItem="3Fe-yJ-7yj" secondAttribute="centerX" id="dDa-ec-idP"/>
                             <constraint firstItem="uFV-0X-Ids" firstAttribute="centerX" secondItem="3Fe-yJ-7yj" secondAttribute="centerX" id="e4t-WL-hNg"/>
@@ -1009,6 +1013,7 @@
                         <outlet property="btnClose" destination="BkR-Mz-76O" id="IQy-KY-PJU"/>
                         <outlet property="imgLogo" destination="cbk-Z9-mo9" id="MtR-yc-Xyf"/>
                         <segue destination="nlR-5N-dsy" kind="unwind" identifier="unwindSegueToAddAddress" unwindAction="unwindToAddAddressWithUnwindSegue:" id="BQf-nv-9EC"/>
+                        <segue destination="nlR-5N-dsy" kind="unwind" identifier="unwindSegueToSend" unwindAction="unwindToSendWithUnwindSegue:" id="Q2j-Z2-tcD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nj6-pY-vnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1037,4 +1042,7 @@
         <image name="symbol.png" width="300" height="300"/>
         <image name="winter-001.jpg" width="2560" height="1600"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="mI3-hK-WYp"/>
+    </inferredMetricsTieBreakers>
 </document>

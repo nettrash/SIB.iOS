@@ -25,8 +25,7 @@ class sibTransaction : NSObject {
 	
 	override init() {
 		super.init()
-		let app = UIApplication.shared.delegate as! AppDelegate
-		self.Change = Wallet(app)
+		self.Change = Wallet()
 	}
 	
 	func addOutput(address: String, amount: Double) -> Void {
@@ -44,21 +43,21 @@ class sibTransaction : NSObject {
 		for o in Output {
 			a += Double(o.Amount.intValue()) / pow(10, 8)
 		}
-		Change!.initialize("NETTRASHiOSChange\(version)\(Input.count)\(Output.count)\(a)")
-		addOutput(address: "SS6hcN1Q7gZEMcSkcHibTeoQHFMy8p3ND4", amount: summa)
-		//addOutput(address: Change!.Address!, amount: summa)
+		Change!.initialize(NSUUID().uuidString)
+		Change!.Address = "SekusUxZxgmQoBSfX7J1JYgfRYjWuwyvE8"
+		addOutput(address: Change!.Address!, amount: summa)
 	}
 	
-	func transactionHash(_ index: Int) -> Data {
+	func transactionHash(_ input: sibTransactionInput) -> Data {
 		//Клонируем текущую транзакцию
 		let tx = clone()
 		
 		//Во всем входы кроме переданного обнуляем Script
-		for i in 0..<tx.Input.count {
-			if i != index {
-				tx.Input[i].Script = []
+		for i in tx.Input {
+			if i.outPoint.Hash != input.outPoint.Hash {
+				i.Script = []
 			} else {
-				tx.Input[i].Script = Input[index].Script
+				i.Script = input.Script.map { $0 }
 			}
 		}
 		//Сериализуем
@@ -104,8 +103,8 @@ class sibTransaction : NSObject {
 		return KBigInt
 	}
 	
-	func transactionSign(_ index: Int, _ address: Address) -> Data {
-		let hash = transactionHash(index)
+	func transactionSign(_ input: sibTransactionInput, _ address: Address) -> Data {
+		let hash = transactionHash(input)
 		let curve = EllipticCurve()
 		let key = address.privateKey as Data
 		let priv = BigInteger(key)
@@ -132,8 +131,8 @@ class sibTransaction : NSObject {
 	}
 	
 	func serializeSign(_ r: BigInteger, _ s: BigInteger) -> Data {
-		let rBa = Data(r.toByteArrayUnsigned()[0..<32])
-		let sBa = Data(s.toByteArrayUnsigned()[0..<32])
+		let rBa = r.toByteArraySigned()
+		let sBa = s.toByteArraySigned()
 		
 		var sequence: Data = Data([UInt8]())
 		sequence.append(UInt8(0x02))
@@ -147,10 +146,10 @@ class sibTransaction : NSObject {
 		return sequence
 	}
 	
-	func signInput(_ input: sibTransactionInput, _ address: Address, _ index: Int) -> Void {
+	func signInput(_ input: sibTransactionInput, _ address: Address) -> Void {
 		//Вычисляем подпись (Script)
 		let key = (address.publicKey as Data)
-		let signature = transactionSign(index, address)
+		let signature = transactionSign(input, address)
 		var script: [UInt8] = [UInt8]()
 		var cnt = signature.count
 		if cnt < 76 {
@@ -202,7 +201,7 @@ class sibTransaction : NSObject {
 	func sign(_ addresses: [Address]) -> Data {
 		for i in Input {
 			let addr = addresses.filter { $0.address == i.outPoint.Address }
-			signInput(i, addr.first!, Input.index(of: i)!)
+			signInput(i, addr.first!)
 		}
 		return serialize()
 	}
@@ -210,13 +209,15 @@ class sibTransaction : NSObject {
 	func serialize() -> Data {
 		var data = [UInt8]()
 		data.append(contentsOf: Convert.toByteArray(version))
-		
+
 		data.append(contentsOf: Convert.toVarIntByteArray(UInt64(Input.count)))
 		for i in Input {
 			data.append(contentsOf: i.outPoint.Hash.hexa2Bytes.reversed())
 			data.append(contentsOf: Convert.toByteArray(UInt32(i.outPoint.Index)))
 			data.append(contentsOf: Convert.toVarIntByteArray(UInt64(i.Script.count)))
-			data.append(contentsOf: i.Script)
+			if i.Script.count > 0 {
+				data.append(contentsOf: i.Script)
+			}
 			data.append(contentsOf: Convert.toByteArray(UInt32(i.Sequence)))
 		}
 		
@@ -236,8 +237,14 @@ class sibTransaction : NSObject {
 		let retVal: sibTransaction = sibTransaction()
 		retVal.version = version
 		retVal.lock_time = lock_time
-		retVal.Input = Input.map { $0 }
-		retVal.Output = Output.map { $0 }
+		retVal.Input = []
+		for i in Input {
+			retVal.Input.append(sibTransactionInput(i.outPoint.Address, i.outPoint.Hash, i.outPoint.Index, i.Script, lock_time))
+		}
+		retVal.Output = []
+		for o in Output {
+			retVal.Output.append(sibTransactionOutput(o.ScriptedAddress, o.Amount))
+		}
 		retVal.Timestamp = Timestamp
 		retVal.Block = Block
 		retVal.Change?.Address = Change?.Address

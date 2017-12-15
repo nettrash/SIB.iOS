@@ -40,7 +40,7 @@ public class ModelRoot: NSObject {
 	
 	init(_ app: AppDelegate) {
 		super.init()
-		SIB = Wallet(app)
+		SIB = Wallet()
 		reload(app)
 	}
 	
@@ -334,7 +334,7 @@ public class ModelRoot: NSObject {
 			let task = URLSession.shared.dataTask(with: request) { data, response, error in
 				guard let data = data, error == nil else {
 					print(error?.localizedDescription ?? "No data")
-					self.delegate?.broadcastTransactionResult(false, nil)
+					self.delegate?.broadcastTransactionResult(false, nil, nil)
 					return
 				}
 				let responseString = String(data: data, encoding: String.Encoding.utf8)
@@ -345,10 +345,15 @@ public class ModelRoot: NSObject {
 					let txsResponse = responseJSON["BroadcastTransactionResult"]!
 					let result: Bool = txsResponse["Success"] as? Bool ?? false
 					var txid: String? = nil
+					var msg: String? = nil
 					if result {
 						txid = txsResponse["TransactionId"] as? String
+					} else {
+						msg = txsResponse["Message"] as? String
 					}
-					self.delegate?.broadcastTransactionResult(result, txid)
+					self.delegate?.broadcastTransactionResult(result, txid, msg)
+				} else {
+					self.delegate?.broadcastTransactionResult(false, nil, nil)
 				}
 			}
 			task.resume()
@@ -417,6 +422,6 @@ protocol ModelRootDelegate {
 	func startHistoryUpdate()
 	func stopHistoryUpdate()
 	func unspetData(_ data: Unspent)
-	func broadcastTransactionResult(_ result: Bool, _ txid: String?)
+	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?)
 }
 

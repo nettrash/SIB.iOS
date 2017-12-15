@@ -28,13 +28,18 @@ public class Wallet : NSObject {
 	public var Address: String?
 	public var WIF: String?
 	
-	private let appDelegate: AppDelegate?
-	
-	init(_ app: AppDelegate) {
-		appDelegate = app
+	override init() {
 		super.init()
 	}
 	
+	init(privateKey: Data?) {
+		super.init()
+		PrivateKey = privateKey
+		PublicKey = generatePublicKey(PrivateKey!)
+		Address = sibAddress.forKey(PublicKey!)
+		WIF = sibAddress.wifFromPrivateKey(PrivateKey!)
+	}
+
 	private func sha256(_ data : Data) -> Data {
 		var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
 		data.withUnsafeBytes {
@@ -43,8 +48,8 @@ public class Wallet : NSObject {
 		return Data(bytes: hash)
 	}
 	
-	private func generatePublicKey() -> Data {
-		let privateKeyBigInteger: BigInteger = BigInteger(PrivateKey!)
+	private func generatePublicKey(_ key: Data) -> Data {
+		let privateKeyBigInteger: BigInteger = BigInteger(key)
 		let curve: EllipticCurve = EllipticCurve()
 		let curvePt: PointFP = curve.G!.multiply(privateKeyBigInteger)
 		let x = curvePt.getX().toBigInteger()
@@ -68,7 +73,7 @@ public class Wallet : NSObject {
 		let sourceForPrivateKey: String = "SIBPrivateKey\(3571 * secret.lengthOfBytes(using: String.Encoding.ascii))\(secret)NETTRASHSIB"
 		let sourceForPrivateKeyData: Data = sourceForPrivateKey.data(using: String.Encoding.utf8)!
 		PrivateKey = sha256(sourceForPrivateKeyData)
-		PublicKey = generatePublicKey()
+		PublicKey = generatePublicKey(PrivateKey!)
 		Address = sibAddress.forKey(PublicKey!)
 		WIF = sibAddress.wifFromPrivateKey(PrivateKey!)
 	}

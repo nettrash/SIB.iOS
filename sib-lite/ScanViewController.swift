@@ -134,7 +134,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		}
 		
 		//dismiss(animated: true)
-		performSegue(withIdentifier: "unwindSegueToAddAddress", sender: self)
+		performSegue(withIdentifier: unwindIdentifiers["scan-address"]!, sender: self)
 	}
 	
 	func found(code: String) -> Bool {
@@ -149,7 +149,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		let q = code[qStartIndex..<qEndIndex]
 		let query = String(q)
 		
-		let qAndIndex = query.index(of: "&") ?? query.endIndex
+		let qAndIndex = query.index(of: "?") ?? query.endIndex
 		let qAddress = query[..<qAndIndex]
 		address = String(qAddress)
 		

@@ -26,14 +26,13 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		app.model?.delegate = self
+
 		self.lblNoOps.isHidden = true
-		refreshBalanceView()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		app.model?.delegate = self
+		app.model!.delegate = self
 		DispatchQueue.main.async {
 			self.prepareActionMenu()
 			self.refreshBalanceView()
@@ -275,7 +274,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	func unspetData(_ unspent: Unspent) {
 	}
 	
-	func broadcastTransactionResult(_ result: Bool, _ txid: String?) {
+	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
 	}
 }
 
