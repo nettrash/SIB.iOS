@@ -12,11 +12,41 @@ import UIKit
 class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	
 	@IBOutlet var tfAddress: UITextField!
+	@IBOutlet var tfAmount: UITextField!
+	@IBOutlet var scInstantSend: UISwitch!
 	@IBOutlet var imgQR: UIImageView!
 	@IBOutlet var aiWait: UIActivityIndicatorView!
 	
 	var address: String = ""
-	var addressUrl: String = ""
+	
+	var queryString: String {
+		var retVal = ""
+		if amount ?? 0 > 0 || scInstantSend.isOn {
+			retVal = "?"
+			if amount ?? 0 > 0 {
+				retVal += "amount=\(amount!)"
+			}
+			if scInstantSend.isOn {
+				if retVal.count > 1 {
+					retVal += "&"
+				}
+				retVal += "IS=1"
+			}
+		}
+		return retVal
+	}
+	
+	var addressUrl: String {
+		let app = UIApplication.shared.delegate as! AppDelegate
+		return app.model!.SIB!.URIScheme + address + queryString
+	}
+	
+	var addressFullUrl: URL {
+		let app = UIApplication.shared.delegate as! AppDelegate
+		return URL(string: app.model!.SIB!.URIScheme + "//" + address + queryString)!
+	}
+	
+	var amount: Decimal? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,7 +63,6 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		
 		let app = UIApplication.shared.delegate as! AppDelegate
 		address = app.model!.Addresses[app.model!.Addresses.count-1].address
-		addressUrl = app.model!.SIB!.URIScheme + address
 		tfAddress.text = address
 		DispatchQueue.main.async {
 			self.refreshQR()
@@ -46,24 +75,16 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	}
 	
 	@IBAction func shareAddress(_ sender: Any?) -> Void {
+		let png = imgQR.image!.pngData!
 		let activityViewController : UIActivityViewController = UIActivityViewController(
-			activityItems: [address, imgQR.image!], applicationActivities: nil)
+			activityItems: [addressFullUrl.absoluteString, UIImage.init(data: png)!], applicationActivities: [])
 	
 		activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
 	
 		activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
 		activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
 	
-		activityViewController.excludedActivityTypes = [
-			UIActivityType.postToWeibo,
-			UIActivityType.assignToContact,
-			UIActivityType.addToReadingList,
-			UIActivityType.postToFlickr,
-			UIActivityType.postToVimeo,
-			UIActivityType.postToTencentWeibo
-		]
-	
-		self.present(activityViewController, animated: true, completion: nil)
+		present(activityViewController, animated: true, completion: nil)
 	}
 	
 	func refreshQR() -> Void {
@@ -89,9 +110,13 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		performSegue(withIdentifier: unwindIdentifiers["receive-sib"]!, sender: self)
 	}
 	
+	@IBAction func scInstantSendChanged(_ sender: Any?) -> Void {
+		refreshQR()
+	}
+	
 	// UITextFieldDelegate
 	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		return false;
+		return textField != tfAddress
 	}
 	
 	public func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -111,18 +136,26 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	}
 	
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-		return false
+		let textFieldText: NSString = (textField.text ?? "") as NSString
+		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
+		if textField == tfAmount {
+			amount = Decimal(string: txtAfterUpdate)
+			DispatchQueue.main.async {
+				self.refreshQR()
+			}
+		}
+		return textField != tfAddress
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 	}
 	
 	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
-		return false;
+		return textField != tfAddress
 	}
 	
 	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		return false
+		return textField != tfAddress
 	}
 	
 }

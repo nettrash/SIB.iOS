@@ -98,8 +98,8 @@ public class ModelRoot: NSObject {
 			let task = URLSession.shared.dataTask(with: request) { data, response, error in
 				guard let data = data, error == nil else {
 					print(error?.localizedDescription ?? "No data")
-					self.delegate?.stopBalanceUpdate()
 					self.isRefresh = false
+					self.delegate?.stopBalanceUpdate(error: error?.localizedDescription ?? "No data")
 					return
 				}
 				let responseString = String(data: data, encoding: String.Encoding.utf8)
@@ -110,7 +110,7 @@ public class ModelRoot: NSObject {
 					let value = BalanceResponse.init(json: responseJSON["BalanceResult"]!)
 					self.Balance = Double(value?.Value ?? 0) / Double(100000000.00)
 					self.isRefresh = false
-					self.delegate?.stopBalanceUpdate()
+					self.delegate?.stopBalanceUpdate(error: nil)
 					DispatchQueue.main.async {
 						//Запрашиваем историю
 						self._loadTransactionsData()
@@ -418,7 +418,7 @@ public class ModelRoot: NSObject {
 
 protocol ModelRootDelegate {
 	func startBalanceUpdate()
-	func stopBalanceUpdate()
+	func stopBalanceUpdate(error: String?)
 	func startHistoryUpdate()
 	func stopHistoryUpdate()
 	func unspetData(_ data: Unspent)

@@ -17,11 +17,14 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	private var _unspentAmount: Double?
 	private var _address: String?
 	
+	var components: URLComponents?
+	
 	@IBOutlet var tfAddress: UITextField!
 	@IBOutlet var tfAmount: UITextField!
 	@IBOutlet var tfCommission: UITextField!
 	@IBOutlet var lblBalance: UILabel!
 	@IBOutlet var vWait: UIView!
+	@IBOutlet var scInstantSend: UISwitch!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,6 +38,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		let app = UIApplication.shared.delegate as! AppDelegate
 		app.model!.delegate = self
 		vWait.isHidden = true
+		parseComponents()
 		if tfAddress.text?.count ?? 0 > 0 {
 			tfAmount.becomeFirstResponder()
 		} else {
@@ -54,11 +58,39 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		}
 	}
 	
+	func parseComponents() -> Void {
+		if components != nil {
+			tfAddress.text = components?.host
+			if components?.queryItems != nil {
+				for qi in components!.queryItems! {
+					switch qi.name {
+					case "amount":
+						tfAmount.text = qi.value ?? ""
+						break;
+					case "message":
+						//message = qi.value
+						break;
+					case "IS":
+						scInstantSend.isOn = qi.value ?? "" == "1"
+						break;
+					default:
+						break;
+					}
+				}
+			}
+			components = nil
+		}
+	}
+	
 	@IBAction func unwindToSend(unwindSegue: UIStoryboardSegue) {
 		if (unwindSegue.source is ScanViewController) {
 			let dest = unwindSegue.destination as! SendViewController
 			let src = unwindSegue.source as! ScanViewController
 			dest.tfAddress.text = src.address
+			if src.amount ?? 0 > 0 {
+				dest.tfAmount.text = "\(src.amount!)"
+			}
+			dest.scInstantSend.isOn = src.instantSend
 		}
 	}
 
@@ -190,7 +222,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		
 	}
 	
-	func stopBalanceUpdate() -> Void {
+	func stopBalanceUpdate(error: String?) -> Void {
 		
 	}
 	
@@ -211,7 +243,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 				self.vWait.isHidden = false;
 			}
 		} else {
-			DispatchQueue.main.async {
+			DispatchQueue.main.sync {
 				self.vWait.isHidden = true
 				let alert = UIAlertController.init(title: NSLocalizedString("Error", comment: "Ошибка"), message: NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self._unspentAmount!), preferredStyle: UIAlertControllerStyle.alert)
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
@@ -225,6 +257,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		if result {
 				let alert = UIAlertController.init(title: NSLocalizedString("SuccessSend", comment: "Успех"), message: NSLocalizedString("SuccessSendMessage", comment: "Success") + txid!, preferredStyle: UIAlertControllerStyle.alert)
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil); self.closeClick(nil) }))
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Share", comment: "Поделться"), style: UIAlertActionStyle.default, handler: { _ in self.shareText(txid!); alert.dismiss(animated: true, completion: nil) }))
 				self.present(alert, animated: true, completion: nil)
 			
 		} else {
@@ -232,6 +265,17 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 				let alert = UIAlertController.init(title: NSLocalizedString("ErrorSend", comment: "Ошибка"), message: NSLocalizedString("ErrorSendMessage", comment: "Ошибка") + (message ?? ""), preferredStyle: UIAlertControllerStyle.alert)
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 				self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	override func processUrlCommand() {
+		let app = UIApplication.shared.delegate as! AppDelegate
+		if app.needToProcessURL {
+			app.needToProcessURL = false
+			if (app.openUrl != nil) {
+				components = URLComponents(url: app.openUrl!, resolvingAgainstBaseURL: true)
+				parseComponents()
+			}
 		}
 	}
 }

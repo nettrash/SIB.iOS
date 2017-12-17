@@ -18,6 +18,9 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	var previewLayer: AVCaptureVideoPreviewLayer!
 	var configured: Bool = false
 	var address: String? = nil
+	var amount: Decimal? = nil
+	var message: String? = nil
+	var instantSend: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -149,10 +152,27 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		let q = code[qStartIndex..<qEndIndex]
 		let query = String(q)
 		
-		let qAndIndex = query.index(of: "?") ?? query.endIndex
-		let qAddress = query[..<qAndIndex]
-		address = String(qAddress)
+		let uri = URL(string: query)
+		let uriComponents = URLComponents.init(url: uri!, resolvingAgainstBaseURL: true)
 		
+		address = uriComponents?.path
+		if uriComponents?.queryItems != nil {
+			for qi in uriComponents!.queryItems! {
+				switch qi.name {
+				case "amount":
+					amount = Decimal(string: qi.value ?? "")
+					break;
+				case "message":
+					message = qi.value
+					break;
+				case "IS":
+					instantSend = qi.value ?? "" == "1"
+					break;
+				default:
+					break;
+				}
+			}
+		}
 		return sibAddress.verify(address)
 	}
 	

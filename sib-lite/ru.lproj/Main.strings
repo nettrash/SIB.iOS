@@ -9,12 +9,12 @@
 "P4j-U6-AM4.text" = "+ 0.00 SIB";
 "PJW-gP-tek.text" = "2017-10-17";
 "T8Z-d3-SDT.placeholder" = "укажите адрес червонцев";
-"TP5-pH-om6.normalTitle" = "Пополнить";
+"TP5-pH-om6.normalTitle" = "  Получить Ч";
 "ahe-VQ-9V0.text" = "Добавить адрес";
 "hDm-SM-dWB.text" = "2017-10-17";
-"wJJ-yD-nnW.normalTitle" = "Дополнительно";
+"wJJ-yD-nnW.normalTitle" = "  Настройки";
 "xnC-CU-xCN.normalTitle" = "отмена";
-"zcb-vT-kvq.normalTitle" = "Перевести";
+"zcb-vT-kvq.normalTitle" = "  Отправить Ч";
 "fCB-sh-hn6.text" = "нет операций";
 "ips-zv-hTO.text" = "Адрес";
 "y67-jG-bbf.text" = "Создать кошелёк";
@@ -27,4 +27,4 @@
 "a8k-Wh-tNN.placeholder" = "сумма";
 "VFB-IM-8xe.placeholder" = "комиссия";
 "h2O-lE-du2.normalTitle" = "Отправить перевод";
-
+"kDI-4d-haX.placeholder" = "сумма";

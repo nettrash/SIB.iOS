@@ -9,12 +9,12 @@
 "P4j-U6-AM4.text" = "+ 0.00 SIB";
 "PJW-gP-tek.text" = "2017-10-17";
 "T8Z-d3-SDT.placeholder" = "sibcoin address";
-"TP5-pH-om6.normalTitle" = "Top up";
+"TP5-pH-om6.normalTitle" = "  Top up";
 "ahe-VQ-9V0.text" = "Add address";
 "hDm-SM-dWB.text" = "2017-10-17";
-"wJJ-yD-nnW.normalTitle" = "Advanced";
+"wJJ-yD-nnW.normalTitle" = "  Settings";
 "xnC-CU-xCN.normalTitle" = "cancel";
-"zcb-vT-kvq.normalTitle" = "Transfer";
+"zcb-vT-kvq.normalTitle" = "  Transfer";
 "fCB-sh-hn6.text" = "no history";
 "ips-zv-hTO.text" = "Address";
 "y67-jG-bbf.text" = "Create wallet";
@@ -27,3 +27,4 @@
 "a8k-Wh-tNN.placeholder" = "amount";
 "VFB-IM-8xe.placeholder" = "commission";
 "h2O-lE-du2.normalTitle" = "Send";
+"kDI-4d-haX.placeholder" = "amount";

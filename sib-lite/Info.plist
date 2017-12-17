@@ -18,12 +18,29 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>symbol</string>
+			<key>CFBundleURLName</key>
+			<string>ru.nettrash.sib-lite</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sibcoin</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>13</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Чтение QR кодов для получения адресов SIB</string>
+	<string>Чтение QR кодов для получения реквизитов перевода SIB</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Сохранение QR реквизитов перевода SIB</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

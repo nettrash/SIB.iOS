@@ -32,8 +32,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		app.model!.delegate = self
 		DispatchQueue.main.async {
+			self.app.model!.delegate = self
 			self.prepareActionMenu()
 			self.refreshBalanceView()
 			self.app.model!.refresh()
@@ -58,6 +58,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		if (segue.identifier == "send-sib") {
 			let dst = segue.destination as! SendViewController
 			dst.unwindIdentifiers["send-sib"] = "unwindSegueToBalance"
+			if sender is URLComponents {
+				let components = sender as! URLComponents
+				dst.components = components
+			}
 		}
 	}
 
@@ -240,7 +244,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		}
 	}
 	
-	func stopBalanceUpdate() {
+	func stopBalanceUpdate(error: String?) {
+		if error != nil { showError(error: error!) }
 		DispatchQueue.main.async {
 			UIView.animate(withDuration: 0.35, animations: { () -> Void in
 				self.lblBalance.alpha = 1
@@ -250,6 +255,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 				                  options: UIViewAnimationOptions.transitionFlipFromBottom,
 				                  animations: { [weak self] in
 									self?.refreshBalanceView()
+									self?.processUrlCommand()
 					}, completion: nil)
 			}, completion: { (_ success: Bool) -> Void in })
 		}
@@ -275,6 +281,16 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
+	}
+	
+	override func processUrlCommand() {
+		if app.needToProcessURL {
+			app.needToProcessURL = false
+			if (app.openUrl != nil) {
+				let components = URLComponents(url: app.openUrl!, resolvingAgainstBaseURL: true)
+				performSegue(withIdentifier: "send-sib", sender: components)
+			}
+		}
 	}
 }
 

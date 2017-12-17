@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 	var firstLaunch: Bool = true
 	public var model: ModelRoot?
+	var needToProcessURL: Bool = false
+	var openUrl: URL? = nil
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -22,7 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		model = ModelRoot(self)
 		return true
 	}
-
+	
+	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+		let components = URLComponents.init(url: url, resolvingAgainstBaseURL: true)
+		if components?.scheme != "sibcoin" {
+			return false
+		}
+		needToProcessURL = true
+		openUrl = url
+		return true
+	}
+	
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -68,12 +80,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		//Грузим PIN-код
 		if !firstLaunch && window!.rootViewController is RootViewController && timeoutPIN {
-			if !(UIApplication.topViewController() is CheckPINViewController) {
+			if !(vc is CheckPINViewController) {
 				(window!.rootViewController as! RootViewController).dismiss(animated: false, completion: nil)
 			} else {
 				if !(vc as! CheckPINViewController).Checked {
 					(vc as! CheckPINViewController).tfPIN0.becomeFirstResponder()
 				}
+			}
+		} else {
+			if vc is BaseViewController {
+				(vc as! BaseViewController).processUrlCommand()
 			}
 		}
 		

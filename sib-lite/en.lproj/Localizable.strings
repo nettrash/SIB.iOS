@@ -14,3 +14,9 @@
 "Error" = "Error";
 "Cancel" = "Cancel";
 "SendAmountError" = "Amount + Commission is greather than ";
+"SuccessSend" = "Success";
+"SuccessSendMessage" = "Information about transfer successfull sent. txid ";
+"ErrorSend" = "Error";
+"ErrorSendMessage" = "Transaction information send error. Repeat later.";
+"OK" = "OK";
+"Share" = "Share";

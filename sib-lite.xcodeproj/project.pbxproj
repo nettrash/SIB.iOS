@@ -17,6 +17,7 @@
 		E50165F21F7657A200855FBC /* sib_liteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50165F11F7657A200855FBC /* sib_liteUITests.swift */; };
 		E50FBC421FD7F62500379A26 /* UnspentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */; };
 		E50FBC441FD7F63500379A26 /* Unspent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC431FD7F63500379A26 /* Unspent.swift */; };
+		E5119BE31FE694BD00599747 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5119BE21FE694BD00599747 /* UIImageExtensions.swift */; };
 		E52C9DB21FB8D4ED00DEC76E /* CreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52C9DB11FB8D4ED00DEC76E /* CreateWalletViewController.swift */; };
 		E52C9DB91FB8D70C00DEC76E /* bear-006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52C9DB31FB8D70900DEC76E /* bear-006.jpg */; };
 		E52C9DBA1FB8D70C00DEC76E /* bear-001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E52C9DB41FB8D70A00DEC76E /* bear-001.jpg */; };
@@ -92,6 +93,15 @@
 		E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */; };
 		E5AA3C801FBDD5850032BDE8 /* PointFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7F1FBDD5850032BDE8 /* PointFP.swift */; };
 		E5AA3C821FBDD58F0032BDE8 /* Barret.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C811FBDD58F0032BDE8 /* Barret.swift */; };
+		E5B4AD531FE52CC200B0BA86 /* ActionButtonSend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD501FE52CC100B0BA86 /* ActionButtonSend@2x.png */; };
+		E5B4AD541FE52CC200B0BA86 /* ActionButtonSend.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD511FE52CC200B0BA86 /* ActionButtonSend.png */; };
+		E5B4AD551FE52CC200B0BA86 /* ActionButtonSend@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD521FE52CC200B0BA86 /* ActionButtonSend@3x.png */; };
+		E5B4AD591FE5306D00B0BA86 /* ActionButtonReceive.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD561FE5306D00B0BA86 /* ActionButtonReceive.png */; };
+		E5B4AD5A1FE5306D00B0BA86 /* ActionButtonReceive@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD571FE5306D00B0BA86 /* ActionButtonReceive@3x.png */; };
+		E5B4AD5B1FE5306D00B0BA86 /* ActionButtonReceive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD581FE5306D00B0BA86 /* ActionButtonReceive@2x.png */; };
+		E5B4AD5F1FE531C700B0BA86 /* ActionButtonSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD5C1FE531C200B0BA86 /* ActionButtonSettings@2x.png */; };
+		E5B4AD601FE531C700B0BA86 /* ActionButtonSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD5D1FE531C400B0BA86 /* ActionButtonSettings.png */; };
+		E5B4AD611FE531C700B0BA86 /* ActionButtonSettings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD5E1FE531C600B0BA86 /* ActionButtonSettings@3x.png */; };
 		E5B6E7DE1FCE0A88009E32BC /* SetPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E7DD1FCE0A88009E32BC /* SetPINViewController.swift */; };
 		E5B6E7E01FCE1B42009E32BC /* CheckPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6E7DF1FCE1B42009E32BC /* CheckPINViewController.swift */; };
 		E5B725FC1FA12F6F00F9004A /* BalanceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B725FB1FA12F6F00F9004A /* BalanceResponse.swift */; };
@@ -193,6 +203,7 @@
 		E50165F31F7657A200855FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnspentTransaction.swift; sourceTree = "<group>"; };
 		E50FBC431FD7F63500379A26 /* Unspent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unspent.swift; sourceTree = "<group>"; };
+		E5119BE21FE694BD00599747 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		E52C9DB11FB8D4ED00DEC76E /* CreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletViewController.swift; sourceTree = "<group>"; };
 		E52C9DB31FB8D70900DEC76E /* bear-006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bear-006.jpg"; sourceTree = "<group>"; };
 		E52C9DB41FB8D70A00DEC76E /* bear-001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bear-001.jpg"; sourceTree = "<group>"; };
@@ -274,6 +285,15 @@
 		E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveFP.swift; sourceTree = "<group>"; };
 		E5AA3C7F1FBDD5850032BDE8 /* PointFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointFP.swift; sourceTree = "<group>"; };
 		E5AA3C811FBDD58F0032BDE8 /* Barret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barret.swift; sourceTree = "<group>"; };
+		E5B4AD501FE52CC100B0BA86 /* ActionButtonSend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonSend@2x.png"; sourceTree = "<group>"; };
+		E5B4AD511FE52CC200B0BA86 /* ActionButtonSend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButtonSend.png; sourceTree = "<group>"; };
+		E5B4AD521FE52CC200B0BA86 /* ActionButtonSend@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonSend@3x.png"; sourceTree = "<group>"; };
+		E5B4AD561FE5306D00B0BA86 /* ActionButtonReceive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButtonReceive.png; sourceTree = "<group>"; };
+		E5B4AD571FE5306D00B0BA86 /* ActionButtonReceive@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonReceive@3x.png"; sourceTree = "<group>"; };
+		E5B4AD581FE5306D00B0BA86 /* ActionButtonReceive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonReceive@2x.png"; sourceTree = "<group>"; };
+		E5B4AD5C1FE531C200B0BA86 /* ActionButtonSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonSettings@2x.png"; sourceTree = "<group>"; };
+		E5B4AD5D1FE531C400B0BA86 /* ActionButtonSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButtonSettings.png; sourceTree = "<group>"; };
+		E5B4AD5E1FE531C600B0BA86 /* ActionButtonSettings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonSettings@3x.png"; sourceTree = "<group>"; };
 		E5B6E7DD1FCE0A88009E32BC /* SetPINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPINViewController.swift; sourceTree = "<group>"; };
 		E5B6E7DF1FCE1B42009E32BC /* CheckPINViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPINViewController.swift; sourceTree = "<group>"; };
 		E5B725FB1FA12F6F00F9004A /* BalanceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceResponse.swift; sourceTree = "<group>"; };
@@ -475,6 +495,15 @@
 		E56EC0B91F765E9600EDE756 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				E5B4AD5D1FE531C400B0BA86 /* ActionButtonSettings.png */,
+				E5B4AD5C1FE531C200B0BA86 /* ActionButtonSettings@2x.png */,
+				E5B4AD5E1FE531C600B0BA86 /* ActionButtonSettings@3x.png */,
+				E5B4AD561FE5306D00B0BA86 /* ActionButtonReceive.png */,
+				E5B4AD581FE5306D00B0BA86 /* ActionButtonReceive@2x.png */,
+				E5B4AD571FE5306D00B0BA86 /* ActionButtonReceive@3x.png */,
+				E5B4AD511FE52CC200B0BA86 /* ActionButtonSend.png */,
+				E5B4AD501FE52CC100B0BA86 /* ActionButtonSend@2x.png */,
+				E5B4AD521FE52CC200B0BA86 /* ActionButtonSend@3x.png */,
 				E54B1DB81FD31F0D0028EC96 /* camera.png */,
 				E54B1DB91FD31F110028EC96 /* camera@2x.png */,
 				E54B1DBA1FD31F140028EC96 /* camera@3x.png */,
@@ -605,6 +634,7 @@
 				E58159DA1FC3F96C002117E8 /* IntegerExtensions.swift */,
 				E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */,
 				E55727881FE00F120004983B /* DataExtensions.swift */,
+				E5119BE21FE694BD00599747 /* UIImageExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -821,6 +851,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B4AD611FE531C700B0BA86 /* ActionButtonSettings@3x.png in Resources */,
 				E54B1DBB1FD31F160028EC96 /* camera.png in Resources */,
 				E579F15E1F922D4E00FA19E8 /* Scan.png in Resources */,
 				E58B4A181F97F3A70023B5E1 /* Vertical.png in Resources */,
@@ -828,6 +859,7 @@
 				E56DECE71F8F6FB3002DADE9 /* background_block-first.jpg in Resources */,
 				E52C9DB91FB8D70C00DEC76E /* bear-006.jpg in Resources */,
 				E50165DC1F7657A200855FBC /* LaunchScreen.storyboard in Resources */,
+				E5B4AD5A1FE5306D00B0BA86 /* ActionButtonReceive@3x.png in Resources */,
 				E5C0C50E1FD1ACEE0039D1BC /* ActionInfo.png in Resources */,
 				E5C0C5041FD19CC10039D1BC /* action@2x.png in Resources */,
 				E56EC0BB1F765EC700EDE756 /* Background.jpg in Resources */,
@@ -846,9 +878,11 @@
 				E56DECE51F8F6FB3002DADE9 /* footer_img2.jpg in Resources */,
 				E56DECEF1F8F6FB3002DADE9 /* wait.gif in Resources */,
 				E5DEEF191F8E68CC00D8441D /* symbol.png in Resources */,
+				E5B4AD551FE52CC200B0BA86 /* ActionButtonSend@3x.png in Resources */,
 				E56DECEC1F8F6FB3002DADE9 /* background_main.jpg in Resources */,
 				E5C0C4FE1FD18FD10039D1BC /* back@2x.png in Resources */,
 				E52C9DC41FB8D71E00DEC76E /* forest-001.jpg in Resources */,
+				E5B4AD531FE52CC200B0BA86 /* ActionButtonSend@2x.png in Resources */,
 				E553B74F1F974722002A86B2 /* GreenArrowUp@2x.png in Resources */,
 				E56DECE81F8F6FB3002DADE9 /* background_block-third.jpg in Resources */,
 				E5C0C5031FD19CC10039D1BC /* action.png in Resources */,
@@ -863,9 +897,12 @@
 				E52C9DBE1FB8D70C00DEC76E /* bear-002.jpg in Resources */,
 				E56DECE91F8F6FB3002DADE9 /* background-main.jpg in Resources */,
 				E5C0C5051FD19CC10039D1BC /* action@3x.png in Resources */,
+				E5B4AD5B1FE5306D00B0BA86 /* ActionButtonReceive@2x.png in Resources */,
 				E50165D91F7657A200855FBC /* Assets.xcassets in Resources */,
+				E5B4AD591FE5306D00B0BA86 /* ActionButtonReceive.png in Resources */,
 				E56DECEA1F8F6FB3002DADE9 /* background-user.jpg in Resources */,
 				E58B4A1A1F97F3A70023B5E1 /* Vertical@3x.png in Resources */,
+				E5B4AD541FE52CC200B0BA86 /* ActionButtonSend.png in Resources */,
 				E553B7511F974722002A86B2 /* GreenArrowUp@3x.png in Resources */,
 				E553B7561F9747B7002A86B2 /* RedArrowDown@2x.png in Resources */,
 				E58B4A191F97F3A70023B5E1 /* Vertical@2x.png in Resources */,
@@ -878,6 +915,8 @@
 				E579F15D1F922D4E00FA19E8 /* Scan@2x.png in Resources */,
 				E50165D41F7657A200855FBC /* Main.storyboard in Resources */,
 				E5C0C4FF1FD18FD10039D1BC /* back.png in Resources */,
+				E5B4AD5F1FE531C700B0BA86 /* ActionButtonSettings@2x.png in Resources */,
+				E5B4AD601FE531C700B0BA86 /* ActionButtonSettings.png in Resources */,
 				E5865C1E1F96682200580954 /* Images.xcassets in Resources */,
 				E56DECE41F8F6FB3002DADE9 /* background_form.jpg in Resources */,
 				E54B1DBD1FD31F160028EC96 /* camera@3x.png in Resources */,
@@ -947,6 +986,7 @@
 				E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */,
 				E546C8BE1FC3177800892D32 /* ArrayExtensions.swift in Sources */,
 				E56DECF61F8F8106002DADE9 /* sibAddress.swift in Sources */,
+				E5119BE31FE694BD00599747 /* UIImageExtensions.swift in Sources */,
 				E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */,
 				E50165CF1F7657A200855FBC /* AppDelegate.swift in Sources */,
 				E52C9DB21FB8D4ED00DEC76E /* CreateWalletViewController.swift in Sources */,

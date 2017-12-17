@@ -25,4 +25,20 @@ class BaseViewController: UIViewController {
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.view.endEditing(true)
 	}
+	
+	public func processUrlCommand() -> Void {
+		dismiss(animated: false, completion: nil)
+	}
+	
+	public func showError(error: String) -> Void {
+		let alert = UIAlertController.init(title: NSLocalizedString("Error", comment: "Ошибка"), message: error, preferredStyle: UIAlertControllerStyle.alert)
+		alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+		self.present(alert, animated: true, completion: nil)
+	}
+	
+	public func shareText(_ text: String) -> Void {
+		let activityViewController : UIActivityViewController = UIActivityViewController(
+			activityItems: [text], applicationActivities: [])
+		present(activityViewController, animated: true, completion: nil)
+	}
 }

@@ -44,7 +44,6 @@ class sibTransaction : NSObject {
 			a += Double(o.Amount.intValue()) / pow(10, 8)
 		}
 		Change!.initialize(NSUUID().uuidString)
-		Change!.Address = "SekusUxZxgmQoBSfX7J1JYgfRYjWuwyvE8"
 		addOutput(address: Change!.Address!, amount: summa)
 	}
 	
