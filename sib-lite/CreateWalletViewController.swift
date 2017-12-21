@@ -72,6 +72,9 @@ class CreateWalletViewController: BaseViewController, UITextFieldDelegate {
 		return true;
 	}
 	
+	override public func processUrlCommand() -> Void {
+	}
+
 	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
 		return true;
 	}

@@ -131,6 +131,9 @@ class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 		return false
 	}
 	
+	override public func processUrlCommand() -> Void {
+	}
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 	}
 	

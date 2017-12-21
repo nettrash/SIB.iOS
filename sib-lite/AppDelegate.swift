@@ -88,13 +88,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				}
 			}
 		} else {
-			if vc is BaseViewController {
-				(vc as! BaseViewController).processUrlCommand()
-			}
 		}
 		
 		if firstLaunch {
 			firstLaunch = false
+		}
+		
+		if vc is BaseViewController {
+			(vc as! BaseViewController).processUrlCommand()
 		}
 	}
 

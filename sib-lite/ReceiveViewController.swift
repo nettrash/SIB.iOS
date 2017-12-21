@@ -13,7 +13,6 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	
 	@IBOutlet var tfAddress: UITextField!
 	@IBOutlet var tfAmount: UITextField!
-	@IBOutlet var scInstantSend: UISwitch!
 	@IBOutlet var imgQR: UIImageView!
 	@IBOutlet var aiWait: UIActivityIndicatorView!
 	
@@ -21,17 +20,8 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	
 	var queryString: String {
 		var retVal = ""
-		if amount ?? 0 > 0 || scInstantSend.isOn {
-			retVal = "?"
-			if amount ?? 0 > 0 {
-				retVal += "amount=\(amount!)"
-			}
-			if scInstantSend.isOn {
-				if retVal.count > 1 {
-					retVal += "&"
-				}
-				retVal += "IS=1"
-			}
+		if amount ?? 0 > 0 {
+			retVal += "?amount=\(amount!)"
 		}
 		return retVal
 	}
@@ -52,9 +42,9 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		super.viewDidLoad()
 		let app = UIApplication.shared.delegate as! AppDelegate
 		if app.model!.needNewAddress {
-			let a = app.model!.AddressesForIncoming[app.model!.AddressesForIncoming.count-1]
-			app.model!.SIB!.initialize(a.address + a.wif)
-			app.model!.add(app.model!.SIB!.PrivateKey!, app.model!.SIB!.PublicKey!, app.model!.SIB!.Address!, app.model!.SIB!.WIF!, app.model!.SIB!.Compressed)
+			app.model!.SIB!.initialize(NSUUID().uuidString)
+			app.model!.storeWallet(app.model!.SIB!, false, .Incoming)
+			app.model!.reload(app)
 		}
 	}
 	
@@ -62,7 +52,7 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		super.viewDidAppear(animated)
 		
 		let app = UIApplication.shared.delegate as! AppDelegate
-		address = app.model!.Addresses[app.model!.Addresses.count-1].address
+		address = app.model!.AddressesForIncoming[app.model!.AddressesForIncoming.count-1].address
 		tfAddress.text = address
 		DispatchQueue.main.async {
 			self.refreshQR()
@@ -110,13 +100,9 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		performSegue(withIdentifier: unwindIdentifiers["receive-sib"]!, sender: self)
 	}
 	
-	@IBAction func scInstantSendChanged(_ sender: Any?) -> Void {
-		refreshQR()
-	}
-	
 	// UITextFieldDelegate
 	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		return textField != tfAddress
+		return true//textField != tfAddress
 	}
 	
 	public func textFieldDidBeginEditing(_ textField: UITextField) {

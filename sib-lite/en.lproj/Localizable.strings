@@ -20,3 +20,8 @@
 "ErrorSendMessage" = "Transaction information send error. Repeat later.";
 "OK" = "OK";
 "Share" = "Share";
+"ScanNotSupport" = "Error";
+"ScanNotSupportedMsg" = "Your device does not support scanning a code from an item. Please use a device with a camera.";
+"InMemoryPool" = "in memory";
+"SIB" = "SIBCoin";
+"SellButtonText" = "Sell for ";

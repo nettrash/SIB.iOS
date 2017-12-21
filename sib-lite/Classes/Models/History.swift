@@ -14,9 +14,6 @@ public class History: NSObject {
 	
 	override init() {
 		super.init()
-		//Items.append(HistoryItem(type: .Incoming, date: Date.init(timeIntervalSinceNow: -1000), amount: 100))
-		//Items.append(HistoryItem(type: .Outgoing, date: Date.init(timeIntervalSinceNow: -500), amount: 25))
-		//Items.append(HistoryItem(type: .Outgoing, date: Date.init(timeIntervalSinceNow: -100), amount: 75))
 	}
 	
 	func load(_ txs: [Any], addresses: [Address]) {

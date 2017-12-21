@@ -28,10 +28,12 @@ public class HistoryItem: NSObject {
 	func getDate() -> String {
 		let cal: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)
 		let d = Date()
+		var a = ""
 		
 		let dateFormatter = DateFormatter()
 		if (cal.compare(date, to: d, toGranularity: Calendar.Component.day) == ComparisonResult.orderedSame) {
 			dateFormatter.dateFormat = "hh:mm"
+			a = " UTC"
 		} else if (cal.compare(date, to: d, toGranularity: Calendar.Component.month) == ComparisonResult.orderedSame) {
 			dateFormatter.dateFormat = "dd MMMM"
 		} else if (cal.compare(date, to: d, toGranularity: Calendar.Component.year) == ComparisonResult.orderedSame) {
@@ -39,7 +41,7 @@ public class HistoryItem: NSObject {
 		} else {
 			dateFormatter.dateFormat = "dd-MM-yyyy"
 		}
-		return dateFormatter.string(from: date)
+		return dateFormatter.string(from: date) + a
 	}
 	
 	func getAmount(_ dimension: BalanceDimension) -> String {

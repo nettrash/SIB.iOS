@@ -27,16 +27,20 @@ public class ModelRoot: NSObject {
 	public var Balance: Double = 0
 	
 	public var isRefresh: Bool = false
-	
 	public var isHistoryRefresh: Bool = false
+	public var isCurrentRatesRefresh: Bool = false
 	
 	public var Dimension: BalanceDimension = .SIB
-	
 	public var HistoryItems: History = History()
+	public var MemoryPool: MemPool = MemPool()
+	public var CurrentRates: Rates = Rates()
 	
 	public var SIB: Wallet?
 	
 	public var needNewAddress: Bool = false
+	
+	public var sellRate: Double = 0
+	public var buyRate: Double = 0
 	
 	init(_ app: AppDelegate) {
 		super.init()
@@ -57,22 +61,31 @@ public class ModelRoot: NSObject {
 	}
 	
 	func refresh() -> Void {
-		//Обновляем
-		NSLog("%i", Addresses.count)
-		//Запрашиваем дельту по адресам
 		_loadBalanceData()
 	}
 	
+	func refreshRates() -> Void {
+		_loadCurrentRatesData()
+	}
+	
+	func refreshHistory() -> Void {
+		_loadHistoryData()
+	}
+	
+	func getSellRate(_ currency: String) -> Void {
+		_getSellRate(currency)
+	}
+	
+	func getBuyRate(_ currency: String) -> Void {
+		_getBuyRate(currency)
+	}
+
 	private func _loadBalanceData() -> Void {
 		DispatchQueue.global().async {
 			// prepare auth data
 			let ServiceName = "SIB"
 			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
-			let d = Date()
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateFormat = "yyyyMMddhh"
-			dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-			let md5src = "\(ServiceName)\(ServiceSecret)\(dateFormatter.string(from: d))"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
 			let md5digest = Crypto.md5(md5src)
 			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
 			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
@@ -132,11 +145,7 @@ public class ModelRoot: NSObject {
 			// prepare auth data
 			let ServiceName = "SIB"
 			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
-			let d = Date()
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateFormat = "yyyyMMddhh"
-			dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-			let md5src = "\(ServiceName)\(ServiceSecret)\(dateFormatter.string(from: d))"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
 			let md5digest = Crypto.md5(md5src)
 			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
 			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
@@ -177,7 +186,65 @@ public class ModelRoot: NSObject {
 					if (txs != nil) {
 						self.HistoryItems.load(txs!, addresses: self.Addresses)
 					}
-					//Инициализируем историю
+					self._loadMemoryPoolData()
+				}
+			}
+			
+			if (!self.isHistoryRefresh) {
+				self.isHistoryRefresh = true
+				self.delegate?.startHistoryUpdate()
+			}
+			
+			task.resume()
+		}
+	}
+	
+	private func _loadHistoryData() -> Void {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			var json: [String:Any] = ["addresses": self.Addresses.map { (_ a: Address) -> String in
+				a.address
+				}]
+			json["last"] = 1000
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/transactions")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.delegate?.stopHistoryUpdate()
+					self.isHistoryRefresh = false
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					let txsResponse = responseJSON["TransactionsResult"]!
+					let txs = txsResponse["Items"] as? [Any]
+					if (txs != nil) {
+						self.HistoryItems.load(txs!, addresses: self.Addresses)
+					}
 					self.delegate?.stopHistoryUpdate()
 					self.isHistoryRefresh = false
 				}
@@ -192,16 +259,72 @@ public class ModelRoot: NSObject {
 		}
 	}
 
+	private func _loadMemoryPoolData() -> Void {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			let json: [String:Any] = ["addresses": self.Addresses.map { (_ a: Address) -> String in
+				a.address
+				}]
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/mempool")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.delegate?.stopHistoryUpdate()
+					self.isHistoryRefresh = false
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					let mpResponse = responseJSON["MemoryPoolResult"]!
+					let mempoolItems = mpResponse["Items"] as? [Any]
+					if (mempoolItems != nil) {
+						self.MemoryPool.load(mempoolItems!, addresses: self.Addresses)
+					}
+					//Инициализируем историю
+					self.delegate?.stopHistoryUpdate()
+					self.isHistoryRefresh = false
+				}
+			}
+			
+			if (!self.isHistoryRefresh) {
+				self.isHistoryRefresh = true
+				self.delegate?.startHistoryUpdate()
+			}
+			
+			task.resume()
+		}
+	}
+	
 	private func _needNewAddressCheck() -> Void {
 		DispatchQueue.global().async {
 			// prepare auth data
 			let ServiceName = "SIB"
 			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
-			let d = Date()
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateFormat = "yyyyMMddhh"
-			dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-			let md5src = "\(ServiceName)\(ServiceSecret)\(dateFormatter.string(from: d))"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
 			let md5digest = Crypto.md5(md5src)
 			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
 			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
@@ -243,16 +366,107 @@ public class ModelRoot: NSObject {
 		}
 	}
 
+	
+	private func _getSellRate(_ currency: String) -> Void {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			let json: [String:String] = ["currency": currency]
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/sellRate")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					//Обрабатываем результат
+					if responseJSON["SellRateResult"]?["Success"] as! Bool {
+						self.sellRate = responseJSON["SellRateResult"]!["Rate"] as! Double
+					}
+				}
+			}
+			
+			task.resume()
+		}
+	}
+	
+	private func _getBuyRate(_ currency: String) -> Void {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			let json: [String:String] = ["currency": currency]
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/buyRate")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					//Обрабатываем результат
+					if responseJSON["BuyRateResult"]!["Success"] as! Bool {
+						self.buyRate = responseJSON["BuyRateResult"]?["Rate"] as! Double
+					}
+				}
+			}
+			
+			task.resume()
+		}
+	}
+
 	public func getUnspentData() -> Void {
 		DispatchQueue.global().async {
 			// prepare auth data
 			let ServiceName = "SIB"
 			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
-			let d = Date()
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateFormat = "yyyyMMddhh"
-			dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-			let md5src = "\(ServiceName)\(ServiceSecret)\(dateFormatter.string(from: d))"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
 			let md5digest = Crypto.md5(md5src)
 			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
 			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
@@ -306,11 +520,7 @@ public class ModelRoot: NSObject {
 			// prepare auth data
 			let ServiceName = "SIB"
 			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
-			let d = Date()
-			let dateFormatter = DateFormatter()
-			dateFormatter.dateFormat = "yyyyMMddhh"
-			dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-			let md5src = "\(ServiceName)\(ServiceSecret)\(dateFormatter.string(from: d))"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
 			let md5digest = Crypto.md5(md5src)
 			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
 			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
@@ -360,6 +570,67 @@ public class ModelRoot: NSObject {
 		}
 	}
 
+	private func _loadCurrentRatesData() -> Void {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			var json: [String:Any] = ["addresses": self.Addresses.map { (_ a: Address) -> String in
+				a.address
+				}]
+			json["last"] = 3
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/currentRates")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.delegate?.stopHistoryUpdate()
+					self.isHistoryRefresh = false
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					let ratesResponse = responseJSON["CurrentRatesResult"]!
+					let rates = ratesResponse["Items"] as? [Any]
+					if (rates != nil) {
+						self.CurrentRates.load(rates!)
+					}
+					//Инициализируем историю
+					self.delegate?.stopCurrentRatesUpdate()
+					self.isCurrentRatesRefresh = false
+				}
+			}
+			
+			if (!self.isCurrentRatesRefresh) {
+				self.isCurrentRatesRefresh = true
+				self.delegate?.startCurrentRatesUpdate()
+			}
+			
+			task.resume()
+		}
+	}
+	
 	func storeWallet(_ wallet: Wallet, _ refresh: Bool = true, _ walletType: sibWalletType = .Incoming) -> Void {
 		add(wallet.PrivateKey!, wallet.PublicKey!, wallet.Address!, wallet.WIF!, wallet.Compressed, refreshAfter: refresh, walletType: walletType)
 	}
@@ -421,6 +692,8 @@ protocol ModelRootDelegate {
 	func stopBalanceUpdate(error: String?)
 	func startHistoryUpdate()
 	func stopHistoryUpdate()
+	func startCurrentRatesUpdate()
+	func stopCurrentRatesUpdate()
 	func unspetData(_ data: Unspent)
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?)
 }

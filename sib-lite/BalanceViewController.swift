@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CardIO
 
-class BalanceViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ModelRootDelegate {
+class BalanceViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ModelRootDelegate, CardIOPaymentViewControllerDelegate, UITextFieldDelegate {
 	
 	let app = UIApplication.shared.delegate as! AppDelegate
+	
+	var historyItemsCount: Int = 0
 	
 	@IBOutlet var lblBalance: UILabel!
 	@IBOutlet var scDimension: UISegmentedControl!
@@ -21,29 +24,90 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBOutlet var btnRequisites: UIButton!
 	@IBOutlet var btnBuy: UIButton!
 	@IBOutlet var tblHistory: UITableView!
-	@IBOutlet var aiRefresh: UIActivityIndicatorView!
+	@IBOutlet var tblRate: UITableView!
 	@IBOutlet var lblNoOps: UILabel!
+	@IBOutlet var vBuy: UIView!
+	@IBOutlet var vSell: UIView!
+	@IBOutlet var tfCardNumber_Buy: UITextField!
+	@IBOutlet var tfCardNumber_Sell: UITextField!
+	@IBOutlet var tfAmount_Sell: UITextField!
+	@IBOutlet var btnSIBSell: UIButton!
+	
+	var refreshControl: UIRefreshControl!
+	var refreshControlRates: UIRefreshControl!
+
+	//Sell
+	var amountSell: Double = 0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		self.lblNoOps.isHidden = true
+		self.tblHistory.isHidden = false
+		self.tblRate.isHidden = true
+		self.vBuy.isHidden = true
+		self.vSell.isHidden = true
+
+		self.roundCorners(self.vBuy)
+		self.roundCorners(self.vSell)
+		
+		refreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+		refreshControl.tintColor = UIColor.white
+		tblHistory.addSubview(refreshControl)
+		
+		refreshControlRates = UIRefreshControl()
+		refreshControlRates.addTarget(self, action: #selector(refreshRates), for: .valueChanged)
+		refreshControlRates.tintColor = UIColor.white
+		tblRate.addSubview(refreshControlRates)
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		historyItemsCount = 0
 		DispatchQueue.main.async {
 			self.app.model!.delegate = self
 			self.prepareActionMenu()
-			self.refreshBalanceView()
-			self.app.model!.refresh()
+			self.segmentControlValueChanged(nil)
 		}
 	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
 	
+	@objc func keyboardWillShow(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			if self.view.frame.origin.y == 0 {
+				self.view.frame.origin.y -= keyboardSize.height / 2
+			}
+		}
+	}
+	
+	@objc func keyboardWillHide(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			if self.view.frame.origin.y != 0 {
+				self.view.frame.origin.y += keyboardSize.height / 2
+			}
+		}
+	}
+
+	@objc func refresh(sender:AnyObject?) {
+		DispatchQueue.main.async {
+			self.app.model!.refresh()
+		}
+	}
+	
+	@objc func refreshRates(sender:AnyObject?) {
+		DispatchQueue.main.async {
+			self.app.model!.refreshRates()
+		}
+	}
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		imgActionInfo.alpha = 1.0
 		if (segue.identifier == "add-address") {
@@ -54,6 +118,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		if (segue.identifier == "receive-sib") {
 			let dst = segue.destination as! ReceiveViewController
 			dst.unwindIdentifiers["receive-sib"] = "unwindSegueToBalance"
+		}
+		if (segue.identifier == "history-sib") {
+			let dst = segue.destination as! HistoryViewController
+			dst.unwindIdentifiers["history-sib"] = "unwindSegueToBalance"
 		}
 		if (segue.identifier == "send-sib") {
 			let dst = segue.destination as! SendViewController
@@ -78,6 +146,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			let src = unwindSegue.source as! SendViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
+		if (unwindSegue.source is HistoryViewController) {
+			let src = unwindSegue.source as! HistoryViewController
+			//app.model!.add(src.textFieldAddress.text!)
+		}
 	}
 	
 	@IBAction func addAddress(_ sender: Any?) {
@@ -91,38 +163,111 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBAction func sendSIB(_ sender: Any?) {
 		performSegue(withIdentifier: "send-sib", sender: self)
 	}
+	
+	@IBAction func historySIB(_ sender: Any?) {
+		performSegue(withIdentifier: "history-sib", sender: self)
+	}
 
+	@IBAction func scanCad(_ sender: Any?) {
+		let ciopvc = CardIOPaymentViewController.init(paymentDelegate: self)!
+		ciopvc.disableManualEntryButtons = true
+		ciopvc.useCardIOLogo = true
+		ciopvc.scanExpiry = true
+		ciopvc.suppressScanConfirmation = true
+		ciopvc.suppressScannedCardImage = true
+		present(ciopvc, animated: true, completion: nil)
+	}
+	
 	@IBAction func segmentControlValueChanged(_ sender: Any?) {
+		self.view.endEditing(true)
 		switch scDimension.selectedSegmentIndex {
 		case 0:
-			app.model!.Dimension = .SIB
+			if !self.app.model!.isHistoryRefresh {
+				self.tblHistory.setContentOffset(CGPoint(x: 0, y: -self.refreshControl!.frame.size.height - self.view.safeAreaInsets.bottom), animated: true)
+				refresh(sender: nil)
+			}
+			if !tblRate.isHidden {
+				flip(tblRate, tblHistory)
+			}
+			if !vBuy.isHidden {
+				flip(vBuy, tblHistory)
+			}
+			if !vSell.isHidden {
+				flip(vSell, tblHistory)
+			}
 		case 1:
-			app.model!.Dimension = .mSIB
+			//Курсы
+			if !self.app.model!.isCurrentRatesRefresh {
+				self.tblRate.setContentOffset(CGPoint(x: 0, y: -self.refreshControlRates!.frame.size.height - self.view.safeAreaInsets.bottom), animated: true)
+				self.app.model!.refreshRates()
+			}
+			if !tblHistory.isHidden {
+				flip(tblHistory, tblRate)
+			}
+			if !vBuy.isHidden {
+				flip(vBuy, tblRate)
+			}
+			if !vSell.isHidden {
+				flip(vSell, tblRate)
+			}
 		case 2:
-			app.model!.Dimension = .µSIB
+			//Купить
+			self.app.model!.getBuyRate("RUB")
+			if !tblHistory.isHidden {
+				flip(tblHistory, vBuy)
+			}
+			if !tblRate.isHidden {
+				flip(tblRate, vBuy)
+			}
+			if !vSell.isHidden {
+				flip(vSell, vBuy)
+			}
 		case 3:
-			app.model!.Dimension = .ivans
+			//Продать
+			self.app.model!.getSellRate("RUB")
+			if !tblHistory.isHidden {
+				flip(tblHistory, vSell)
+			}
+			if !tblRate.isHidden {
+				flip(tblRate, vSell)
+			}
+			if !vBuy.isHidden {
+				flip(vBuy, vSell)
+			}
 		default:
-			app.model!.Dimension = .SIB
+			if !tblRate.isHidden {
+				flip(tblRate, tblHistory)
+			}
+			if !vBuy.isHidden {
+				flip(vBuy, tblHistory)
+			}
+			if !vSell.isHidden {
+				flip(vSell, tblHistory)
+			}
+			refreshBalanceView()
 		}
-		refreshBalanceView()
-		tblHistory.reloadData()
+	}
+	
+	func setButtonText(_ btn: UIButton!, _ text: String!) -> Void {
+		btn.setTitle(text, for: .application)
+		btn.setTitle(text, for: .disabled)
+		btn.setTitle(text, for: .focused)
+		btn.setTitle(text, for: .highlighted)
+		btn.setTitle(text, for: .normal)
+		btn.setTitle(text, for: .reserved)
+		btn.setTitle(text, for: .selected)
 	}
 	
 	func refreshBalanceView() {
 		switch app.model!.Dimension {
 		case .SIB:
 			lblBalance.text = String(format: "%.2f", app.model!.Balance)
-			scDimension.selectedSegmentIndex = 0
 		case .mSIB:
 			lblBalance.text = String(format: "%.2f", app.model!.Balance * 1000)
-			scDimension.selectedSegmentIndex = 1
 		case .µSIB:
 			lblBalance.text = String(format: "%.2f", app.model!.Balance * 1000 * 1000)
-			scDimension.selectedSegmentIndex = 2
 		case .ivans:
 			lblBalance.text = String(format: "%.0f", app.model!.Balance * 1000 * 1000 * 100)
-			scDimension.selectedSegmentIndex = 3
 		}
 	}
 	
@@ -153,6 +298,17 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 							self.imgActionInfo.alpha = self.imgActionInfo.alpha == 0 ? 1 : 0
 							self.btnBuy.alpha = self.btnBuy.alpha == 0 ? 1 : 0
 							self.imgVertical.alpha = self.imgVertical.alpha == 0 ? self.btnAddAddress.alpha : self.imgVertical.alpha
+							if self.btnRequisites.frame.origin.y < self.tblHistory.frame.origin.y + self.tblHistory.frame.size.height {
+								if self.imgVertical.alpha == 0 {
+									self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
+									if self.historyItemsCount > 3 { self.historyItemsCount = 3 }
+									self.tblHistory.reloadData()
+								} else {
+									self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
+									if self.historyItemsCount > 1 { self.historyItemsCount = 1 }
+									self.tblHistory.reloadData()
+								}
+							}
 						}, completion: { (_ success: Bool) -> Void in
 							
 						})
@@ -160,6 +316,17 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 				})
 			})
 		})
+	}
+	
+	@IBAction func btnSIBSellClick(_ sender: Any?) -> Void {
+		amountSell = Double(self.tfAmount_Sell.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
+		if self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance < amountSell {
+			//Регистрируем вывод и получаем реквизиты отправки
+			//Отправляем
+			//Alert что все отправлено
+		} else {
+			//Тут надо показать Alert
+		}
 	}
 	
 	private func prepareActionMenu() {
@@ -190,21 +357,42 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1;
 	}
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return app.model!.HistoryItems.Items.count
+		return tableView == tblHistory ? historyItemsCount : app.model!.CurrentRates.Items.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	private func _historyCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+		if indexPath.row < app.model!.MemoryPool.Items.count {
+			let item = app.model!.MemoryPool.Items.sorted(by: { (_ a: MemPoolItem, _ b: MemPoolItem) -> Bool in
+				a.seconds ?? 0 > b.seconds ?? 0
+			})[indexPath.row]
+			if item.isInput {
+				let cell = tableView.dequeueReusableCell(withIdentifier: "MemPoolIn", for: indexPath)
+				
+				cell.detailTextLabel?.text = "+ " + item.getAmount(app.model!.Dimension)
+				cell.textLabel?.text = item.getSeconds()
+				
+				return cell
+			} else {
+				let cell = tableView.dequeueReusableCell(withIdentifier: "MemPoolOut", for: indexPath)
+				
+				cell.detailTextLabel?.text = "- " + item.getAmount(app.model!.Dimension)
+				cell.textLabel?.text = item.getSeconds()
+				
+				return cell
+			}
+		}
 		let item = app.model!.HistoryItems.Items.sorted(by: { (_ a: HistoryItem, _ b: HistoryItem) -> Bool in
 			a.date > b.date
-		})[indexPath.row]
+		})[indexPath.row-app.model!.MemoryPool.Items.count]
 		switch item.type {
 		case .Incoming:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "IncomingTransaction", for: indexPath)
 			
 			cell.detailTextLabel?.text = "+ " + item.getAmount(app.model!.Dimension)
 			cell.textLabel?.text = item.getDate()
-
+			
 			return cell
 		case .Outgoing:
 			let cell = tableView.dequeueReusableCell(withIdentifier: "OutgoingTransaction", for: indexPath)
@@ -222,8 +410,33 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			return cell
 		}
 	}
+	
+	private func _rateCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+		let item = app.model!.CurrentRates.Items[indexPath.row]
+		let cell = tableView.dequeueReusableCell(withIdentifier: "RateInfo", for: indexPath)
+		cell.textLabel?.text = "1 SIB"
+		cell.detailTextLabel?.text = "~ " + (item.Currency! == "BTC" ? String(format: "%.8f", item.Rate!) : String(format: "%.2f", item.Rate!)) + " " + item.Currency!
+		return cell
+	}
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if tableView == tblHistory {
+			return _historyCell(tableView, indexPath)
+		}
+		
+		if tableView == tblRate {
+			return _rateCell(tableView, indexPath)
+		}
+		
+		return UITableViewCell()
+	}
 
 	//UITableViewDelegate
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+	{
+		if tableView == tblRate { return 40 }
+		return 44
+	}
 	
 	//ModelRootDelegate
 	func startBalanceUpdate() {
@@ -263,15 +476,18 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	func startHistoryUpdate() {
 		DispatchQueue.main.async {
-			self.app.model!.HistoryItems.Items = [];
+			self.app.model!.HistoryItems.Items = []
+			self.historyItemsCount = 0
 			self.tblHistory.reloadData()
-			self.aiRefresh.startAnimating()
+			self.refreshControl.beginRefreshing()
 		}
 	}
 	
 	func stopHistoryUpdate() {
 		DispatchQueue.main.async {
-			self.aiRefresh.stopAnimating()
+			self.refreshControl.endRefreshing()
+			self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
+			if self.historyItemsCount > 3 { self.historyItemsCount = 3 }
 			self.tblHistory.reloadData()
 			self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0
 		}
@@ -283,6 +499,21 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
 	}
 	
+	func startCurrentRatesUpdate() {
+		DispatchQueue.main.async {
+			self.app.model!.HistoryItems.Items = [];
+			self.tblRate.reloadData()
+			self.refreshControlRates.beginRefreshing()
+		}
+	}
+	
+	func stopCurrentRatesUpdate() {
+		DispatchQueue.main.async {
+			self.refreshControlRates.endRefreshing()
+			self.tblRate.reloadData()
+		}
+	}
+
 	override func processUrlCommand() {
 		if app.needToProcessURL {
 			app.needToProcessURL = false
@@ -292,5 +523,89 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			}
 		}
 	}
+	
+	//CardIOPaymentViewControllerDelegate
+	func userDidCancel(_ paymentViewController: CardIOPaymentViewController) -> Void {
+		paymentViewController.dismiss(animated: true, completion: nil)
+	}
+	
+	/// This method will be called when there is a successful scan (or manual entry). You MUST dismiss paymentViewController.
+	/// @param cardInfo The results of the scan.
+	/// @param paymentViewController The active CardIOPaymentViewController.
+	func userDidProvide (_ cardInfo: CardIOCreditCardInfo, in paymentViewController: CardIOPaymentViewController) -> Void {
+		if !(self.tfCardNumber_Buy.superview?.isHidden ?? true) {
+			self.tfCardNumber_Buy.text = cardInfo.cardNumber
+			//self.tfCardExp_Buy.text = String("%02i", cardInfo.expiryMonth) + "\\" + String("%02i", cardInfo.expiryYear)
+			//paymentViewController.dismiss(animated: true, completion: {() -> Void in self.tfAmount_Sell.becomeFirstResponder()})
+		}
+		if !(self.tfCardNumber_Sell.superview?.isHidden ?? true) {
+			self.tfCardNumber_Sell.text = cardInfo.cardNumber
+			if self.tfCardNumber_Sell.text!.luhnCheck() {
+				self.tfCardNumber_Sell.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
+			} else {
+				self.tfCardNumber_Sell.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
+			}
+			paymentViewController.dismiss(animated: true, completion: {() -> Void in self.tfAmount_Sell.becomeFirstResponder()})
+		}
+	}
+
+	// UITextFieldDelegate
+	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+		return true;
+	}
+	
+	public func textFieldDidBeginEditing(_ textField: UITextField) {
+		
+	}
+	
+	public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+		return true;
+	}
+	
+	public func textFieldDidEndEditing(_ textField: UITextField) {
+		
+	}
+	
+	public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+		
+	}
+	
+	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		let textFieldText: NSString = (textField.text ?? "") as NSString
+		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
+		
+		if textField == self.tfCardNumber_Sell {
+			if (txtAfterUpdate.luhnCheck()) {
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
+				textField.text = txtAfterUpdate
+				return false
+			} else {
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
+			}
+		}
+		
+		if textField == self.tfAmount_Sell {
+			let app = UIApplication.shared.delegate as! AppDelegate
+			amountSell = Double(txtAfterUpdate.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
+			if app.model!.Balance < amountSell {
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
+			} else {
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
+			}
+
+			setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate) + " ₽")
+		}
+		
+		return true;
+	}
+	
+	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
+		return true;
+	}
+	
+	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		return true
+	}
+
 }
 

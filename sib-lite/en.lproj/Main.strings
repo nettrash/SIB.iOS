@@ -2,9 +2,9 @@
 "BkR-Mz-76O.normalTitle" = "MANUAL INPUT";
 "DrU-WC-4iH.normalTitle" = "scan";
 "IbY-ks-fih.segmentTitles[0]" = "SIB";
-"IbY-ks-fih.segmentTitles[1]" = "mSIB";
-"IbY-ks-fih.segmentTitles[2]" = "µSIB";
-"IbY-ks-fih.segmentTitles[3]" = "ivans";
+"IbY-ks-fih.segmentTitles[1]" = "Rates";
+"IbY-ks-fih.segmentTitles[2]" = "Buy";
+"IbY-ks-fih.segmentTitles[3]" = "Sell";
 "K4F-zs-aIp.text" = "- 0.00 SIB";
 "P4j-U6-AM4.text" = "+ 0.00 SIB";
 "PJW-gP-tek.text" = "2017-10-17";
@@ -12,7 +12,7 @@
 "TP5-pH-om6.normalTitle" = "  Top up";
 "ahe-VQ-9V0.text" = "Add address";
 "hDm-SM-dWB.text" = "2017-10-17";
-"wJJ-yD-nnW.normalTitle" = "  Settings";
+"wJJ-yD-nnW.normalTitle" = "  History";
 "xnC-CU-xCN.normalTitle" = "cancel";
 "zcb-vT-kvq.normalTitle" = "  Transfer";
 "fCB-sh-hn6.text" = "no history";
@@ -28,3 +28,6 @@
 "VFB-IM-8xe.placeholder" = "commission";
 "h2O-lE-du2.normalTitle" = "Send";
 "kDI-4d-haX.placeholder" = "amount";
+"0Aa-F3-XfX.text" = "History";
+"qHc-tC-AF2.text" = "no history";
+"g1Q-cb-sHo.normalTitle" = "Sell";

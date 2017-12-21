@@ -24,7 +24,6 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	@IBOutlet var tfCommission: UITextField!
 	@IBOutlet var lblBalance: UILabel!
 	@IBOutlet var vWait: UIView!
-	@IBOutlet var scInstantSend: UISwitch!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -71,7 +70,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 						//message = qi.value
 						break;
 					case "IS":
-						scInstantSend.isOn = qi.value ?? "" == "1"
+						//scInstantSend.isOn = qi.value ?? "" == "1"
 						break;
 					default:
 						break;
@@ -90,7 +89,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 			if src.amount ?? 0 > 0 {
 				dest.tfAmount.text = "\(src.amount!)"
 			}
-			dest.scInstantSend.isOn = src.instantSend
+			//dest.scInstantSend.isOn = src.instantSend
 		}
 	}
 
@@ -196,8 +195,8 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		
 		if textField == tfAmount || textField == tfCommission {
 			let app = UIApplication.shared.delegate as! AppDelegate
-			let amount = Double(textField == tfAmount ? txtAfterUpdate : tfAmount.text!)
-			let commission = Double(textField == tfCommission ? txtAfterUpdate : tfCommission.text!)
+			let amount = Double((textField == tfAmount ? txtAfterUpdate : tfAmount.text!).replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
+			let commission = Double((textField == tfCommission ? txtAfterUpdate : tfCommission.text!).replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
 			if app.model!.Balance < (amount ?? 0) + (commission ?? 0) {
 				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
 			} else {
@@ -268,6 +267,12 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		}
 	}
 	
+	func startCurrentRatesUpdate() {
+	}
+	
+	func stopCurrentRatesUpdate() {
+	}
+
 	override func processUrlCommand() {
 		let app = UIApplication.shared.delegate as! AppDelegate
 		if app.needToProcessURL {

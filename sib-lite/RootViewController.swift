@@ -32,6 +32,9 @@ class RootViewController: BaseViewController {
 		}
 	}
 	
+	override public func processUrlCommand() -> Void {
+	}
+
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.

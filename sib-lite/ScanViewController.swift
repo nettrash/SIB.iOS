@@ -30,8 +30,8 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	}
 	
 	func failed() {
-		let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-		ac.addAction(UIAlertAction(title: "OK", style: .default))
+		let ac = UIAlertController(title: NSLocalizedString("ScanNotSupport", comment: "Scanning not supported"), message: NSLocalizedString("ScanNotSupportedMsg", comment: "Message"), preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default))
 		present(ac, animated: true)
 		captureSession = nil
 	}
@@ -141,6 +141,11 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	}
 	
 	func found(code: String) -> Bool {
+		if sibAddress.verify(code) {
+			address = code
+			return true
+		}
+		
 		if (!code.hasPrefix("sibcoin:")) { return false }
 		
 		let qDelIndex = code.index(of: ":")
@@ -186,7 +191,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	
 	@IBAction func btnClose_Click(_ sender: Any?) {
 		captureSession.stopRunning()
-		performSegue(withIdentifier: "unwindSegueToAddAddress", sender: self)
+		performSegue(withIdentifier: unwindIdentifiers["scan-address"]!, sender: self)
 	}
 
 }

@@ -28,6 +28,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ModelRoot.add(_:_:_:_:_:refreshAfter:walletType:):ModelRoot.swift">
+      </ContextState>
+      <ContextState
          contextName = "sibTransaction.addChange(amount:):sibTransaction.swift">
          <PersistentStrings>
             <PersistentString
@@ -86,6 +89,14 @@
          contextName = "sibTransaction.addInput(_:):sibTransaction.swift">
       </ContextState>
       <ContextState
+         contextName = "sibTransaction.transactionHash(_:):sibTransaction.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "sibTransaction.sign(_:):sibTransaction.swift">
          <PersistentStrings>
             <PersistentString
@@ -105,15 +116,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "sibTransaction.transactionHash(_:):sibTransaction.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "data.hexEncodedString()">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
       </ContextState>
       <ContextState
-         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
+         contextName = "ReceiveViewController.viewDidAppear(_:):ReceiveViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "app.model!.AddressesForIncoming">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "SendViewController.viewDidAppear(_:):SendViewController.swift">
@@ -140,6 +151,17 @@
             </PersistentString>
             <PersistentString
                value = "self.Addresses[1].address">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #5 in History.load(_:addresses:):History.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BalanceViewController.tableView(_:cellForRowAt:):BalanceViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "historyItemsCount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
