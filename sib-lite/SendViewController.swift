@@ -272,6 +272,12 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	
 	func stopCurrentRatesUpdate() {
 	}
+	
+	func sellStart() {
+	}
+	
+	func sellComplete() {
+	}
 
 	override func processUrlCommand() {
 		let app = UIApplication.shared.delegate as! AppDelegate

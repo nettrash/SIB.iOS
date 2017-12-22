@@ -80,6 +80,139 @@ public class ModelRoot: NSObject {
 		_getBuyRate(currency)
 	}
 
+	func sell(_ currency: String, _ amountSIB: Double, _ amount: Double, _ pan: String) -> Void {
+		_processSell(currency, amountSIB, amount, pan)
+	}
+	
+	private func _processSell(_ currency: String, _ amountSIB: Double, _ amount: Double, _ pan: String) -> Void {
+		//PaymentServicePassword 70FD2005-B198-4CE2-A5AE-CB93E4F99211
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			var json: [String:Any] = ["account": self.Addresses[0].address]
+			json["pan"] = pan
+			json["amountSIB"] = amountSIB
+			json["amount"] = amount
+			json["currency"] = currency
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/registerSell")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.isRefresh = false
+					self.delegate?.sellComplete()
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					if responseJSON["RegisterSellResult"]?["Success"] as? Bool ?? false{
+						let Address = responseJSON["RegisterSellResult"]!["Address"] as! String
+						DispatchQueue.global().async {
+							// prepare auth data
+							let ServiceName = "SIB"
+							let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+							let md5src = "\(ServiceName)\(ServiceSecret)"
+							let md5digest = Crypto.md5(md5src)
+							let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+							let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+							
+							// prepare json data
+							let json: [String:Any] = ["addresses": self.Addresses.map { (_ a: Address) -> String in
+								a.address
+								}]
+							
+							let jsonData = try? JSONSerialization.data(withJSONObject: json)
+							
+							// create post request
+							let url = URL(string: "https://api.sib.moe/wallet/sib.svc/unspentTransactions")!
+							var request = URLRequest(url: url)
+							request.httpMethod = "POST"
+							request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+							request.addValue("application/json", forHTTPHeaderField: "Accept")
+							request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+							
+							// insert json data to the request
+							request.httpBody = jsonData
+							
+							let task = URLSession.shared.dataTask(with: request) { data, response, error in
+								guard let data = data, error == nil else {
+									print(error?.localizedDescription ?? "No data")
+									self.delegate?.sellComplete()
+									return
+								}
+								let responseString = String(data: data, encoding: String.Encoding.utf8)
+								print(responseString ?? "nil")
+								let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+								if let responseJSON = responseJSON as? [String: [String: Any]] {
+									print(responseJSON)
+									let txsResponse = responseJSON["UnspentTransactionsResult"]!
+									let unspent = Unspent()
+									if txsResponse["Success"] as? Bool ?? false {
+										let txs = txsResponse["Items"] as? [Any]
+										if (txs != nil) {
+											unspent.load(txs!)
+										}
+										//Готовим транзакцию и отправляем ее
+										let tx: sibTransaction = sibTransaction()
+										//Добавляем требуемый вывод
+										tx.addOutput(address: Address, amount: amountSIB)
+										var spent: Double = 0
+										//Добавляем непотраченные входы
+										for u in unspent.Items {
+											if spent < amountSIB + 0.0001 {
+												spent += u.amount
+												tx.addInput(u)
+											} else {
+												break;
+											}
+										}
+										tx.addChange(amount: spent - amountSIB - 0.0001)
+										self.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
+										let sign = tx.sign(self.Addresses)
+										print(sign.hexEncodedString())
+										//Отправляем sign как rawtx
+										self.broadcastTransaction(sign)
+										self.delegate?.sellComplete()
+									}
+								}
+							}
+							task.resume()
+						}
+					}
+				}
+			}
+			
+			if (!self.isRefresh) {
+				self.isRefresh = true
+				self.delegate?.sellStart()
+			}
+			
+			task.resume()
+		}
+	}
+	
 	private func _loadBalanceData() -> Void {
 		DispatchQueue.global().async {
 			// prepare auth data
@@ -696,5 +829,7 @@ protocol ModelRootDelegate {
 	func stopCurrentRatesUpdate()
 	func unspetData(_ data: Unspent)
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?)
+	func sellStart()
+	func sellComplete()
 }
 

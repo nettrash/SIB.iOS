@@ -105,6 +105,8 @@
 		E58B4A181F97F3A70023B5E1 /* Vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A151F97F3A60023B5E1 /* Vertical.png */; };
 		E58B4A191F97F3A70023B5E1 /* Vertical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */; };
 		E58B4A1A1F97F3A70023B5E1 /* Vertical@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */; };
+		E594F3681FED50DC0042C256 /* CardIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E857831FEBE2FA00397A76 /* CardIO.framework */; };
+		E594F3691FED511E0042C256 /* CardIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5E857831FEBE2FA00397A76 /* CardIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E59C7DF61FDD556A00ABFC9A /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C7DF51FDD556A00ABFC9A /* Convert.swift */; };
 		E5A20A811FD5826A004B3907 /* sibTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A801FD5826A004B3907 /* sibTransaction.swift */; };
 		E5A20A831FD5890C004B3907 /* sibTransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */; };
@@ -154,7 +156,6 @@
 		E5DEEF191F8E68CC00D8441D /* symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DEEF171F8E68CB00D8441D /* symbol.png */; };
 		E5DEEF1A1F8E68CC00D8441D /* symbol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DEEF181F8E68CC00D8441D /* symbol@2x.png */; };
 		E5E4AC7D1FBB4B5400BAAF46 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E4AC7C1FBB4B5400BAAF46 /* Wallet.swift */; };
-		E5E8579F1FEBFAB300397A76 /* libCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E857871FEBE2FA00397A76 /* libCardIO.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,13 +236,6 @@
 			remoteGlobalIDString = 92263D6F1B83ACBB003FE678;
 			remoteInfo = CardIO;
 		};
-		E5E857A01FEBFB7D00397A76 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E5E857781FEBE2FA00397A76 /* icc.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E9F4BD9181F03F300F33B48;
-			remoteInfo = "CardIO-static";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -251,6 +245,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E594F3691FED511E0042C256 /* CardIO.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,9 +433,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E594F3681FED50DC0042C256 /* CardIO.framework in Frameworks */,
 				E5291BC21FEC0D0E000BEF89 /* MobileCoreServices.framework in Frameworks */,
 				E5291BC01FEC0CCF000BEF89 /* Accelerate.framework in Frameworks */,
-				E5E8579F1FEBFAB300397A76 /* libCardIO.a in Frameworks */,
 				E579F1621F922F7700FA19E8 /* AVFoundation.framework in Frameworks */,
 				E5BC8D991F90DCC400BE78A9 /* Security.framework in Frameworks */,
 				E5BC8D971F90DC6000BE78A9 /* CoreFoundation.framework in Frameworks */,
@@ -825,7 +820,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E5E857A11FEBFB7D00397A76 /* PBXTargetDependency */,
 				E5E8578C1FEBF7F200397A76 /* PBXTargetDependency */,
 				E5BC8DBA1F90E5FE00BE78A9 /* PBXTargetDependency */,
 			);
@@ -1265,11 +1259,6 @@
 			isa = PBXTargetDependency;
 			name = CardIO;
 			targetProxy = E5E8578B1FEBF7F200397A76 /* PBXContainerItemProxy */;
-		};
-		E5E857A11FEBFB7D00397A76 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CardIO-static";
-			targetProxy = E5E857A01FEBFB7D00397A76 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

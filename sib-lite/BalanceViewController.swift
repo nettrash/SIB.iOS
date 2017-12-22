@@ -32,7 +32,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBOutlet var tfCardNumber_Sell: UITextField!
 	@IBOutlet var tfAmount_Sell: UITextField!
 	@IBOutlet var btnSIBSell: UIButton!
-	
+	@IBOutlet var vWait: UIView!
+
 	var refreshControl: UIRefreshControl!
 	var refreshControlRates: UIRefreshControl!
 
@@ -42,6 +43,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		self.vWait.isHidden = true
+		
 		self.lblNoOps.isHidden = true
 		self.tblHistory.isHidden = false
 		self.tblRate.isHidden = true
@@ -298,7 +301,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 							self.imgActionInfo.alpha = self.imgActionInfo.alpha == 0 ? 1 : 0
 							self.btnBuy.alpha = self.btnBuy.alpha == 0 ? 1 : 0
 							self.imgVertical.alpha = self.imgVertical.alpha == 0 ? self.btnAddAddress.alpha : self.imgVertical.alpha
-							if self.btnRequisites.frame.origin.y < self.tblHistory.frame.origin.y + self.tblHistory.frame.size.height {
+							if self.btnRequisites.frame.origin.y < self.tblHistory.frame.origin.y + 157 {
 								if self.imgVertical.alpha == 0 {
 									self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
 									if self.historyItemsCount > 3 { self.historyItemsCount = 3 }
@@ -319,11 +322,15 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	@IBAction func btnSIBSellClick(_ sender: Any?) -> Void {
+		self.view.endEditing(true)
 		amountSell = Double(self.tfAmount_Sell.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
-		if self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance < amountSell {
-			//Регистрируем вывод и получаем реквизиты отправки
-			//Отправляем
-			//Alert что все отправлено
+		if self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance > amountSell {
+			app.model!.sell("RUB", amountSell, amountSell * app.model!.sellRate, self.tfCardNumber_Sell.text!)
+			self.tfCardNumber_Sell.text = ""
+			self.tfAmount_Sell.text = ""
+			amountSell = 0
+			setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate) + " ₽")
+			//Показываем что все ок
 		} else {
 			//Тут надо показать Alert
 		}
@@ -497,6 +504,19 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
+//		DispatchQueue.main.sync { self.vWait.isHidden = true }
+		if result {
+			let alert = UIAlertController.init(title: NSLocalizedString("SuccessSend", comment: "Успех"), message: NSLocalizedString("SuccessSendMessage", comment: "Success") + txid!, preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: nil))
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("Share", comment: "Поделться"), style: UIAlertActionStyle.default, handler: { _ in self.shareText(txid!) }))
+			self.present(alert, animated: true, completion: nil)
+			
+		} else {
+			//Добавить удаление последнего адреса Change
+			let alert = UIAlertController.init(title: NSLocalizedString("ErrorSend", comment: "Ошибка"), message: NSLocalizedString("ErrorSendMessage", comment: "Ошибка") + (message ?? ""), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+			self.present(alert, animated: true, completion: nil)
+		}
 	}
 	
 	func startCurrentRatesUpdate() {
@@ -512,6 +532,14 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			self.refreshControlRates.endRefreshing()
 			self.tblRate.reloadData()
 		}
+	}
+	
+	func sellStart() {
+		DispatchQueue.main.sync { self.vWait.isHidden = false }
+	}
+	
+	func sellComplete() {
+		DispatchQueue.main.sync { self.vWait.isHidden = true }
 	}
 
 	override func processUrlCommand() {
@@ -593,7 +621,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
 			}
 
-			setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate) + " ₽")
+			setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate - 30) + " ₽")
 		}
 		
 		return true;

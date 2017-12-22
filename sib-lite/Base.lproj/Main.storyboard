@@ -488,7 +488,7 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="номер карты" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mGI-cD-gVy">
                                         <rect key="frame" x="8" y="0.0" width="290" height="29"/>
-                                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="ras-jb-ZU2"/>
                                         </constraints>
@@ -511,7 +511,7 @@
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="количество червонцев" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-3M-J9Q">
                                         <rect key="frame" x="8" y="37" width="327" height="29"/>
-                                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="Ryx-MN-O4M"/>
                                         </constraints>
@@ -614,15 +614,30 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLG-CJ-o4v">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="crW-Ob-caL">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="crW-Ob-caL" firstAttribute="centerX" secondItem="wLG-CJ-o4v" secondAttribute="centerX" id="frO-e9-iLH"/>
+                                    <constraint firstItem="crW-Ob-caL" firstAttribute="centerY" secondItem="wLG-CJ-o4v" secondAttribute="centerY" id="lRk-SI-Sbl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="swS-Su-ir4" firstAttribute="top" secondItem="IbY-ks-fih" secondAttribute="bottom" constant="36" id="10h-lK-Fdo"/>
+                            <constraint firstItem="wLG-CJ-o4v" firstAttribute="top" secondItem="sGo-GA-Zah" secondAttribute="top" id="3zX-Uf-TfB"/>
                             <constraint firstItem="loe-KO-UeN" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" constant="16" id="5Bs-lu-A8j"/>
                             <constraint firstItem="IsI-uY-SLd" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" constant="64" id="5NZ-yt-N6R"/>
                             <constraint firstItem="geP-U4-Epy" firstAttribute="bottom" secondItem="UGC-Nh-Yb8" secondAttribute="bottom" constant="21" id="5gg-ok-qAY"/>
                             <constraint firstItem="hWk-v1-0In" firstAttribute="trailing" secondItem="geP-U4-Epy" secondAttribute="trailing" id="6IS-Mx-bpk"/>
                             <constraint firstItem="geP-U4-Epy" firstAttribute="trailing" secondItem="qXc-qX-g0a" secondAttribute="trailing" constant="16" id="6cf-Pe-GAx"/>
+                            <constraint firstItem="wLG-CJ-o4v" firstAttribute="bottom" secondItem="geP-U4-Epy" secondAttribute="bottom" id="6rL-YN-t3v"/>
                             <constraint firstItem="hWk-v1-0In" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" id="8bj-i5-1eN"/>
                             <constraint firstItem="geP-U4-Epy" firstAttribute="trailing" secondItem="NLN-gh-F2L" secondAttribute="trailing" constant="16" id="9IF-Tn-BHg"/>
                             <constraint firstItem="UGC-Nh-Yb8" firstAttribute="top" secondItem="IbY-ks-fih" secondAttribute="bottom" constant="36" id="AnF-ZO-WFX"/>
@@ -647,10 +662,12 @@
                             <constraint firstItem="KV6-Y2-a6B" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" id="cWx-0v-fqG"/>
                             <constraint firstItem="KV6-Y2-a6B" firstAttribute="top" secondItem="geP-U4-Epy" secondAttribute="top" id="dfs-8h-a56"/>
                             <constraint firstItem="zcb-vT-kvq" firstAttribute="top" secondItem="TP5-pH-om6" secondAttribute="bottom" constant="7" id="eqw-Yq-0VE"/>
+                            <constraint firstItem="wLG-CJ-o4v" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" id="gRe-2W-qna"/>
                             <constraint firstItem="fCB-sh-hn6" firstAttribute="top" secondItem="IbY-ks-fih" secondAttribute="bottom" constant="30" id="gid-l6-2NU"/>
                             <constraint firstItem="UGC-Nh-Yb8" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" constant="16" id="hMD-g8-cPw"/>
                             <constraint firstItem="8iA-U7-KMJ" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" id="j6W-Fj-pLI"/>
                             <constraint firstItem="geP-U4-Epy" firstAttribute="trailing" secondItem="IbY-ks-fih" secondAttribute="trailing" constant="20" id="kBd-gQ-Ke8"/>
+                            <constraint firstItem="wLG-CJ-o4v" firstAttribute="trailing" secondItem="geP-U4-Epy" secondAttribute="trailing" id="kC3-Yd-Ck0"/>
                             <constraint firstItem="IbY-ks-fih" firstAttribute="top" secondItem="8iA-U7-KMJ" secondAttribute="bottom" constant="8" id="lMA-p5-FCb"/>
                             <constraint firstItem="qXc-qX-g0a" firstAttribute="leading" secondItem="geP-U4-Epy" secondAttribute="leading" constant="16" id="meT-NS-M0R"/>
                             <constraint firstItem="hWk-v1-0In" firstAttribute="bottom" secondItem="sGo-GA-Zah" secondAttribute="bottom" id="mjC-JO-mJw"/>
@@ -683,6 +700,7 @@
                         <outlet property="tfCardNumber_Sell" destination="mGI-cD-gVy" id="Mp6-GT-VDY"/>
                         <outlet property="vBuy" destination="NLN-gh-F2L" id="u8K-NK-eGS"/>
                         <outlet property="vSell" destination="qXc-qX-g0a" id="69E-GF-w8w"/>
+                        <outlet property="vWait" destination="wLG-CJ-o4v" id="W1U-n9-Jqy"/>
                         <segue destination="dYl-ZK-dA8" kind="presentation" identifier="add-address" id="Bat-jo-1AW"/>
                         <segue destination="Rwi-A3-Uo8" kind="showDetail" identifier="receive-sib" id="2YZ-tt-qYC"/>
                         <segue destination="qSj-MT-dfw" kind="showDetail" identifier="send-sib" id="Ex6-OJ-hVf"/>

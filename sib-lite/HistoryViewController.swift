@@ -96,8 +96,7 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	}
 	
 	//UITableViewDelegate
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-	{
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 48
 	}
 	
@@ -140,6 +139,12 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
 		
+	}
+	
+	func sellStart() {
+	}
+	
+	func sellComplete() {
 	}
 
 }
