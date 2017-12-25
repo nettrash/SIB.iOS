@@ -30,3 +30,9 @@
 "ErrorStartSellMessage" = "Invalid form data. Please correct and repeat again.";
 "BuyButtonText" = "Buy by ";
 "EmptyBuyButtonText" = "Buy";
+"CheckOpErrorTitle" = "Error";
+"CheckOpErrorMessage" = "Can't check operation state.";
+"CheckOpDoneTitle" = "Success";
+"CheckOpDoneMessage" = "Congrats. Await SIBCoin.";
+"CheckOpCancelTitle" = "Cancel";
+"CheckOpCancelMessage" = "Operation canceled.";

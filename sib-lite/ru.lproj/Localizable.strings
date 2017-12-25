@@ -30,3 +30,9 @@
 "ErrorStartSellMessage" = "Неверные данные для продажи. Проверьте корректность заполднения формы.";
 "BuyButtonText" = "Купить за ";
 "EmptyBuyButtonText" = "Купить";
+"CheckOpErrorTitle" = "Ошибка";
+"CheckOpErrorMessage" = "Не удалось проверить состояние платежа.";
+"CheckOpDoneTitle" = "Успех";
+"CheckOpDoneMessage" = "Полный успех! Ожидайте зачисления монет.";
+"CheckOpCancelTitle" = "Отмена";
+"CheckOpCancelMessage" = "Оплата отменена. Повторите попытку позже.";

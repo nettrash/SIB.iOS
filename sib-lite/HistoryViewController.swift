@@ -160,4 +160,8 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 		
 	}
 	
+	func checkOpComplete(_ process: String) {
+		
+	}
+	
 }

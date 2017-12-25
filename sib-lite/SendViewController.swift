@@ -295,6 +295,10 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		
 	}
 	
+	func checkOpComplete(_ process: String) {
+		
+	}
+	
 	override func processUrlCommand() {
 		let app = UIApplication.shared.delegate as! AppDelegate
 		if app.needToProcessURL {

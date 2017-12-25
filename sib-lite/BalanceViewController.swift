@@ -84,6 +84,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			self.app.model!.delegate = self
 			self.prepareActionMenu()
 			self.segmentControlValueChanged(nil)
+			if self.app.model!.buyOpKey != "" {
+				self.vWait.isHidden = false
+				self.app.model!.checkBuyOp()
+			}
 		}
 	}
 	
@@ -165,6 +169,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		if (unwindSegue.source is HistoryViewController) {
 			let src = unwindSegue.source as! HistoryViewController
 			//app.model!.add(src.textFieldAddress.text!)
+		}
+		if (unwindSegue.source is WebViewController) {
+			let src = unwindSegue.source as! WebViewController
 		}
 	}
 	
@@ -590,14 +597,17 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func buyStart() {
+		app.model!.buyRedirectUrl = ""
+		app.model!.buyState = ""
+		app.model!.buyOpKey = ""
 		DispatchQueue.main.sync { self.vWait.isHidden = false }
 	}
 	
 	func buyComplete() {
-		DispatchQueue.main.sync { self.vWait.isHidden = true }
 		if app.model!.buyState == "Redirect" && app.model!.buyRedirectUrl != "" {
 			DispatchQueue.main.async {
 				self.performSegue(withIdentifier: "3ds-auth", sender: self.app.model!.buyRedirectUrl)
+				self.vWait.isHidden = true
 			}
 		}
 	}
@@ -607,7 +617,35 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			self.lblBuyRate.text = " 1 SIB ~ \(String(format: "%.2f", Double(1) / app.model!.buyRate)) ₽"
 		}
 	}
-
+	
+	func checkOpComplete(_ process: String) {
+		switch process {
+		case "ERROR":
+			DispatchQueue.main.sync { self.vWait.isHidden = true }
+			let alert = UIAlertController.init(title: NSLocalizedString("CheckOpErrorTitle", comment: ""), message: NSLocalizedString("CheckOpErrorMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+			self.present(alert, animated: true, completion: nil)
+			break;
+		case "Done":
+			DispatchQueue.main.sync { self.vWait.isHidden = true }
+			let alert = UIAlertController.init(title: NSLocalizedString("CheckOpDoneTitle", comment: ""), message: NSLocalizedString("CheckOpDoneMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+			self.present(alert, animated: true, completion: nil)
+			break;
+		case "Cancel":
+			DispatchQueue.main.sync { self.vWait.isHidden = true }
+			let alert = UIAlertController.init(title: NSLocalizedString("CheckOpCancelTitle", comment: ""), message: NSLocalizedString("CheckOpCancelMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+			self.present(alert, animated: true, completion: nil)
+			break;
+		default:
+			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+				self.app.model!.checkBuyOp()
+			})
+			break;
+		}
+	}
+	
 	override func processUrlCommand() {
 		if app.needToProcessURL {
 			app.needToProcessURL = false

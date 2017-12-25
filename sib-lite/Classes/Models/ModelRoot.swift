@@ -44,6 +44,8 @@ public class ModelRoot: NSObject {
 	public var buyRedirectUrl: String = ""
 	public var buyState: String = ""
 
+	public var buyOpKey: String = ""
+	
 	init(_ app: AppDelegate) {
 		super.init()
 		SIB = Wallet()
@@ -88,6 +90,66 @@ public class ModelRoot: NSObject {
 	
 	func buy(_ currency: String, _ amountSIB: Double, _ amount: Double, _ pan: String, _ exp: String, _ cvv: String) -> Void {
 		_processBuy(currency, amountSIB, amount, pan, exp, cvv)
+	}
+	
+	func checkBuyOp() {
+		_checkOperation()
+	}
+	
+	private func _checkOperation() {
+		//PaymentServicePassword 70FD2005-B198-4CE2-A5AE-CB93E4F99211
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			let json: [String:Any] = ["OpKey": self.buyOpKey]
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/checkOp")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.isRefresh = false
+					self.buyRedirectUrl = ""
+					self.buyState = ""
+					self.delegate?.checkOpComplete("ERROR")
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					if responseJSON["CheckOpResult"]?["Success"] as? Bool ?? false {
+						self.delegate?.checkOpComplete(responseJSON["CheckOpResult"]!["State"] as! String)
+					}
+				}
+			}
+			
+			if (!self.isRefresh) {
+				self.isRefresh = true
+				self.delegate?.buyStart()
+			}
+			
+			task.resume()
+		}
 	}
 	
 	private func _processSell(_ currency: String, _ amountSIB: Double, _ amount: Double, _ pan: String) -> Void {
@@ -908,5 +970,6 @@ protocol ModelRootDelegate {
 	func buyStart()
 	func buyComplete()
 	func updateBuyRate()
+	func checkOpComplete(_ process: String)
 }
 
