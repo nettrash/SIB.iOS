@@ -25,3 +25,8 @@
 "InMemoryPool" = "в памяти";
 "SIB" = "Сибирский Червонец";
 "SellButtonText" = "Продать за ";
+"EmptySellButtonText" = "Продать";
+"ErrorStartSell" = "Ошибка";
+"ErrorStartSellMessage" = "Неверные данные для продажи. Проверьте корректность заполднения формы.";
+"BuyButtonText" = "Купить за ";
+"EmptyBuyButtonText" = "Купить";

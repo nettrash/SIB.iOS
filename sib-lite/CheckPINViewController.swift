@@ -98,6 +98,13 @@ class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		let textFieldText: NSString = (textField.text ?? "") as NSString
 		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
+		if string == "" && txtAfterUpdate == "" && textField.text == "" {
+			//Backspace
+			if textField == self.tfPIN1 { PIN0 = ""; self.tfPIN0.text = ""; self.tfPIN0.becomeFirstResponder() }
+			if textField == self.tfPIN2 { PIN0 = String(PIN0[String.Index(encodedOffset: 0)]); self.tfPIN1.text = ""; self.tfPIN1.becomeFirstResponder() }
+			if textField == self.tfPIN3 { PIN0 = PIN0.substring(to: String.Index(encodedOffset: 2)); self.tfPIN2.text = ""; self.tfPIN2.becomeFirstResponder() }
+			return false
+		}
 		if txtAfterUpdate.count != 1 { return false }
 		if textField == tfPIN0 {
 			tfPIN0.text = "0"

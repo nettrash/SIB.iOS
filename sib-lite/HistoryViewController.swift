@@ -12,6 +12,7 @@ import UIKit
 class HistoryViewController : BaseViewController, ModelRootDelegate, UITableViewDelegate, UITableViewDataSource {
 	
 	let app = UIApplication.shared.delegate as! AppDelegate
+	var selectedIndex: IndexPath? = nil
 	
 	@IBOutlet var tblHistory: UITableView!
 	@IBOutlet var lblNoOps: UILabel!
@@ -63,27 +64,13 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 		let item = app.model!.HistoryItems.Items.sorted(by: { (_ a: HistoryItem, _ b: HistoryItem) -> Bool in
 			a.date > b.date
 		})[indexPath.row]
-		switch item.type {
-		case .Incoming:
-			let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCellIncoming", for: indexPath)
-			
-			cell.detailTextLabel?.text = "+ " + item.getAmount(app.model!.Dimension)
-			cell.textLabel?.text = item.getDate()
-			
+		if selectedIndex != nil && selectedIndex == indexPath {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCellSelected", for: indexPath) as! HistoryCellSelected
+			cell.loadData(item, self)
 			return cell
-		case .Outgoing:
-			let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCellOutgoing", for: indexPath)
-			
-			cell.detailTextLabel?.text = "- " + item.getAmount(app.model!.Dimension)
-			cell.textLabel?.text = item.getDate()
-			
-			return cell
-		case .Unknown:
-			let cell = tableView.dequeueReusableCell(withIdentifier: "UnknownCell", for: indexPath)
-			
-			cell.detailTextLabel?.text = "? " + item.getAmount(app.model!.Dimension)
-			cell.textLabel?.text = item.getDate()
-			
+		} else {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
+			cell.loadData(item)
 			return cell
 		}
 	}
@@ -97,7 +84,18 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	
 	//UITableViewDelegate
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if selectedIndex != nil && selectedIndex == indexPath { return 96 }
 		return 48
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if selectedIndex != indexPath {
+			selectedIndex = indexPath
+		} else {
+			selectedIndex = nil
+		}
+		tableView.deselectRow(at: indexPath, animated: true)
+		tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
 	}
 	
 	//ModelRootDelegate
@@ -147,4 +145,19 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	func sellComplete() {
 	}
 
+	func updateSellRate() {
+	}
+	
+	func buyStart() {
+		
+	}
+	
+	func buyComplete() {
+		
+	}
+	
+	func updateBuyRate() {
+		
+	}
+	
 }

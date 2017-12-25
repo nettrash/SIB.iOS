@@ -21,7 +21,7 @@
 "7WB-rZ-rY9.placeholder" = "secret words";
 "g3f-km-vGj.normalTitle" = "create";
 "FFr-Dd-tIX.text" = "PIN";
-"IoT-us-Yg3.text" = "PIN";
+"IoT-us-Yg3.text" = "";
 "hmj-Lt-W1w.text" = "Transfer";
 "r9G-Pr-nQs.placeholder" = "receiver address";
 "a8k-Wh-tNN.placeholder" = "amount";
@@ -31,3 +31,11 @@
 "0Aa-F3-XfX.text" = "History";
 "qHc-tC-AF2.text" = "no history";
 "g1Q-cb-sHo.normalTitle" = "Sell";
+"OKp-rq-sBc.normalTitle" = "Details";
+"5FG-0H-Zij.normalTitle" = "Share";
+"Cv2-nO-U5r.placeholder" = "card number";
+"UHc-Mu-q0q.placeholder" = "amount SIB";
+"0DN-3M-J9Q.placeholder" = "amount SIB";
+"mGI-cD-gVy.placeholder" = "card number";
+"foP-SZ-J55.placeholder" = "MMYY";
+"Bpk-Sq-E3N.placeholder" = "CVV";

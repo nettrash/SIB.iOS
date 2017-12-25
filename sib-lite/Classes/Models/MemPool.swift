@@ -25,13 +25,13 @@ public class MemPool: NSObject {
 			let mp = t as? [String: Any]
 			let mpi = MemPoolItem()
 			mpi.address = mp?["Address"] as? String
-			mpi.isInput = addrs.contains(mpi.address ?? "")
 			mpi.txid = mp?["TransactionId"] as? String
 			mpi.N = mp?["N"] as? Int
 			mpi.value = mp?["Value"] as? Int64
 			mpi.seconds = mp?["Seconds"] as? Int64
 			mpi.prev_txid = mp?["PrevTransactionId"] as? String
 			mpi.prev_N = mp?["PrevN"] as? Int
+			mpi.isInput = mpi.value ?? 0 > 0//addrs.contains(mpi.address ?? "")
 
 			return mpi
 		})

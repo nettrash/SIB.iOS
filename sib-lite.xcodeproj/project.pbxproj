@@ -15,6 +15,7 @@
 		E50165DC1F7657A200855FBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50165DA1F7657A200855FBC /* LaunchScreen.storyboard */; };
 		E50165E71F7657A200855FBC /* sib_liteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50165E61F7657A200855FBC /* sib_liteTests.swift */; };
 		E50165F21F7657A200855FBC /* sib_liteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50165F11F7657A200855FBC /* sib_liteUITests.swift */; };
+		E509A0DC1FF05F8300D89050 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E509A0DB1FF05F8300D89050 /* HistoryCell.swift */; };
 		E50FBC421FD7F62500379A26 /* UnspentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */; };
 		E50FBC441FD7F63500379A26 /* Unspent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC431FD7F63500379A26 /* Unspent.swift */; };
 		E5119BE31FE694BD00599747 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5119BE21FE694BD00599747 /* UIImageExtensions.swift */; };
@@ -44,6 +45,8 @@
 		E5420D111FE7CF6A0074ACAF /* ActionButtonHistory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5420D0E1FE7CF690074ACAF /* ActionButtonHistory@2x.png */; };
 		E5420D131FE7F3BF0074ACAF /* Rates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5420D121FE7F3BF0074ACAF /* Rates.swift */; };
 		E5420D151FE7F3D40074ACAF /* RateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5420D141FE7F3D40074ACAF /* RateInfo.swift */; };
+		E54539EF1FEEBC37002F3169 /* PINTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54539EE1FEEBC37002F3169 /* PINTextField.swift */; };
+		E54539F51FEEE368002F3169 /* HistoryCellSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54539F41FEEE368002F3169 /* HistoryCellSelected.swift */; };
 		E546C8BE1FC3177800892D32 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E546C8BD1FC3177800892D32 /* ArrayExtensions.swift */; };
 		E54A70AA1F97978300AA422B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A70A91F97978300AA422B /* History.swift */; };
 		E54A70AC1F979C0E00AA422B /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A70AB1F979C0E00AA422B /* HistoryItem.swift */; };
@@ -155,6 +158,7 @@
 		E5DEEF161F8E4C0A00D8441D /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */; };
 		E5DEEF191F8E68CC00D8441D /* symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DEEF171F8E68CB00D8441D /* symbol.png */; };
 		E5DEEF1A1F8E68CC00D8441D /* symbol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DEEF181F8E68CC00D8441D /* symbol@2x.png */; };
+		E5E1BF931FF0EC7600C515DF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E1BF921FF0EC7600C515DF /* WebViewController.swift */; };
 		E5E4AC7D1FBB4B5400BAAF46 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E4AC7C1FBB4B5400BAAF46 /* Wallet.swift */; };
 /* End PBXBuildFile section */
 
@@ -266,6 +270,7 @@
 		E50165ED1F7657A200855FBC /* sib-liteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sib-liteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50165F11F7657A200855FBC /* sib_liteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sib_liteUITests.swift; sourceTree = "<group>"; };
 		E50165F31F7657A200855FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E509A0DB1FF05F8300D89050 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnspentTransaction.swift; sourceTree = "<group>"; };
 		E50FBC431FD7F63500379A26 /* Unspent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unspent.swift; sourceTree = "<group>"; };
 		E5119BE21FE694BD00599747 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -298,6 +303,8 @@
 		E5420D0E1FE7CF690074ACAF /* ActionButtonHistory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonHistory@2x.png"; sourceTree = "<group>"; };
 		E5420D121FE7F3BF0074ACAF /* Rates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rates.swift; sourceTree = "<group>"; };
 		E5420D141FE7F3D40074ACAF /* RateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateInfo.swift; sourceTree = "<group>"; };
+		E54539EE1FEEBC37002F3169 /* PINTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINTextField.swift; sourceTree = "<group>"; };
+		E54539F41FEEE368002F3169 /* HistoryCellSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCellSelected.swift; sourceTree = "<group>"; };
 		E546C8BD1FC3177800892D32 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		E54A70A91F97978300AA422B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		E54A70AB1F979C0E00AA422B /* HistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
@@ -424,6 +431,7 @@
 		E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5DEEF171F8E68CB00D8441D /* symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = symbol.png; sourceTree = "<group>"; };
 		E5DEEF181F8E68CC00D8441D /* symbol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "symbol@2x.png"; sourceTree = "<group>"; };
+		E5E1BF921FF0EC7600C515DF /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E5E4AC7C1FBB4B5400BAAF46 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		E5E857781FEBE2FA00397A76 /* icc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = icc.xcodeproj; path = "../card.io/github/card.io-iOS-source/icc.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -521,6 +529,9 @@
 				E53BA4041FCE8791007386AE /* ReceiveViewController.swift */,
 				E54B1DB61FD2DC690028EC96 /* SendViewController.swift */,
 				E53B23FF1FEAC39200D5F5A4 /* HistoryViewController.swift */,
+				E509A0DB1FF05F8300D89050 /* HistoryCell.swift */,
+				E54539F41FEEE368002F3169 /* HistoryCellSelected.swift */,
+				E5E1BF921FF0EC7600C515DF /* WebViewController.swift */,
 				E50165D21F7657A200855FBC /* Main.storyboard */,
 				E50165D81F7657A200855FBC /* Assets.xcassets */,
 				E50165DA1F7657A200855FBC /* LaunchScreen.storyboard */,
@@ -684,6 +695,7 @@
 				E56EC0BD1F7660CE00EDE756 /* Models */,
 				E5865C0C1F962CAA00580954 /* BaseViewController.swift */,
 				E5C0C51D1FD1B0890039D1BC /* SIBLogoImageView.swift */,
+				E54539EE1FEEBC37002F3169 /* PINTextField.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1144,6 +1156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E54A7ECA1FBED37B008346CD /* FieldElementFP.swift in Sources */,
+				E5E1BF931FF0EC7600C515DF /* WebViewController.swift in Sources */,
 				E557052F1FE9166400BCCD08 /* MemPool.swift in Sources */,
 				E55727891FE00F120004983B /* DataExtensions.swift in Sources */,
 				E59C7DF61FDD556A00ABFC9A /* Convert.swift in Sources */,
@@ -1166,6 +1179,7 @@
 				E5AA3C821FBDD58F0032BDE8 /* Barret.swift in Sources */,
 				E53EA69D1FCDAEFE0073EDC6 /* RIPEMD160.swift in Sources */,
 				E5E4AC7D1FBB4B5400BAAF46 /* Wallet.swift in Sources */,
+				E54539F51FEEE368002F3169 /* HistoryCellSelected.swift in Sources */,
 				E5A20A851FD5891B004B3907 /* sibTransactionOutput.swift in Sources */,
 				E53BA4051FCE8791007386AE /* ReceiveViewController.swift in Sources */,
 				E54A70AE1F97C37A00AA422B /* HistoryItemType.swift in Sources */,
@@ -1176,9 +1190,11 @@
 				E56DECF61F8F8106002DADE9 /* sibAddress.swift in Sources */,
 				E5119BE31FE694BD00599747 /* UIImageExtensions.swift in Sources */,
 				E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */,
+				E509A0DC1FF05F8300D89050 /* HistoryCell.swift in Sources */,
 				E50165CF1F7657A200855FBC /* AppDelegate.swift in Sources */,
 				E52C9DB21FB8D4ED00DEC76E /* CreateWalletViewController.swift in Sources */,
 				E56D300B1FBC92E7003DE186 /* BigInteger.swift in Sources */,
+				E54539EF1FEEBC37002F3169 /* PINTextField.swift in Sources */,
 				E5C0C51E1FD1B0890039D1BC /* SIBLogoImageView.swift in Sources */,
 				E56DECF11F8F7629002DADE9 /* BalanceViewController.swift in Sources */,
 				E5B6E7E01FCE1B42009E32BC /* CheckPINViewController.swift in Sources */,

@@ -25,3 +25,8 @@
 "InMemoryPool" = "in memory";
 "SIB" = "SIBCoin";
 "SellButtonText" = "Sell for ";
+"EmptySellButtonText" = "Sell";
+"ErrorStartSell" = "Error";
+"ErrorStartSellMessage" = "Invalid form data. Please correct and repeat again.";
+"BuyButtonText" = "Buy by ";
+"EmptyBuyButtonText" = "Buy";

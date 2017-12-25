@@ -31,14 +31,23 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBOutlet var tfCardNumber_Buy: UITextField!
 	@IBOutlet var tfCardNumber_Sell: UITextField!
 	@IBOutlet var tfAmount_Sell: UITextField!
+	@IBOutlet var tfAmount_Buy: UITextField!
+	@IBOutlet var tfExp_Buy: UITextField!
+	@IBOutlet var tfCVV_Buy: UITextField!
 	@IBOutlet var btnSIBSell: UIButton!
+	@IBOutlet var btnSIBBuy: UIButton!
 	@IBOutlet var vWait: UIView!
+	@IBOutlet var lblSellRate: UILabel!
+	@IBOutlet var lblBuyRate: UILabel!
 
 	var refreshControl: UIRefreshControl!
 	var refreshControlRates: UIRefreshControl!
 
 	//Sell
 	var amountSell: Double = 0
+	
+	//Buy
+	var amountBuy: Double = 0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -113,26 +122,30 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		imgActionInfo.alpha = 1.0
-		if (segue.identifier == "add-address") {
+		if segue.identifier == "add-address" {
 			let dst = segue.destination as! AddAddressViewController
 			dst.availibleCancel = true;
 			dst.unwindIdentifiers["add-address"] = "unwindSegueToBalance"
 		}
-		if (segue.identifier == "receive-sib") {
+		if segue.identifier == "receive-sib" {
 			let dst = segue.destination as! ReceiveViewController
 			dst.unwindIdentifiers["receive-sib"] = "unwindSegueToBalance"
 		}
-		if (segue.identifier == "history-sib") {
+		if segue.identifier == "history-sib" {
 			let dst = segue.destination as! HistoryViewController
 			dst.unwindIdentifiers["history-sib"] = "unwindSegueToBalance"
 		}
-		if (segue.identifier == "send-sib") {
+		if segue.identifier == "send-sib" {
 			let dst = segue.destination as! SendViewController
 			dst.unwindIdentifiers["send-sib"] = "unwindSegueToBalance"
 			if sender is URLComponents {
 				let components = sender as! URLComponents
 				dst.components = components
 			}
+		}
+		if segue.identifier == "3ds-auth" {
+			let dst = segue.destination as! WebViewController
+			dst.unwindIdentifiers["3ds-auth"] = "unwindSegueToBalance"
 		}
 	}
 
@@ -215,6 +228,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			}
 		case 2:
 			//Купить
+			self.lblBuyRate.text = "...";
 			self.app.model!.getBuyRate("RUB")
 			if !tblHistory.isHidden {
 				flip(tblHistory, vBuy)
@@ -227,6 +241,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			}
 		case 3:
 			//Продать
+			self.lblSellRate.text = "...";
 			self.app.model!.getSellRate("RUB")
 			if !tblHistory.isHidden {
 				flip(tblHistory, vSell)
@@ -252,13 +267,16 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func setButtonText(_ btn: UIButton!, _ text: String!) -> Void {
-		btn.setTitle(text, for: .application)
-		btn.setTitle(text, for: .disabled)
-		btn.setTitle(text, for: .focused)
-		btn.setTitle(text, for: .highlighted)
-		btn.setTitle(text, for: .normal)
-		btn.setTitle(text, for: .reserved)
-		btn.setTitle(text, for: .selected)
+		UIView.performWithoutAnimation {
+			btn.setTitle(text, for: .application)
+			btn.setTitle(text, for: .disabled)
+			btn.setTitle(text, for: .focused)
+			btn.setTitle(text, for: .highlighted)
+			btn.setTitle(text, for: .normal)
+			btn.setTitle(text, for: .reserved)
+			btn.setTitle(text, for: .selected)
+			btn.layoutIfNeeded()
+		}
 	}
 	
 	func refreshBalanceView() {
@@ -324,15 +342,38 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBAction func btnSIBSellClick(_ sender: Any?) -> Void {
 		self.view.endEditing(true)
 		amountSell = Double(self.tfAmount_Sell.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
-		if self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance > amountSell {
+		if self.tfCardNumber_Sell.text!.count > 0 && self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance > amountSell && amountSell > 0 {
 			app.model!.sell("RUB", amountSell, amountSell * app.model!.sellRate, self.tfCardNumber_Sell.text!)
 			self.tfCardNumber_Sell.text = ""
 			self.tfAmount_Sell.text = ""
 			amountSell = 0
-			setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate) + " ₽")
-			//Показываем что все ок
+			self.tfCardNumber_Sell.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.7)
+			self.tfAmount_Sell.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.7)
+			setButtonText(self.btnSIBSell, NSLocalizedString("EmptySellButtonText", comment: "EmptySellButtonText"))
 		} else {
-			//Тут надо показать Alert
+			let alert = UIAlertController.init(title: NSLocalizedString("ErrorStartSell", comment: "Ошибка"), message: NSLocalizedString("ErrorStartSellMessage", comment: "Ошибка"), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	@IBAction func btnSIBBuyClick(_ sender: Any?) -> Void {
+		self.view.endEditing(true)
+		amountBuy = Double(self.tfAmount_Buy.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
+		if self.tfCardNumber_Buy.text!.count > 0 && self.tfCardNumber_Buy.text!.luhnCheck() && amountBuy > 0 {
+			app.model!.buy("RUB", amountBuy, amountBuy * Double(1) / app.model!.buyRate, self.tfCardNumber_Buy.text!, self.tfExp_Buy.text!, self.tfCVV_Buy.text!)
+			self.tfCardNumber_Buy.text = ""
+			self.tfAmount_Buy.text = ""
+			self.tfExp_Buy.text = ""
+			self.tfCVV_Buy.text = ""
+			amountBuy = 0
+			self.tfCardNumber_Buy.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.7)
+			self.tfAmount_Buy.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.7)
+			setButtonText(self.btnSIBBuy, NSLocalizedString("EmptyBuyButtonText", comment: "EmptyBuyButtonText"))
+		} else {
+			let alert = UIAlertController.init(title: NSLocalizedString("ErrorStartSell", comment: "Ошибка"), message: NSLocalizedString("ErrorStartSellMessage", comment: "Ошибка"), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+			self.present(alert, animated: true, completion: nil)
 		}
 	}
 	
@@ -541,6 +582,31 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	func sellComplete() {
 		DispatchQueue.main.sync { self.vWait.isHidden = true }
 	}
+	
+	func updateSellRate() {
+		DispatchQueue.main.sync {
+			self.lblSellRate.text = " 1 SIB ~ \(String(format: "%.2f", app.model!.sellRate)) ₽ \n комиссия 30 ₽ за каждые 70000 ₽"
+		}
+	}
+	
+	func buyStart() {
+		DispatchQueue.main.sync { self.vWait.isHidden = false }
+	}
+	
+	func buyComplete() {
+		DispatchQueue.main.sync { self.vWait.isHidden = true }
+		if app.model!.buyState == "Redirect" && app.model!.buyRedirectUrl != "" {
+			DispatchQueue.main.async {
+				self.performSegue(withIdentifier: "3ds-auth", sender: self.app.model!.buyRedirectUrl)
+			}
+		}
+	}
+	
+	func updateBuyRate() {
+		DispatchQueue.main.sync {
+			self.lblBuyRate.text = " 1 SIB ~ \(String(format: "%.2f", Double(1) / app.model!.buyRate)) ₽"
+		}
+	}
 
 	override func processUrlCommand() {
 		if app.needToProcessURL {
@@ -602,28 +668,81 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		let textFieldText: NSString = (textField.text ?? "") as NSString
 		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
 		
+		if txtAfterUpdate == "" {
+			textField.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.7)
+			if textField == self.tfAmount_Sell {
+				setButtonText(self.btnSIBSell, NSLocalizedString("EmptySellButtonText", comment: "EmptySellButtonText"))
+			}
+			if textField == self.tfAmount_Buy {
+				setButtonText(self.btnSIBBuy, NSLocalizedString("EmptyBuyButtonText", comment: "EmptyBuyButtonText"))
+			}
+			return true
+		}
+		
 		if textField == self.tfCardNumber_Sell {
 			if (txtAfterUpdate.luhnCheck()) {
-				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
 				textField.text = txtAfterUpdate
 				return false
 			} else {
-				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
 			}
 		}
 		
+		if textField == self.tfCardNumber_Buy {
+			if (txtAfterUpdate.luhnCheck()) {
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
+				textField.text = txtAfterUpdate
+				return false
+			} else {
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
+			}
+		}
+
 		if textField == self.tfAmount_Sell {
 			let app = UIApplication.shared.delegate as! AppDelegate
 			amountSell = Double(txtAfterUpdate.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
 			if app.model!.Balance < amountSell {
-				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
 			} else {
-				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
 			}
-
+			
 			setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate - 30) + " ₽")
 		}
+
+		if textField == self.tfAmount_Buy {
+			let app = UIApplication.shared.delegate as! AppDelegate
+			amountBuy = Double(txtAfterUpdate.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
+			if amountBuy < 1 {
+				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
+			} else {
+				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
+			}
+			
+			setButtonText(self.btnSIBBuy, NSLocalizedString("BuyButtonText", comment: "BuyButtonText") + String(format: "%.2f", amountBuy * Double(1)/app.model!.buyRate) + " ₽")
+		}
 		
+		if textField == self.tfExp_Buy {
+			if (txtAfterUpdate.count == 4) {
+				textField.text = txtAfterUpdate
+				self.tfCVV_Buy.becomeFirstResponder()
+				return false
+			} else {
+				return true
+			}
+		}
+		
+		if textField == self.tfCVV_Buy {
+			if (txtAfterUpdate.count == 3) {
+				textField.text = txtAfterUpdate
+				self.tfAmount_Buy.becomeFirstResponder()
+				return false
+			} else {
+				return true
+			}
+		}
+
 		return true;
 	}
 	

@@ -1,0 +1,40 @@
+//
+//  WebViewController.swift
+//  sib-lite
+//
+//  Created by Иван Алексеев on 25.12.2017.
+//  Copyright © 2017 NETTRASH. All rights reserved.
+//
+
+import Foundation
+import UIKit
+import WebKit
+
+class WebViewController : BaseViewController, WKNavigationDelegate {
+	
+	@IBOutlet var webView: WKWebView!
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		self.webView.navigationDelegate = self
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		self.webView.load(URLRequest(url: URL(string: (UIApplication.shared.delegate as! AppDelegate).model!.buyRedirectUrl)!))
+	}
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
+
+	//WKNavigationDelegate
+	
+	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+		let url = webView.url?.absoluteString
+		if url?.starts(with: "https://sib.cards/WS/State") ?? false {
+			performSegue(withIdentifier: unwindIdentifiers["3ds-auth"]!, sender: self)
+		}
+	}
+}

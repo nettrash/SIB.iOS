@@ -10,6 +10,7 @@ import Foundation
 
 public class HistoryItem: NSObject {
 	
+	var id: String = ""
 	var type: HistoryItemType = .Incoming
 	var date: Date = Date()
 	var amount: Double = 0
@@ -18,8 +19,9 @@ public class HistoryItem: NSObject {
 		super.init()
 	}
 	
-	init(type itemType: HistoryItemType, date itemDate: Date, amount itemAmount: Double) {
+	init(id txid: String, type itemType: HistoryItemType, date itemDate: Date, amount itemAmount: Double) {
 		super.init()
+		id = txid
 		type = itemType
 		date = itemDate
 		amount = itemAmount

@@ -31,6 +31,7 @@ public class History: NSObject {
 			
 			//let confirmations = tx?["Confirmations"] as? UInt32
 			let transactionDate = tx?["TransactionDate"] as? String
+			let transactionId = tx?["Id"] as? String
 			let formatter = DateFormatter()
 			formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
 			txDate = formatter.date(from: transactionDate!)!
@@ -63,12 +64,12 @@ public class History: NSObject {
 					}
 				}
 				
-				return HistoryItem(type: (outInAmount == 0 ? .Outgoing : .Incoming), date: txDate, amount: (outInAmount == 0 ? outExternalAmount : outInAmount) / Double(100000000))
+				return HistoryItem(id: transactionId!, type: (outInAmount == 0 ? .Outgoing : .Incoming), date: txDate, amount: (outInAmount == 0 ? outExternalAmount : outInAmount) / Double(100000000))
 			}
 			
 			//let In = tx?["In"] as? [Any]
 			
-			return HistoryItem(type: .Unknown, date: txDate, amount: txAmount)
+			return HistoryItem(id: "", type: .Unknown, date: txDate, amount: txAmount)
 		})
 	}
 }

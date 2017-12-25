@@ -278,7 +278,23 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	
 	func sellComplete() {
 	}
-
+	
+	func updateSellRate() {
+		
+	}
+	
+	func buyStart() {
+		
+	}
+	
+	func buyComplete() {
+		
+	}
+	
+	func updateBuyRate() {
+		
+	}
+	
 	override func processUrlCommand() {
 		let app = UIApplication.shared.delegate as! AppDelegate
 		if app.needToProcessURL {

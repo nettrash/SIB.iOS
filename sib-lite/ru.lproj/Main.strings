@@ -21,7 +21,7 @@
 "7WB-rZ-rY9.placeholder" = "секретная фраза";
 "g3f-km-vGj.normalTitle" = "создать";
 "FFr-Dd-tIX.text" = "PIN";
-"IoT-us-Yg3.text" = "PIN";
+"IoT-us-Yg3.text" = "";
 "hmj-Lt-W1w.text" = "Перевод";
 "r9G-Pr-nQs.placeholder" = "адрес получателя";
 "a8k-Wh-tNN.placeholder" = "сумма";
@@ -31,3 +31,11 @@
 "0Aa-F3-XfX.text" = "История";
 "qHc-tC-AF2.text" = "Нет операций";
 "g1Q-cb-sHo.normalTitle" = "Продать";
+"OKp-rq-sBc.normalTitle" = "Детали";
+"5FG-0H-Zij.normalTitle" = "Поделиться";
+"Cv2-nO-U5r.placeholder" = "номер карты";
+"UHc-Mu-q0q.placeholder" = "кол-во червонцев";
+"0DN-3M-J9Q.placeholder" = "количество червонцев";
+"mGI-cD-gVy.placeholder" = "номер карты";
+"foP-SZ-J55.placeholder" = "MMYY";
+"Bpk-Sq-E3N.placeholder" = "CVV";
