@@ -12,10 +12,12 @@ class sibTransactionOutput : NSObject {
 
 	var Amount: BigInteger
 	var ScriptedAddress: [UInt8]
+	var Satoshi: UInt64
 	
-	init(_ script: [UInt8], _ value: BigInteger) {
+	init(_ script: [UInt8], _ value: BigInteger, _ satoshi: UInt64) {
 		ScriptedAddress = script.map { $0 }
-		Amount = BigInteger("\(value.intValue())")
+		Amount = value
+		Satoshi = satoshi
 		super.init()
 	}
 }

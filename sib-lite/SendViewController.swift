@@ -137,7 +137,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		//Добавляем непотраченные входы
 		for u in _unspent!.Items {
 			if spent < _amount! + _commission! {
-				spent += u.amount
+				spent += u.amount.rounded(toPlaces: 8)
 				tx.addInput(u)
 			} else {
 				break;

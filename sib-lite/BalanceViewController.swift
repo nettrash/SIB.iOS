@@ -39,7 +39,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBOutlet var vWait: UIView!
 	@IBOutlet var lblSellRate: UILabel!
 	@IBOutlet var lblBuyRate: UILabel!
-
+	@IBOutlet var btnSettings: UIButton!
+	
 	var refreshControl: UIRefreshControl!
 	var refreshControlRates: UIRefreshControl!
 
@@ -83,9 +84,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		DispatchQueue.main.async {
 			self.app.model!.delegate = self
 			self.prepareActionMenu()
-			self.segmentControlValueChanged(nil)
+			self.segmentControlValueChanged(self)
 			if self.app.model!.buyOpKey != "" {
-				self.vWait.isHidden = false
 				self.app.model!.checkBuyOp()
 			}
 		}
@@ -151,6 +151,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			let dst = segue.destination as! WebViewController
 			dst.unwindIdentifiers["3ds-auth"] = "unwindSegueToBalance"
 		}
+		if segue.identifier == "settings-sib" {
+			let dst = segue.destination as! SettingsViewController
+			dst.unwindIdentifiers["settings-sib"] = "unwindSegueToBalance"
+		}
 	}
 
 	@IBAction func unwindToBalance(unwindSegue: UIStoryboardSegue) {
@@ -190,6 +194,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBAction func historySIB(_ sender: Any?) {
 		performSegue(withIdentifier: "history-sib", sender: self)
 	}
+	
+	@IBAction func settingsSIB(_ sender: Any?) {
+		performSegue(withIdentifier: "settings-sib", sender: self)
+	}
 
 	@IBAction func scanCad(_ sender: Any?) {
 		let ciopvc = CardIOPaymentViewController.init(paymentDelegate: self)!
@@ -205,7 +213,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		self.view.endEditing(true)
 		switch scDimension.selectedSegmentIndex {
 		case 0:
-			if !self.app.model!.isHistoryRefresh {
+			if !self.app.model!.isHistoryRefresh && sender != nil {
 				self.tblHistory.setContentOffset(CGPoint(x: 0, y: -self.refreshControl!.frame.size.height - self.view.safeAreaInsets.bottom), animated: true)
 				refresh(sender: nil)
 			}
@@ -326,6 +334,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 							self.imgActionInfo.alpha = self.imgActionInfo.alpha == 0 ? 1 : 0
 							self.btnBuy.alpha = self.btnBuy.alpha == 0 ? 1 : 0
 							self.imgVertical.alpha = self.imgVertical.alpha == 0 ? self.btnAddAddress.alpha : self.imgVertical.alpha
+							self.btnSettings.alpha = self.imgVertical.alpha
 							if self.btnRequisites.frame.origin.y < self.tblHistory.frame.origin.y + 157 {
 								if self.imgVertical.alpha == 0 {
 									self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
@@ -385,10 +394,11 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	private func prepareActionMenu() {
-		btnAddAddress.alpha = 0;
-		btnRequisites.alpha = 0;
-		btnBuy.alpha = 0;
-		imgVertical.alpha = 0;
+		btnAddAddress.alpha = 0
+		btnRequisites.alpha = 0
+		btnBuy.alpha = 0
+		btnSettings.alpha = 0
+		imgVertical.alpha = 0
 		/*
 		self.btnAddAddress.transform = CGAffineTransform(rotationAngle: CGFloat.pi * -0.5)
 		self.btnRequisites.transform = CGAffineTransform(rotationAngle: CGFloat.pi * -0.25)
@@ -539,7 +549,12 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func stopHistoryUpdate() {
+		DispatchQueue.main.sync {
+			self.vWait.isHidden = true
+		}
 		DispatchQueue.main.async {
+			self.scDimension.selectedSegmentIndex = 0
+			self.segmentControlValueChanged(nil)
 			self.refreshControl.endRefreshing()
 			self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
 			if self.historyItemsCount > 3 { self.historyItemsCount = 3 }
@@ -549,6 +564,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func unspetData(_ unspent: Unspent) {
+		
 	}
 	
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
@@ -587,7 +603,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func sellComplete() {
-		DispatchQueue.main.sync { self.vWait.isHidden = true }
+		DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+			self.app.model!.refresh()
+		})
 	}
 	
 	func updateSellRate() {
@@ -607,9 +625,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		if app.model!.buyState == "Redirect" && app.model!.buyRedirectUrl != "" {
 			DispatchQueue.main.async {
 				self.performSegue(withIdentifier: "3ds-auth", sender: self.app.model!.buyRedirectUrl)
-				self.vWait.isHidden = true
 			}
+			return
 		}
+		checkOpComplete(app.model!.buyState)
 	}
 	
 	func updateBuyRate() {
@@ -621,22 +640,28 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	func checkOpComplete(_ process: String) {
 		switch process {
 		case "ERROR":
-			DispatchQueue.main.sync { self.vWait.isHidden = true }
 			let alert = UIAlertController.init(title: NSLocalizedString("CheckOpErrorTitle", comment: ""), message: NSLocalizedString("CheckOpErrorMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
 			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 			self.present(alert, animated: true, completion: nil)
+			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+				self.app.model!.refresh()
+			})
 			break;
 		case "Done":
-			DispatchQueue.main.sync { self.vWait.isHidden = true }
 			let alert = UIAlertController.init(title: NSLocalizedString("CheckOpDoneTitle", comment: ""), message: NSLocalizedString("CheckOpDoneMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
 			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 			self.present(alert, animated: true, completion: nil)
+			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+				self.app.model!.refresh()
+			})
 			break;
 		case "Cancel":
-			DispatchQueue.main.sync { self.vWait.isHidden = true }
 			let alert = UIAlertController.init(title: NSLocalizedString("CheckOpCancelTitle", comment: ""), message: NSLocalizedString("CheckOpCancelMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
 			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 			self.present(alert, animated: true, completion: nil)
+			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+				self.app.model!.refresh()
+			})
 			break;
 		default:
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -718,9 +743,12 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		}
 		
 		if textField == self.tfCardNumber_Sell {
-			if (txtAfterUpdate.luhnCheck()) {
+			if (txtAfterUpdate.luhnCheck() && txtAfterUpdate.count > 13) {
 				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
 				textField.text = txtAfterUpdate
+				if txtAfterUpdate.count == 16 {
+					self.tfAmount_Sell.becomeFirstResponder()
+				}
 				return false
 			} else {
 				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
@@ -728,9 +756,12 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		}
 		
 		if textField == self.tfCardNumber_Buy {
-			if (txtAfterUpdate.luhnCheck()) {
+			if (txtAfterUpdate.luhnCheck() && txtAfterUpdate.count > 13) {
 				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
 				textField.text = txtAfterUpdate
+				if txtAfterUpdate.count == 16 {
+					self.tfExp_Buy.becomeFirstResponder()
+				}
 				return false
 			} else {
 				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)

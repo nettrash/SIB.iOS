@@ -6,7 +6,16 @@
          contextName = "SendViewController._prepareTransaction():SendViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "spent - _amount! - _commission!">
+            </PersistentString>
+            <PersistentString
                value = "tx.serialize().hexEncodedString()">
+            </PersistentString>
+            <PersistentString
+               value = "_commission!">
+            </PersistentString>
+            <PersistentString
+               value = "312+4.33019178">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -89,6 +98,14 @@
          contextName = "sibTransaction.addInput(_:):sibTransaction.swift">
       </ContextState>
       <ContextState
+         contextName = "sibTransaction.transactionHash(_:):sibTransaction.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "sibTransaction.sign(_:):sibTransaction.swift">
          <PersistentStrings>
             <PersistentString
@@ -107,14 +124,6 @@
          <PersistentStrings>
             <PersistentString
                value = "self._numberData">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.transactionHash(_:):sibTransaction.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "data.hexEncodedString()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -166,6 +175,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "BigInteger.init(_:):BigInteger.swift">
+      </ContextState>
+      <ContextState
          contextName = "AppDelegate.application(_:didFinishLaunchingWithOptions:):AppDelegate.swift">
          <PersistentStrings>
             <PersistentString
@@ -174,10 +186,30 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "sibTransaction.addOutput(address:amount:):sibTransaction.swift">
+      </ContextState>
+      <ContextState
          contextName = "BigInteger.toByteArraySigned():BigInteger.swift">
          <PersistentStrings>
             <PersistentString
                value = "retVal[0] &amp; 0x80">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BigInteger.intValue():BigInteger.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "16&lt;&lt;26">
+            </PersistentString>
+            <PersistentString
+               value = "((1 &lt;&lt; (32 - 26)) - 1)">
+            </PersistentString>
+            <PersistentString
+               value = "_numberData[1]&amp;63">
+            </PersistentString>
+            <PersistentString
+               value = "1073741824 | _numberData[0]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

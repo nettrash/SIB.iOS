@@ -31,7 +31,7 @@ class sibTransaction : NSObject {
 	func addOutput(address: String, amount: Double) -> Void {
 		let value = BigInteger("\(Int(amount * pow(10, 8)))")
 		let script: [UInt8] = sibAddress.spendToScript(address)
-		Output.append(sibTransactionOutput(script, value))
+		Output.append(sibTransactionOutput(script, value, UInt64(amount * pow(10, 8))))
 	}
 	
 	func addInput(_ tx: UnspentTransaction) -> Void {
@@ -39,10 +39,6 @@ class sibTransaction : NSObject {
 	}
 	
 	func addChange(amount summa: Double) -> Void {
-		var a: Double = 0
-		for o in Output {
-			a += Double(o.Amount.intValue()) / pow(10, 8)
-		}
 		Change!.initialize(NSUUID().uuidString)
 		addOutput(address: Change!.Address!, amount: summa)
 	}
@@ -222,7 +218,7 @@ class sibTransaction : NSObject {
 		
 		data.append(contentsOf: Convert.toVarIntByteArray(UInt64(Output.count)))
 		for o in Output {
-			data.append(contentsOf: Convert.toByteArray(UInt64(o.Amount.intValue())))
+			data.append(contentsOf: Convert.toByteArray(o.Satoshi))
 			data.append(contentsOf: Convert.toVarIntByteArray(UInt64(o.ScriptedAddress.count)))
 			data.append(contentsOf: o.ScriptedAddress)
 		}
@@ -242,7 +238,7 @@ class sibTransaction : NSObject {
 		}
 		retVal.Output = []
 		for o in Output {
-			retVal.Output.append(sibTransactionOutput(o.ScriptedAddress, o.Amount))
+			retVal.Output.append(sibTransactionOutput(o.ScriptedAddress, o.Amount, o.Satoshi))
 		}
 		retVal.Timestamp = Timestamp
 		retVal.Block = Block
