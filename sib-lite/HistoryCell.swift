@@ -16,6 +16,7 @@ class HistoryCell: UITableViewCell {
 	@IBOutlet var imgOp: UIImageView!
 	@IBOutlet var lblDate: UILabel!
 	@IBOutlet var lblAmount: UILabel!
+	@IBOutlet var lblAddress: UILabel!
 	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,6 +47,7 @@ class HistoryCell: UITableViewCell {
 		self.imgOp.image = UIImage(named: ((item.type == .Incoming ? "GreenArrowUp" : "RedArrowDown")))
 		self.lblAmount.text = (item.type == .Incoming ? "+ " : "- ") + item.getAmount((UIApplication.shared.delegate as! AppDelegate).model!.Dimension)
 		self.lblDate.text = item.getDate()
+		self.lblAddress.text = item.outAddress
 		self.roundCorners()
 	}
 }

@@ -46,6 +46,8 @@ public class History: NSObject {
 				var outInAmount: Double = 0
 				var outChangeAmount: Double = 0
 				var outExternalAmount: Double = 0
+				var outAddressExt: String = ""
+				var outAddressIn: String = ""
 				
 				for out in OutSorted! {
 					let o = out as? [String: Any]
@@ -54,6 +56,7 @@ public class History: NSObject {
 					for oai in oa! {
 						if addrsIn.contains(oai) {
 							outInAmount += os!
+							outAddressIn = oai
 							continue
 						}
 						if addrsChange.contains(oai) {
@@ -61,15 +64,16 @@ public class History: NSObject {
 							continue
 						}
 						outExternalAmount += os!
+						outAddressExt = oai
 					}
 				}
 				
-				return HistoryItem(id: transactionId!, type: (outInAmount == 0 ? .Outgoing : .Incoming), date: txDate, amount: (outInAmount == 0 ? outExternalAmount : outInAmount) / Double(100000000))
+				return HistoryItem(id: transactionId!, type: (outInAmount == 0 ? .Outgoing : .Incoming), date: txDate, amount: (outInAmount == 0 ? outExternalAmount : outInAmount) / Double(100000000), outAddress: outAddressExt == "" ? outAddressIn : outAddressExt)
 			}
 			
 			//let In = tx?["In"] as? [Any]
 			
-			return HistoryItem(id: "", type: .Unknown, date: txDate, amount: txAmount)
+			return HistoryItem(id: "", type: .Unknown, date: txDate, amount: txAmount, outAddress: "")
 		})
 	}
 }

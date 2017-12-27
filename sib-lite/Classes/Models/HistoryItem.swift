@@ -14,17 +14,19 @@ public class HistoryItem: NSObject {
 	var type: HistoryItemType = .Incoming
 	var date: Date = Date()
 	var amount: Double = 0
+	var outAddress: String = ""
 	
 	override init() {
 		super.init()
 	}
 	
-	init(id txid: String, type itemType: HistoryItemType, date itemDate: Date, amount itemAmount: Double) {
+	init(id txid: String, type itemType: HistoryItemType, date itemDate: Date, amount itemAmount: Double, outAddress address: String) {
 		super.init()
 		id = txid
 		type = itemType
 		date = itemDate
 		amount = itemAmount
+		outAddress = address
 	}
 	
 	func getDate() -> String {

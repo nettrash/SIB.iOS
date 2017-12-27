@@ -177,6 +177,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		if (unwindSegue.source is WebViewController) {
 			let src = unwindSegue.source as! WebViewController
 		}
+		if (unwindSegue.source is ScanViewController) {
+			let src = unwindSegue.source as! ScanViewController
+		}
 	}
 	
 	@IBAction func addAddress(_ sender: Any?) {
@@ -337,13 +340,15 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 							self.btnSettings.alpha = self.imgVertical.alpha
 							if self.btnRequisites.frame.origin.y < self.tblHistory.frame.origin.y + 157 {
 								if self.imgVertical.alpha == 0 {
-									self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
-									if self.historyItemsCount > 3 { self.historyItemsCount = 3 }
-									self.tblHistory.reloadData()
+									self.tblHistory.isHidden = self.scDimension.selectedSegmentIndex != 0
+									self.tblRate.isHidden = self.scDimension.selectedSegmentIndex != 1
+									self.vBuy.isHidden = self.scDimension.selectedSegmentIndex != 2
+									self.vSell.isHidden = self.scDimension.selectedSegmentIndex != 3
 								} else {
-									self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
-									if self.historyItemsCount > 1 { self.historyItemsCount = 1 }
-									self.tblHistory.reloadData()
+									self.tblHistory.isHidden = true
+									self.tblRate.isHidden = true
+									self.vBuy.isHidden = true
+									self.vSell.isHidden = true
 								}
 							}
 						}, completion: { (_ success: Bool) -> Void in
@@ -644,6 +649,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 			self.present(alert, animated: true, completion: nil)
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+				self.app.model!.buyOpKey = ""
+				self.app.model!.buyState = ""
 				self.app.model!.refresh()
 			})
 			break;
@@ -652,6 +659,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 			self.present(alert, animated: true, completion: nil)
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+				self.app.model!.buyOpKey = ""
+				self.app.model!.buyState = ""
 				self.app.model!.refresh()
 			})
 			break;
@@ -660,6 +669,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 			self.present(alert, animated: true, completion: nil)
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+				self.app.model!.buyOpKey = ""
+				self.app.model!.buyState = ""
 				self.app.model!.refresh()
 			})
 			break;

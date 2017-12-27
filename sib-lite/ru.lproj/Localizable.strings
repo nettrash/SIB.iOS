@@ -36,3 +36,9 @@
 "CheckOpDoneMessage" = "Полный успех! Ожидайте зачисления монет.";
 "CheckOpCancelTitle" = "Отмена";
 "CheckOpCancelMessage" = "Оплата отменена. Повторите попытку позже.";
+"Key" = "Пароль";
+"EncryptTitle" = "Шифрование";
+"EncryptMessage" = "Укажите пароль для шифрования файла ключей.";
+"EncryptPasswordErrorMessage" = "Пароль не от этого хранилища ключей.";
+"KeyStoreImportTitle" = "Хранилище ключей";
+"KeyStoreImportMessage" = "Импорт ключей успешно произведён.";

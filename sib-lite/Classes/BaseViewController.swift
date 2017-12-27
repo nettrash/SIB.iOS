@@ -52,6 +52,12 @@ class BaseViewController: UIViewController {
 		present(activityViewController, animated: true, completion: nil)
 	}
 	
+	public func shareUrl(_ url: URL) -> Void {
+		let activityViewController : UIActivityViewController = UIActivityViewController(
+			activityItems: [url], applicationActivities: [])
+		present(activityViewController, animated: true, completion: nil)
+	}
+
 	@objc func flip(_ firstView: UIView, _ secondView: UIView) {
 		let transitionOptions: UIViewAnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
 		

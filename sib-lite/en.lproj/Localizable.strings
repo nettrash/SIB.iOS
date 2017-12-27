@@ -36,3 +36,9 @@
 "CheckOpDoneMessage" = "Congrats. Await SIBCoin.";
 "CheckOpCancelTitle" = "Cancel";
 "CheckOpCancelMessage" = "Operation canceled.";
+"Key" = "Password";
+"EncryptTitle" = "Encryption";
+"EncryptMessage" = "Enter password for key file encryption.";
+"EncryptPasswordErrorMessage" = "Invalid password.";
+"KeyStoreImportTitle" = "Keystore";
+"KeyStoreImportMessage" = "Keystore imported.";

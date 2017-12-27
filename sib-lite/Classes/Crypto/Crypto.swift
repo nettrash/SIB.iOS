@@ -37,4 +37,5 @@ class Crypto {
 		
 		return digestData
 	}
+
 }
