@@ -42,3 +42,7 @@
 "EncryptPasswordErrorMessage" = "Invalid password.";
 "KeyStoreImportTitle" = "Keystore";
 "KeyStoreImportMessage" = "Keystore imported.";
+"Today" = "Today";
+"Yesterday" = "Yesterday";
+"Month" = "Current month";
+"Other" = "A long time ago";

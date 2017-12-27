@@ -18,6 +18,12 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	@IBOutlet var lblNoOps: UILabel!
 	var refreshControl: UIRefreshControl!
 	
+	var data: [Any] = []
+	var today: [HistoryItem] = []
+	var yesterday: [HistoryItem] = []
+	var month: [HistoryItem] = []
+	var other: [HistoryItem] = []
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.app.model!.HistoryItems.Items = []
@@ -47,21 +53,37 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	}
 	
 	func refreshHistory() -> Void {
+		data = []
+		today = []
+		yesterday = []
+		month = []
+		other = []
 		self.app.model!.delegate = self
 		self.app.model!.refreshHistory()
 	}
 	
+	func prepareHistoryData() {
+		today = self.app.model!.HistoryItems.Items.filter { $0.date.isToday() }
+		yesterday = self.app.model!.HistoryItems.Items.filter { $0.date.isYesterday() }
+		month = self.app.model!.HistoryItems.Items.filter { $0.date.isCurrentMonth() }
+		other = self.app.model!.HistoryItems.Items.filter { !$0.date.isToday() && !$0.date.isYesterday() && !$0.date.isCurrentMonth() }
+		if today.count > 0 { data.append(today) }
+		if yesterday.count > 0 { data.append(yesterday) }
+		if month.count > 0 { data.append(month) }
+		if other.count > 0 { data.append(other) }
+	}
+	
 	//UITaleViewDataSourceDelegate
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return 1;
+		return data.count;
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.app.model!.HistoryItems.Items.count
+		return (data[section] as? [HistoryItem])!.count
 	}
 	
 	private func _historyCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-		let item = app.model!.HistoryItems.Items.sorted(by: { (_ a: HistoryItem, _ b: HistoryItem) -> Bool in
+		let item = (data[indexPath.section] as? [HistoryItem])!.sorted(by: { (_ a: HistoryItem, _ b: HistoryItem) -> Bool in
 			a.date > b.date
 		})[indexPath.row]
 		if selectedIndex != nil && selectedIndex == indexPath {
@@ -80,6 +102,37 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 			return _historyCell(tableView, indexPath)
 		}
 		return UITableViewCell()
+	}
+	
+	func headerTitle(_ section: Int) -> String? {
+		if data[section] as! [HistoryItem] == today { return NSLocalizedString("Today", comment: "Today") }
+		if data[section] as! [HistoryItem] == yesterday { return NSLocalizedString("Yesterday", comment: "Yesterday") }
+		if data[section] as! [HistoryItem] == month { return NSLocalizedString("Month", comment: "Month") }
+		if data[section] as! [HistoryItem] == other { return NSLocalizedString("Other", comment: "Other") }
+		return nil
+	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return headerTitle(section)
+	}
+	
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 48
+	}
+	
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let headerView = UIView()
+		headerView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.4)
+		let lblTitle = UILabel()
+		headerView.addSubview(lblTitle)
+		lblTitle.frame.origin.x = 20
+		lblTitle.frame.origin.y = 0
+		lblTitle.frame.size.height = 48
+		lblTitle.frame.size.width = self.tblHistory.frame.size.width - 40
+		lblTitle.text = headerTitle(section)
+		lblTitle.font = UIFont.boldSystemFont(ofSize: 18)
+		lblTitle.textColor = UIColor.white
+		return headerView
 	}
 	
 	//UITableViewDelegate
@@ -118,6 +171,7 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	func stopHistoryUpdate() {
 		DispatchQueue.main.async {
 			self.refreshControl.endRefreshing()
+			self.prepareHistoryData()
 			self.tblHistory.reloadData()
 			self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0
 		}

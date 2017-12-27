@@ -110,6 +110,11 @@
 		E58B4A181F97F3A70023B5E1 /* Vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A151F97F3A60023B5E1 /* Vertical.png */; };
 		E58B4A191F97F3A70023B5E1 /* Vertical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */; };
 		E58B4A1A1F97F3A70023B5E1 /* Vertical@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */; };
+		E5920BAC1FF41CFB0051A213 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5920BAB1FF41CFB0051A213 /* DateExtensions.swift */; };
+		E5920BB51FF42B080051A213 /* SIBKeystoreIcon44.png in Resources */ = {isa = PBXBuildFile; fileRef = E5920BB11FF42B060051A213 /* SIBKeystoreIcon44.png */; };
+		E5920BB61FF42B080051A213 /* SIBKeystoreIcon64.png in Resources */ = {isa = PBXBuildFile; fileRef = E5920BB21FF42B060051A213 /* SIBKeystoreIcon64.png */; };
+		E5920BB71FF42B080051A213 /* SIBKeystoreIcon320.png in Resources */ = {isa = PBXBuildFile; fileRef = E5920BB31FF42B060051A213 /* SIBKeystoreIcon320.png */; };
+		E5920BB81FF42B080051A213 /* SIBKeystoreIcon22.png in Resources */ = {isa = PBXBuildFile; fileRef = E5920BB41FF42B070051A213 /* SIBKeystoreIcon22.png */; };
 		E594F3681FED50DC0042C256 /* CardIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E857831FEBE2FA00397A76 /* CardIO.framework */; };
 		E594F3691FED511E0042C256 /* CardIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5E857831FEBE2FA00397A76 /* CardIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E59C7DF61FDD556A00ABFC9A /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C7DF51FDD556A00ABFC9A /* Convert.swift */; };
@@ -374,6 +379,11 @@
 		E58B4A151F97F3A60023B5E1 /* Vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vertical.png; sourceTree = "<group>"; };
 		E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@2x.png"; sourceTree = "<group>"; };
 		E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@3x.png"; sourceTree = "<group>"; };
+		E5920BAB1FF41CFB0051A213 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		E5920BB11FF42B060051A213 /* SIBKeystoreIcon44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIBKeystoreIcon44.png; sourceTree = "<group>"; };
+		E5920BB21FF42B060051A213 /* SIBKeystoreIcon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIBKeystoreIcon64.png; sourceTree = "<group>"; };
+		E5920BB31FF42B060051A213 /* SIBKeystoreIcon320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIBKeystoreIcon320.png; sourceTree = "<group>"; };
+		E5920BB41FF42B070051A213 /* SIBKeystoreIcon22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIBKeystoreIcon22.png; sourceTree = "<group>"; };
 		E59C7DF51FDD556A00ABFC9A /* Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convert.swift; sourceTree = "<group>"; };
 		E5A20A801FD5826A004B3907 /* sibTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransaction.swift; sourceTree = "<group>"; };
 		E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionInput.swift; sourceTree = "<group>"; };
@@ -606,6 +616,10 @@
 		E56EC0B91F765E9600EDE756 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				E5920BB41FF42B070051A213 /* SIBKeystoreIcon22.png */,
+				E5920BB11FF42B060051A213 /* SIBKeystoreIcon44.png */,
+				E5920BB21FF42B060051A213 /* SIBKeystoreIcon64.png */,
+				E5920BB31FF42B060051A213 /* SIBKeystoreIcon320.png */,
 				E53B23F91FEAC1F500D5F5A4 /* backWhite.png */,
 				E53B23FB1FEAC1FA00D5F5A4 /* backWhite@2x.png */,
 				E53B23FA1FEAC1F800D5F5A4 /* backWhite@3x.png */,
@@ -767,6 +781,7 @@
 				E55727881FE00F120004983B /* DataExtensions.swift */,
 				E5119BE21FE694BD00599747 /* UIImageExtensions.swift */,
 				E536E0061FF2213100F3BBE8 /* DoubleExtensions.swift */,
+				E5920BAB1FF41CFB0051A213 /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1059,6 +1074,7 @@
 				E557053C1FE92A7B00BCCD08 /* AlphaGreenArrowUp@3x.png in Resources */,
 				E5865C221F966ADF00580954 /* ActionButton@2x.png in Resources */,
 				E557053A1FE92A7B00BCCD08 /* AlphaRedArrowDown.png in Resources */,
+				E5920BB71FF42B080051A213 /* SIBKeystoreIcon320.png in Resources */,
 				E5420D0F1FE7CF6A0074ACAF /* ActionButtonHistory.png in Resources */,
 				E5C0C4FD1FD18FD10039D1BC /* back@3x.png in Resources */,
 				E52C9DBB1FB8D70C00DEC76E /* bear-005.jpg in Resources */,
@@ -1109,12 +1125,15 @@
 				E5420D101FE7CF6A0074ACAF /* ActionButtonHistory@3x.png in Resources */,
 				E5420D111FE7CF6A0074ACAF /* ActionButtonHistory@2x.png in Resources */,
 				E579F1661F937EE400FA19E8 /* Close.png in Resources */,
+				E5920BB51FF42B080051A213 /* SIBKeystoreIcon44.png in Resources */,
 				E56DECED1F8F6FB3002DADE9 /* background_user__email.jpg in Resources */,
 				E53B23FC1FEAC1FB00D5F5A4 /* backWhite.png in Resources */,
 				E53B23F81FEA578700D5F5A4 /* cameraWhite@3x.png in Resources */,
 				E579F15D1F922D4E00FA19E8 /* Scan@2x.png in Resources */,
+				E5920BB81FF42B080051A213 /* SIBKeystoreIcon22.png in Resources */,
 				E557053B1FE92A7B00BCCD08 /* AlphaGreenArrowUp.png in Resources */,
 				E50165D41F7657A200855FBC /* Main.storyboard in Resources */,
+				E5920BB61FF42B080051A213 /* SIBKeystoreIcon64.png in Resources */,
 				E5C0C4FF1FD18FD10039D1BC /* back.png in Resources */,
 				E5B4AD5F1FE531C700B0BA86 /* ActionButtonSettings@2x.png in Resources */,
 				E5B4AD601FE531C700B0BA86 /* ActionButtonSettings.png in Resources */,
@@ -1205,6 +1224,7 @@
 				E54539EF1FEEBC37002F3169 /* PINTextField.swift in Sources */,
 				E5C0C51E1FD1B0890039D1BC /* SIBLogoImageView.swift in Sources */,
 				E56DECF11F8F7629002DADE9 /* BalanceViewController.swift in Sources */,
+				E5920BAC1FF41CFB0051A213 /* DateExtensions.swift in Sources */,
 				E5B6E7E01FCE1B42009E32BC /* CheckPINViewController.swift in Sources */,
 				E55705311FE9168F00BCCD08 /* MemPoolItem.swift in Sources */,
 				E5B6E7DE1FCE0A88009E32BC /* SetPINViewController.swift in Sources */,

@@ -42,3 +42,7 @@
 "EncryptPasswordErrorMessage" = "Пароль не от этого хранилища ключей.";
 "KeyStoreImportTitle" = "Хранилище ключей";
 "KeyStoreImportMessage" = "Импорт ключей успешно произведён.";
+"Today" = "Сегодня";
+"Yesterday" = "Вчера";
+"Month" = "В этом месяце";
+"Other" = "Совсем давно";

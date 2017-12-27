@@ -703,8 +703,12 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	func userDidProvide (_ cardInfo: CardIOCreditCardInfo, in paymentViewController: CardIOPaymentViewController) -> Void {
 		if !(self.tfCardNumber_Buy.superview?.isHidden ?? true) {
 			self.tfCardNumber_Buy.text = cardInfo.cardNumber
-			//self.tfCardExp_Buy.text = String("%02i", cardInfo.expiryMonth) + "\\" + String("%02i", cardInfo.expiryYear)
-			//paymentViewController.dismiss(animated: true, completion: {() -> Void in self.tfAmount_Sell.becomeFirstResponder()})
+			self.tfExp_Buy.text = String(format: "%02i", cardInfo.expiryMonth) + String(format: "%02i", cardInfo.expiryYear > 2000 ? cardInfo.expiryYear - 2000 : cardInfo.expiryYear)
+			if self.tfExp_Buy.text != "" {
+				paymentViewController.dismiss(animated: true, completion: {() -> Void in self.tfCVV_Buy.becomeFirstResponder()})
+			} else {
+				paymentViewController.dismiss(animated: true, completion: {() -> Void in self.tfExp_Buy.becomeFirstResponder()})
+			}
 		}
 		if !(self.tfCardNumber_Sell.superview?.isHidden ?? true) {
 			self.tfCardNumber_Sell.text = cardInfo.cardNumber

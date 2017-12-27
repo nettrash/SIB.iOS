@@ -9,8 +9,13 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string></string>
+			<key>CFBundleTypeIconFiles</key>
+			<array>
+				<string>SIBKeystoreIcon320</string>
+				<string>SIBKeystoreIcon64</string>
+				<string>SIBKeystoreIcon44</string>
+				<string>SIBKeystoreIcon22</string>
+			</array>
 			<key>CFBundleTypeName</key>
 			<string>SIB Keystore</string>
 			<key>LSHandlerRank</key>
@@ -86,8 +91,10 @@
 			<string>SIB Keystore</string>
 			<key>UTTypeIdentifier</key>
 			<string>ru.nettrash.sib.file.keystore</string>
+			<key>UTTypeSize320IconFile</key>
+			<string>SIBKeystoreIcon44</string>
 			<key>UTTypeSize64IconFile</key>
-			<string></string>
+			<string>SIBKeystoreIcon22</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
