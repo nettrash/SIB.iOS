@@ -120,6 +120,7 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 									let w: Wallet = Wallet.init(privateKey: privKey)
 									app.model!.storeWallet(w, false, keyType! == 0 ? .Incoming : .Change)
 								}
+								app.model!.save(app)
 								app.model!.reload(app)
 								
 								self.vWait.isHidden = true

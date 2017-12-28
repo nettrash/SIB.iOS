@@ -64,6 +64,14 @@ public class ModelRoot: NSObject {
 		}
 	}
 	
+	func save(_ app: AppDelegate) -> Void {
+		do {
+			let moc = app.persistentContainer.viewContext
+			try moc.save()
+		} catch {
+		}
+	}
+	
 	func refresh() -> Void {
 		_loadBalanceData()
 	}
