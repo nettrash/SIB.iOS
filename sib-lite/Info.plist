@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ru</string>
 	<key>CFBundleDisplayName</key>
-	<string>Червонец</string>
+	<string>SIB Light</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -54,13 +54,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>29</string>
+	<string>30</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Чтение QR кодов для получения реквизитов перевода SIB</string>
+	<string>QR SIBCoin</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Сохранение QR реквизитов перевода SIB</string>
+	<string>QR SIBCoin</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
