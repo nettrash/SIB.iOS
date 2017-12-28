@@ -404,6 +404,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		btnBuy.alpha = 0
 		btnSettings.alpha = 0
 		imgVertical.alpha = 0
+		self.tblHistory.isHidden = self.scDimension.selectedSegmentIndex != 0
+		self.tblRate.isHidden = self.scDimension.selectedSegmentIndex != 1
+		self.vBuy.isHidden = self.scDimension.selectedSegmentIndex != 2
+		self.vSell.isHidden = self.scDimension.selectedSegmentIndex != 3
 		/*
 		self.btnAddAddress.transform = CGAffineTransform(rotationAngle: CGFloat.pi * -0.5)
 		self.btnRequisites.transform = CGAffineTransform(rotationAngle: CGFloat.pi * -0.25)
