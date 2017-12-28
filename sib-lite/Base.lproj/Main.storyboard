@@ -1662,10 +1662,12 @@
                                     <action selector="shareKeys:" destination="aX8-tR-28a" eventType="touchUpInside" id="uUz-76-MJs"/>
                                 </connections>
                             </button>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xML-bu-yVm">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xML-bu-yVm">
                                 <rect key="frame" x="30" y="136" width="313" height="1"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Fpe-5H-lQB"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9E-9f-0QH">
                                 <rect key="frame" x="179" y="160" width="180" height="30"/>
@@ -1681,10 +1683,12 @@
                                     <action selector="loadKeys:" destination="aX8-tR-28a" eventType="touchUpInside" id="2Dx-kx-c4Y"/>
                                 </connections>
                             </button>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HcW-5W-hHg">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HcW-5W-hHg">
                                 <rect key="frame" x="30" y="188" width="313" height="1"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="zH0-Yw-0yb"/>
+                                </constraints>
                             </view>
                             <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GJ-cZ-J5v">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -1704,19 +1708,25 @@
                             <constraint firstItem="h41-W7-MgI" firstAttribute="top" secondItem="qG5-JA-99u" secondAttribute="bottom" constant="46" id="C1G-cS-fhL"/>
                             <constraint firstItem="rxV-eG-uI7" firstAttribute="trailing" secondItem="k9E-9f-0QH" secondAttribute="trailing" constant="16" id="CY8-vl-toe"/>
                             <constraint firstItem="qG5-JA-99u" firstAttribute="centerX" secondItem="PA4-SR-jd3" secondAttribute="centerX" id="FcY-NI-B3P"/>
+                            <constraint firstItem="HcW-5W-hHg" firstAttribute="top" secondItem="h41-W7-MgI" secondAttribute="bottom" constant="51" id="H7U-SF-sEn"/>
                             <constraint firstItem="k9E-9f-0QH" firstAttribute="top" secondItem="h41-W7-MgI" secondAttribute="bottom" constant="23" id="MR9-p7-Vo7"/>
                             <constraint firstItem="AuF-Vg-Gbf" firstAttribute="top" secondItem="rxV-eG-uI7" secondAttribute="top" id="ReZ-4G-HMP"/>
+                            <constraint firstItem="HcW-5W-hHg" firstAttribute="leading" secondItem="PA4-SR-jd3" secondAttribute="leadingMargin" constant="14" id="Tew-Du-INA"/>
                             <constraint firstItem="h41-W7-MgI" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" constant="16" id="Tfo-9R-Jwm"/>
                             <constraint firstItem="qG5-JA-99u" firstAttribute="top" secondItem="rxV-eG-uI7" secondAttribute="top" id="UDe-AF-k20"/>
                             <constraint firstItem="Qbx-cZ-0GC" firstAttribute="top" secondItem="PA4-SR-jd3" secondAttribute="top" id="UPL-3i-yIY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xML-bu-yVm" secondAttribute="trailing" constant="16" id="W2H-pF-28r"/>
+                            <constraint firstItem="xML-bu-yVm" firstAttribute="leading" secondItem="PA4-SR-jd3" secondAttribute="leadingMargin" constant="14" id="WPb-RH-DaZ"/>
                             <constraint firstItem="Qbx-cZ-0GC" firstAttribute="bottom" secondItem="rxV-eG-uI7" secondAttribute="bottom" id="cWl-VJ-x2y"/>
                             <constraint firstItem="AuF-Vg-Gbf" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" id="cnN-gu-uHj"/>
                             <constraint firstItem="3GJ-cZ-J5v" firstAttribute="trailing" secondItem="rxV-eG-uI7" secondAttribute="trailing" id="fER-fr-sxx"/>
                             <constraint firstItem="rxV-eG-uI7" firstAttribute="bottom" secondItem="G6m-mo-tpS" secondAttribute="bottom" constant="14" id="geh-Qf-fxS"/>
+                            <constraint firstItem="xML-bu-yVm" firstAttribute="top" secondItem="qG5-JA-99u" secondAttribute="bottom" constant="75" id="gxf-li-fJd"/>
                             <constraint firstItem="3GJ-cZ-J5v" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" id="ijw-Sk-bhA"/>
                             <constraint firstItem="3GJ-cZ-J5v" firstAttribute="bottom" secondItem="rxV-eG-uI7" secondAttribute="bottom" id="oXE-wB-Th3"/>
                             <constraint firstItem="Qbx-cZ-0GC" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" id="ubh-lB-6VH"/>
                             <constraint firstItem="Qbx-cZ-0GC" firstAttribute="trailing" secondItem="rxV-eG-uI7" secondAttribute="trailing" id="vzn-Tf-dLc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HcW-5W-hHg" secondAttribute="trailing" constant="16" id="zAV-CH-VT4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rxV-eG-uI7"/>
                     </view>

@@ -120,6 +120,8 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 									let w: Wallet = Wallet.init(privateKey: privKey)
 									app.model!.storeWallet(w, false, keyType! == 0 ? .Incoming : .Change)
 								}
+								app.model!.reload(app)
+								
 								self.vWait.isHidden = true
 
 								let alert = UIAlertController.init(title: NSLocalizedString("KeyStoreImportTitle", comment: "Ключи"), message: NSLocalizedString("KeyStoreImportMessage", comment: "Ключи"), preferredStyle: UIAlertControllerStyle.alert)

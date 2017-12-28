@@ -214,6 +214,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	@IBAction func segmentControlValueChanged(_ sender: Any?) {
 		self.view.endEditing(true)
+		self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0 || self.scDimension.selectedSegmentIndex > 0
 		switch scDimension.selectedSegmentIndex {
 		case 0:
 			if !self.app.model!.isHistoryRefresh && sender != nil {
@@ -568,7 +569,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
 			if self.historyItemsCount > 3 { self.historyItemsCount = 3 }
 			self.tblHistory.reloadData()
-			self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0
+			self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0 || self.scDimension.selectedSegmentIndex > 0
 		}
 	}
 	
