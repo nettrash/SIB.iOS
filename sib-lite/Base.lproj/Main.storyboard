@@ -890,9 +890,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="winter-001.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="MiD-MJ-lSD">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="winter-001.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="MiD-MJ-lSD">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="SIBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="VM6-1L-5WX" customClass="SIBLogoImageView" customModule="sib_lite" customModuleProvider="target">
                                 <rect key="frame" x="112" y="573" width="253" height="80"/>
@@ -1086,21 +1085,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xDd-N1-0SS" firstAttribute="top" secondItem="0Aa-F3-XfX" secondAttribute="bottom" constant="8" id="0hR-cr-1KW"/>
+                            <constraint firstItem="MiD-MJ-lSD" firstAttribute="bottom" secondItem="hOp-Q5-XH1" secondAttribute="bottom" id="3oc-Sp-TPp"/>
                             <constraint firstItem="1EX-2D-12t" firstAttribute="leading" secondItem="hOp-Q5-XH1" secondAttribute="leading" id="7J8-dZ-Q3p"/>
                             <constraint firstItem="0Aa-F3-XfX" firstAttribute="top" secondItem="hOp-Q5-XH1" secondAttribute="top" id="8Yy-Il-eWc"/>
                             <constraint firstAttribute="bottom" secondItem="xDd-N1-0SS" secondAttribute="bottom" id="B4K-TW-kNJ"/>
                             <constraint firstItem="oEj-mo-Ng7" firstAttribute="bottom" secondItem="hOp-Q5-XH1" secondAttribute="bottom" id="Bsb-UW-5vl"/>
                             <constraint firstItem="hOp-Q5-XH1" firstAttribute="trailing" secondItem="xDd-N1-0SS" secondAttribute="trailing" id="Gp8-0z-Uag"/>
+                            <constraint firstItem="MiD-MJ-lSD" firstAttribute="top" secondItem="XM0-rG-CDT" secondAttribute="top" id="LEP-wP-6Kd"/>
                             <constraint firstItem="hOp-Q5-XH1" firstAttribute="trailing" secondItem="VM6-1L-5WX" secondAttribute="trailing" constant="10" id="Lsz-lH-d75"/>
                             <constraint firstItem="xDd-N1-0SS" firstAttribute="leading" secondItem="hOp-Q5-XH1" secondAttribute="leading" id="MJu-S3-xl3"/>
                             <constraint firstItem="qHc-tC-AF2" firstAttribute="leading" secondItem="hOp-Q5-XH1" secondAttribute="leading" constant="8" id="MiI-Ur-d34"/>
                             <constraint firstItem="oEj-mo-Ng7" firstAttribute="top" secondItem="XM0-rG-CDT" secondAttribute="top" id="OYD-5u-6C8"/>
+                            <constraint firstItem="MiD-MJ-lSD" firstAttribute="trailing" secondItem="hOp-Q5-XH1" secondAttribute="trailing" id="SI9-8h-ANa"/>
                             <constraint firstItem="oEj-mo-Ng7" firstAttribute="leading" secondItem="hOp-Q5-XH1" secondAttribute="leading" id="Y7i-Uq-MDu"/>
                             <constraint firstItem="oEj-mo-Ng7" firstAttribute="trailing" secondItem="hOp-Q5-XH1" secondAttribute="trailing" id="b0g-1f-jCy"/>
                             <constraint firstItem="0Aa-F3-XfX" firstAttribute="centerX" secondItem="XM0-rG-CDT" secondAttribute="centerX" id="dHW-mC-uKc"/>
                             <constraint firstItem="hOp-Q5-XH1" firstAttribute="bottom" secondItem="VM6-1L-5WX" secondAttribute="bottom" constant="14" id="egG-3p-gEL"/>
                             <constraint firstItem="qHc-tC-AF2" firstAttribute="top" secondItem="0Aa-F3-XfX" secondAttribute="bottom" constant="36" id="fdD-pA-uv6"/>
                             <constraint firstItem="1EX-2D-12t" firstAttribute="top" secondItem="hOp-Q5-XH1" secondAttribute="top" id="gbJ-hJ-u6d"/>
+                            <constraint firstItem="MiD-MJ-lSD" firstAttribute="leading" secondItem="hOp-Q5-XH1" secondAttribute="leading" id="jMQ-fJ-tLg"/>
                             <constraint firstItem="qHc-tC-AF2" firstAttribute="centerX" secondItem="XM0-rG-CDT" secondAttribute="centerX" id="nrb-ss-tC6"/>
                             <constraint firstItem="hOp-Q5-XH1" firstAttribute="trailing" secondItem="qHc-tC-AF2" secondAttribute="trailing" constant="8" id="yYA-Sg-6Yk"/>
                         </constraints>

@@ -65,7 +65,7 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	func prepareHistoryData() {
 		today = self.app.model!.HistoryItems.Items.filter { $0.date.isToday() }
 		yesterday = self.app.model!.HistoryItems.Items.filter { $0.date.isYesterday() }
-		month = self.app.model!.HistoryItems.Items.filter { $0.date.isCurrentMonth() }
+		month = self.app.model!.HistoryItems.Items.filter { !$0.date.isToday() && !$0.date.isYesterday() && $0.date.isCurrentMonth() }
 		other = self.app.model!.HistoryItems.Items.filter { !$0.date.isToday() && !$0.date.isYesterday() && !$0.date.isCurrentMonth() }
 		if today.count > 0 { data.append(today) }
 		if yesterday.count > 0 { data.append(yesterday) }
