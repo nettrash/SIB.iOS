@@ -1496,11 +1496,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "sib-lite/sib-lite.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C3UC3CTWHD;
+				DEVELOPMENT_TEAM = L3973VL47F;
 				INFOPLIST_FILE = "sib-lite/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.nettrash.sib-lite.release";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.nettrash.sib-lite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 4.0;
@@ -1514,11 +1514,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "sib-lite/sib-lite.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C3UC3CTWHD;
+				DEVELOPMENT_TEAM = L3973VL47F;
 				INFOPLIST_FILE = "sib-lite/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.nettrash.sib-lite.release";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.nettrash.sib-lite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_VERSION = 4.0;
