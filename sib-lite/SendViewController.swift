@@ -159,7 +159,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	
 	// UITextFieldDelegate
 	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		return true;
+		return textField != self.tfCommission
 	}
 	
 	public func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -167,7 +167,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	}
 	
 	public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-		return true;
+		return true
 	}
 	
 	public func textFieldDidEndEditing(_ textField: UITextField) {
@@ -193,11 +193,12 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 			}
 		}
 		
-		if textField == tfAmount || textField == tfCommission {
+		if textField == tfAmount {
 			let app = UIApplication.shared.delegate as! AppDelegate
-			let amount = Double((textField == tfAmount ? txtAfterUpdate : tfAmount.text!).replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
-			let commission = Double((textField == tfCommission ? txtAfterUpdate : tfCommission.text!).replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
-			if app.model!.Balance < (amount ?? 0) + (commission ?? 0) {
+			let amount = Double(txtAfterUpdate.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
+			let commission = Double(0.001 * (amount ?? 0))
+			self.tfCommission.text = String(format: "%.4f", commission)
+			if app.model!.Balance < (amount ?? 0) + commission {
 				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
 			} else {
 				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
