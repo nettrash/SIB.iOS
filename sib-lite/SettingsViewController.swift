@@ -12,7 +12,10 @@ import MobileCoreServices
 
 class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 
+	var app = UIApplication.shared.delegate as! AppDelegate
+	
 	@IBOutlet var vWait: UIView!
+	@IBOutlet var scCurrency: UISegmentedControl!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -21,11 +24,40 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		vWait.isHidden = true
+		
+		switch app.model!.currency {
+		case .RUB:
+			scCurrency.selectedSegmentIndex = 0
+			break
+		case .USD:
+			scCurrency.selectedSegmentIndex = 1
+			break
+		case .EUR:
+			scCurrency.selectedSegmentIndex = 2
+			break
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	@IBAction func scCurrencyValueChanged(_ sender: Any?) {
+		switch scCurrency.selectedSegmentIndex {
+		case 0:
+			app.model!.setCurrency(.RUB)
+			break
+		case 1:
+			app.model!.setCurrency(.USD)
+			break
+		case 2:
+			app.model!.setCurrency(.EUR)
+			break
+		default:
+			app.model!.setCurrency(.RUB)
+			break
+		}
 	}
 	
 	@IBAction func closeClick(_ sender: Any?) -> Void {

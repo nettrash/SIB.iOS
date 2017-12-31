@@ -248,7 +248,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		case 2:
 			//Купить
 			self.lblBuyRate.text = "...";
-			self.app.model!.getBuyRate("RUB")
+			self.app.model!.buyRate = 0
+			self.app.model!.getBuyRate(app.model!.currency.rawValue)
+			updateBuyAmount(tfAmount_Buy.text ?? "")
 			if !tblHistory.isHidden {
 				flip(tblHistory, vBuy)
 			}
@@ -261,7 +263,9 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		case 3:
 			//Продать
 			self.lblSellRate.text = "...";
-			self.app.model!.getSellRate("RUB")
+			self.app.model!.sellRate = 0
+			self.app.model!.getSellRate(app.model!.currency.rawValue)
+			updateSellAmount(tfAmount_Sell.text ?? "")
 			if !tblHistory.isHidden {
 				flip(tblHistory, vSell)
 			}
@@ -620,7 +624,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	func updateSellRate() {
 		DispatchQueue.main.sync {
-			self.lblSellRate.text = " 1 SIB ~ \(String(format: "%.2f", app.model!.sellRate)) ₽ \n комиссия 30 ₽ за каждые 70000 ₽"
+			self.lblSellRate.text = " 1 SIB ~ \(String(format: "%.2f", app.model!.sellRate)) " + app.model!.currency.symbol() + " \n " + NSLocalizedString(app.model!.currency.rawValue+"Commission", comment: "commission text")
+			updateSellAmount(self.tfAmount_Sell.text ?? "")
 		}
 	}
 	
@@ -643,7 +648,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	func updateBuyRate() {
 		DispatchQueue.main.sync {
-			self.lblBuyRate.text = " 1 SIB ~ \(String(format: "%.2f", Double(1) / app.model!.buyRate)) ₽"
+			self.lblBuyRate.text = " 1 SIB ~ \(String(format: "%.2f", Double(1) / app.model!.buyRate)) " + app.model!.currency.symbol()
+			updateBuyAmount(self.tfAmount_Buy.text ?? "")
 		}
 	}
 	
@@ -747,6 +753,36 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		
 	}
 	
+	func updateBuyAmount(_ txt: String) {
+		if txt == "" || self.app.model!.buyRate == 0 {
+			setButtonText(self.btnSIBBuy, NSLocalizedString("EmptyBuyButtonText", comment: "EmptyBuyButtonText"))
+			return
+		}
+		amountBuy = Double(txt.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
+		if amountBuy < 1 {
+			tfAmount_Buy.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
+		} else {
+			tfAmount_Buy.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
+		}
+		
+		setButtonText(self.btnSIBBuy, NSLocalizedString("BuyButtonText", comment: "BuyButtonText") + String(format: "%.2f", amountBuy * Double(1)/app.model!.buyRate) + " " + app.model!.currency.symbol())
+	}
+	
+	func updateSellAmount(_ txt: String) {
+		if txt == "" || self.app.model!.sellRate == 0 {
+			setButtonText(self.btnSIBSell, NSLocalizedString("EmptySellButtonText", comment: "EmptySellButtonText"))
+			return
+		}
+		amountSell = Double(txt.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
+		if app.model!.Balance < amountSell {
+			tfAmount_Sell.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
+		} else {
+			tfAmount_Sell.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
+		}
+		
+		setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate) + " " + app.model!.currency.symbol())
+	}
+	
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		let textFieldText: NSString = (textField.text ?? "") as NSString
 		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
@@ -789,27 +825,11 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		}
 
 		if textField == self.tfAmount_Sell {
-			let app = UIApplication.shared.delegate as! AppDelegate
-			amountSell = Double(txtAfterUpdate.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
-			if app.model!.Balance < amountSell {
-				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
-			} else {
-				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
-			}
-			
-			setButtonText(self.btnSIBSell, NSLocalizedString("SellButtonText", comment: "SellButtonText") + String(format: "%.2f", amountSell * app.model!.sellRate - 30) + " ₽")
+			updateSellAmount(txtAfterUpdate)
 		}
 
 		if textField == self.tfAmount_Buy {
-			let app = UIApplication.shared.delegate as! AppDelegate
-			amountBuy = Double(txtAfterUpdate.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
-			if amountBuy < 1 {
-				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.7)
-			} else {
-				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.7)
-			}
-			
-			setButtonText(self.btnSIBBuy, NSLocalizedString("BuyButtonText", comment: "BuyButtonText") + String(format: "%.2f", amountBuy * Double(1)/app.model!.buyRate) + " ₽")
+			updateBuyAmount(txtAfterUpdate)
 		}
 		
 		if textField == self.tfExp_Buy {

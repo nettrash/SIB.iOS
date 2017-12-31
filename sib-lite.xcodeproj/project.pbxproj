@@ -162,6 +162,7 @@
 		E5C0C51E1FD1B0890039D1BC /* SIBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C0C51D1FD1B0890039D1BC /* SIBLogoImageView.swift */; };
 		E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */; };
 		E5D615AF1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */; };
+		E5DA2FD11FF78FC00013964D /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DA2FD01FF78FC00013964D /* Currency.swift */; };
 		E5DEEF151F8E4C0A00D8441D /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DEEF131F8E4C0A00D8441D /* Address+CoreDataClass.swift */; };
 		E5DEEF161F8E4C0A00D8441D /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */; };
 		E5DEEF191F8E68CC00D8441D /* symbol.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DEEF171F8E68CB00D8441D /* symbol.png */; };
@@ -444,6 +445,7 @@
 		E5C0C51D1FD1B0890039D1BC /* SIBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIBLogoImageView.swift; sourceTree = "<group>"; };
 		E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibWalletType.swift; sourceTree = "<group>"; };
 		E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionInputOutpoint.swift; sourceTree = "<group>"; };
+		E5DA2FD01FF78FC00013964D /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		E5DEEF131F8E4C0A00D8441D /* Address+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E5DEEF171F8E68CB00D8441D /* symbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = symbol.png; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				E5420D141FE7F3D40074ACAF /* RateInfo.swift */,
 				E557052E1FE9166400BCCD08 /* MemPool.swift */,
 				E55705301FE9168F00BCCD08 /* MemPoolItem.swift */,
+				E5DA2FD01FF78FC00013964D /* Currency.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1219,6 +1222,7 @@
 				E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */,
 				E546C8BE1FC3177800892D32 /* ArrayExtensions.swift in Sources */,
 				E536E0071FF2213100F3BBE8 /* DoubleExtensions.swift in Sources */,
+				E5DA2FD11FF78FC00013964D /* Currency.swift in Sources */,
 				E56DECF61F8F8106002DADE9 /* sibAddress.swift in Sources */,
 				E5119BE31FE694BD00599747 /* UIImageExtensions.swift in Sources */,
 				E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */,

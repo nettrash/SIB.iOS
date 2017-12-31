@@ -46,10 +46,13 @@ public class ModelRoot: NSObject {
 
 	public var buyOpKey: String = ""
 	
+	public var currency: Currency = .RUB
+	
 	init(_ app: AppDelegate) {
 		super.init()
 		SIB = Wallet()
 		reload(app)
+		currency = loadCurrency()
 	}
 	
 	func reload(_ app: AppDelegate) -> Void {
@@ -70,6 +73,18 @@ public class ModelRoot: NSObject {
 			try moc.save()
 		} catch {
 		}
+	}
+	
+	func setCurrency(_ curr: Currency) {
+		let defs = UserDefaults.standard
+		defs.set(curr.rawValue, forKey: "currency")
+		currency = curr
+	}
+	
+	func loadCurrency() -> Currency {
+		let defs = UserDefaults.standard
+		let c = defs.string(forKey: "currency")
+		return Currency(rawValue: c ?? "RUB") ?? .RUB
 	}
 	
 	func refresh() -> Void {

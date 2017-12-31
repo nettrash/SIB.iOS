@@ -46,3 +46,6 @@
 "Yesterday" = "Yesterday";
 "Month" = "Current month";
 "Other" = "A long time ago";
+"RUBCommission" = "commission 30 ₽ for every 70000 ₽";
+"USDCommission" = "commission 3$ for every 1000 $";
+"EURCommission" = "commission 3€ ₽ for every 1000 €";
