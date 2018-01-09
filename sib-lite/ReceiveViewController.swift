@@ -102,7 +102,13 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 	
 	// UITextFieldDelegate
 	public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		return true//textField != tfAddress
+		if textField == tfAddress {
+			UIPasteboard.general.string = textField.text
+			let alert = UIAlertController.init(title: NSLocalizedString("CopyToClipboard", comment: "CopyToClipboard"), message: NSLocalizedString("CopyToClipboardMessage", comment: "CopyToClipboardMessage"), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+			self.present(alert, animated: true, completion: nil)
+		}
+		return textField != tfAddress
 	}
 	
 	public func textFieldDidBeginEditing(_ textField: UITextField) {

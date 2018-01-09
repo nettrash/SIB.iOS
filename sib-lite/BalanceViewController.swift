@@ -368,8 +368,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBAction func btnSIBSellClick(_ sender: Any?) -> Void {
 		self.view.endEditing(true)
 		amountSell = Double(self.tfAmount_Sell.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
-		if self.tfCardNumber_Sell.text!.count > 0 && self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance > amountSell && amountSell > 0 && amountSell * app.model!.sellRate >= 100 {
-			app.model!.sell("RUB", amountSell, amountSell * app.model!.sellRate, self.tfCardNumber_Sell.text!)
+		if self.tfCardNumber_Sell.text!.count > 0 && self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance > amountSell && amountSell > 0 && amountSell * app.model!.sellRate >= 30 {
+			app.model!.sell(app.model!.currency.rawValue, amountSell, amountSell * app.model!.sellRate, self.tfCardNumber_Sell.text!)
 			self.tfCardNumber_Sell.text = ""
 			self.tfAmount_Sell.text = ""
 			amountSell = 0
@@ -387,7 +387,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		self.view.endEditing(true)
 		amountBuy = Double(self.tfAmount_Buy.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
 		if self.tfCardNumber_Buy.text!.count > 0 && self.tfCardNumber_Buy.text!.luhnCheck() && amountBuy > 0 {
-			app.model!.buy("RUB", amountBuy, amountBuy * Double(1) / app.model!.buyRate, self.tfCardNumber_Buy.text!, self.tfExp_Buy.text!, self.tfCVV_Buy.text!)
+			app.model!.buy(app.model!.currency.rawValue, amountBuy, amountBuy * Double(1) / app.model!.buyRate, self.tfCardNumber_Buy.text!, self.tfExp_Buy.text!, self.tfCVV_Buy.text!)
 			self.tfCardNumber_Buy.text = ""
 			self.tfAmount_Buy.text = ""
 			self.tfExp_Buy.text = ""

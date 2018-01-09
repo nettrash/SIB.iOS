@@ -87,9 +87,9 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 				json["keys"] = v
 				let jsonData = try? JSONSerialization.data(withJSONObject: json)
 				let urlToShare = jsonData?.fileUrl(withName: "keys.sib")
-
+				
 				self.vWait.isHidden = true
-
+				
 				DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
 					if urlToShare != nil {
 						self.shareUrl(urlToShare!)
@@ -100,6 +100,10 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 				self.vWait.isHidden = true
 				alert.dismiss(animated: true, completion: nil)
 			}
+		}))
+		alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertActionStyle.cancel, handler: { _ in
+			self.vWait.isHidden = true
+			alert.dismiss(animated: true, completion: nil)
 		}))
 		self.present(alert, animated: true, completion: nil)
 
@@ -170,6 +174,12 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 							}
 						}
 					}
+				}))
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertActionStyle.cancel, handler: { _ in
+					DispatchQueue.main.sync {
+						self.vWait.isHidden = true
+					}
+					alert.dismiss(animated: true, completion: nil)
 				}))
 				present(alert, animated: true, completion: nil)
 			}

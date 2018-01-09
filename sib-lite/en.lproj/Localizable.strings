@@ -27,7 +27,7 @@
 "SellButtonText" = "Sell for ";
 "EmptySellButtonText" = "Sell";
 "ErrorStartSell" = "Error";
-"ErrorStartSellMessage" = "Invalid form data. Please correct and repeat again. For example: The amount receivable must be more than 100.";
+"ErrorStartSellMessage" = "Invalid form data. Please correct and repeat again. For example: The amount receivable must be more than 30.";
 "BuyButtonText" = "Buy by ";
 "EmptyBuyButtonText" = "Buy";
 "CheckOpErrorTitle" = "Error";
@@ -46,6 +46,8 @@
 "Yesterday" = "Yesterday";
 "Month" = "Current month";
 "Other" = "A long time ago";
-"RUBCommission" = "commission 30 ₽ for every 70000 ₽";
-"USDCommission" = "commission 8$ for every 1000 $";
-"EURCommission" = "commission 8€ ₽ for every 1000 €";
+"RUBCommission" = "commission 30₽ for every 70000₽";
+"USDCommission" = "commission 8$ for every 1000$";
+"EURCommission" = "commission 8€ for every 1000€";
+"CopyToClipboard" = "Clipboard";
+"CopyToClipboardMessage" = "Data copied to clipboard.";

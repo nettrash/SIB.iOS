@@ -27,7 +27,7 @@
 "SellButtonText" = "Продать за ";
 "EmptySellButtonText" = "Продать";
 "ErrorStartSell" = "Ошибка";
-"ErrorStartSellMessage" = "Неверные данные для продажи. Проверьте корректность заполнения формы. Например: Сумма к получению должна быть не менее 100.";
+"ErrorStartSellMessage" = "Неверные данные для продажи. Проверьте корректность заполнения формы. Например: Сумма к получению должна быть не менее 30.";
 "BuyButtonText" = "Купить за ";
 "EmptyBuyButtonText" = "Купить";
 "CheckOpErrorTitle" = "Ошибка";
@@ -49,3 +49,5 @@
 "RUBCommission" = "комиссия 30₽ за каждые 70000₽";
 "USDCommission" = "комиссия 3$ за каждые 1000$";
 "EURCommission" = "комиссия 3€ ₽ за каждые 1000€";
+"CopyToClipboard" = "Буфер обмена";
+"CopyToClipboardMessage" = "Данные скопированы в буфер обмена.";
