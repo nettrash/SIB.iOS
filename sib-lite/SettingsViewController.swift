@@ -111,6 +111,8 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 	}
 
 	@IBAction func loadKeys(_ sender: Any?) -> Void {
+		self.vWait.isHidden = false
+		
 		let dpvc = UIDocumentPickerViewController(documentTypes: [String(kUTTypeData)], in: .import)
 		dpvc.allowsMultipleSelection = false
 		dpvc.delegate = self
@@ -143,7 +145,6 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 							let hashFile = Crypto.sha256(hs.data(using: String.Encoding.utf8)!).base64EncodedString()
 							
 							if hashFile == hash {
-								self.vWait.isHidden = false
 								let app = UIApplication.shared.delegate as! AppDelegate
 								for sKey in v {
 									let keyType = Int16(String(sKey[String.Index(encodedOffset: 0)]))
@@ -154,8 +155,6 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 								}
 								app.model!.save(app)
 								app.model!.reload(app)
-								
-								self.vWait.isHidden = true
 
 								let alert = UIAlertController.init(title: NSLocalizedString("KeyStoreImportTitle", comment: "Ключи"), message: NSLocalizedString("KeyStoreImportMessage", comment: "Ключи"), preferredStyle: UIAlertControllerStyle.alert)
 								alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: nil))
@@ -165,6 +164,9 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 								let alert = UIAlertController.init(title: NSLocalizedString("EncryptTitle", comment: "Шифрование"), message: NSLocalizedString("EncryptPasswordErrorMessage", comment: "Шифрование"), preferredStyle: UIAlertControllerStyle.alert)
 								alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: nil))
 								self.present(alert, animated: true, completion: nil)
+							}
+							DispatchQueue.main.sync {
+								self.vWait.isHidden = true
 							}
 						}
 					}

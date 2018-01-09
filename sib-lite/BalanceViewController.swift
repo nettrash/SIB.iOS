@@ -368,7 +368,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@IBAction func btnSIBSellClick(_ sender: Any?) -> Void {
 		self.view.endEditing(true)
 		amountSell = Double(self.tfAmount_Sell.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
-		if self.tfCardNumber_Sell.text!.count > 0 && self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance > amountSell && amountSell > 0 {
+		if self.tfCardNumber_Sell.text!.count > 0 && self.tfCardNumber_Sell.text!.luhnCheck() && app.model!.Balance > amountSell && amountSell > 0 && amountSell * app.model!.sellRate >= 100 {
 			app.model!.sell("RUB", amountSell, amountSell * app.model!.sellRate, self.tfCardNumber_Sell.text!)
 			self.tfCardNumber_Sell.text = ""
 			self.tfAmount_Sell.text = ""
