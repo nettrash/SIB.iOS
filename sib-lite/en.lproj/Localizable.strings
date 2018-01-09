@@ -27,7 +27,7 @@
 "SellButtonText" = "Sell for ";
 "EmptySellButtonText" = "Sell";
 "ErrorStartSell" = "Error";
-"ErrorStartSellMessage" = "Invalid form data. Please correct and repeat again. For example: The amount receivable must be more than 30.";
+"ErrorStartSellMessage" = "Invalid form data. Please correct and repeat again. For example: The amount receivable must be more than 50.";
 "BuyButtonText" = "Buy by ";
 "EmptyBuyButtonText" = "Buy";
 "CheckOpErrorTitle" = "Error";

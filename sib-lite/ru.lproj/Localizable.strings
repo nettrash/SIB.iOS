@@ -27,7 +27,7 @@
 "SellButtonText" = "Продать за ";
 "EmptySellButtonText" = "Продать";
 "ErrorStartSell" = "Ошибка";
-"ErrorStartSellMessage" = "Неверные данные для продажи. Проверьте корректность заполнения формы. Например: Сумма к получению должна быть не менее 30.";
+"ErrorStartSellMessage" = "Неверные данные для продажи. Проверьте корректность заполнения формы. Например: Сумма к получению должна быть не менее 50.";
 "BuyButtonText" = "Купить за ";
 "EmptyBuyButtonText" = "Купить";
 "CheckOpErrorTitle" = "Ошибка";
