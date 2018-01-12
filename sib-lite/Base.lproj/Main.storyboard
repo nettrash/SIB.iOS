@@ -1623,7 +1623,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Настройки" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qG5-JA-99u">
-                                <rect key="frame" x="87.5" y="20" width="200" height="41"/>
+                                <rect key="frame" x="88" y="20" width="200" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="DnL-4a-arq"/>
                                     <constraint firstAttribute="width" constant="200" id="WsA-H1-opT"/>
@@ -1705,12 +1705,24 @@
                             <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GJ-cZ-J5v">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="88F-QF-IPG">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="88F-QF-IPG">
                                         <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D5n-jX-0u7">
+                                        <rect key="frame" x="112" y="365" width="150" height="2"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="e0q-JA-lnb"/>
+                                        </constraints>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="D5n-jX-0u7" firstAttribute="top" secondItem="88F-QF-IPG" secondAttribute="bottom" constant="13" id="3qB-0V-nF1"/>
+                                    <constraint firstItem="88F-QF-IPG" firstAttribute="centerY" secondItem="3GJ-cZ-J5v" secondAttribute="centerY" id="5ZG-vt-lwX"/>
+                                    <constraint firstItem="88F-QF-IPG" firstAttribute="centerX" secondItem="3GJ-cZ-J5v" secondAttribute="centerX" id="Bz4-LF-mwz"/>
+                                    <constraint firstItem="D5n-jX-0u7" firstAttribute="centerX" secondItem="88F-QF-IPG" secondAttribute="centerX" id="Tzu-KC-cjz"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1737,7 +1749,7 @@
                             <constraint firstItem="xML-bu-yVm" firstAttribute="top" secondItem="qG5-JA-99u" secondAttribute="bottom" constant="75" id="gxf-li-fJd"/>
                             <constraint firstItem="3GJ-cZ-J5v" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" id="ijw-Sk-bhA"/>
                             <constraint firstItem="Kvg-fv-aY3" firstAttribute="top" secondItem="k9E-9f-0QH" secondAttribute="bottom" constant="42" id="llb-G0-RxA"/>
-                            <constraint firstItem="3GJ-cZ-J5v" firstAttribute="bottom" secondItem="rxV-eG-uI7" secondAttribute="bottom" id="oXE-wB-Th3"/>
+                            <constraint firstItem="3GJ-cZ-J5v" firstAttribute="bottom" secondItem="PA4-SR-jd3" secondAttribute="bottom" id="oXE-wB-Th3"/>
                             <constraint firstItem="rxV-eG-uI7" firstAttribute="trailing" secondItem="Kvg-fv-aY3" secondAttribute="trailing" constant="32" id="sfo-Ot-uh1"/>
                             <constraint firstItem="Qbx-cZ-0GC" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" id="ubh-lB-6VH"/>
                             <constraint firstItem="Qbx-cZ-0GC" firstAttribute="trailing" secondItem="rxV-eG-uI7" secondAttribute="trailing" id="vzn-Tf-dLc"/>
@@ -1746,6 +1758,7 @@
                         <viewLayoutGuide key="safeArea" id="rxV-eG-uI7"/>
                     </view>
                     <connections>
+                        <outlet property="pvProgress" destination="D5n-jX-0u7" id="fZd-Gd-bHL"/>
                         <outlet property="scCurrency" destination="Kvg-fv-aY3" id="snX-sM-SMl"/>
                         <outlet property="vWait" destination="3GJ-cZ-J5v" id="iPq-D4-CJb"/>
                         <segue destination="chb-3k-TfS" kind="unwind" identifier="unwindSegueToBalance" unwindAction="unwindToBalanceWithUnwindSegue:" id="0lO-FG-ttH"/>

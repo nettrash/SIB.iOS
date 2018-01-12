@@ -20,6 +20,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static sibAddress.verify(_:):sibAddress.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "subArray(decoded, index: 0, length: 21)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "sibTransactionOutput.init(_:_:):sibTransactionOutput.swift">
       </ContextState>
       <ContextState
@@ -117,15 +125,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
+      </ContextState>
+      <ContextState
          contextName = "BigInteger.fromBytes(_:):BigInteger.swift">
          <PersistentStrings>
             <PersistentString
                value = "self._numberData">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
       </ContextState>
       <ContextState
          contextName = "ReceiveViewController.viewDidAppear(_:):ReceiveViewController.swift">
@@ -217,13 +225,21 @@
          contextName = "closure #1 in SettingsViewController.shareKeys(_:):SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "&quot;VxuSAma7AJlNqH7Z/bNPO6UbwK0AChRWoTSTA9FjF52lc9bp2OL177NxYwT/ox5g&quot;.aesDecrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
-            </PersistentString>
-            <PersistentString
                value = "(app.model!.Addresses[0].privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
             </PersistentString>
             <PersistentString
+               value = "&quot;VxuSAma7AJlNqH7Z/bNPO6UbwK0AChRWoTSTA9FjF52lc9bp2OL177NxYwT/ox5g&quot;.aesDecrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
+            </PersistentString>
+            <PersistentString
                value = "alert.textFields![0].text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SettingsViewController.documentPicker(_:didPickDocumentsAt:):SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Float(idx) / Float(v.count)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

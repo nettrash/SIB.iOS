@@ -75,6 +75,34 @@
 		E557053D1FE92A7B00BCCD08 /* AlphaGreenArrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E55705371FE92A7B00BCCD08 /* AlphaGreenArrowUp@2x.png */; };
 		E55727871FDFCBC60004983B /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55727861FDFCBC60004983B /* Crypto.swift */; };
 		E55727891FE00F120004983B /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55727881FE00F120004983B /* DataExtensions.swift */; };
+		E55F724420080F4C006B539B /* sibAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56DECF51F8F8106002DADE9 /* sibAddress.swift */; };
+		E55F724920080F51006B539B /* BigInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56D300A1FBC92E7003DE186 /* BigInteger.swift */; };
+		E55F724A20080F55006B539B /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55727861FDFCBC60004983B /* Crypto.swift */; };
+		E55F724B20080F59006B539B /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53EA69C1FCDAEFE0073EDC6 /* RIPEMD160.swift */; };
+		E55F724C20080F5D006B539B /* FieldElementFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A7EC91FBED37B008346CD /* FieldElementFP.swift */; };
+		E55F724D20080F61006B539B /* Barret.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C811FBDD58F0032BDE8 /* Barret.swift */; };
+		E55F724E20080F67006B539B /* PointFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7F1FBDD5850032BDE8 /* PointFP.swift */; };
+		E55F724F20080F6B006B539B /* CurveFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */; };
+		E55F725020080F6F006B539B /* EllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C781FBDC26F0032BDE8 /* EllipticCurve.swift */; };
+		E55F725120080F75006B539B /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7B1FBDCF660032BDE8 /* StringExtensions.swift */; };
+		E55F725220080F79006B539B /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E546C8BD1FC3177800892D32 /* ArrayExtensions.swift */; };
+		E55F725320080F7D006B539B /* IntegerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58159DA1FC3F96C002117E8 /* IntegerExtensions.swift */; };
+		E55F725420080F80006B539B /* ApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */; };
+		E55F725520080F84006B539B /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55727881FE00F120004983B /* DataExtensions.swift */; };
+		E55F725620080F89006B539B /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5119BE21FE694BD00599747 /* UIImageExtensions.swift */; };
+		E55F725720080F8D006B539B /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E536E0061FF2213100F3BBE8 /* DoubleExtensions.swift */; };
+		E55F725820080F90006B539B /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5920BAB1FF41CFB0051A213 /* DateExtensions.swift */; };
+		E55F725920080F96006B539B /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C7DF51FDD556A00ABFC9A /* Convert.swift */; };
+		E55F725A20080F9D006B539B /* sibTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A801FD5826A004B3907 /* sibTransaction.swift */; };
+		E55F725B20080FA1006B539B /* sibTransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */; };
+		E55F725C20080FA5006B539B /* sibTransactionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */; };
+		E55F725D20080FAC006B539B /* sibWalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */; };
+		E55F725E20080FB1006B539B /* sibTransactionInputOutpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */; };
+		E55F725F200810EC006B539B /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E4AC7C1FBB4B5400BAAF46 /* Wallet.swift */; };
+		E55F726020081123006B539B /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DEEF131F8E4C0A00D8441D /* Address+CoreDataClass.swift */; };
+		E55F726120081127006B539B /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DEEF141F8E4C0A00D8441D /* Address+CoreDataProperties.swift */; };
+		E55F726220081130006B539B /* Unspent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC431FD7F63500379A26 /* Unspent.swift */; };
+		E55F726320081134006B539B /* UnspentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */; };
 		E5611F291FD0A66A00B17097 /* ApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */; };
 		E56D300B1FBC92E7003DE186 /* BigInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56D300A1FBC92E7003DE186 /* BigInteger.swift */; };
 		E56DECE41F8F6FB3002DADE9 /* background_form.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECD81F8F6FB1002DADE9 /* background_form.jpg */; };
@@ -1253,7 +1281,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E55F724E20080F67006B539B /* PointFP.swift in Sources */,
+				E55F724B20080F59006B539B /* RIPEMD160.swift in Sources */,
+				E55F724A20080F55006B539B /* Crypto.swift in Sources */,
+				E55F725D20080FAC006B539B /* sibWalletType.swift in Sources */,
+				E55F725620080F89006B539B /* UIImageExtensions.swift in Sources */,
+				E55F725F200810EC006B539B /* Wallet.swift in Sources */,
+				E55F725B20080FA1006B539B /* sibTransactionInput.swift in Sources */,
 				E50165E71F7657A200855FBC /* sib_liteTests.swift in Sources */,
+				E55F725820080F90006B539B /* DateExtensions.swift in Sources */,
+				E55F724920080F51006B539B /* BigInteger.swift in Sources */,
+				E55F724420080F4C006B539B /* sibAddress.swift in Sources */,
+				E55F725920080F96006B539B /* Convert.swift in Sources */,
+				E55F726320081134006B539B /* UnspentTransaction.swift in Sources */,
+				E55F725120080F75006B539B /* StringExtensions.swift in Sources */,
+				E55F726220081130006B539B /* Unspent.swift in Sources */,
+				E55F725220080F79006B539B /* ArrayExtensions.swift in Sources */,
+				E55F725A20080F9D006B539B /* sibTransaction.swift in Sources */,
+				E55F725520080F84006B539B /* DataExtensions.swift in Sources */,
+				E55F726020081123006B539B /* Address+CoreDataClass.swift in Sources */,
+				E55F725C20080FA5006B539B /* sibTransactionOutput.swift in Sources */,
+				E55F725320080F7D006B539B /* IntegerExtensions.swift in Sources */,
+				E55F724C20080F5D006B539B /* FieldElementFP.swift in Sources */,
+				E55F725720080F8D006B539B /* DoubleExtensions.swift in Sources */,
+				E55F725420080F80006B539B /* ApplicationExtension.swift in Sources */,
+				E55F724F20080F6B006B539B /* CurveFP.swift in Sources */,
+				E55F724D20080F61006B539B /* Barret.swift in Sources */,
+				E55F725E20080FB1006B539B /* sibTransactionInputOutpoint.swift in Sources */,
+				E55F725020080F6F006B539B /* EllipticCurve.swift in Sources */,
+				E55F726120081127006B539B /* Address+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

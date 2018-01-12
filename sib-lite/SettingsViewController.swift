@@ -12,10 +12,12 @@ import MobileCoreServices
 
 class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 
+	var keysAction = false
 	var app = UIApplication.shared.delegate as! AppDelegate
 	
 	@IBOutlet var vWait: UIView!
 	@IBOutlet var scCurrency: UISegmentedControl!
+	@IBOutlet var pvProgress: UIProgressView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -23,8 +25,9 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		vWait.isHidden = true
-		
+		vWait.isHidden = !keysAction
+		self.pvProgress.isHidden = !keysAction
+
 		switch app.model!.currency {
 		case .RUB:
 			scCurrency.selectedSegmentIndex = 0
@@ -66,38 +69,43 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 
 	@IBAction func shareKeys(_ sender: Any?) -> Void {
 	
+		self.keysAction = true
+		self.pvProgress.progress = 0
+		self.pvProgress.isHidden = false
 		self.vWait.isHidden = false
 		
 		let alert = UIAlertController.init(title: NSLocalizedString("EncryptTitle", comment: "Шифрование"), message: NSLocalizedString("EncryptMessage", comment: "Шифрование"), preferredStyle: UIAlertControllerStyle.alert)
 		alert.addTextField(configurationHandler: configurationTextField)
-		alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in
+		alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default, handler: { _ in
 			
 			let psw = alert.textFields![0].text ?? ""
 			
 			if psw != "" {
-				let app = UIApplication.shared.delegate as! AppDelegate
-				var json: [String: Any] = [:]
-				let v = app.model!.Addresses.map { "\($0.type)" + ($0.privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: "20219510518024419136177230")! }
-				var hs = ""
-				for s in v { hs = hs + s }
-				hs = hs + psw
-				let hash = Crypto.sha256(hs.data(using: String.Encoding.utf8)!).base64EncodedString()
-				json["version"] = "1.0"
-				json["hash"] = hash
-				json["keys"] = v
-				let jsonData = try? JSONSerialization.data(withJSONObject: json)
-				let urlToShare = jsonData?.fileUrl(withName: "keys.sib")
+				DispatchQueue.global().async {
+					var json: [String: Any] = [:]
+					let v = self.app.model!.Addresses.map { "\($0.type)" + ($0.privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: "20219510518024419136177230")! }
+					var hs = ""
+					var idx = 0
+					for s in v { hs = hs + s; idx += 1; DispatchQueue.main.async { self.pvProgress.setProgress(Float(idx) / Float(v.count), animated: true) } }
+					hs = hs + psw
+					let hash = Crypto.sha256(hs.data(using: String.Encoding.utf8)!).base64EncodedString()
+					json["version"] = "1.0"
+					json["hash"] = hash
+					json["keys"] = v
+					let jsonData = try? JSONSerialization.data(withJSONObject: json)
+					let urlToShare = jsonData?.fileUrl(withName: "keys.sib")
 				
-				self.vWait.isHidden = true
-				
-				DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-					if urlToShare != nil {
-						self.shareUrl(urlToShare!)
-					}
-				})
-				
+					DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+						self.vWait.isHidden = true
+						self.keysAction = false
+						if urlToShare != nil {
+							self.shareUrl(urlToShare!)
+						}
+					})
+				}
 			} else {
 				self.vWait.isHidden = true
+				self.keysAction = false
 				alert.dismiss(animated: true, completion: nil)
 			}
 		}))
@@ -116,11 +124,14 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 
 	@IBAction func loadKeys(_ sender: Any?) -> Void {
 		self.vWait.isHidden = false
+		self.keysAction = true
+		self.pvProgress.progress = 0
+		self.pvProgress.isHidden = false
 		
 		let dpvc = UIDocumentPickerViewController(documentTypes: [String(kUTTypeData)], in: .import)
 		dpvc.allowsMultipleSelection = false
 		dpvc.delegate = self
-		present(dpvc, animated: true, completion: nil)
+		self.present(dpvc, animated: true, completion: nil)
 	}
 	
 	//UIDocumentPickerDelegateb
@@ -133,7 +144,7 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 			if jsonData != nil {
 				let alert = UIAlertController.init(title: NSLocalizedString("EncryptTitle", comment: "Шифрование"), message: NSLocalizedString("EncryptMessage", comment: "Шифрование"), preferredStyle: UIAlertControllerStyle.alert)
 				alert.addTextField(configurationHandler: configurationTextField)
-				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default, handler: { _ in
 					
 					let psw = alert.textFields![0].text ?? ""
 					
@@ -149,28 +160,36 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 							let hashFile = Crypto.sha256(hs.data(using: String.Encoding.utf8)!).base64EncodedString()
 							
 							if hashFile == hash {
-								let app = UIApplication.shared.delegate as! AppDelegate
-								for sKey in v {
-									let keyType = Int16(String(sKey[String.Index(encodedOffset: 0)]))
-									let keyData = String(sKey[String.Index(encodedOffset: 1)..<String.Index(encodedOffset: sKey.count)])
-									let privKey = Data(base64Encoded: keyData.aesDecrypt(key: psw, iv: "20219510518024419136177230")!)!
-									let w: Wallet = Wallet.init(privateKey: privKey)
-									app.model!.storeWallet(w, false, keyType! == 0 ? .Incoming : .Change)
+								DispatchQueue.global().async {
+									var idx = 0
+									for sKey in v {
+										let keyType = Int16(String(sKey[String.Index(encodedOffset: 0)]))
+										let keyData = String(sKey[String.Index(encodedOffset: 1)..<String.Index(encodedOffset: sKey.count)])
+										let privKey = Data(base64Encoded: keyData.aesDecrypt(key: psw, iv: "20219510518024419136177230")!)!
+										let w: Wallet = Wallet.init(privateKey: privKey)
+										self.app.model!.storeWallet(w, false, keyType! == 0 ? .Incoming : .Change)
+										idx += 1
+										DispatchQueue.main.async { self.pvProgress.setProgress(Float(idx) / Float(v.count), animated: true) }
+									}
+									self.app.model!.save(self.app)
+									self.app.model!.reload(self.app)
+									
+									DispatchQueue.main.async {
+										self.vWait.isHidden = true
+										self.keysAction = false
+
+										let alert = UIAlertController.init(title: NSLocalizedString("KeyStoreImportTitle", comment: "Ключи"), message: NSLocalizedString("KeyStoreImportMessage", comment: "Ключи"), preferredStyle: UIAlertControllerStyle.alert)
+										alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: nil))
+										self.present(alert, animated: true, completion: nil)
+									}
 								}
-								app.model!.save(app)
-								app.model!.reload(app)
-
-								let alert = UIAlertController.init(title: NSLocalizedString("KeyStoreImportTitle", comment: "Ключи"), message: NSLocalizedString("KeyStoreImportMessage", comment: "Ключи"), preferredStyle: UIAlertControllerStyle.alert)
-								alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: nil))
-								self.present(alert, animated: true, completion: nil)
-
 							} else {
 								let alert = UIAlertController.init(title: NSLocalizedString("EncryptTitle", comment: "Шифрование"), message: NSLocalizedString("EncryptPasswordErrorMessage", comment: "Шифрование"), preferredStyle: UIAlertControllerStyle.alert)
 								alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: nil))
 								self.present(alert, animated: true, completion: nil)
-							}
-							DispatchQueue.main.sync {
+								
 								self.vWait.isHidden = true
+								self.keysAction = false
 							}
 						}
 					}
@@ -178,6 +197,7 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertActionStyle.cancel, handler: { _ in
 					DispatchQueue.main.sync {
 						self.vWait.isHidden = true
+						self.keysAction = false
 					}
 					alert.dismiss(animated: true, completion: nil)
 				}))
