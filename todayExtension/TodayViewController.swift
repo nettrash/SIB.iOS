@@ -26,17 +26,32 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	var balance: BalanceResponse?
 	@IBOutlet var lblBalance: UILabel!
 	@IBOutlet var aiWait: UIActivityIndicatorView!
+	@IBOutlet var imgQR: UIImageView!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
 		self.lblBalance.text = self.balance != nil ? String(format: "%.2f", Double(self.balance?.Value ?? 0) / Double(100000000.00)) : ""
+		//self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	/*func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize)
+	{
+		if activeDisplayMode == .expanded
+		{
+			preferredContentSize = CGSize(width: 0.0, height: 300.0)
+			DispatchQueue.main.async { self.qrIncoming() }
+		}
+		else
+		{
+			preferredContentSize = CGSize(width: 0.0, height: 37.0)
+		}
+	}*/
 	
 	/*override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		super.touchesBegan(touches, with: event)
@@ -111,4 +126,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		task.resume()
 	}
 
+	func qrIncoming() {
+		let moc = TodayViewController.persistentContainer.viewContext
+		let Addresses = try! moc.fetch(Address.fetchRequest()) as! [Address]
+		let AddressesForIncoming = Addresses.filter { $0.type == sibWalletType.Incoming.rawValue }
+		let address = AddressesForIncoming[AddressesForIncoming.count-1].address
+		
+		let data = "sibcoin://\(address)".data(using: String.Encoding.ascii)
+		let filter = CIFilter(name: "CIQRCodeGenerator")
+		
+		filter!.setValue(data, forKey: "inputMessage")
+		filter!.setValue("Q", forKey: "inputCorrectionLevel")
+		
+		let qrcodeImage = filter!.outputImage
+		
+		let scaleX = imgQR.frame.size.width / qrcodeImage!.extent.size.width
+		let scaleY = imgQR.frame.size.height / qrcodeImage!.extent.size.height
+		
+		let transformedImage = qrcodeImage!.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+		
+		imgQR.image = UIImage(ciImage: transformedImage)
+	}
 }

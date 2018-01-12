@@ -124,6 +124,7 @@
 		E56C68B1200972480098A96C /* ActionButtonSend.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD511FE52CC200B0BA86 /* ActionButtonSend.png */; };
 		E56C68B22009724C0098A96C /* ActionButtonSend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD501FE52CC100B0BA86 /* ActionButtonSend@2x.png */; };
 		E56C68B32009724F0098A96C /* ActionButtonSend@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD521FE52CC200B0BA86 /* ActionButtonSend@3x.png */; };
+		E56C68B4200973750098A96C /* sibWalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */; };
 		E56D300B1FBC92E7003DE186 /* BigInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56D300A1FBC92E7003DE186 /* BigInteger.swift */; };
 		E56DECE41F8F6FB3002DADE9 /* background_form.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECD81F8F6FB1002DADE9 /* background_form.jpg */; };
 		E56DECE51F8F6FB3002DADE9 /* footer_img2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56DECD91F8F6FB2002DADE9 /* footer_img2.jpg */; };
@@ -1449,6 +1450,7 @@
 				E56C687E20095C5B0098A96C /* sib_lite.xcdatamodeld in Sources */,
 				E56C689920095CE10098A96C /* BalanceDimension.swift in Sources */,
 				E56C689620095CCE0098A96C /* Address+CoreDataClass.swift in Sources */,
+				E56C68B4200973750098A96C /* sibWalletType.swift in Sources */,
 				E56C686A200950770098A96C /* TodayViewController.swift in Sources */,
 				E56C689A20095CE90098A96C /* BalanceResponse.swift in Sources */,
 				E56C68A720095ECE0098A96C /* Crypto.swift in Sources */,
