@@ -25,39 +25,62 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	
 	var balance: BalanceResponse?
 	@IBOutlet var lblBalance: UILabel!
+	@IBOutlet var lblBalanceLabel: UILabel!
+	@IBOutlet var lblQRLabel: UILabel!
+	@IBOutlet var lblQRInfo: UILabel!
 	@IBOutlet var aiWait: UIActivityIndicatorView!
 	@IBOutlet var imgQR: UIImageView!
-	
+	@IBOutlet var imgLogo: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
-		self.lblBalance.text = self.balance != nil ? String(format: "%.2f", Double(self.balance?.Value ?? 0) / Double(100000000.00)) : ""
-		//self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-    }
+		updateVisibleInfo()
+		self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+   }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 	
-	/*func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize)
+	func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize)
 	{
+		updateVisibleInfo()
 		if activeDisplayMode == .expanded
 		{
-			preferredContentSize = CGSize(width: 0.0, height: 300.0)
+			preferredContentSize = CGSize(width: 0.0, height: 280.0)
+			self.imgQR.isHidden = false
+			self.lblQRInfo.isHidden = self.imgQR.isHidden
+			self.lblQRLabel.isHidden = self.imgQR.isHidden
+			//self.lblBalance.textAlignment = NSTextAlignment.center
+			//self.lblBalanceLabel.textAlignment = NSTextAlignment.center
 			DispatchQueue.main.async { self.qrIncoming() }
 		}
 		else
 		{
-			preferredContentSize = CGSize(width: 0.0, height: 37.0)
+			preferredContentSize = CGSize(width: 0.0, height: 110.0)
+			self.imgQR.isHidden = true
+			self.lblQRInfo.isHidden = self.imgQR.isHidden
+			self.lblQRLabel.isHidden = self.imgQR.isHidden
+			//self.lblBalance.textAlignment = NSTextAlignment.right
+			//self.lblBalanceLabel.textAlignment = NSTextAlignment.right
 		}
-	}*/
+	}
 	
 	/*override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		super.touchesBegan(touches, with: event)
 		let url: NSURL = NSURL(string: "sibcoin://")!
 		self.extensionContext?.open(url as URL, completionHandler: nil)
 	}*/
+	
+	func updateVisibleInfo() {
+		self.imgLogo.image = UIImage(named: NSLocalizedString("SIBLogoImageName", comment: "SIBLogoImageName"))
+		self.lblBalanceLabel.text = NSLocalizedString("BalanceLabel", comment: "balance info label")
+		self.lblBalance.text = self.balance != nil ? String(format: "%.2f", Double(self.balance?.Value ?? 0) / Double(100000000.00)) : ""
+		self.lblQRInfo.text = NSLocalizedString("QRInfo", comment: "qr info")
+		self.lblQRLabel.text = NSLocalizedString("QRLabel", comment: "qr label")
+	}
 	
 	@IBAction func sendClick(_ sender: Any?) {
 		let url: NSURL = NSURL(string: "sibcoin://")!
@@ -70,6 +93,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
+		updateVisibleInfo()
 		aiWait.startAnimating()
 		_loadBalanceData(completionHandler: completionHandler)
     }

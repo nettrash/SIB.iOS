@@ -209,6 +209,8 @@
 		E5C0C5131FD1AD4A0039D1BC /* ActionInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0C5151FD1AD4A0039D1BC /* ActionInfo@2x.png */; };
 		E5C0C5181FD1AD760039D1BC /* ActionInfo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0C51A1FD1AD760039D1BC /* ActionInfo@3x.png */; };
 		E5C0C51E1FD1B0890039D1BC /* SIBLogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C0C51D1FD1B0890039D1BC /* SIBLogoImageView.swift */; };
+		E5CE4D8B200A145400193F9C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5865C1D1F96682200580954 /* Images.xcassets */; };
+		E5CE4D92200A169800193F9C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5CE4D94200A169800193F9C /* Localizable.strings */; };
 		E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */; };
 		E5D615AF1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */; };
 		E5DA2FD11FF78FC00013964D /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DA2FD01FF78FC00013964D /* Currency.swift */; };
@@ -519,6 +521,8 @@
 		E5C0C51B1FD1AD770039D1BC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/ActionInfo@3x.png"; sourceTree = "<group>"; };
 		E5C0C51C1FD1AD790039D1BC /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = "ru.lproj/ActionInfo@3x.png"; sourceTree = "<group>"; };
 		E5C0C51D1FD1B0890039D1BC /* SIBLogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIBLogoImageView.swift; sourceTree = "<group>"; };
+		E5CE4D93200A169800193F9C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5CE4D95200A169A00193F9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5D615AC1FDBF257005D4F3F /* sibWalletType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibWalletType.swift; sourceTree = "<group>"; };
 		E5D615AE1FDC2259005D4F3F /* sibTransactionInputOutpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionInputOutpoint.swift; sourceTree = "<group>"; };
 		E5DA2FD01FF78FC00013964D /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
@@ -676,6 +680,7 @@
 				E56C686E200950770098A96C /* Info.plist */,
 				E56C687A200950CD0098A96C /* InfoPlist.strings */,
 				E56C68A9200962BE0098A96C /* PersistentContainer.swift */,
+				E5CE4D94200A169800193F9C /* Localizable.strings */,
 			);
 			path = todayExtension;
 			sourceTree = "<group>";
@@ -1304,6 +1309,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E56C68B22009724C0098A96C /* ActionButtonSend@2x.png in Resources */,
+				E5CE4D8B200A145400193F9C /* Images.xcassets in Resources */,
+				E5CE4D92200A169800193F9C /* Localizable.strings in Resources */,
 				E56C68B32009724F0098A96C /* ActionButtonSend@3x.png in Resources */,
 				E56C686D200950770098A96C /* MainInterface.storyboard in Resources */,
 				E56C68AE20096CA80098A96C /* wait.gif in Resources */,
@@ -1597,6 +1604,15 @@
 				E5C0C51C1FD1AD790039D1BC /* ru */,
 			);
 			name = "ActionInfo@3x.png";
+			sourceTree = "<group>";
+		};
+		E5CE4D94200A169800193F9C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5CE4D93200A169800193F9C /* ru */,
+				E5CE4D95200A169A00193F9C /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

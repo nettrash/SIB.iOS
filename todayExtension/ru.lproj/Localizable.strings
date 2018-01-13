@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  sib-lite
+
+  Created by Иван Алексеев on 13.01.2018.
+  Copyright © 2018 NETTRASH. All rights reserved.
+*/
+"SIBLogoImageName" = "SIBLogo";
+"BalanceLabel" = "Баланс";
+"QRLabel" = "Реквизиты для пополнения";
+"QRInfo" = "Просканируйте любым кошельком Сибирского Червонца код слева от этого текста для перевода пополнения Вашего баланса.";
