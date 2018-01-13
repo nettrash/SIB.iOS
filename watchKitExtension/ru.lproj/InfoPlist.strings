@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  sib-lite
+
+  Created by Иван Алексеев on 13.01.2018.
+  Copyright © 2018 NETTRASH. All rights reserved.
+*/
+"CFBundleDisplayName" = "Червонец";
+"CFBundleName" = "Червонец";
+
