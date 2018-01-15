@@ -9,10 +9,12 @@
 import UIKit
 import CoreData
 import CommonCrypto
+import WatchConnectivity
 
-public class ModelRoot: NSObject {
+public class ModelRoot: NSObject, WCSessionDelegate {
 
 	var delegate: ModelRootDelegate?
+	var session: WCSession?
 	
 	public var Addresses: [Address] = [Address]()
 	
@@ -51,6 +53,7 @@ public class ModelRoot: NSObject {
 	init(_ app: AppDelegate) {
 		super.init()
 		SIB = Wallet()
+		initWatch()
 		reload(app)
 		currency = loadCurrency()
 	}
@@ -65,13 +68,38 @@ public class ModelRoot: NSObject {
 		} catch {
 			Addresses = [Address]()
 		}
+		syncWatch()
 	}
 	
 	func save(_ app: AppDelegate) -> Void {
 		do {
 			let moc = app.persistentContainer.viewContext
 			try moc.save()
+			syncWatch()
 		} catch {
+		}
+	}
+	func initWatch() {
+		if WCSession.isSupported() {
+			session = WCSession.default
+			session?.delegate = self
+			session?.activate()
+		}
+	}
+	
+	func syncWatch() {
+		if session?.activationState == WCSessionActivationState.activated {
+			do
+			{
+				try session?.updateApplicationContext(["Addresses" : Addresses.map { (_ a: Address) -> String in
+					a.address
+				}])
+			} catch {
+				
+			}
+			
+		} else {
+			session?.activate()
 		}
 	}
 	
@@ -975,6 +1003,47 @@ public class ModelRoot: NSObject {
 			}
 		}
 		return false
+	}
+	
+	//WCSessionDelegate
+	public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+		if activationState == WCSessionActivationState.activated {
+			syncWatch()
+		}
+	}
+	
+	public func sessionDidBecomeInactive(_ session: WCSession) {
+		
+	}
+	
+	public func sessionDidDeactivate(_ session: WCSession) {
+		
+	}
+	
+	public func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+		if message is [String:String] {
+			let commands = message as! [String:String]
+			if commands["Context"] == "Refresh" {
+				syncWatch()
+			}
+			if commands["ReceiveQR"] == "Incoming" {
+				let data = (SIB!.URIScheme + AddressesForIncoming[AddressesForIncoming.count-1].address).data(using: String.Encoding.ascii)
+				let filter = CIFilter(name: "CIQRCodeGenerator")
+				
+				filter!.setValue(data, forKey: "inputMessage")
+				filter!.setValue("Q", forKey: "inputCorrectionLevel")
+				
+				let qrcodeImage = filter!.outputImage
+				
+				let scaleX = 110.0 / qrcodeImage!.extent.size.width
+				let scaleY = 110.0 / qrcodeImage!.extent.size.height
+				
+				let transformedImage = qrcodeImage!.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+				
+				let image = UIImage(ciImage: transformedImage)
+				session.sendMessageData(image.pngData!, replyHandler: nil, errorHandler: nil)
+			}
+		}
 	}
 }
 

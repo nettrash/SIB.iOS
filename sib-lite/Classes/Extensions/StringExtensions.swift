@@ -58,8 +58,6 @@ extension String {
 				cryptData.length = Int(numBytesEncrypted)
 				let base64cryptString = cryptData.base64EncodedString(options: .lineLength64Characters)
 				return base64cryptString
-				
-				
 			}
 			else {
 				return nil

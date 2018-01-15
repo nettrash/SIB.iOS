@@ -6,3 +6,8 @@
   Copyright © 2018 NETTRASH. All rights reserved.
 */
 "SIBLogoImageName" = "SIBLogo";
+"AppTitle" = "Червонец";
+"AppTitleBalance" = "Баланс";
+"AppTitleReceive" = "Получение";
+"Refresh" = "обновление";
+"Error" = "ошибка";

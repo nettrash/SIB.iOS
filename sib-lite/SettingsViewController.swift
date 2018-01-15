@@ -14,6 +14,7 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 
 	var keysAction = false
 	var app = UIApplication.shared.delegate as! AppDelegate
+	var fileUrl: URL?
 	
 	@IBOutlet var vWait: UIView!
 	@IBOutlet var scCurrency: UISegmentedControl!
@@ -38,6 +39,11 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 		case .EUR:
 			scCurrency.selectedSegmentIndex = 2
 			break
+		}
+		
+		if fileUrl != nil {
+			loadKeysFromUrl(fileUrl!)
+			fileUrl = nil
 		}
 	}
 	
@@ -202,6 +208,32 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 					alert.dismiss(animated: true, completion: nil)
 				}))
 				present(alert, animated: true, completion: nil)
+			}
+		}
+	}
+	
+	func loadKeysFromUrl(_ url: URL) {
+		self.vWait.isHidden = false
+		self.keysAction = true
+		self.pvProgress.progress = 0
+		self.pvProgress.isHidden = false
+		
+		DispatchQueue.main.async {
+			self.documentPicker(UIDocumentPickerViewController(documentTypes: [String(kUTTypeData)], in: .import), didPickDocumentsAt: [url])
+		}
+	}
+	
+	override func processUrlCommand() {
+		let app = UIApplication.shared.delegate as! AppDelegate
+		if app.needToProcessURL {
+			if (app.openUrl != nil) {
+				let components = URLComponents(url: app.openUrl!, resolvingAgainstBaseURL: true)
+				if components?.scheme?.lowercased() == "file" {
+					app.needToProcessURL = false
+					loadKeysFromUrl(app.openUrl!)
+				} else {
+					super.processUrlCommand()
+				}
 			}
 		}
 	}

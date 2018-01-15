@@ -38,6 +38,20 @@
 		E53A44EB200A575E002F93AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5865C1D1F96682200580954 /* Images.xcassets */; };
 		E53A44EC200A575E002F93AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5865C1D1F96682200580954 /* Images.xcassets */; };
 		E53A44ED200AB580002F93AC /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C68A9200962BE0098A96C /* PersistentContainer.swift */; };
+		E53A44EF200B6D86002F93AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44EE200B6D85002F93AC /* CoreData.framework */; };
+		E53A44F1200B6DBA002F93AC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F0200B6DB9002F93AC /* CoreFoundation.framework */; };
+		E53A44F3200B6DCB002F93AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F2200B6DCB002F93AC /* Foundation.framework */; };
+		E53A44F5200B6DF2002F93AC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F4200B6DF1002F93AC /* MobileCoreServices.framework */; };
+		E53A44F7200B6E02002F93AC /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F6200B6E02002F93AC /* WatchConnectivity.framework */; };
+		E53A44F9200B6E0D002F93AC /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F8200B6E0D002F93AC /* WatchKit.framework */; };
+		E53A44FA200B6E1C002F93AC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44EE200B6D85002F93AC /* CoreData.framework */; };
+		E53A44FB200B6E23002F93AC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F0200B6DB9002F93AC /* CoreFoundation.framework */; };
+		E53A44FC200B6E32002F93AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F2200B6DCB002F93AC /* Foundation.framework */; };
+		E53A44FD200B6E46002F93AC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F4200B6DF1002F93AC /* MobileCoreServices.framework */; };
+		E53A44FE200B6E4E002F93AC /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F6200B6E02002F93AC /* WatchConnectivity.framework */; };
+		E53A44FF200B6E56002F93AC /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A44F8200B6E0D002F93AC /* WatchKit.framework */; };
+		E53A4501200B7309002F93AC /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53A4500200B7309002F93AC /* WatchConnectivity.framework */; };
+		E53A4503200BD9B6002F93AC /* QRReceiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A4502200BD9B6002F93AC /* QRReceiveController.swift */; };
 		E53B23F61FEA578700D5F5A4 /* cameraWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E53B23F31FEA578100D5F5A4 /* cameraWhite@2x.png */; };
 		E53B23F71FEA578700D5F5A4 /* cameraWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = E53B23F41FEA578300D5F5A4 /* cameraWhite.png */; };
 		E53B23F81FEA578700D5F5A4 /* cameraWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E53B23F51FEA578500D5F5A4 /* cameraWhite@3x.png */; };
@@ -440,6 +454,14 @@
 		E53A44DA200A4159002F93AC /* watchsimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = watchsimulator.modulemap; sourceTree = "<group>"; };
 		E53A44DB200A4159002F93AC /* watchos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = watchos.modulemap; sourceTree = "<group>"; };
 		E53A44E7200A465E002F93AC /* watchKitExtension Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watchKitExtension Extension-Bridging-Header.h"; sourceTree = "<group>"; };
+		E53A44EE200B6D85002F93AC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.2.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		E53A44F0200B6DB9002F93AC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.2.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		E53A44F2200B6DCB002F93AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		E53A44F4200B6DF1002F93AC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.2.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		E53A44F6200B6E02002F93AC /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.2.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		E53A44F8200B6E0D002F93AC /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.2.sdk/System/Library/Frameworks/WatchKit.framework; sourceTree = DEVELOPER_DIR; };
+		E53A4500200B7309002F93AC /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
+		E53A4502200BD9B6002F93AC /* QRReceiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReceiveController.swift; sourceTree = "<group>"; };
 		E53B23F31FEA578100D5F5A4 /* cameraWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraWhite@2x.png"; sourceTree = "<group>"; };
 		E53B23F41FEA578300D5F5A4 /* cameraWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraWhite.png; sourceTree = "<group>"; };
 		E53B23F51FEA578500D5F5A4 /* cameraWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraWhite@3x.png"; sourceTree = "<group>"; };
@@ -631,6 +653,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53A4501200B7309002F93AC /* WatchConnectivity.framework in Frameworks */,
 				E594F3681FED50DC0042C256 /* CardIO.framework in Frameworks */,
 				E5291BC21FEC0D0E000BEF89 /* MobileCoreServices.framework in Frameworks */,
 				E5291BC01FEC0CCF000BEF89 /* Accelerate.framework in Frameworks */,
@@ -685,6 +708,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53A44F9200B6E0D002F93AC /* WatchKit.framework in Frameworks */,
+				E53A44F7200B6E02002F93AC /* WatchConnectivity.framework in Frameworks */,
+				E53A44F5200B6DF2002F93AC /* MobileCoreServices.framework in Frameworks */,
+				E53A44F3200B6DCB002F93AC /* Foundation.framework in Frameworks */,
+				E53A44F1200B6DBA002F93AC /* CoreFoundation.framework in Frameworks */,
+				E53A44EF200B6D86002F93AC /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +721,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53A44FF200B6E56002F93AC /* WatchKit.framework in Frameworks */,
+				E53A44FE200B6E4E002F93AC /* WatchConnectivity.framework in Frameworks */,
+				E53A44FD200B6E46002F93AC /* MobileCoreServices.framework in Frameworks */,
+				E53A44FC200B6E32002F93AC /* Foundation.framework in Frameworks */,
+				E53A44FB200B6E23002F93AC /* CoreFoundation.framework in Frameworks */,
+				E53A44FA200B6E1C002F93AC /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,6 +852,13 @@
 		E56EC0B61F765A9000EDE756 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E53A4500200B7309002F93AC /* WatchConnectivity.framework */,
+				E53A44F8200B6E0D002F93AC /* WatchKit.framework */,
+				E53A44F6200B6E02002F93AC /* WatchConnectivity.framework */,
+				E53A44F4200B6DF1002F93AC /* MobileCoreServices.framework */,
+				E53A44F2200B6DCB002F93AC /* Foundation.framework */,
+				E53A44F0200B6DB9002F93AC /* CoreFoundation.framework */,
+				E53A44EE200B6D85002F93AC /* CoreData.framework */,
 				E5291BC11FEC0D0D000BEF89 /* MobileCoreServices.framework */,
 				E5291BBF1FEC0CCF000BEF89 /* Accelerate.framework */,
 				E5E857781FEBE2FA00397A76 /* icc.xcodeproj */,
@@ -1048,6 +1090,7 @@
 			children = (
 				E5CE4DCC200A270900193F9C /* watchKitExtension Extension.entitlements */,
 				E5CE4DA9200A23FA00193F9C /* InterfaceController.swift */,
+				E53A4502200BD9B6002F93AC /* QRReceiveController.swift */,
 				E5CE4DAB200A23FA00193F9C /* ExtensionDelegate.swift */,
 				E5CE4DAD200A23FA00193F9C /* NotificationController.swift */,
 				E5CE4DAF200A23FA00193F9C /* Assets.xcassets */,
@@ -1706,6 +1749,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5CE4DAE200A23FA00193F9C /* NotificationController.swift in Sources */,
+				E53A4503200BD9B6002F93AC /* QRReceiveController.swift in Sources */,
 				E5CE4DCF200A278200193F9C /* Address+CoreDataProperties.swift in Sources */,
 				E53A44ED200AB580002F93AC /* PersistentContainer.swift in Sources */,
 				E5CE4DCE200A277E00193F9C /* Address+CoreDataClass.swift in Sources */,

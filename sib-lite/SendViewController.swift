@@ -303,10 +303,14 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	override func processUrlCommand() {
 		let app = UIApplication.shared.delegate as! AppDelegate
 		if app.needToProcessURL {
-			app.needToProcessURL = false
 			if (app.openUrl != nil) {
 				components = URLComponents(url: app.openUrl!, resolvingAgainstBaseURL: true)
-				parseComponents()
+				if components?.scheme?.lowercased() == "sibcoin" {
+					app.needToProcessURL = false
+					parseComponents()
+				} else {
+					super.processUrlCommand()
+				}
 			}
 		}
 	}

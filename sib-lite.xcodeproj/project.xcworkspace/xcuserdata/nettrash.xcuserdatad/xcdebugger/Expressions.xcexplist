@@ -67,6 +67,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "BalanceViewController.keyboardWillShow(notification:):BalanceViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.frame.origin.y">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SendViewController._sendTransaction(_:):SendViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -125,15 +133,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
-      </ContextState>
-      <ContextState
          contextName = "BigInteger.fromBytes(_:):BigInteger.swift">
          <PersistentStrings>
             <PersistentString
                value = "self._numberData">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
       </ContextState>
       <ContextState
          contextName = "ReceiveViewController.viewDidAppear(_:):ReceiveViewController.swift">
@@ -225,10 +233,10 @@
          contextName = "closure #1 in SettingsViewController.shareKeys(_:):SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "(app.model!.Addresses[0].privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
+               value = "&quot;VxuSAma7AJlNqH7Z/bNPO6UbwK0AChRWoTSTA9FjF52lc9bp2OL177NxYwT/ox5g&quot;.aesDecrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
             </PersistentString>
             <PersistentString
-               value = "&quot;VxuSAma7AJlNqH7Z/bNPO6UbwK0AChRWoTSTA9FjF52lc9bp2OL177NxYwT/ox5g&quot;.aesDecrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
+               value = "(app.model!.Addresses[0].privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
             </PersistentString>
             <PersistentString
                value = "alert.textFields![0].text">

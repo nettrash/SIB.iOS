@@ -10,18 +10,7 @@ import WatchKit
 import Foundation
 import CoreData
 
-class InterfaceController: WKInterfaceController {
-
-	static var persistentContainer: PersistentContainer = {
-		let container = PersistentContainer(name: "sib_lite")
-		container.loadPersistentStores(completionHandler: { (storeDescription:NSPersistentStoreDescription, error:Error?) in
-			if let error = error as NSError?{
-				fatalError("UnResolved error \(error), \(error.userInfo)")
-			}
-		})
-		
-		return container
-	}()
+class InterfaceController: WKInterfaceController, ApplicationContextDelegate {
 	
 	var balance: BalanceResponse?
 	@IBOutlet var lblBalance: WKInterfaceLabel!
@@ -47,7 +36,9 @@ class InterfaceController: WKInterfaceController {
         // Configure interface objects here.
 		self.imgBack.setImage(UIImage(named: "WKBackground"))
 		self.imgLogo.setImage(UIImage(named: NSLocalizedString("SIBLogoImageName", comment: "SIBLogoImageName")))
-		self.lblBalance.setText("...")
+		self.lblBalance.setText(NSLocalizedString("Refresh", comment: "refresh"))
+		
+		self.setTitle(NSLocalizedString("AppTitleBalance", comment: "main title"))
     }
     
     override func willActivate() {
@@ -55,7 +46,11 @@ class InterfaceController: WKInterfaceController {
         super.willActivate()
 		self.imgBack.setImage(UIImage(named: "WKBackground"))
 		self.imgLogo.setImage(UIImage(named: NSLocalizedString("SIBLogoImageName", comment: "SIBLogoImageName")))
-		self._loadBalanceData()
+		self.lblBalance.setText(NSLocalizedString("Refresh", comment: "refresh"))
+		_loadBalanceData()
+		let extDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+		extDelegate.delegate = self
+		extDelegate.requestContext()
     }
     
     override func didDeactivate() {
@@ -63,6 +58,18 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
 
+	@IBAction func refreshTap(_ sender: Any?) {
+		self.lblBalance.setText(NSLocalizedString("Refresh", comment: "refresh"))
+		_loadBalanceData()
+		let extDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+		extDelegate.delegate = self
+		extDelegate.requestContext()
+	}
+	
+	@IBAction func switchToQR(_ sender: Any?) {
+		
+	}
+	
 	func _loadBalanceData() -> Void {
 		// prepare auth data
 		let ServiceName = "SIB"
@@ -72,14 +79,11 @@ class InterfaceController: WKInterfaceController {
 		let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
 		let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
 		
-		let moc = InterfaceController.persistentContainer.viewContext
-		moc.refreshAllObjects()
-		let Addresses = try! moc.fetch(Address.fetchRequest()) as! [Address]
+		let extDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+		let Addresses = extDelegate.addresses
 		
 		// prepare json data
-		let json: [String:Any] = ["addresses": Addresses.map { (_ a: Address) -> String in
-			a.address
-			}]
+		let json: [String:Any] = ["addresses": Addresses ?? ""]
 		
 		let jsonData = try? JSONSerialization.data(withJSONObject: json)
 		
@@ -96,7 +100,7 @@ class InterfaceController: WKInterfaceController {
 		
 		let task = URLSession.shared.dataTask(with: request) { data, response, error in
 			guard let data = data, error == nil else {
-				self.lblBalance.setText("-")
+				self.lblBalance.setText(NSLocalizedString("Error", comment: "error"))
 				return
 			}
 			let responseString = String(data: data, encoding: String.Encoding.utf8)
@@ -111,27 +115,12 @@ class InterfaceController: WKInterfaceController {
 		
 		task.resume()
 	}
-	
-	/*func qrIncoming() {
-		let moc = InterfaceController.persistentContainer.viewContext
-		let Addresses = try! moc.fetch(Address.fetchRequest()) as! [Address]
-		let AddressesForIncoming = Addresses.filter { $0.type == sibWalletType.Incoming.rawValue }
-		let address = AddressesForIncoming[AddressesForIncoming.count-1].address
-		
-		let data = "sibcoin://\(address)".data(using: String.Encoding.ascii)
-		let filter = CIFilter(name: "CIQRCodeGenerator")
-		
-		filter!.setValue(data, forKey: "inputMessage")
-		filter!.setValue("Q", forKey: "inputCorrectionLevel")
-		
-		let qrcodeImage = filter!.outputImage
-		
-		let scaleX = imgQR.frame.size.width / qrcodeImage!.extent.size.width
-		let scaleY = imgQR.frame.size.height / qrcodeImage!.extent.size.height
-		
-		let transformedImage = qrcodeImage!.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
-		
-		imgQR.setImage(UIImage(ciImage: transformedImage))
-	}*/
 
+	//ApplicationContextDelegate
+	func contextUpdated() {
+		_loadBalanceData()
+	}
+	
+	func qrUpdated() {
+	}
 }

@@ -107,7 +107,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	@objc func keyboardWillHide(notification: NSNotification) {
 		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
 			if self.view.frame.origin.y != 0 {
-				self.view.frame.origin.y += keyboardSize.height / 2
+				self.view.frame.origin.y = 0//+= keyboardSize.height / 2
 			}
 		}
 	}
@@ -154,6 +154,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		if segue.identifier == "settings-sib" {
 			let dst = segue.destination as! SettingsViewController
 			dst.unwindIdentifiers["settings-sib"] = "unwindSegueToBalance"
+			if sender is URL {
+				let url = sender as! URL
+				dst.fileUrl = url
+			}
 		}
 	}
 
@@ -695,10 +699,16 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	override func processUrlCommand() {
 		if app.needToProcessURL {
-			app.needToProcessURL = false
 			if (app.openUrl != nil) {
 				let components = URLComponents(url: app.openUrl!, resolvingAgainstBaseURL: true)
-				performSegue(withIdentifier: "send-sib", sender: components)
+				if components?.scheme?.lowercased() == "sibcoin" {
+					app.needToProcessURL = false
+					performSegue(withIdentifier: "send-sib", sender: components)
+				}
+				if components?.scheme?.lowercased() == "file" {
+					app.needToProcessURL = false
+					performSegue(withIdentifier: "settings-sib", sender: app.openUrl!)
+				}
 			}
 		}
 	}

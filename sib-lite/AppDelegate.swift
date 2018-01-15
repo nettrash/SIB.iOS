@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 		let components = URLComponents.init(url: url, resolvingAgainstBaseURL: true)
-		if components?.scheme != "sibcoin" {
+		if components?.scheme != "sibcoin" && components?.scheme != "file" {
 			return false
 		}
 		needToProcessURL = true
@@ -144,6 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	    if context.hasChanges {
 	        do {
 	            try context.save()
+				model!.syncWatch()
 	        } catch {
 	            // Replace this implementation with code to handle the error appropriately.
 	            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

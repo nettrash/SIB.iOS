@@ -6,3 +6,8 @@
   Copyright © 2018 NETTRASH. All rights reserved.
 */
 "SIBLogoImageName" = "SIBLogoEn";
+"AppTitle" = "SIBCoin";
+"AppTitleBalance" = "Balance";
+"AppTitleReceive" = "Receive";
+"Refresh" = "refresh";
+"Error" = "error";

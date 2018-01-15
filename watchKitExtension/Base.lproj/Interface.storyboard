@@ -17,13 +17,17 @@
                         <group width="1" height="1" alignment="center" verticalAlignment="center" layout="overlap" id="w7U-og-Y4U">
                             <items>
                                 <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="WKBackground" contentMode="scaleAspectFill" id="5tj-Ne-NH2"/>
+                                <imageView width="1" height="48" alignment="center" image="SIBLogo" contentMode="scaleAspectFit" id="IZo-w7-zUh"/>
                                 <label width="1" height="148" alignment="center" verticalAlignment="bottom" text="10000.00" textAlignment="center" id="DS6-0V-lin">
                                     <fontDescription key="font" type="system" pointSize="24"/>
                                 </label>
-                                <imageView width="1" height="48" alignment="center" image="SIBLogo" contentMode="scaleAspectFit" id="IZo-w7-zUh"/>
                             </items>
                             <gestureRecognizers>
-                                <swipeGestureRecognizer direction="2" id="xUs-9t-O8n"/>
+                                <tapGestureRecognizer id="nLq-F1-TQp">
+                                    <connections>
+                                        <action selector="refreshTap:" destination="AgC-eL-Hgc" id="uLn-aM-RFP"/>
+                                    </connections>
+                                </tapGestureRecognizer>
                             </gestureRecognizers>
                         </group>
                     </items>
@@ -31,10 +35,31 @@
                         <outlet property="imgBack" destination="5tj-Ne-NH2" id="H5i-aB-X9w"/>
                         <outlet property="imgLogo" destination="IZo-w7-zUh" id="xTd-3W-ebO"/>
                         <outlet property="lblBalance" destination="DS6-0V-lin" id="KbO-l5-Aih"/>
+                        <segue destination="Ga5-6e-H2V" kind="relationship" relationship="nextPage" id="zKC-Qy-Vb0"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Receive Controller-->
+        <scene sceneID="UnO-L7-Orp">
+            <objects>
+                <controller fullScreen="YES" id="Ga5-6e-H2V" customClass="QRReceiveController" customModule="watchKitExtension_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" id="DnT-vC-r5i">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="WKBackground" id="fT2-Le-Aay"/>
+                                <imageView width="110" height="110" alignment="center" verticalAlignment="center" id="Mmw-ih-eSY"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="imgBack" destination="fT2-Le-Aay" id="wyt-J4-WXP"/>
+                        <outlet property="imgQR" destination="Mmw-ih-eSY" id="Mvi-gq-rVS"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="464" y="343"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

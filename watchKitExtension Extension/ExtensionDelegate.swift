@@ -7,11 +7,40 @@
 //
 
 import WatchKit
+import CoreData
+import WatchConnectivity
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
+
+	var session: WCSession?
+	var addresses: [String]? = []
+	var delegate: ApplicationContextDelegate?
+	var qrReceive: UIImage?
+	
+	public var persistentContainer: PersistentContainer = {
+		let container = PersistentContainer(name: "sib_lite")
+		container.loadPersistentStores(completionHandler: { (storeDescription:NSPersistentStoreDescription, error:Error?) in
+			if let error = error as NSError?{
+				fatalError("UnResolved error \(error), \(error.userInfo)")
+			}
+		})
+		
+		return container
+	}()
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+		addresses = UserDefaults.standard.value(forKey: "Addresses") as? [String]
+		let d: Data? = UserDefaults.standard.value(forKey: "QR") as? Data
+		if d != nil {
+			qrReceive = UIImage.init(data: d!)
+		}
+		
+		if WCSession.isSupported() {
+			session = WCSession.default
+			session?.delegate = self
+			session?.activate()
+		}
     }
 
     func applicationDidBecomeActive() {
@@ -47,4 +76,38 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
     }
 
+	func requestContext() {
+		session?.sendMessage(["Context" : "Refresh"], replyHandler: nil, errorHandler: nil)
+	}
+	
+	func requestQR() {
+		session?.sendMessage(["ReceiveQR" : "Incoming"], replyHandler: nil, errorHandler: nil)
+	}
+	
+	//WCSessionDelegate
+	
+	public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+		if activationState == WCSessionActivationState.activated {
+			requestContext()
+		} else {
+			delegate?.contextUpdated()
+		}
+	}
+	
+	public func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+		addresses = applicationContext["Addresses"] as? [String]
+		UserDefaults.standard.setValue(addresses, forKey: "Addresses")
+		delegate?.contextUpdated()
+	}
+	
+	public func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
+		qrReceive = UIImage.init(data: messageData)
+		UserDefaults.standard.setValue(messageData, forKey: "QR")
+		delegate?.qrUpdated();
+	}
+}
+
+protocol ApplicationContextDelegate {
+	func contextUpdated()
+	func qrUpdated()
 }
