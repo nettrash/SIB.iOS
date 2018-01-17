@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sib-liteTests/sib_liteTests.swift"
-            timestampString = "537400043.581633"
+            filePath = "sib-lite/Classes/Math/BigInteger.swift"
+            timestampString = "537807277.527442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "testSIBAddressVerify_isCorrect()"
-            landmarkType = "7">
+            startingLineNumber = "644"
+            endingLineNumber = "644"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

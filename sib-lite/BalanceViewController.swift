@@ -44,6 +44,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	var refreshControl: UIRefreshControl!
 	var refreshControlRates: UIRefreshControl!
 
+	var selectedSegmentIndex = 0
+	
 	//Sell
 	var amountSell: Double = 0
 	
@@ -81,6 +83,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		historyItemsCount = 0
+		selectedSegmentIndex = self.scDimension.selectedSegmentIndex
+		
 		DispatchQueue.main.async {
 			self.app.model!.delegate = self
 			self.prepareActionMenu()
@@ -218,7 +222,13 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	@IBAction func segmentControlValueChanged(_ sender: Any?) {
 		self.view.endEditing(true)
-		self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0 || self.scDimension.selectedSegmentIndex > 0
+		self.lblNoOps.isHidden = historyItemsCount > 0 || self.scDimension.selectedSegmentIndex > 0
+		if scDimension.selectedSegmentIndex > selectedSegmentIndex {
+			flipRight = true
+		} else {
+			flipRight = false
+		}
+		selectedSegmentIndex = scDimension.selectedSegmentIndex
 		switch scDimension.selectedSegmentIndex {
 		case 0:
 			if !self.app.model!.isHistoryRefresh && sender != nil {
@@ -577,7 +587,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 			self.historyItemsCount = self.app.model!.HistoryItems.Items.count + self.app.model!.MemoryPool.Items.count
 			if self.historyItemsCount > 3 { self.historyItemsCount = 3 }
 			self.tblHistory.reloadData()
-			self.lblNoOps.isHidden = self.app.model!.HistoryItems.Items.count > 0 || self.scDimension.selectedSegmentIndex > 0
+			self.lblNoOps.isHidden = self.historyItemsCount > 0 || self.scDimension.selectedSegmentIndex > 0
 		}
 	}
 	
@@ -795,7 +805,12 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		let textFieldText: NSString = (textField.text ?? "") as NSString
-		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
+		var txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
+		var txtChange = string
+		if textField == tfCardNumber_Sell || textField == tfCardNumber_Buy || textField == tfExp_Buy || textField == tfCVV_Buy {
+			txtAfterUpdate = txtAfterUpdate.digits
+			txtChange = string.digits
+		}
 		
 		if txtAfterUpdate == "" {
 			textField.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.7)
@@ -847,8 +862,6 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 				textField.text = txtAfterUpdate
 				self.tfCVV_Buy.becomeFirstResponder()
 				return false
-			} else {
-				return true
 			}
 		}
 		
@@ -857,12 +870,15 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 				textField.text = txtAfterUpdate
 				self.tfAmount_Buy.becomeFirstResponder()
 				return false
-			} else {
-				return true
 			}
 		}
 
-		return true;
+		textField.text = txtAfterUpdate;
+		DispatchQueue.main.async {
+			let position = textField.position(from: textField.beginningOfDocument, offset: range.lowerBound+txtChange.count)!
+			textField.selectedTextRange = textField.textRange(from: position, to: position)
+		}
+		return false
 	}
 	
 	public func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -873,5 +889,20 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		return true
 	}
 
+	// Swipes
+	func doSwipe(_ delta: Int) {
+		self.scDimension.selectedSegmentIndex += delta
+		if self.scDimension.selectedSegmentIndex < 0 { self.scDimension.selectedSegmentIndex = 0 }
+		if self.scDimension.selectedSegmentIndex >= self.scDimension.numberOfSegments { self.scDimension.selectedSegmentIndex = self.scDimension.numberOfSegments - 1 }
+		segmentControlValueChanged(self)
+	}
+	
+	@IBAction public func swipeLeft(_ sender: Any?) {
+		doSwipe(1);
+	}
+	
+	@IBAction public func swipeRight(_ sender: Any?) {
+		doSwipe(-1);
+	}
 }
 

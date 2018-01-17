@@ -27,6 +27,14 @@ class sib_liteTests: XCTestCase {
 		XCTAssert(sibAddress.verify("SNmdtyvBJ88kg1r7vPSYMzt7yV4tkvdeFp") == true);
 		XCTAssert(sibAddress.verify("16TFkJYqK73JPbdwMeteGbNbMddVWJP5rG") == false);
     }
+	
+	func testWalletInitialize_isCorrect() {
+		let w = Wallet()
+		w.initialize("test")
+		XCTAssert(w.Address == "SRcxum6SzkCLkgC3W8vzSeiVtdiPrbH9zB")
+		XCTAssert(w.WIF == "Kz45ruVNX4YRYobW6nqjCjFnjDw67rRV2ZJoq3akysBX9qQNWHNC")
+	}
+	
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.

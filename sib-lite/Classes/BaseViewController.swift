@@ -12,6 +12,7 @@ import UIKit
 class BaseViewController: UIViewController {
 	
 	public var unwindIdentifiers: [String:String] = [String:String]()
+	public var flipRight = true
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -37,6 +38,9 @@ class BaseViewController: UIViewController {
 	public func processUrlCommand() -> Void {
 		if (UIApplication.shared.delegate as! AppDelegate).needToProcessURL {
 			dismiss(animated: false, completion: nil)
+			DispatchQueue.main.async {
+				(self.parent as? BaseViewController)?.processUrlCommand()
+			}
 		}
 	}
 	
@@ -59,7 +63,8 @@ class BaseViewController: UIViewController {
 	}
 
 	@objc func flip(_ firstView: UIView, _ secondView: UIView) {
-		let transitionOptions: UIViewAnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
+		
+		let transitionOptions: UIViewAnimationOptions = [flipRight ? .transitionFlipFromRight : .transitionFlipFromLeft, .showHideTransitionViews]
 		
 		UIView.transition(with: firstView, duration: 1.0, options: transitionOptions, animations: {
 			firstView.isHidden = true
