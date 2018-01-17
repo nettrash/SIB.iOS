@@ -22,7 +22,7 @@
 "Share" = "Поделиться";
 "ScanNotSupport" = "Ошибка";
 "ScanNotSupportedMsg" = "Для распознавания кодов нужно устройство с камерой.";
-"InMemoryPool" = "в памяти";
+"InMemoryPool" = "в обработке";
 "SIB" = "Сибирский Червонец";
 "SellButtonText" = "Продать за ";
 "EmptySellButtonText" = "Продать";

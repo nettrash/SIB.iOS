@@ -22,7 +22,7 @@
 "Share" = "Share";
 "ScanNotSupport" = "Error";
 "ScanNotSupportedMsg" = "Your device does not support scanning a code from an item. Please use a device with a camera.";
-"InMemoryPool" = "in memory";
+"InMemoryPool" = "in processing";
 "SIB" = "SIBCoin";
 "SellButtonText" = "Sell for ";
 "EmptySellButtonText" = "Sell";
