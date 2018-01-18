@@ -6,3 +6,6 @@
   Copyright © 2017 NETTRASH. All rights reserved.
 */
 "CFBundleDisplayName" = "SIBCoin";
+"NSCameraUsageDescription" = "Access to the camera for scanning QR codes for transfer details.";
+"NSPhotoLibraryAddUsageDescription" = "Access to photos to save QR-codes of recharge details.";
+"NSSiriUsageDescription" = "Access to Siri for requesting and transfering funds using voice commands.";

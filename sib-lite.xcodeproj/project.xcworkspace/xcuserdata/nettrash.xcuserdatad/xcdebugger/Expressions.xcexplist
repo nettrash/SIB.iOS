@@ -3,27 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "SendViewController._prepareTransaction():SendViewController.swift">
+         contextName = "ReceiveViewController.viewDidAppear(_:):ReceiveViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "spent - _amount! - _commission!">
-            </PersistentString>
-            <PersistentString
-               value = "tx.serialize().hexEncodedString()">
-            </PersistentString>
-            <PersistentString
-               value = "_commission!">
-            </PersistentString>
-            <PersistentString
-               value = "312+4.33019178">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static sibAddress.verify(_:):sibAddress.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "subArray(decoded, index: 0, length: 21)">
+               value = "app.model!.AddressesForIncoming">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -31,29 +14,43 @@
          contextName = "sibTransactionOutput.init(_:_:):sibTransactionOutput.swift">
       </ContextState>
       <ContextState
+         contextName = "sibTransaction.serialize():sibTransaction.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Convert.toByteArray(UInt64(o.Amount.intValue())))">
+            </PersistentString>
+            <PersistentString
+               value = "Data(data).hexEncodedString()">
+            </PersistentString>
+            <PersistentString
+               value = "o.Amount.intValue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BigInteger.toByteArraySigned():BigInteger.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "retVal[0] &amp; 0x80">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BigInteger.multiply(_:):BigInteger.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #5 in History.load(_:addresses:):History.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CurveFP.decodePoint(_:):CurveFP.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "[UInt8](data[1...len])">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "BigInteger.dMultiply(_:):BigInteger.swift">
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.deterministicK(_:_:_:):sibTransaction.swift">
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.serializeSign(_:_:):sibTransaction.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sequence.hexEncodedString()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ModelRoot.add(_:_:_:_:_:refreshAfter:walletType:):ModelRoot.swift">
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.addChange(amount:):sibTransaction.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Change!.Address">
-            </PersistentString>
-         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "static sibAddress.spendToScript(_:):sibAddress.swift">
@@ -75,49 +72,68 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SendViewController._sendTransaction(_:):SendViewController.swift">
+         contextName = "static sibAddress.verify(_:):sibAddress.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "subArray(decoded, index: 0, length: 21)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SendViewController._prepareTransaction():SendViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "spent - _amount! - _commission!">
+            </PersistentString>
             <PersistentString
                value = "tx.serialize().hexEncodedString()">
             </PersistentString>
             <PersistentString
-               value = "sign.hexEncodedString()">
+               value = "_commission!">
+            </PersistentString>
+            <PersistentString
+               value = "312+4.33019178">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.serialize():sibTransaction.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Convert.toByteArray(UInt64(o.Amount.intValue())))">
-            </PersistentString>
-            <PersistentString
-               value = "Data(data).hexEncodedString()">
-            </PersistentString>
-            <PersistentString
-               value = "o.Amount.intValue()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static sibAddress.decodeBase58(_:):sibAddress.swift">
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.transactionSign(_:_:):sibTransaction.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sig.hexEncodedString()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.addInput(_:):sibTransaction.swift">
       </ContextState>
       <ContextState
          contextName = "sibTransaction.transactionHash(_:):sibTransaction.swift">
          <PersistentStrings>
             <PersistentString
                value = "data.hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.addOutput(address:amount:):sibTransaction.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BigInteger.divide(_:):BigInteger.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ModelRoot.add(_:_:_:_:_:refreshAfter:walletType:):ModelRoot.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SendViewController.viewDidAppear(_:):SendViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(app.model!.Addresses[0].privateKey as Data).hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PointFP.multiply(_:):PointFP.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "h.bitLength">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BalanceViewController.tableView(_:cellForRowAt:):BalanceViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "historyItemsCount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -133,6 +149,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "BigInteger.modInverse(_:):BigInteger.swift">
+      </ContextState>
+      <ContextState
          contextName = "BigInteger.fromBytes(_:):BigInteger.swift">
          <PersistentStrings>
             <PersistentString
@@ -141,26 +160,75 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ReceiveViewController.viewDidAppear(_:):ReceiveViewController.swift">
+         contextName = "sibTransaction.transactionSign(_:_:):sibTransaction.swift">
          <PersistentStrings>
             <PersistentString
-               value = "app.model!.AddressesForIncoming">
+               value = "sig.hexEncodedString()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SendViewController.viewDidAppear(_:):SendViewController.swift">
+         contextName = "sibTransaction.addInput(_:):sibTransaction.swift">
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.addChange(amount:):sibTransaction.swift">
          <PersistentStrings>
             <PersistentString
-               value = "(app.model!.Addresses[0].privateKey as Data).hexEncodedString()">
+               value = "Change!.Address">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "BigInteger.modInverse(_:):BigInteger.swift">
+         contextName = "static sibAddress.decodeBase58(_:):sibAddress.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.application(_:didFinishLaunchingWithOptions:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "c!.queryItems.filter { $0.name == &quot;OpKey&quot; }">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SettingsViewController.shareKeys(_:):SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "alert.textFields![0].text">
+            </PersistentString>
+            <PersistentString
+               value = "&quot;VxuSAma7AJlNqH7Z/bNPO6UbwK0AChRWoTSTA9FjF52lc9bp2OL177NxYwT/ox5g&quot;.aesDecrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "(app.model!.Addresses[0].privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SettingsViewController.documentPicker(_:didPickDocumentsAt:):SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Float(idx) / Float(v.count)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SendViewController._sendTransaction(_:):SendViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tx.serialize().hexEncodedString()">
+            </PersistentString>
+            <PersistentString
+               value = "sign.hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "sibTransaction.serializeSign(_:_:):sibTransaction.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sequence.hexEncodedString()">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ModelRoot.reload(_:):ModelRoot.swift">
@@ -180,35 +248,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #5 in History.load(_:addresses:):History.swift">
+         contextName = "EllipticCurve.init():EllipticCurve.swift">
       </ContextState>
       <ContextState
-         contextName = "BalanceViewController.tableView(_:cellForRowAt:):BalanceViewController.swift">
+         contextName = "static sibAddress.encodeBase58(_:):sibAddress.swift">
          <PersistentStrings>
             <PersistentString
-               value = "historyItemsCount">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "BigInteger.init(_:):BigInteger.swift">
-      </ContextState>
-      <ContextState
-         contextName = "AppDelegate.application(_:didFinishLaunchingWithOptions:):AppDelegate.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "c!.queryItems.filter { $0.name == &quot;OpKey&quot; }">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "sibTransaction.addOutput(address:amount:):sibTransaction.swift">
-      </ContextState>
-      <ContextState
-         contextName = "BigInteger.toByteArraySigned():BigInteger.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "retVal[0] &amp; 0x80">
+               value = "mod.intValue()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -230,26 +276,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in SettingsViewController.shareKeys(_:):SettingsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "&quot;VxuSAma7AJlNqH7Z/bNPO6UbwK0AChRWoTSTA9FjF52lc9bp2OL177NxYwT/ox5g&quot;.aesDecrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "(app.model!.Addresses[0].privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "alert.textFields![0].text">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "sibTransaction.deterministicK(_:_:_:):sibTransaction.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in SettingsViewController.documentPicker(_:didPickDocumentsAt:):SettingsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Float(idx) / Float(v.count)">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "BigInteger.toByteArrayUnsigned():BigInteger.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

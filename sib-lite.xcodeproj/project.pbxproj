@@ -554,6 +554,9 @@
 		E58B4A151F97F3A60023B5E1 /* Vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vertical.png; sourceTree = "<group>"; };
 		E58B4A161F97F3A70023B5E1 /* Vertical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@2x.png"; sourceTree = "<group>"; };
 		E58B4A171F97F3A70023B5E1 /* Vertical@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vertical@3x.png"; sourceTree = "<group>"; };
+		E58D55CF200F611C0092AA8C /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		E58D55E6200F64790092AA8C /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		E58D55ED200F66680092AA8C /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		E5920BAB1FF41CFB0051A213 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		E5920BB11FF42B060051A213 /* SIBKeystoreIcon44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIBKeystoreIcon44.png; sourceTree = "<group>"; };
 		E5920BB21FF42B060051A213 /* SIBKeystoreIcon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIBKeystoreIcon64.png; sourceTree = "<group>"; };
@@ -853,6 +856,7 @@
 		E56EC0B61F765A9000EDE756 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E58D55E6200F64790092AA8C /* Intents.framework */,
 				E53A4500200B7309002F93AC /* WatchConnectivity.framework */,
 				E53A44F8200B6E0D002F93AC /* WatchKit.framework */,
 				E53A44F6200B6E02002F93AC /* WatchConnectivity.framework */,
@@ -871,6 +875,8 @@
 				E56EC0C71F76631A00EDE756 /* CoreData.framework */,
 				E56EC0B71F765A9000EDE756 /* PassKit.framework */,
 				E56C6866200950770098A96C /* NotificationCenter.framework */,
+				E58D55CF200F611C0092AA8C /* IntentsUI.framework */,
+				E58D55ED200F66680092AA8C /* Messages.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1302,6 +1308,9 @@
 							};
 							com.apple.Push = {
 								enabled = 1;
+							};
+							com.apple.Siri = {
+								enabled = 0;
 							};
 							com.apple.Wallet = {
 								enabled = 1;
