@@ -33,38 +33,6 @@
             endingLineNumber = "33"
             landmarkName = "integerToBytes(_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static sib_lite.EllipticCurve.integerToBytes(sib_lite.BigInteger, Swift.Int) -&gt; Swift.Array&lt;Swift.UInt8&gt;"
-                  moduleName = "sib-lite"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/NETTRASH%20DATA/Develop/iOS/sib-lite/sib-lite/Classes/Crypto/EllipticCurve.swift"
-                  timestampString = "539621555.963209"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static sib_liteTests.EllipticCurve.integerToBytes(sib_liteTests.BigInteger, Swift.Int) -&gt; Swift.Array&lt;Swift.UInt8&gt;"
-                  moduleName = "sib-liteTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/NETTRASH%20DATA/Develop/iOS/sib-lite/sib-lite/Classes/Crypto/EllipticCurve.swift"
-                  timestampString = "539621557.363119"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
