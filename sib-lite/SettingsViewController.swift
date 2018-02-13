@@ -89,13 +89,13 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 			if psw != "" {
 				DispatchQueue.global().async {
 					var json: [String: Any] = [:]
-					let v = self.app.model!.Addresses.map { "\($0.type)" + ($0.privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: "20219510518024419136177230")! }
+					let v = self.app.model!.Addresses.map { "\($0.type)" + ($0.privateKey as Data).base64EncodedString().aesEncrypt(key: Crypto.md5(psw), iv: Crypto.md5("20219510518024419136177230"))! }
 					var hs = ""
 					var idx = 0
 					for s in v { hs = hs + s; idx += 1; DispatchQueue.main.async { self.pvProgress.setProgress(Float(idx) / Float(v.count), animated: true) } }
 					hs = hs + psw
 					let hash = Crypto.sha256(hs.data(using: String.Encoding.utf8)!).base64EncodedString()
-					json["version"] = "1.0"
+					json["version"] = "1.1"
 					json["hash"] = hash
 					json["keys"] = v
 					let jsonData = try? JSONSerialization.data(withJSONObject: json)
@@ -156,7 +156,9 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 					
 					if psw != "" {
 						let json = jsonData as? [String:Any]
-						if json!["version"] as? String ?? "" == "1.0" {
+						if json!["version"] as? String ?? "" == "1.0" ||
+							json!["version"] as? String ?? "" == "1.1" {
+							let version = json!["version"] as? String ?? ""
 							let hash = json!["hash"] as! String
 							let v = json!["keys"] as! [String]
 							
@@ -171,7 +173,7 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 									for sKey in v {
 										let keyType = Int16(String(sKey[String.Index(encodedOffset: 0)]))
 										let keyData = String(sKey[String.Index(encodedOffset: 1)..<String.Index(encodedOffset: sKey.count)])
-										let privKey = Data(base64Encoded: keyData.aesDecrypt(key: psw, iv: "20219510518024419136177230")!)!
+										let privKey = version == "1.0" ? Data(base64Encoded: keyData.aesDecrypt(key: psw, iv: "20219510518024419136177230")!)! : Data(base64Encoded: keyData.aesDecrypt(key: Crypto.md5(psw), iv: Crypto.md5("20219510518024419136177230"))!)!
 										let w: Wallet = Wallet.init(privateKey: privKey)
 										self.app.model!.storeWallet(w, false, keyType! == 0 ? .Incoming : .Change)
 										idx += 1
