@@ -21,6 +21,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	var amount: Decimal? = nil
 	var message: String? = nil
 	var instantSend: Bool = false
+	var currency: Currency = .SIB
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -140,13 +141,87 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		performSegue(withIdentifier: unwindIdentifiers["scan-address"]!, sender: self)
 	}
 	
-	func found(code: String) -> Bool {
-		if sibAddress.verify(code) {
-			address = code
-			return true
-		}
+	func parseSIBCode(code: String) -> Bool {
+		//SIB Code
+		if (!code.lowercased().hasPrefix("sibcoin:")) { return false }
 		
-		if (!code.hasPrefix("sibcoin:")) { return false }
+		let qDelIndex = code.index(of: ":")
+		var qStartIndex = qDelIndex ?? code.startIndex
+		if (qDelIndex != nil) {
+			qStartIndex = code.index(after: qDelIndex!)
+		}
+		let qEndIndex = code.endIndex
+		let q = code[qStartIndex..<qEndIndex]
+		let query = String(q)
+		
+		let uri = URL(string: query)
+		let uriComponents = URLComponents.init(url: uri!, resolvingAgainstBaseURL: true)
+		
+		address = uriComponents?.path
+		if uriComponents?.queryItems != nil {
+			for qi in uriComponents!.queryItems! {
+				switch qi.name {
+				case "amount":
+					amount = Decimal(string: qi.value ?? "")
+					break
+				case "message":
+					message = qi.value
+					break
+				case "IS":
+					instantSend = qi.value ?? "" == "1"
+					break
+				default:
+					break
+				}
+			}
+		}
+		currency = .SIB
+		
+		return sibAddress.verify(address)
+	}
+	
+	func parseBTCCode(code: String) -> Bool {
+		//BTC Code
+		if (!code.lowercased().hasPrefix("bitcoin:")) { return false }
+		
+		let qDelIndex = code.index(of: ":")
+		var qStartIndex = qDelIndex ?? code.startIndex
+		if (qDelIndex != nil) {
+			qStartIndex = code.index(after: qDelIndex!)
+		}
+		let qEndIndex = code.endIndex
+		let q = code[qStartIndex..<qEndIndex]
+		let query = String(q)
+		
+		let uri = URL(string: query)
+		let uriComponents = URLComponents.init(url: uri!, resolvingAgainstBaseURL: true)
+		
+		address = uriComponents?.path
+		if uriComponents?.queryItems != nil {
+			for qi in uriComponents!.queryItems! {
+				switch qi.name {
+				case "amount":
+					amount = Decimal(string: qi.value ?? "")
+					break
+				case "message":
+					message = qi.value
+					break
+				case "IS":
+					instantSend = qi.value ?? "" == "1"
+					break
+				default:
+					break
+				}
+			}
+		}
+		currency = .BTC
+		
+		return amount ?? 0 > 0.0 && sibAddress.verifyBTC(address)
+	}
+
+	func parseBIOCode(code: String) -> Bool {
+		//BIO Code
+		if (!code.lowercased().hasPrefix("biocoin:")) { return false }
 		
 		let qDelIndex = code.index(of: ":")
 		var qStartIndex = qDelIndex ?? code.startIndex
@@ -170,15 +245,35 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 				case "message":
 					message = qi.value
 					break;
-				case "IS":
-					instantSend = qi.value ?? "" == "1"
-					break;
 				default:
 					break;
 				}
 			}
 		}
-		return sibAddress.verify(address)
+		currency = .BIO
+		
+		return amount ?? 0.0 > 0 && sibAddress.verifyBIO(address)
+	}
+
+	func found(code: String) -> Bool {
+		if sibAddress.verify(code) {
+			address = code
+			return true
+		}
+		
+		if (parseSIBCode(code: code)) {
+			return true
+		}
+		
+		if (parseBTCCode(code: code)) {
+			return true
+		}
+		
+		if (parseBIOCode(code: code)) {
+			return true
+		}
+		
+		return false
 	}
 	
 	override var prefersStatusBarHidden: Bool {

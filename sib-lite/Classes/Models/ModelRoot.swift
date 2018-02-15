@@ -298,16 +298,17 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 										//Добавляем требуемый вывод
 										tx.addOutput(address: Address, amount: amountSIB)
 										var spent: Double = 0
+										let comm = 0.001 * amountSIB
 										//Добавляем непотраченные входы
 										for u in unspent.Items {
-											if spent < amountSIB + 0.0001 {
+											if spent < amountSIB + comm {
 												spent += u.amount
 												tx.addInput(u)
 											} else {
 												break;
 											}
 										}
-										tx.addChange(amount: spent - amountSIB - 0.0001)
+										tx.addChange(amount: spent - amountSIB - comm)
 										self.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
 										let sign = tx.sign(self.Addresses)
 										print(sign.hexEncodedString())

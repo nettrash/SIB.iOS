@@ -124,6 +124,66 @@ class sibAddress: NSObject {
 		}
 	}
 	
+	static func verifyBTC(_ address: String?) -> Bool {
+		do
+		{
+			if (address == nil) {
+				return false
+			}
+			if (address?.count ?? 0 < 26 || address?.count ?? 0 > 35) {
+				return false
+			}
+			if (!address!.starts(with: "1") && !address!.starts(with: "3")) {
+				return false
+			}
+			let decoded = try decodeBase58(address!)
+			let d1 = Crypto.sha256(subArray(decoded, index: 0, length: 21))
+			let d2 = Crypto.sha256(d1)
+			if (decoded[21] != d2[0] ||
+				decoded[22] != d2[1] ||
+				decoded[23] != d2[2] ||
+				decoded[24] != d2[3]) {
+				return false
+			}
+			
+			return true
+		}
+		catch
+		{
+			return false
+		}
+	}
+	
+	static func verifyBIO(_ address: String?) -> Bool {
+		do
+		{
+			if (address == nil) {
+				return false
+			}
+			if (address?.count ?? 0 < 26 || address?.count ?? 0 > 35) {
+				return false
+			}
+			if (!address!.starts(with: "B")) {
+				return false
+			}
+			let decoded = try decodeBase58(address!)
+			let d1 = Crypto.sha256(subArray(decoded, index: 0, length: 21))
+			let d2 = Crypto.sha256(d1)
+			if (decoded[21] != d2[0] ||
+				decoded[22] != d2[1] ||
+				decoded[23] != d2[2] ||
+				decoded[24] != d2[3]) {
+				return false
+			}
+			
+			return true
+		}
+		catch
+		{
+			return false
+		}
+	}
+
 	static func forKey(_ key: Data) -> String {
 		let keyHash = Crypto.sha256(key)
 		var md = RIPEMD160()

@@ -39,6 +39,8 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 		case .EUR:
 			scCurrency.selectedSegmentIndex = 2
 			break
+		default:
+			break
 		}
 		
 		if fileUrl != nil {

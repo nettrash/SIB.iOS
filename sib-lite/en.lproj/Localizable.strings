@@ -51,3 +51,9 @@
 "EURCommission" = "commission 8€ for every 1000€";
 "CopyToClipboard" = "Clipboard";
 "CopyToClipboardMessage" = "Data copied to clipboard.";
+"OtherCryptoTransferTitle" = "Sending ";
+"OtherCryptoTransferMessageAddress" = "Receipt address: ";
+"OtherCryptoTransferMessageAmount" = "Amount receivable: ";
+"OtherCryptoTransferMessageAmountSIB" = "Amount to be sent: ";
+"OtherCryptoTransferMessageCommission" = "Commission: ";
+"OtherCryptoTransferDo" = "Fulfill";

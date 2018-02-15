@@ -51,3 +51,10 @@
 "EURCommission" = "комиссия 3€ ₽ за каждые 1000€";
 "CopyToClipboard" = "Буфер обмена";
 "CopyToClipboardMessage" = "Данные скопированы в буфер обмена.";
+"OtherCryptoTransferTitle" = "Отправка ";
+"OtherCryptoTransferMessageAddress" = "Адрес получения: ";
+"OtherCryptoTransferMessageAmount" = "Сумма к получению: ";
+"OtherCryptoTransferMessageAmountSIB" = "Сумма к отправке: ";
+"OtherCryptoTransferMessageCommission" = "Комиссия: ";
+"OtherCryptoTransferDo" = "Исполнить";
+
