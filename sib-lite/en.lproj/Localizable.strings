@@ -57,3 +57,7 @@
 "OtherCryptoTransferMessageAmountSIB" = "Amount to be sent: ";
 "OtherCryptoTransferMessageCommission" = "Commission: ";
 "OtherCryptoTransferDo" = "Fulfill";
+"OtherCryptoTransferAmountTitle" = "Amount in ";
+"UpdateAvailableTitle" = "Update";
+"UpdateAvailableMessage" = "A newer version of the application appeared.";
+"Update" = "Update now";

@@ -155,5 +155,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	    }
 	}
 
+	// UPDATE
+	
+	func checkAvailableUpdate() -> Void {
+		DispatchQueue.main.async {
+			let manifest = NSDictionary.init(contentsOf: URL.init(string: "https://sib.sale/manifest.plist")!)
+		
+			let items = manifest?.value(forKey: "items") as? [NSDictionary?]
+			if items?.count ?? 0 < 1 { return }
+			let metadata = items?[0]?.value(forKey: "metadata") as? NSDictionary
+			let version = metadata?.value(forKey: "bundle-version") as? String
+			if version == nil { return }
+			let nVersion: Double? = (Decimal.init(string: version!) as NSDecimalNumber?)?.doubleValue
+			if nVersion == nil { return }
+		
+			let dictionary = Bundle.main.infoDictionary!
+			let appversion = dictionary["CFBundleShortVersionString"] as! String
+			let nAppVersion: Double? = (Decimal.init(string: appversion) as NSDecimalNumber?)?.doubleValue
+			if nAppVersion == nil { return }
+			
+			if nVersion! > nAppVersion! {
+
+				let alert = UIAlertController.init(title: NSLocalizedString("UpdateAvailableTitle", comment: "UpdateAvailableTitle"), message: NSLocalizedString("UpdateAvailableMessage", comment: "UpdateAvailableTitle"), preferredStyle: UIAlertControllerStyle.alert)
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Update", comment: "Обновить"), style: UIAlertActionStyle.default, handler: { _ in
+					UIApplication.shared.open(URL.init(string: "itms-services://?action=download-manifest&url=https://sib.sale/manifest.plist")!, options: [:], completionHandler: nil)
+					alert.dismiss(animated: true, completion: nil) }))
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in
+					alert.dismiss(animated: true, completion: nil) }))
+				let vc = UIApplication.topViewController()
+				vc?.present(alert, animated: true, completion: nil)
+
+			}
+		}
+	}
 }
 

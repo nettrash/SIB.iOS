@@ -122,6 +122,10 @@
 		E55F726220081130006B539B /* Unspent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC431FD7F63500379A26 /* Unspent.swift */; };
 		E55F726320081134006B539B /* UnspentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50FBC411FD7F62500379A26 /* UnspentTransaction.swift */; };
 		E5611F291FD0A66A00B17097 /* ApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */; };
+		E56233C4203761E600400785 /* EnterAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56233C3203761E600400785 /* EnterAmountViewController.swift */; };
+		E56233CA20382E9700400785 /* Siberian_autumn_in_taiga..jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56233C920382E9400400785 /* Siberian_autumn_in_taiga..jpg */; };
+		E56233CC20382F2200400785 /* Vasyugan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E56233CB20382F1E00400785 /* Vasyugan.jpg */; };
+		E56233D02038382E00400785 /* bitpayInvoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56233CF2038382E00400785 /* bitpayInvoice.swift */; };
 		E56C6867200950770098A96C /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56C6866200950770098A96C /* NotificationCenter.framework */; };
 		E56C686A200950770098A96C /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C6869200950770098A96C /* TodayViewController.swift */; };
 		E56C686D200950770098A96C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E56C686B200950770098A96C /* MainInterface.storyboard */; };
@@ -507,6 +511,10 @@
 		E55727881FE00F120004983B /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		E55E17F21F94DD7400B5AC3C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5611F281FD0A66A00B17097 /* ApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationExtension.swift; sourceTree = "<group>"; };
+		E56233C3203761E600400785 /* EnterAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAmountViewController.swift; sourceTree = "<group>"; };
+		E56233C920382E9400400785 /* Siberian_autumn_in_taiga..jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Siberian_autumn_in_taiga..jpg; sourceTree = "<group>"; };
+		E56233CB20382F1E00400785 /* Vasyugan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Vasyugan.jpg; sourceTree = "<group>"; };
+		E56233CF2038382E00400785 /* bitpayInvoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpayInvoice.swift; sourceTree = "<group>"; };
 		E56C6865200950770098A96C /* todayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = todayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E56C6866200950770098A96C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		E56C6869200950770098A96C /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -784,6 +792,7 @@
 				E5B6E7DF1FCE1B42009E32BC /* CheckPINViewController.swift */,
 				E53BA4041FCE8791007386AE /* ReceiveViewController.swift */,
 				E54B1DB61FD2DC690028EC96 /* SendViewController.swift */,
+				E56233C3203761E600400785 /* EnterAmountViewController.swift */,
 				E53B23FF1FEAC39200D5F5A4 /* HistoryViewController.swift */,
 				E509A0DB1FF05F8300D89050 /* HistoryCell.swift */,
 				E54539F41FEEE368002F3169 /* HistoryCellSelected.swift */,
@@ -884,6 +893,8 @@
 		E56EC0B91F765E9600EDE756 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				E56233CB20382F1E00400785 /* Vasyugan.jpg */,
+				E56233C920382E9400400785 /* Siberian_autumn_in_taiga..jpg */,
 				E5920BB41FF42B070051A213 /* SIBKeystoreIcon22.png */,
 				E5920BB11FF42B060051A213 /* SIBKeystoreIcon44.png */,
 				E5920BB21FF42B060051A213 /* SIBKeystoreIcon64.png */,
@@ -1005,6 +1016,7 @@
 				E557052E1FE9166400BCCD08 /* MemPool.swift */,
 				E55705301FE9168F00BCCD08 /* MemPoolItem.swift */,
 				E5DA2FD01FF78FC00013964D /* Currency.swift */,
+				E56233CF2038382E00400785 /* bitpayInvoice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1453,6 +1465,7 @@
 				E5B4AD611FE531C700B0BA86 /* ActionButtonSettings@3x.png in Resources */,
 				E54B1DBB1FD31F160028EC96 /* camera.png in Resources */,
 				E579F15E1F922D4E00FA19E8 /* Scan.png in Resources */,
+				E56233CC20382F2200400785 /* Vasyugan.jpg in Resources */,
 				E58B4A181F97F3A70023B5E1 /* Vertical.png in Resources */,
 				E5B725FF1FA14DF700F9004A /* Localizable.strings in Resources */,
 				E56DECE71F8F6FB3002DADE9 /* background_block-first.jpg in Resources */,
@@ -1464,6 +1477,7 @@
 				E5C0C50E1FD1ACEE0039D1BC /* ActionInfo.png in Resources */,
 				E5C0C5041FD19CC10039D1BC /* action@2x.png in Resources */,
 				E56EC0BB1F765EC700EDE756 /* Background.jpg in Resources */,
+				E56233CA20382E9700400785 /* Siberian_autumn_in_taiga..jpg in Resources */,
 				E5C0C5181FD1AD760039D1BC /* ActionInfo@3x.png in Resources */,
 				E54B1DBC1FD31F160028EC96 /* camera@2x.png in Resources */,
 				E56DECE61F8F6FB3002DADE9 /* background_block-fail.jpg in Resources */,
@@ -1667,7 +1681,9 @@
 				E5B6E7E01FCE1B42009E32BC /* CheckPINViewController.swift in Sources */,
 				E55705311FE9168F00BCCD08 /* MemPoolItem.swift in Sources */,
 				E5B6E7DE1FCE0A88009E32BC /* SetPINViewController.swift in Sources */,
+				E56233D02038382E00400785 /* bitpayInvoice.swift in Sources */,
 				E5AA3C801FBDD5850032BDE8 /* PointFP.swift in Sources */,
+				E56233C4203761E600400785 /* EnterAmountViewController.swift in Sources */,
 				E54A70AC1F979C0E00AA422B /* HistoryItem.swift in Sources */,
 				E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */,
 				E579F1601F922EFE00FA19E8 /* ScanViewController.swift in Sources */,

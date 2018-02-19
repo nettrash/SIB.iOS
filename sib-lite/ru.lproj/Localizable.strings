@@ -57,4 +57,7 @@
 "OtherCryptoTransferMessageAmountSIB" = "Сумма к отправке: ";
 "OtherCryptoTransferMessageCommission" = "Комиссия: ";
 "OtherCryptoTransferDo" = "Исполнить";
-
+"OtherCryptoTransferAmountTitle" = "Сумма в ";
+"UpdateAvailableTitle" = "Обновление";
+"UpdateAvailableMessage" = "Есть более новая версия приложения.";
+"Update" = "Обновить";

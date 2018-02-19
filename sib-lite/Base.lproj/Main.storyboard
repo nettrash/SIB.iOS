@@ -1332,12 +1332,113 @@
                         <outlet property="vWait" destination="uO0-Bv-zAJ" id="Hb8-1u-Z76"/>
                         <segue destination="2HB-54-Iob" kind="unwind" identifier="unwindSegueToBalance" unwindAction="unwindToBalanceWithUnwindSegue:" id="CYu-p0-aHM"/>
                         <segue destination="gdP-Sw-8eU" kind="show" identifier="scan-address" id="mI3-hK-WYp"/>
+                        <segue destination="0Uz-Ox-pNt" kind="show" identifier="enter-other-amount" action="showDetailViewController:sender:" id="FsP-yN-K4s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YLi-x9-oDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2HB-54-Iob" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1942" y="904"/>
+        </scene>
+        <!--Enter Amount View Controller-->
+        <scene sceneID="Isq-4a-QZr">
+            <objects>
+                <viewController id="0Uz-Ox-pNt" customClass="EnterAmountViewController" customModule="sib_lite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dzg-ge-NfQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="Vasyugan.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3Y6-iD-k2V">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTf-vu-9dB">
+                                <rect key="frame" x="0.0" y="20" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="H9B-aa-VXW"/>
+                                    <constraint firstAttribute="height" constant="40" id="j5H-yV-LSA"/>
+                                </constraints>
+                                <state key="normal" image="back.png">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeClick:" destination="0Uz-Ox-pNt" eventType="touchUpInside" id="lij-YD-5Em"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сумма перевода" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhK-OM-b39">
+                                <rect key="frame" x="59" y="20" width="257" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="LLD-ZJ-I8e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="сумма к получению" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y35-IN-O94">
+                                <rect key="frame" x="0.0" y="75" width="375" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="dJl-iA-Td3"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="0Uz-Ox-pNt" id="UIn-YH-TFb"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Pa-oW-NwD">
+                                <rect key="frame" x="0.0" y="131" width="375" height="42"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="1b9-k3-hJP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Установить сумму">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="setAmount:" destination="0Uz-Ox-pNt" eventType="touchUpInside" id="lMY-8v-FzY"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="SIBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="rGs-et-CZQ" customClass="SIBLogoImageView" customModule="sib_lite" customModuleProvider="target">
+                                <rect key="frame" x="112" y="573" width="253" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="36b-4j-6uw"/>
+                                    <constraint firstAttribute="width" constant="253" id="Sfc-DC-bCj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1Pa-oW-NwD" firstAttribute="top" secondItem="y35-IN-O94" secondAttribute="bottom" constant="14" id="25d-fW-vUr"/>
+                            <constraint firstItem="EhK-OM-b39" firstAttribute="centerX" secondItem="Dzg-ge-NfQ" secondAttribute="centerX" id="85I-lb-Gg3"/>
+                            <constraint firstItem="1Pa-oW-NwD" firstAttribute="leading" secondItem="xEH-5W-xYm" secondAttribute="leading" id="BPs-Ec-4bZ"/>
+                            <constraint firstItem="3Y6-iD-k2V" firstAttribute="top" secondItem="Dzg-ge-NfQ" secondAttribute="top" id="RN4-Vo-7qc"/>
+                            <constraint firstItem="nTf-vu-9dB" firstAttribute="leading" secondItem="xEH-5W-xYm" secondAttribute="leading" id="S9A-3b-YXY"/>
+                            <constraint firstItem="xEH-5W-xYm" firstAttribute="bottom" secondItem="rGs-et-CZQ" secondAttribute="bottom" constant="14" id="VIS-tc-kzE"/>
+                            <constraint firstItem="y35-IN-O94" firstAttribute="trailing" secondItem="xEH-5W-xYm" secondAttribute="trailing" id="XEa-h6-YAy"/>
+                            <constraint firstItem="xEH-5W-xYm" firstAttribute="trailing" secondItem="rGs-et-CZQ" secondAttribute="trailing" constant="10" id="bId-eh-UFw"/>
+                            <constraint firstItem="3Y6-iD-k2V" firstAttribute="bottom" secondItem="Dzg-ge-NfQ" secondAttribute="bottom" id="bcF-F6-u6P"/>
+                            <constraint firstItem="1Pa-oW-NwD" firstAttribute="trailing" secondItem="xEH-5W-xYm" secondAttribute="trailing" id="cMh-NK-i1A"/>
+                            <constraint firstItem="y35-IN-O94" firstAttribute="leading" secondItem="xEH-5W-xYm" secondAttribute="leading" id="dmw-dV-rrV"/>
+                            <constraint firstItem="y35-IN-O94" firstAttribute="top" secondItem="EhK-OM-b39" secondAttribute="bottom" constant="14" id="gD0-cm-4gs"/>
+                            <constraint firstItem="3Y6-iD-k2V" firstAttribute="leading" secondItem="xEH-5W-xYm" secondAttribute="leading" id="nhh-Z8-P9c"/>
+                            <constraint firstItem="nTf-vu-9dB" firstAttribute="top" secondItem="xEH-5W-xYm" secondAttribute="top" id="t4b-o2-599"/>
+                            <constraint firstItem="3Y6-iD-k2V" firstAttribute="trailing" secondItem="xEH-5W-xYm" secondAttribute="trailing" id="tGo-Pk-9FK"/>
+                            <constraint firstItem="EhK-OM-b39" firstAttribute="top" secondItem="xEH-5W-xYm" secondAttribute="top" id="wie-nh-g0G"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xEH-5W-xYm"/>
+                    </view>
+                    <connections>
+                        <outlet property="lblTitle" destination="EhK-OM-b39" id="u5j-PW-9ZF"/>
+                        <outlet property="tfAmount" destination="y35-IN-O94" id="cMB-X7-QV1"/>
+                        <segue destination="6SE-b9-rpz" kind="unwind" identifier="unwindSegueToSend" unwindAction="unwindToSendWithUnwindSegue:" id="u1w-KK-jHB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OUN-hU-cK0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="6SE-b9-rpz" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2885.5999999999999" y="903.59820089955031"/>
         </scene>
         <!--Create Wallet View Controller-->
         <scene sceneID="nMF-1d-VpF">
@@ -1840,6 +1941,7 @@
         <image name="GreenArrowUp.png" width="32" height="32"/>
         <image name="RedArrowDown.png" width="32" height="32"/>
         <image name="SIBLogo" width="253" height="80"/>
+        <image name="Vasyugan.jpg" width="1452" height="870"/>
         <image name="Vertical.png" width="35" height="225"/>
         <image name="action.png" width="40" height="40"/>
         <image name="back.png" width="40" height="40"/>

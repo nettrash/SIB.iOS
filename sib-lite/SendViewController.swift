@@ -23,6 +23,8 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	private var _otherAmount: Decimal?
 	private var _otherCurrency: Currency?
 	
+	private var processAction: (() -> Void)?
+	
 	var components: URLComponents?
 	
 	@IBOutlet var tfAddress: UITextField!
@@ -48,6 +50,10 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		} else {
 			tfAddress.becomeFirstResponder()
 		}
+		
+		if processAction != nil {
+			processAction!()
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -59,6 +65,11 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		if (segue.identifier == "scan-address") {
 			let dst = segue.destination as! ScanViewController
 			dst.unwindIdentifiers["scan-address"] = "unwindSegueToSend"
+		}
+		if (segue.identifier == "enter-other-amount") {
+			let dst = segue.destination as! EnterAmountViewController
+			dst.unwindIdentifiers["enter-other-amount"] = "unwindSegueToSend"
+			dst.otherTitle = NSLocalizedString("OtherCryptoTransferAmountTitle", comment: "currency") + " " + (_otherCurrency?.rawValue ?? "")
 		}
 	}
 	
@@ -101,15 +112,27 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 			case .BTC,
 				 .BIO:
 				//send SIB to other crypto
-				processOtherCrypto(src.currency, src.address, src.amount)
+				self.processAction = { self.processOtherCrypto(src.currency, src.address, src.amount) }
 				break
 			default:
 				break
 			}
 		}
+		
+		if (unwindSegue.source is EnterAmountViewController) {
+			let src = unwindSegue.source as! EnterAmountViewController
+			if src.amount != nil {
+				_otherAmount = src.amount
+				self.vWait.isHidden = false
+				self.app.model!.sellRate = 0
+				self.app.model!.getSellRate(_otherCurrency!.rawValue)
+			}
+		}
 	}
 
 	func processOtherCrypto(_ currency: Currency?, _ address: String?, _ amount: Decimal?) -> Void {
+		self.processAction = nil
+		
 		//Считаем курс sellRate
 		_otherCurrency = currency
 		_otherAddress = address
@@ -117,10 +140,13 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		
 		if (currency == nil) { return }
 		
-		self.vWait.isHidden = false
-		
-		self.app.model!.sellRate = 0
-		self.app.model!.getSellRate(currency!.rawValue)
+		if (_otherAmount ?? 0 <= 0) {
+			performSegue(withIdentifier: "enter-other-amount", sender: self)
+		} else {
+			self.vWait.isHidden = false
+			self.app.model!.sellRate = 0
+			self.app.model!.getSellRate(currency!.rawValue)
+		}
 	}
 	
 	@IBAction func closeClick(_ sender: Any?) -> Void {

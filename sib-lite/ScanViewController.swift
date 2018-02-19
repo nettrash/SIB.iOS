@@ -143,6 +143,11 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	
 	func parseSIBCode(code: String) -> Bool {
 		//SIB Code
+		if sibAddress.verify(code) {
+			address = code
+			currency = .SIB
+			return true
+		}
 		if (!code.lowercased().hasPrefix("sibcoin:")) { return false }
 		
 		let qDelIndex = code.index(of: ":")
@@ -182,6 +187,11 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	
 	func parseBTCCode(code: String) -> Bool {
 		//BTC Code
+		if sibAddress.verifyBTC(code) {
+			address = code
+			currency = .BTC
+			return true
+		}
 		if (!code.lowercased().hasPrefix("bitcoin:")) { return false }
 		
 		let qDelIndex = code.index(of: ":")
@@ -216,11 +226,16 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		}
 		currency = .BTC
 		
-		return amount ?? 0 > 0.0 && sibAddress.verifyBTC(address)
+		return sibAddress.verifyBTC(address)
 	}
 
 	func parseBIOCode(code: String) -> Bool {
 		//BIO Code
+		if sibAddress.verifyBIO(code) {
+			address = code
+			currency = .BIO
+			return true
+		}
 		if (!code.lowercased().hasPrefix("biocoin:")) { return false }
 		
 		let qDelIndex = code.index(of: ":")
@@ -252,15 +267,10 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		}
 		currency = .BIO
 		
-		return amount ?? 0.0 > 0 && sibAddress.verifyBIO(address)
+		return sibAddress.verifyBIO(address)
 	}
 
 	func found(code: String) -> Bool {
-		if sibAddress.verify(code) {
-			address = code
-			return true
-		}
-		
 		if (parseSIBCode(code: code)) {
 			return true
 		}
