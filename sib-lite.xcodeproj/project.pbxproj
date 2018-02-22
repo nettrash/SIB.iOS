@@ -194,6 +194,21 @@
 		E5A20A811FD5826A004B3907 /* sibTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A801FD5826A004B3907 /* sibTransaction.swift */; };
 		E5A20A831FD5890C004B3907 /* sibTransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */; };
 		E5A20A851FD5891B004B3907 /* sibTransactionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */; };
+		E5A49125203EAD8A009CEBA4 /* bitpayBuyerProvidedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49124203EAD8A009CEBA4 /* bitpayBuyerProvidedInfo.swift */; };
+		E5A4912B203EB33B009CEBA4 /* bitpayExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A4912A203EB33B009CEBA4 /* bitpayExchangeRates.swift */; };
+		E5A4912D203EB473009CEBA4 /* bitpayMinerFees.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A4912C203EB473009CEBA4 /* bitpayMinerFees.swift */; };
+		E5A4912F203EB4A6009CEBA4 /* bitpayMinerFee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A4912E203EB4A6009CEBA4 /* bitpayMinerFee.swift */; };
+		E5A49131203EB6FA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49130203EB6FA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift */; };
+		E5A49133203EB73E009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49132203EB73E009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift */; };
+		E5A49135203EB924009CEBA4 /* bitpayPaymentCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49134203EB924009CEBA4 /* bitpayPaymentCodes.swift */; };
+		E5A49137203EBBB5009CEBA4 /* bitpayInvoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56233CF2038382E00400785 /* bitpayInvoice.swift */; };
+		E5A49138203EBBB9009CEBA4 /* bitpayBuyerProvidedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49124203EAD8A009CEBA4 /* bitpayBuyerProvidedInfo.swift */; };
+		E5A49139203EBBBC009CEBA4 /* bitpayExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A4912A203EB33B009CEBA4 /* bitpayExchangeRates.swift */; };
+		E5A4913A203EBBC0009CEBA4 /* bitpayMinerFees.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A4912C203EB473009CEBA4 /* bitpayMinerFees.swift */; };
+		E5A4913B203EBBC5009CEBA4 /* bitpayMinerFee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A4912E203EB4A6009CEBA4 /* bitpayMinerFee.swift */; };
+		E5A4913C203EBBCA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49130203EB6FA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift */; };
+		E5A4913D203EBBCE009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49132203EB73E009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift */; };
+		E5A4913E203EBBDA009CEBA4 /* bitpayPaymentCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A49134203EB924009CEBA4 /* bitpayPaymentCodes.swift */; };
 		E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C781FBDC26F0032BDE8 /* EllipticCurve.swift */; };
 		E5AA3C7C1FBDCF660032BDE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7B1FBDCF660032BDE8 /* StringExtensions.swift */; };
 		E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */; };
@@ -574,6 +589,13 @@
 		E5A20A801FD5826A004B3907 /* sibTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransaction.swift; sourceTree = "<group>"; };
 		E5A20A821FD5890C004B3907 /* sibTransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionInput.swift; sourceTree = "<group>"; };
 		E5A20A841FD5891B004B3907 /* sibTransactionOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibTransactionOutput.swift; sourceTree = "<group>"; };
+		E5A49124203EAD8A009CEBA4 /* bitpayBuyerProvidedInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpayBuyerProvidedInfo.swift; sourceTree = "<group>"; };
+		E5A4912A203EB33B009CEBA4 /* bitpayExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpayExchangeRates.swift; sourceTree = "<group>"; };
+		E5A4912C203EB473009CEBA4 /* bitpayMinerFees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpayMinerFees.swift; sourceTree = "<group>"; };
+		E5A4912E203EB4A6009CEBA4 /* bitpayMinerFee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpayMinerFee.swift; sourceTree = "<group>"; };
+		E5A49130203EB6FA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpaySupportedTransactionCurrencies.swift; sourceTree = "<group>"; };
+		E5A49132203EB73E009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpaySupportedTransactionCurrencyInfo.swift; sourceTree = "<group>"; };
+		E5A49134203EB924009CEBA4 /* bitpayPaymentCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitpayPaymentCodes.swift; sourceTree = "<group>"; };
 		E5AA3C781FBDC26F0032BDE8 /* EllipticCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurve.swift; sourceTree = "<group>"; };
 		E5AA3C7B1FBDCF660032BDE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveFP.swift; sourceTree = "<group>"; };
@@ -1001,6 +1023,7 @@
 		E56EC0BD1F7660CE00EDE756 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E5A49136203EBAC1009CEBA4 /* BitPay */,
 				E56EC0C61F7662C800EDE756 /* Data */,
 				E56EC0BE1F76610000EDE756 /* ModelRoot.swift */,
 				E5865C0E1F96384900580954 /* BalanceDimension.swift */,
@@ -1016,7 +1039,6 @@
 				E557052E1FE9166400BCCD08 /* MemPool.swift */,
 				E55705301FE9168F00BCCD08 /* MemPoolItem.swift */,
 				E5DA2FD01FF78FC00013964D /* Currency.swift */,
-				E56233CF2038382E00400785 /* bitpayInvoice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1036,6 +1058,21 @@
 				E59C7DF51FDD556A00ABFC9A /* Convert.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E5A49136203EBAC1009CEBA4 /* BitPay */ = {
+			isa = PBXGroup;
+			children = (
+				E56233CF2038382E00400785 /* bitpayInvoice.swift */,
+				E5A49124203EAD8A009CEBA4 /* bitpayBuyerProvidedInfo.swift */,
+				E5A4912A203EB33B009CEBA4 /* bitpayExchangeRates.swift */,
+				E5A4912C203EB473009CEBA4 /* bitpayMinerFees.swift */,
+				E5A4912E203EB4A6009CEBA4 /* bitpayMinerFee.swift */,
+				E5A49130203EB6FA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift */,
+				E5A49132203EB73E009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift */,
+				E5A49134203EB924009CEBA4 /* bitpayPaymentCodes.swift */,
+			);
+			path = BitPay;
 			sourceTree = "<group>";
 		};
 		E5AA3C771FBDC2490032BDE8 /* Crypto */ = {
@@ -1640,6 +1677,7 @@
 				E50165D71F7657A200855FBC /* sib_lite.xcdatamodeld in Sources */,
 				E55727871FDFCBC60004983B /* Crypto.swift in Sources */,
 				E50165D11F7657A200855FBC /* RootViewController.swift in Sources */,
+				E5A4912B203EB33B009CEBA4 /* bitpayExchangeRates.swift in Sources */,
 				E5865C0D1F962CAA00580954 /* BaseViewController.swift in Sources */,
 				E50FBC441FD7F63500379A26 /* Unspent.swift in Sources */,
 				E5AA3C7C1FBDCF660032BDE8 /* StringExtensions.swift in Sources */,
@@ -1658,9 +1696,11 @@
 				E5E4AC7D1FBB4B5400BAAF46 /* Wallet.swift in Sources */,
 				E54539F51FEEE368002F3169 /* HistoryCellSelected.swift in Sources */,
 				E5A20A851FD5891B004B3907 /* sibTransactionOutput.swift in Sources */,
+				E5A49135203EB924009CEBA4 /* bitpayPaymentCodes.swift in Sources */,
 				E53BA4051FCE8791007386AE /* ReceiveViewController.swift in Sources */,
 				E54A70AE1F97C37A00AA422B /* HistoryItemType.swift in Sources */,
 				E54A70AA1F97978300AA422B /* History.swift in Sources */,
+				E5A49131203EB6FA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift in Sources */,
 				E5A20A831FD5890C004B3907 /* sibTransactionInput.swift in Sources */,
 				E5AA3C791FBDC26F0032BDE8 /* EllipticCurve.swift in Sources */,
 				E546C8BE1FC3177800892D32 /* ArrayExtensions.swift in Sources */,
@@ -1672,9 +1712,12 @@
 				E5D615AD1FDBF257005D4F3F /* sibWalletType.swift in Sources */,
 				E509A0DC1FF05F8300D89050 /* HistoryCell.swift in Sources */,
 				E50165CF1F7657A200855FBC /* AppDelegate.swift in Sources */,
+				E5A49125203EAD8A009CEBA4 /* bitpayBuyerProvidedInfo.swift in Sources */,
 				E52C9DB21FB8D4ED00DEC76E /* CreateWalletViewController.swift in Sources */,
 				E56D300B1FBC92E7003DE186 /* BigInteger.swift in Sources */,
 				E54539EF1FEEBC37002F3169 /* PINTextField.swift in Sources */,
+				E5A49133203EB73E009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift in Sources */,
+				E5A4912F203EB4A6009CEBA4 /* bitpayMinerFee.swift in Sources */,
 				E5C0C51E1FD1B0890039D1BC /* SIBLogoImageView.swift in Sources */,
 				E56DECF11F8F7629002DADE9 /* BalanceViewController.swift in Sources */,
 				E5920BAC1FF41CFB0051A213 /* DateExtensions.swift in Sources */,
@@ -1684,6 +1727,7 @@
 				E56233D02038382E00400785 /* bitpayInvoice.swift in Sources */,
 				E5AA3C801FBDD5850032BDE8 /* PointFP.swift in Sources */,
 				E56233C4203761E600400785 /* EnterAmountViewController.swift in Sources */,
+				E5A4912D203EB473009CEBA4 /* bitpayMinerFees.swift in Sources */,
 				E54A70AC1F979C0E00AA422B /* HistoryItem.swift in Sources */,
 				E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */,
 				E579F1601F922EFE00FA19E8 /* ScanViewController.swift in Sources */,
@@ -1706,9 +1750,13 @@
 				E55F725620080F89006B539B /* UIImageExtensions.swift in Sources */,
 				E55F725F200810EC006B539B /* Wallet.swift in Sources */,
 				E55F725B20080FA1006B539B /* sibTransactionInput.swift in Sources */,
+				E5A4913C203EBBCA009CEBA4 /* bitpaySupportedTransactionCurrencies.swift in Sources */,
 				E50165E71F7657A200855FBC /* sib_liteTests.swift in Sources */,
 				E55F725820080F90006B539B /* DateExtensions.swift in Sources */,
 				E55F724920080F51006B539B /* BigInteger.swift in Sources */,
+				E5A49138203EBBB9009CEBA4 /* bitpayBuyerProvidedInfo.swift in Sources */,
+				E5A4913A203EBBC0009CEBA4 /* bitpayMinerFees.swift in Sources */,
+				E5A49137203EBBB5009CEBA4 /* bitpayInvoice.swift in Sources */,
 				E55F724420080F4C006B539B /* sibAddress.swift in Sources */,
 				E55F725920080F96006B539B /* Convert.swift in Sources */,
 				E55F726320081134006B539B /* UnspentTransaction.swift in Sources */,
@@ -1721,13 +1769,17 @@
 				E55F725C20080FA5006B539B /* sibTransactionOutput.swift in Sources */,
 				E55F725320080F7D006B539B /* IntegerExtensions.swift in Sources */,
 				E55F724C20080F5D006B539B /* FieldElementFP.swift in Sources */,
+				E5A4913E203EBBDA009CEBA4 /* bitpayPaymentCodes.swift in Sources */,
 				E55F725720080F8D006B539B /* DoubleExtensions.swift in Sources */,
 				E55F725420080F80006B539B /* ApplicationExtension.swift in Sources */,
 				E55F724F20080F6B006B539B /* CurveFP.swift in Sources */,
 				E55F724D20080F61006B539B /* Barret.swift in Sources */,
+				E5A4913B203EBBC5009CEBA4 /* bitpayMinerFee.swift in Sources */,
+				E5A4913D203EBBCE009CEBA4 /* bitpaySupportedTransactionCurrencyInfo.swift in Sources */,
 				E55F725E20080FB1006B539B /* sibTransactionInputOutpoint.swift in Sources */,
 				E55F725020080F6F006B539B /* EllipticCurve.swift in Sources */,
 				E55F726120081127006B539B /* Address+CoreDataProperties.swift in Sources */,
+				E5A49139203EBBBC009CEBA4 /* bitpayExchangeRates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
