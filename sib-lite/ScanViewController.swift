@@ -22,6 +22,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 	var message: String? = nil
 	var instantSend: Bool = false
 	var currency: Currency = .SIB
+	var bitpay: bitpayInvoice? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -219,6 +220,19 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 				case "IS":
 					instantSend = qi.value ?? "" == "1"
 					break
+				case "r":
+					let bipUrl = qi.value ?? ""
+					if bitpayInvoice.canParse(url: bipUrl) {
+						let semaphore = DispatchSemaphore(value: 0)
+						bitpay = bitpayInvoice(url: URL(string: bipUrl.replacingOccurrences(of: "/i/", with: "/invoices/"))!, completion: {
+							(_ error: Error?) -> () in
+							
+							semaphore.signal()
+							
+						})
+						semaphore.wait() 
+					}
+					break;
 				default:
 					break
 				}
@@ -226,7 +240,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 		}
 		currency = .BTC
 		
-		return sibAddress.verifyBTC(address)
+		return sibAddress.verifyBTC(address) || bitpay != nil
 	}
 
 	func parseBIOCode(code: String) -> Bool {

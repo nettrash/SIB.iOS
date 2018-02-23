@@ -22,6 +22,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	private var _otherAddress: String?
 	private var _otherAmount: Decimal?
 	private var _otherCurrency: Currency?
+	private var _otherInvoice: bitpayInvoice?
 	
 	private var processAction: (() -> Void)?
 	
@@ -112,7 +113,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 			case .BTC,
 				 .BIO:
 				//send SIB to other crypto
-				self.processAction = { self.processOtherCrypto(src.currency, src.address, src.amount) }
+				self.processAction = { self.processOtherCrypto(src.currency, src.address, src.amount, src.bitpay) }
 				break
 			default:
 				break
@@ -130,17 +131,30 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		}
 	}
 
-	func processOtherCrypto(_ currency: Currency?, _ address: String?, _ amount: Decimal?) -> Void {
+	func processOtherCrypto(_ currency: Currency?, _ address: String?, _ amount: Decimal?, _ invoice: bitpayInvoice?) -> Void {
 		self.processAction = nil
 		
 		//Считаем курс sellRate
 		_otherCurrency = currency
 		_otherAddress = address
 		_otherAmount = amount
+		_otherInvoice = invoice
 		
-		if (currency == nil) { return }
+		if currency == nil { return }
 		
-		if (_otherAmount ?? 0 <= 0) {
+		if _otherInvoice != nil {
+			if _otherInvoice!.isAvailibleForProcess() {
+				self.vWait.isHidden = false
+				self.app.model!.sellRate = 0
+				_otherAmount = Decimal(_otherInvoice!.btcDue!)
+				_otherAddress = _otherInvoice!.bitcoinAddress
+				self.app.model!.getSellRate(currency!.rawValue)
+			} else {
+				_otherInvoice!.showErrorInfo(self)
+			}
+			return
+		}
+		if _otherAmount ?? 0 <= 0 {
 			performSegue(withIdentifier: "enter-other-amount", sender: self)
 		} else {
 			self.vWait.isHidden = false
@@ -346,30 +360,46 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 			if self.app.model!.Balance < (self._amount ?? 0) + commission {
 				self.vWait.isHidden = true
 				
-				let alert = UIAlertController.init(title: NSLocalizedString("Error", comment: "Ошибка"), message: NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self.app.model!.Balance), preferredStyle: UIAlertControllerStyle.alert)
-				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
-				self.present(alert, animated: true, completion: nil)
-				
+				if self._otherInvoice != nil {
+					var msg: String = NSLocalizedString("OtherCryptoTransferMessageAmountSIB", comment: "OtherCryptoTransferMessageAmountSIB") + String(format: "%.8f", self._amount!) + " SIB\n"
+					msg += NSLocalizedString("OtherCryptoTransferMessageCommission", comment: "OtherCryptoTransferMessageCommission") + String(format: "%.8f", commission) + " SIB\n"
+					msg += NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self.app.model!.Balance)
+						
+					self._otherInvoice!.showErrorInfo(self, msg)
+				} else {
+					let alert = UIAlertController.init(title: NSLocalizedString("Error", comment: "Ошибка"), message: NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self.app.model!.Balance), preferredStyle: UIAlertControllerStyle.alert)
+					alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+					self.present(alert, animated: true, completion: nil)
+				}
 				return
 			}
 
-			let title: String = NSLocalizedString("OtherCryptoTransferTitle", comment: "OtherCryptoTransferTitle") + self._otherCurrency!.rawValue
+			if self._otherInvoice != nil {
+				var msg: String = NSLocalizedString("OtherCryptoTransferMessageAmountSIB", comment: "OtherCryptoTransferMessageAmountSIB") + String(format: "%.8f", self._amount!) + " SIB\n"
+				msg += NSLocalizedString("OtherCryptoTransferMessageCommission", comment: "OtherCryptoTransferMessageCommission") + String(format: "%.8f", commission) + " SIB\n"
+				
+				self._otherInvoice!.showInfo(self, msg, {
+					print("pay invoice")
+				}, { self.vWait.isHidden = true })
+			} else {
+				let title: String = NSLocalizedString("OtherCryptoTransferTitle", comment: "OtherCryptoTransferTitle") + self._otherCurrency!.rawValue
 			
-			var msg: String = NSLocalizedString("OtherCryptoTransferMessageAddress", comment: "OtherCryptoTransferMessageAddress") + self._otherAddress! + "\n"
-			msg += NSLocalizedString("OtherCryptoTransferMessageAmount", comment: "OtherCryptoTransferMessageAmount") + String(format: "%.8f", (self._otherAmount! as NSDecimalNumber).doubleValue) + " " + self._otherCurrency!.rawValue + "\n"
-			msg += NSLocalizedString("OtherCryptoTransferMessageAmountSIB", comment: "OtherCryptoTransferMessageAmountSIB") + String(format: "%.8f", self._amount!) + " SIB\n"
-			msg += NSLocalizedString("OtherCryptoTransferMessageCommission", comment: "OtherCryptoTransferMessageCommission") + String(format: "%.8f", commission) + " SIB"
+				var msg: String = NSLocalizedString("OtherCryptoTransferMessageAddress", comment: "OtherCryptoTransferMessageAddress") + self._otherAddress! + "\n"
+				msg += NSLocalizedString("OtherCryptoTransferMessageAmount", comment: "OtherCryptoTransferMessageAmount") + String(format: "%.8f", (self._otherAmount! as NSDecimalNumber).doubleValue) + " " + self._otherCurrency!.rawValue + "\n"
+				msg += NSLocalizedString("OtherCryptoTransferMessageAmountSIB", comment: "OtherCryptoTransferMessageAmountSIB") + String(format: "%.8f", self._amount!) + " SIB\n"
+				msg += NSLocalizedString("OtherCryptoTransferMessageCommission", comment: "OtherCryptoTransferMessageCommission") + String(format: "%.8f", commission) + " SIB"
 			
-			let alert = UIAlertController.init(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
-			alert.addAction(UIAlertAction.init(title: NSLocalizedString("OtherCryptoTransferDo", comment: "Исполнить"), style: UIAlertActionStyle.default, handler: { _ in
-				//Регистрируем выплату
-				//Выплачиваем
-				self.app.model!.sell(self._otherCurrency!.rawValue, self._amount!, (self._otherAmount! as NSDecimalNumber).doubleValue, self._otherAddress!)
-				alert.dismiss(animated: true, completion: nil) }))
-			alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in
-				self.vWait.isHidden = true
-				alert.dismiss(animated: true, completion: nil) }))
-			self.present(alert, animated: true, completion: nil)
+				let alert = UIAlertController.init(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OtherCryptoTransferDo", comment: "Исполнить"), style: 	UIAlertActionStyle.default, handler: { _ in
+					//Регистрируем выплату
+					//Выплачиваем
+					self.app.model!.sell(self._otherCurrency!.rawValue, self._amount!, (self._otherAmount! as NSDecimalNumber).doubleValue, self._otherAddress!)
+					alert.dismiss(animated: true, completion: nil) }))
+				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: 	{ _ in
+					self.vWait.isHidden = true
+					alert.dismiss(animated: true, completion: nil) }))
+				self.present(alert, animated: true, completion: nil)
+			}
 		}
 	}
 	

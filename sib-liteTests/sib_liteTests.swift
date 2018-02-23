@@ -38,7 +38,7 @@ class sib_liteTests: XCTestCase {
 	func testBitPayInvoiceDeserialize_isCorrect() {
 		let expectation = XCTestExpectation.init(description: "testBitPayInvoiceDeserialize")
 
-		let url = URL(string: "https://bitpay.com/invoices/ShvPHvxLuwARmnLisSmnBg")
+		let url = URL(string: "https://bitpay.com/invoices/PbPg5haAL94t9jmgugtLxN")
 		let urlRequest: URLRequest = URLRequest(url: url!)
 		let session = URLSession.shared
 		let task = session.dataTask(with: urlRequest) {
@@ -47,7 +47,9 @@ class sib_liteTests: XCTestCase {
 			if error == nil {
 				let json = String(data: data!, encoding: .utf8)
 				let invoice = bitpayInvoice(json!)
-				XCTAssert(invoice.valid)
+				XCTAssert(invoice.isValid())
+				XCTAssert(invoice.isExpired())
+				XCTAssert(!invoice.isAvailibleForProcess())
 			} else {
 				XCTAssert(false)
 			}
