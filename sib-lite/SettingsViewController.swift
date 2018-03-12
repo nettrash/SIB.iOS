@@ -19,9 +19,13 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 	@IBOutlet var vWait: UIView!
 	@IBOutlet var scCurrency: UISegmentedControl!
 	@IBOutlet var pvProgress: UIProgressView!
+	@IBOutlet var lblVersion: UILabel!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		let dictionary = Bundle.main.infoDictionary!
+		let appversion = dictionary["CFBundleShortVersionString"] as! String
+		lblVersion.text = "v\(appversion)"
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {

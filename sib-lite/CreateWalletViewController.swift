@@ -66,8 +66,8 @@ class CreateWalletViewController: BaseViewController, UITextFieldDelegate {
 	}
 	
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-		let textFieldText: NSString = (textField.text ?? "") as NSString
-		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
+		//let textFieldText: NSString = (textField.text ?? "") as NSString
+		//let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
 		
 		return true;
 	}

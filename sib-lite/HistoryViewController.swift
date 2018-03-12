@@ -218,4 +218,15 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 		
 	}
 	
+	func newBitPayAddressComplete(_ address: String?) {
+		
+	}
+	
+	func payInvoiceError(_ error: String?) {
+		
+	}
+	
+	func payInvoiceComplete(_ txid: String?, _ btctxid: String?, _ message: String?) {
+		
+	}
 }

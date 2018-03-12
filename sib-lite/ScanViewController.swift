@@ -168,7 +168,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 			for qi in uriComponents!.queryItems! {
 				switch qi.name {
 				case "amount":
-					amount = Decimal(string: qi.value ?? "")
+					amount = Decimal(string: (qi.value ?? "").replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
 					break
 				case "message":
 					message = qi.value
@@ -212,7 +212,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 			for qi in uriComponents!.queryItems! {
 				switch qi.name {
 				case "amount":
-					amount = Decimal(string: qi.value ?? "")
+					amount = Decimal(string: (qi.value ?? "").replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
 					break
 				case "message":
 					message = qi.value
@@ -269,7 +269,7 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 			for qi in uriComponents!.queryItems! {
 				switch qi.name {
 				case "amount":
-					amount = Decimal(string: qi.value ?? "")
+					amount = Decimal(string: (qi.value ?? "").replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
 					break;
 				case "message":
 					message = qi.value

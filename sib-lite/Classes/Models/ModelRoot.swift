@@ -147,6 +147,113 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 		_checkOperation()
 	}
 	
+	func getNewAddressForOtherInvoice() {
+		_newBitPayAddress()
+	}
+	
+	func payInvoice(_ invoice: bitpayInvoice, _ txsign: Data, _ address: String, _ amount: Double, _ otherAddress: String, _ otherAmount: Decimal) {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			var json: [String:Any] = ["invoice":invoice.sourceJson!.data(using: String.Encoding.utf8)?.base64EncodedString() ?? ""]
+			json["tx"] = txsign.base64EncodedString()
+			json["address"] = address
+			json["amount"] = amount
+			json["otherAddress"] = otherAddress
+			json["otherAmount"] = otherAmount
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/payInvoice")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.delegate?.payInvoiceError(error?.localizedDescription ?? "No data")
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					if responseJSON["PayInvoiceResult"]?["Success"] as? Bool ?? false {
+						self.delegate?.payInvoiceComplete(responseJSON["PayInvoiceResult"]!["TransactionId"] as? String, responseJSON["PayInvoiceResult"]!["BTCTransactionId"] as? String, responseJSON["PayInvoiceResult"]!["Message"] as? String)
+					} else {
+						self.delegate?.payInvoiceError(responseJSON["PayInvoiceResult"]!["Message"] as? String)
+					}
+				} else {
+					self.delegate?.payInvoiceError("UNKNOWN ERROR")
+				}
+			}
+			
+			task.resume()
+		}
+	}
+	
+	private func _newBitPayAddress() {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			let json: [String:Any] = [:]
+			
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/getNewBitPayAddress")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					self.delegate?.newBitPayAddressComplete(nil)
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					if responseJSON["GetNewBitPayAddressResult"]?["Success"] as? Bool ?? false {
+						self.delegate?.newBitPayAddressComplete(responseJSON["GetNewBitPayAddressResult"]!["Address"] as? String)
+					}
+				}
+			}
+			
+			task.resume()
+		}
+	}
+
 	private func _checkOperation() {
 		//PaymentServicePassword 70FD2005-B198-4CE2-A5AE-CB93E4F99211
 		DispatchQueue.global().async {
@@ -1064,5 +1171,8 @@ protocol ModelRootDelegate {
 	func buyComplete()
 	func updateBuyRate()
 	func checkOpComplete(_ process: String)
+	func newBitPayAddressComplete(_ address: String?)
+	func payInvoiceError(_ error: String?)
+	func payInvoiceComplete(_ txid: String?, _ btctxid: String?, _ message: String?)
 }
 

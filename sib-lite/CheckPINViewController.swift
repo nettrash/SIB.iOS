@@ -102,7 +102,7 @@ class CheckPINViewController : BaseViewController, UITextFieldDelegate {
 			//Backspace
 			if textField == self.tfPIN1 { PIN0 = ""; self.tfPIN0.text = ""; self.tfPIN0.becomeFirstResponder() }
 			if textField == self.tfPIN2 { PIN0 = String(PIN0[String.Index(encodedOffset: 0)]); self.tfPIN1.text = ""; self.tfPIN1.becomeFirstResponder() }
-			if textField == self.tfPIN3 { PIN0 = PIN0.substring(to: String.Index(encodedOffset: 2)); self.tfPIN2.text = ""; self.tfPIN2.becomeFirstResponder() }
+			if textField == self.tfPIN3 { PIN0 = String(PIN0[String.Index(encodedOffset: 0)...String.Index(encodedOffset: 2)]); self.tfPIN2.text = ""; self.tfPIN2.becomeFirstResponder() }
 			return false
 		}
 		if txtAfterUpdate.count != 1 { return false }

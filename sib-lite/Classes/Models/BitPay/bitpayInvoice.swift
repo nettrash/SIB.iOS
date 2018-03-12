@@ -11,6 +11,8 @@ import UIKit
 
 class bitpayInvoice {
 	
+	public var sourceJson: String?
+	
 	public var url: URL?
 	public var posData: String?
 	public var status: String?
@@ -70,6 +72,8 @@ class bitpayInvoice {
 	}
 
 	func parse(_ jsonData: String) -> Void {
+		sourceJson = jsonData
+		
 		let json = try? JSONSerialization.jsonObject(with: jsonData.data(using: String.Encoding.utf8)!, options: [])
 		if let jsonRoot = json as? [String:Any] {
 			if let json = jsonRoot["data"] as? [String:Any] {

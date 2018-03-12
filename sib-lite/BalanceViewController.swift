@@ -113,7 +113,7 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 	}
 	
 	@objc func keyboardWillHide(notification: NSNotification) {
-		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+		if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
 			if self.view.frame.origin.y != 0 {
 				self.view.frame.origin.y = 0//+= keyboardSize.height / 2
 			}
@@ -171,26 +171,26 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 
 	@IBAction func unwindToBalance(unwindSegue: UIStoryboardSegue) {
 		if (unwindSegue.source is AddAddressViewController) {
-			let src = unwindSegue.source as! AddAddressViewController
+			//let src = unwindSegue.source as! AddAddressViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
 		if (unwindSegue.source is ReceiveViewController) {
-			let src = unwindSegue.source as! ReceiveViewController
+			//let src = unwindSegue.source as! ReceiveViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
 		if (unwindSegue.source is SendViewController) {
-			let src = unwindSegue.source as! SendViewController
+			//let src = unwindSegue.source as! SendViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
 		if (unwindSegue.source is HistoryViewController) {
-			let src = unwindSegue.source as! HistoryViewController
+			//let src = unwindSegue.source as! HistoryViewController
 			//app.model!.add(src.textFieldAddress.text!)
 		}
 		if (unwindSegue.source is WebViewController) {
-			let src = unwindSegue.source as! WebViewController
+			//let src = unwindSegue.source as! WebViewController
 		}
 		if (unwindSegue.source is ScanViewController) {
-			let src = unwindSegue.source as! ScanViewController
+			//let src = unwindSegue.source as! ScanViewController
 		}
 	}
 	
@@ -711,6 +711,18 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		}
 	}
 	
+	func newBitPayAddressComplete(_ address: String?) {
+		
+	}
+	
+	func payInvoiceError(_ error: String?) {
+		if error != nil { showError(error: error!) }
+	}
+	
+	func payInvoiceComplete(_ txid: String?, _ btctxid: String?, _ message: String?) {
+		
+	}
+
 	override func processUrlCommand() {
 		if app.needToProcessURL {
 			if (app.openUrl != nil) {

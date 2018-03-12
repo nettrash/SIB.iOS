@@ -46,14 +46,15 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		let app = UIApplication.shared.delegate as! AppDelegate
 		app.model!.delegate = self
 		parseComponents()
-		if tfAddress.text?.count ?? 0 > 0 {
-			tfAmount.becomeFirstResponder()
-		} else {
-			tfAddress.becomeFirstResponder()
-		}
 		
 		if processAction != nil {
 			processAction!()
+		} else {
+			if tfAddress.text?.count ?? 0 > 0 {
+				tfAmount.becomeFirstResponder()
+			} else {
+				tfAddress.becomeFirstResponder()
+			}
 		}
 	}
 	
@@ -216,7 +217,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		tx.addChange(amount: spent - _amount! - _commission!)
 		return tx
 	}
-	
+
 	private func _sendTransaction(_ tx: sibTransaction) -> Void {
 		let app = UIApplication.shared.delegate as! AppDelegate
 		app.model!.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
@@ -305,35 +306,47 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	
 	func unspetData(_ data: Unspent) -> Void {
 		_unspent = data
-		if verifyData() {
-			DispatchQueue.main.sync {
-				let tx: sibTransaction = self._prepareTransaction()
-				self._sendTransaction(tx)
-				self.vWait.isHidden = false;
-			}
+		if (self._otherInvoice != nil) {
+			//prepare signed transaction data to pay invoice
+			self._commission = Double(0.001 * (self._amount ?? 0))
+			let tx: sibTransaction = self._prepareTransaction()
+			app.model!.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
+			let sign = tx.sign(app.model!.Addresses)
+			//pay invoice
+			self.app.model!.payInvoice(self._otherInvoice!, sign, self._address!, self._amount!, self._otherAddress!, self._otherAmount!)
 		} else {
-			DispatchQueue.main.sync {
-				self.vWait.isHidden = true
-				let alert = UIAlertController.init(title: NSLocalizedString("Error", comment: "Ошибка"), message: NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self._unspentAmount!), preferredStyle: UIAlertControllerStyle.alert)
-				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
-				self.present(alert, animated: true, completion: nil)
+			if verifyData() {
+				DispatchQueue.main.sync {
+					let tx: sibTransaction = self._prepareTransaction()
+					self._sendTransaction(tx)
+					self.vWait.isHidden = false;
+				}
+			} else {
+				DispatchQueue.main.sync {
+					self.vWait.isHidden = true
+					let alert = UIAlertController.init(title: NSLocalizedString("Error", comment: "Ошибка"), message: NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self._unspentAmount!), preferredStyle: UIAlertControllerStyle.alert)
+					alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
+					self.present(alert, animated: true, completion: nil)
+				}
 			}
 		}
 	}
 	
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?) {
-		DispatchQueue.main.sync { self.vWait.isHidden = true }
-		if result {
+		DispatchQueue.main.async {
+			self.vWait.isHidden = true
+			if result {
 				let alert = UIAlertController.init(title: NSLocalizedString("SuccessSend", comment: "Успех"), message: NSLocalizedString("SuccessSendMessage", comment: "Success") + txid!, preferredStyle: UIAlertControllerStyle.alert)
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil); self.closeClick(nil) }))
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Share", comment: "Поделться"), style: UIAlertActionStyle.default, handler: { _ in self.shareText(txid!); alert.dismiss(animated: true, completion: nil) }))
 				self.present(alert, animated: true, completion: nil)
 			
-		} else {
+			} else {
 				//Добавить удаление последнего адреса Change
 				let alert = UIAlertController.init(title: NSLocalizedString("ErrorSend", comment: "Ошибка"), message: NSLocalizedString("ErrorSendMessage", comment: "Ошибка") + (message ?? ""), preferredStyle: UIAlertControllerStyle.alert)
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 				self.present(alert, animated: true, completion: nil)
+			}
 		}
 	}
 	
@@ -348,8 +361,15 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	
 	func sellComplete() {
 		DispatchQueue.main.async {
-			self.vWait.isHidden = true
-			self.closeClick(nil)
+			self._otherAddress = nil
+			self._otherInvoice = nil
+			self._otherAmount = nil
+			self._otherCurrency = nil
+			self._amount = nil
+			self._address = nil
+			self._commission = nil
+			self.tfAmount.text = ""
+			self.tfAddress.text = ""
 		}
 	}
 	
@@ -379,7 +399,9 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 				msg += NSLocalizedString("OtherCryptoTransferMessageCommission", comment: "OtherCryptoTransferMessageCommission") + String(format: "%.8f", commission) + " SIB\n"
 				
 				self._otherInvoice!.showInfo(self, msg, {
-					print("pay invoice")
+					
+					self.app.model!.getNewAddressForOtherInvoice()
+					
 				}, { self.vWait.isHidden = true })
 			} else {
 				let title: String = NSLocalizedString("OtherCryptoTransferTitle", comment: "OtherCryptoTransferTitle") + self._otherCurrency!.rawValue
@@ -419,6 +441,30 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		
 	}
 	
+	func newBitPayAddressComplete(_ address: String?) {
+		if address != nil && sibAddress.verify(address) {
+			//address for send getted
+			//refresh unspent data for prepare signed transaction data
+			self._address = address
+			self.app.model!.getUnspentData()
+		}
+	}
+	
+	func payInvoiceError(_ error: String?) {
+		DispatchQueue.main.async {
+			self.vWait.isHidden = true
+			if error != nil { self.showError(error: error!) }
+		}
+	}
+	
+	func payInvoiceComplete(_ txid: String?, _ btctxid: String?, _ message: String?) {
+		//Сообщить о результате корректно с использованием атрибутов
+		DispatchQueue.main.async {
+			self.vWait.isHidden = true
+			self.broadcastTransactionResult(true, txid, nil)
+		}
+	}
+
 	override func processUrlCommand() {
 		let app = UIApplication.shared.delegate as! AppDelegate
 		if app.needToProcessURL {

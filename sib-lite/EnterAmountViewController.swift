@@ -36,7 +36,7 @@ class EnterAmountViewController: BaseViewController, UITextFieldDelegate {
 	}
 
 	@IBAction func setAmount(_ sender: Any?) -> Void {
-		amount = Decimal.init(string: tfAmount.text!)
+		amount = Decimal.init(string: tfAmount.text!.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil))
 		performSegue(withIdentifier: unwindIdentifiers["enter-other-amount"]!, sender: self)
 	}
 	

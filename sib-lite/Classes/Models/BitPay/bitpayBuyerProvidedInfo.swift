@@ -12,4 +12,5 @@ class bitpayBuyerProvidedInfo {
 	
 	public var emailAddress: String?
 	public var selectedTransactionCurrency: String?
+	
 }
