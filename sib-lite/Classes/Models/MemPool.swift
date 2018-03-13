@@ -17,9 +17,6 @@ public class MemPool: NSObject {
 	}
 	
 	func load(_ mempool: [Any], addresses: [Address]) {
-		let addrs = addresses.map { (_ a: Address) -> String in
-			a.address
-		}
 		Items = mempool.map({ (_ t: Any) -> MemPoolItem in
 			
 			let mp = t as? [String: Any]
@@ -31,7 +28,7 @@ public class MemPool: NSObject {
 			mpi.seconds = mp?["Seconds"] as? Int64
 			mpi.prev_txid = mp?["PrevTransactionId"] as? String
 			mpi.prev_N = mp?["PrevN"] as? Int
-			mpi.isInput = mpi.value ?? 0 > 0//addrs.contains(mpi.address ?? "")
+			mpi.isInput = mpi.value ?? 0 > 0
 
 			return mpi
 		})
