@@ -61,3 +61,6 @@
 "UpdateAvailableTitle" = "Update";
 "UpdateAvailableMessage" = "A newer version of the application appeared.";
 "Update" = "Update now";
+"SupportSubject" = "Question about SIBCoin Wallet for iOS";
+"MailTitle" = "Mail send";
+"MailServicesAreNotAvailable" = "Mail services are not available.";

@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 import MobileCoreServices
+import MessageUI
 
-class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
+class SettingsViewController : BaseViewController, UIDocumentPickerDelegate, MFMailComposeViewControllerDelegate {
 
 	var keysAction = false
 	var app = UIApplication.shared.delegate as! AppDelegate
@@ -77,6 +78,28 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 	
 	@IBAction func closeClick(_ sender: Any?) -> Void {
 		performSegue(withIdentifier: unwindIdentifiers["settings-sib"]!, sender: self)
+	}
+	
+	@IBAction func supportClick(_ sender: Any?) -> Void {
+		if !MFMailComposeViewController.canSendMail() {
+			let alert = UIAlertController.init(title: NSLocalizedString("MailTitle", comment: "MailTitle"), message: NSLocalizedString("MailServicesAreNotAvailable", comment: "MailServicesAreNotAvailable"), preferredStyle: UIAlertControllerStyle.alert)
+			alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertActionStyle.cancel, handler: { _ in
+				alert.dismiss(animated: true, completion: nil)
+			}))
+			self.present(alert, animated: true, completion: nil)
+			return
+		}
+		
+		let composeVC = MFMailComposeViewController()
+		composeVC.mailComposeDelegate = self
+		
+		// Configure the fields of the interface.
+		composeVC.setToRecipients(["support@bitwallet.ge"])
+		composeVC.setSubject(NSLocalizedString("SupportSubject", comment: "SupportSubject"))
+		composeVC.setMessageBody("", isHTML: true)
+		
+		// Present the view controller modally.
+		self.present(composeVC, animated: true, completion: nil)
 	}
 
 	@IBAction func shareKeys(_ sender: Any?) -> Void {
@@ -246,4 +269,10 @@ class SettingsViewController : BaseViewController, UIDocumentPickerDelegate {
 		}
 	}
 
+	//MFMailComposeViewControllerDelegate
+
+	func mailComposeController(_ controller: MFMailComposeViewController,
+							   didFinishWith result: MFMailComposeResult, error: Error?) {
+		controller.dismiss(animated: true, completion: nil)
+	}
 }

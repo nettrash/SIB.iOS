@@ -214,6 +214,7 @@
 		E5AA3C7E1FBDD2D80032BDE8 /* CurveFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */; };
 		E5AA3C801FBDD5850032BDE8 /* PointFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C7F1FBDD5850032BDE8 /* PointFP.swift */; };
 		E5AA3C821FBDD58F0032BDE8 /* Barret.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA3C811FBDD58F0032BDE8 /* Barret.swift */; };
+		E5B3A4892058291200897D0D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B3A4842058291200897D0D /* MessageUI.framework */; };
 		E5B4AD531FE52CC200B0BA86 /* ActionButtonSend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD501FE52CC100B0BA86 /* ActionButtonSend@2x.png */; };
 		E5B4AD541FE52CC200B0BA86 /* ActionButtonSend.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD511FE52CC200B0BA86 /* ActionButtonSend.png */; };
 		E5B4AD551FE52CC200B0BA86 /* ActionButtonSend@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4AD521FE52CC200B0BA86 /* ActionButtonSend@3x.png */; };
@@ -601,6 +602,7 @@
 		E5AA3C7D1FBDD2D80032BDE8 /* CurveFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveFP.swift; sourceTree = "<group>"; };
 		E5AA3C7F1FBDD5850032BDE8 /* PointFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointFP.swift; sourceTree = "<group>"; };
 		E5AA3C811FBDD58F0032BDE8 /* Barret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barret.swift; sourceTree = "<group>"; };
+		E5B3A4842058291200897D0D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E5B4AD501FE52CC100B0BA86 /* ActionButtonSend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonSend@2x.png"; sourceTree = "<group>"; };
 		E5B4AD511FE52CC200B0BA86 /* ActionButtonSend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButtonSend.png; sourceTree = "<group>"; };
 		E5B4AD521FE52CC200B0BA86 /* ActionButtonSend@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActionButtonSend@3x.png"; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B3A4892058291200897D0D /* MessageUI.framework in Frameworks */,
 				E53A4501200B7309002F93AC /* WatchConnectivity.framework in Frameworks */,
 				E594F3681FED50DC0042C256 /* CardIO.framework in Frameworks */,
 				E5291BC21FEC0D0E000BEF89 /* MobileCoreServices.framework in Frameworks */,
@@ -887,6 +890,7 @@
 		E56EC0B61F765A9000EDE756 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5B3A4842058291200897D0D /* MessageUI.framework */,
 				E58D55E6200F64790092AA8C /* Intents.framework */,
 				E53A4500200B7309002F93AC /* WatchConnectivity.framework */,
 				E53A44F8200B6E0D002F93AC /* WatchKit.framework */,

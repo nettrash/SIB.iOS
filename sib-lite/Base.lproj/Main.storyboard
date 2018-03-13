@@ -1824,6 +1824,19 @@
                                     <action selector="scCurrencyValueChanged:" destination="aX8-tR-28a" eventType="valueChanged" id="fsc-Me-Yp6"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MlJ-JD-4F6">
+                                <rect key="frame" x="196" y="284" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="AtP-Cg-np5"/>
+                                    <constraint firstAttribute="height" constant="30" id="ki1-Gs-rtf"/>
+                                </constraints>
+                                <state key="normal" title="support@bitwallet.ge">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="supportClick:" destination="aX8-tR-28a" eventType="touchUpInside" id="gDt-he-MT8"/>
+                                </connections>
+                            </button>
                             <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GJ-cZ-J5v">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
@@ -1854,10 +1867,12 @@
                             <constraint firstItem="3GJ-cZ-J5v" firstAttribute="top" secondItem="PA4-SR-jd3" secondAttribute="top" id="9l1-W4-Qeb"/>
                             <constraint firstItem="h41-W7-MgI" firstAttribute="top" secondItem="qG5-JA-99u" secondAttribute="bottom" constant="46" id="C1G-cS-fhL"/>
                             <constraint firstItem="rxV-eG-uI7" firstAttribute="trailing" secondItem="k9E-9f-0QH" secondAttribute="trailing" constant="16" id="CY8-vl-toe"/>
+                            <constraint firstItem="rxV-eG-uI7" firstAttribute="trailing" secondItem="MlJ-JD-4F6" secondAttribute="trailing" constant="29" id="FIk-ZZ-A16"/>
                             <constraint firstItem="qG5-JA-99u" firstAttribute="centerX" secondItem="PA4-SR-jd3" secondAttribute="centerX" id="FcY-NI-B3P"/>
                             <constraint firstItem="HcW-5W-hHg" firstAttribute="top" secondItem="h41-W7-MgI" secondAttribute="bottom" constant="51" id="H7U-SF-sEn"/>
                             <constraint firstItem="Kvg-fv-aY3" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" constant="30" id="JsE-PT-4de"/>
                             <constraint firstItem="k9E-9f-0QH" firstAttribute="top" secondItem="h41-W7-MgI" secondAttribute="bottom" constant="23" id="MR9-p7-Vo7"/>
+                            <constraint firstItem="MlJ-JD-4F6" firstAttribute="top" secondItem="Kvg-fv-aY3" secondAttribute="bottom" constant="24" id="QIo-sm-jaS"/>
                             <constraint firstItem="AuF-Vg-Gbf" firstAttribute="top" secondItem="rxV-eG-uI7" secondAttribute="top" id="ReZ-4G-HMP"/>
                             <constraint firstItem="HcW-5W-hHg" firstAttribute="leading" secondItem="PA4-SR-jd3" secondAttribute="leadingMargin" constant="14" id="Tew-Du-INA"/>
                             <constraint firstItem="h41-W7-MgI" firstAttribute="leading" secondItem="rxV-eG-uI7" secondAttribute="leading" constant="16" id="Tfo-9R-Jwm"/>
