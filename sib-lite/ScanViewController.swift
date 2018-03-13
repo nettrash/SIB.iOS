@@ -226,7 +226,9 @@ class ScanViewController: BaseViewController, AVCaptureMetadataOutputObjectsDele
 						let semaphore = DispatchSemaphore(value: 0)
 						bitpay = bitpayInvoice(url: URL(string: bipUrl.replacingOccurrences(of: "/i/", with: "/invoices/"))!, completion: {
 							(_ error: Error?) -> () in
-							
+							if error != nil {
+								self.showError(error: error!.localizedDescription)
+							}
 							semaphore.signal()
 							
 						})
