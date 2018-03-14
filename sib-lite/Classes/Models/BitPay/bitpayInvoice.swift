@@ -182,15 +182,15 @@ class bitpayInvoice {
 	}
 
 	func showErrorInfo(_ vc: UIViewController, _ msg: String) -> Void {
-		var msg = "";
+		var s = msg;
 		if !isValid() {
-			msg = "BitPay Invoice is invalid"
+			s = "BitPay Invoice is invalid"
 		} else {
 			if isExpired() {
-				msg = "\(invoiceInformation())\n\(msg)"
+				s = "\(invoiceInformation())\n\(msg)"
 			}
 		}
-		let alert = UIAlertController.init(title: "BitPay Invoice", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+		let alert = UIAlertController.init(title: "BitPay Invoice", message: s, preferredStyle: UIAlertControllerStyle.alert)
 		alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Отмена"), style: UIAlertActionStyle.cancel, handler: { _ in alert.dismiss(animated: true, completion: nil) }))
 		vc.present(alert, animated: true, completion: nil)
 		

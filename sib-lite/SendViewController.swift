@@ -381,9 +381,9 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 				self.vWait.isHidden = true
 				
 				if self._otherInvoice != nil {
-					var msg: String = NSLocalizedString("OtherCryptoTransferMessageAmountSIB", comment: "OtherCryptoTransferMessageAmountSIB") + String(format: "%.8f", self._amount!) + " SIB\n"
-					msg += NSLocalizedString("OtherCryptoTransferMessageCommission", comment: "OtherCryptoTransferMessageCommission") + String(format: "%.8f", commission) + " SIB\n"
-					msg += NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self.app.model!.Balance)
+					var msg: String = "\n" + NSLocalizedString("OtherCryptoTransferMessageAmountSIB", comment: "OtherCryptoTransferMessageAmountSIB") + String(format: "%.8f", self._amount!) + " SIB\n\n"
+					msg += NSLocalizedString("OtherCryptoTransferMessageCommission", comment: "OtherCryptoTransferMessageCommission") + String(format: "%.8f", commission) + " SIB\n\n"
+					msg += NSLocalizedString("SendAmountError", comment: "Ошибка") + String(format: "%.2f", self.app.model!.Balance) + " SIB\n"
 						
 					self._otherInvoice!.showErrorInfo(self, msg)
 				} else {
