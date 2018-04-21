@@ -209,13 +209,13 @@
          contextName = "closure #1 in SettingsViewController.shareKeys(_:):SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "alert.textFields![0].text">
+            </PersistentString>
+            <PersistentString
                value = "&quot;VxuSAma7AJlNqH7Z/bNPO6UbwK0AChRWoTSTA9FjF52lc9bp2OL177NxYwT/ox5g&quot;.aesDecrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
             </PersistentString>
             <PersistentString
                value = "(app.model!.Addresses[0].privateKey as Data).base64EncodedString().aesEncrypt(key: psw, iv: &quot;20219510518024419136177230&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "alert.textFields![0].text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -279,6 +279,26 @@
          <PersistentStrings>
             <PersistentString
                value = "mod.intValue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AppDelegate.checkAvailableUpdate():AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Int(nVersion!)">
+            </PersistentString>
+            <PersistentString
+               value = "Int(nAppVersion!*100) - 100 * Int(nAppVersion!)">
+            </PersistentString>
+            <PersistentString
+               value = "String(version!.suffix(from: pointIndex!))!">
+            </PersistentString>
+            <PersistentString
+               value = "String(appversion.suffix(from: appPointIndex!))">
+            </PersistentString>
+            <PersistentString
+               value = "Int(nAppVersion!)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -168,13 +168,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			if version == nil { return }
 			let nVersion: Double? = (Decimal.init(string: version!) as NSDecimalNumber?)?.doubleValue
 			if nVersion == nil { return }
-		
+			var pointIndex = version?.index(of: ".")
+			pointIndex = version?.index(after: pointIndex!)
+			
 			let dictionary = Bundle.main.infoDictionary!
 			let appversion = dictionary["CFBundleShortVersionString"] as! String
 			let nAppVersion: Double? = (Decimal.init(string: appversion) as NSDecimalNumber?)?.doubleValue
 			if nAppVersion == nil { return }
+			var appPointIndex = appversion.index(of: ".")
+			appPointIndex = appversion.index(after: appPointIndex!)
 			
-			if nVersion! > nAppVersion! {
+			if Int(nVersion!) > Int(nAppVersion!) ||
+				(Int(nVersion!) == Int(nAppVersion!) &&
+					Int(String(version!.suffix(from: pointIndex!)))! > Int(String(appversion.suffix(from: appPointIndex!)))!) {
 
 				let alert = UIAlertController.init(title: NSLocalizedString("UpdateAvailableTitle", comment: "UpdateAvailableTitle"), message: NSLocalizedString("UpdateAvailableMessage", comment: "UpdateAvailableTitle"), preferredStyle: UIAlertControllerStyle.alert)
 				alert.addAction(UIAlertAction.init(title: NSLocalizedString("Update", comment: "Обновить"), style: UIAlertActionStyle.default, handler: { _ in
