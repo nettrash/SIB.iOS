@@ -37,7 +37,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.12</string>
+	<string>1.13</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -52,13 +52,39 @@
 				<string>sibcoin</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>symbol</string>
+			<key>CFBundleURLName</key>
+			<string>ru.nettrash.sib-lite.btc</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>bitcoin</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>symbol</string>
+			<key>CFBundleURLName</key>
+			<string>ru.nettrash.sib-lite.bio</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>biocoin</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>57</string>
+	<string>59</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>QR SIBCoin</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Login</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>QR SIBCoin</string>
 	<key>NSSiriUsageDescription</key>

@@ -28,7 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 		let components = URLComponents.init(url: url, resolvingAgainstBaseURL: true)
-		if components?.scheme != "sibcoin" && components?.scheme != "file" {
+		if components?.scheme?.lowercased() != "sibcoin" &&
+			components?.scheme?.lowercased() != "biocoin" &&
+			components?.scheme?.lowercased() != "bitcoin" &&
+			components?.scheme?.lowercased() != "file" {
 			return false
 		}
 		needToProcessURL = true

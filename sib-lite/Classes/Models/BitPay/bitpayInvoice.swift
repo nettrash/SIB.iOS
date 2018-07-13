@@ -159,7 +159,9 @@ class bitpayInvoice {
 			isValid() &&
 			!isExpired() &&
 			supportedTransactionCurrencies?.BTC?.enabled ?? false == true &&
-			buyerProvidedInfo?.selectedTransactionCurrency?.uppercased() ?? "" == "BTC"
+			buyerProvidedInfo?.selectedTransactionCurrency?.uppercased() ?? "" == "BTC" &&
+			btcDue != nil &&
+			sibAddress.verifyBTC(bitcoinAddress)
 	}
 	
 	static func canParse(url: String) -> Bool {

@@ -17,7 +17,7 @@ class PINTextField: UITextField {
 		super.deleteBackward()
 		
 		if (shouldDismiss) {
-			self.delegate?.textField!(self, shouldChangeCharactersIn: NSRange.init(location: 0, length: 0), replacementString: "")
+			let _ = self.delegate?.textField!(self, shouldChangeCharactersIn: NSRange.init(location: 0, length: 0), replacementString: "")
 		}
 	}
 }

@@ -208,8 +208,11 @@ class sibAddress: NSObject {
 	
 	static func spendToScript(_ address: String) -> [UInt8] {
 		let addrBytes = try! decodeBase58(address)
+		let version = addrBytes[0]
 		var retVal: [UInt8] = []
-		retVal.append(118) //OP_DUP
+		if version != 40 {
+			retVal.append(118) //OP_DUP
+		}
 		retVal.append(169) //HASH_160
 		let cnt = addrBytes.count - 5
 		if cnt < 76 {
@@ -233,8 +236,12 @@ class sibAddress: NSObject {
 			}
 		}
 		retVal.append(contentsOf: addrBytes[1..<addrBytes.count-4])
-		retVal.append(136) //OP_EQUALVERIFY
-		retVal.append(172) //OP_CHECKSIG
+		if version != 40 {
+			retVal.append(136) //OP_EQUALVERIFY
+			retVal.append(172) //OP_CHECKSIG
+		} else {
+			retVal.append(135) //OP_EQUAL
+		}
 		return retVal
 	}
 }

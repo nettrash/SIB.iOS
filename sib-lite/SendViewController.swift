@@ -45,7 +45,7 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		super.viewDidAppear(animated)
 		let app = UIApplication.shared.delegate as! AppDelegate
 		app.model!.delegate = self
-		parseComponents()
+		parseComponents(true)
 		
 		if processAction != nil {
 			processAction!()
@@ -75,27 +75,61 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		}
 	}
 	
-	func parseComponents() -> Void {
+	func parseComponents(_ includeOtherCrypto: Bool) -> Void {
 		if components != nil {
-			tfAddress.text = components?.host
-			if components?.queryItems != nil {
-				for qi in components!.queryItems! {
-					switch qi.name {
-					case "amount":
-						tfAmount.text = qi.value ?? ""
-						break;
-					case "message":
-						//message = qi.value
-						break;
-					case "IS":
-						//scInstantSend.isOn = qi.value ?? "" == "1"
-						break;
-					default:
-						break;
+			if components?.scheme?.lowercased() == "sibcoin" {
+
+				tfAddress.text = components?.host
+				if components?.queryItems != nil {
+					for qi in components!.queryItems! {
+						switch qi.name {
+						case "amount":
+							tfAmount.text = qi.value ?? ""
+							break;
+						case "message":
+							//message = qi.value
+							break;
+						case "IS":
+							//scInstantSend.isOn = qi.value ?? "" == "1"
+							break;
+						default:
+							break;
+						}
 					}
 				}
+				components = nil
 			}
-			components = nil
+			if includeOtherCrypto && (components?.scheme?.lowercased() == "bitcoin" || components?.scheme?.lowercased() == "biocoin") {
+				var ocCurrency: Currency?
+				
+				switch components?.scheme?.lowercased() {
+				case "bitcoin":
+					ocCurrency = Currency.BTC
+					break
+				case "biocoin":
+					ocCurrency = Currency.BIO
+					break
+				default:
+					break
+				}
+				
+				let ocAddress: String? = components?.host
+				var ocAmount: String = ""
+				
+				if components?.queryItems != nil {
+					for qi in components!.queryItems! {
+						switch qi.name {
+						case "amount":
+							ocAmount = qi.value ?? ""
+							break
+						default:
+							break
+						}
+					}
+				}
+				components = nil
+				processOtherCrypto(ocCurrency, ocAddress, Double.init(ocAmount) != nil ? Decimal.init(Double.init(ocAmount)!) : nil, nil)
+			}
 		}
 	}
 	
@@ -254,12 +288,24 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
 		
 		if textField == tfAddress {
-			if (sibAddress.verify(txtAfterUpdate)) {
+			
+			if sibAddress.verify(txtAfterUpdate) {
 				textField.backgroundColor = UIColor(displayP3Red: 0.9, green: 1, blue: 0.9, alpha: 0.8)
 				textField.text = txtAfterUpdate
 				tfAmount.becomeFirstResponder()
 				return false
 			} else {
+				if sibAddress.verifyBTC(txtAfterUpdate) {
+					textField.text = ""
+					processOtherCrypto(.BTC, txtAfterUpdate, nil, nil)
+					return false
+				} else {
+					if sibAddress.verifyBIO(txtAfterUpdate) {
+						textField.text = ""
+						processOtherCrypto(.BIO, txtAfterUpdate, nil, nil)
+						return false
+					}
+				}
 				textField.backgroundColor = UIColor(displayP3Red: 1, green: 0.9, blue: 0.9, alpha: 0.8)
 			}
 		}
@@ -470,9 +516,11 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		if app.needToProcessURL {
 			if (app.openUrl != nil) {
 				components = URLComponents(url: app.openUrl!, resolvingAgainstBaseURL: true)
-				if components?.scheme?.lowercased() == "sibcoin" {
+				if components?.scheme?.lowercased() == "sibcoin" ||
+					components?.scheme?.lowercased() == "biocoin" ||
+					components?.scheme?.lowercased() == "bitcoin" {
 					app.needToProcessURL = false
-					parseComponents()
+					parseComponents(false)
 				} else {
 					super.processUrlCommand()
 				}
