@@ -26,7 +26,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>ru.nettrash.sib-lite</string>
+	<string>ru.nettrash.sib-lite-bwas</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

@@ -11,6 +11,6 @@ import CoreData
 
 class PersistentContainer: NSPersistentContainer {
 	override class func defaultDirectoryURL() -> URL{
-		return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ru.nettrash.sibcoinwallet")!
+		return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ru.nettrash.sibcoinwallet-bwas")!
 	}
 }
