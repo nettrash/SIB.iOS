@@ -248,13 +248,18 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 				break;
 			}
 		}
-		tx.addChange(amount: spent - _amount! - _commission!)
+		if spent - _amount! - _commission! > 0 {
+			tx.addChange(amount: spent - _amount! - _commission!)
+		}
 		return tx
 	}
 
 	private func _sendTransaction(_ tx: sibTransaction) -> Void {
 		let app = UIApplication.shared.delegate as! AppDelegate
-		app.model!.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
+		if tx.Change != nil && tx.Change!.PrivateKey != nil &&
+			tx.Change!.PublicKey != nil && tx.Change!.Address != nil && tx.Change!.WIF != nil {
+			app.model!.storeWallet(tx.Change!, true, .Change) //В слычае неуспеха отправки надо удалять
+		}
 		let sign = tx.sign(app.model!.Addresses)
 		print(sign.hexEncodedString())
 		//Отправляем sign как rawtx
@@ -419,6 +424,13 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 		}
 	}
 	
+	func sellError(error: String?) {
+		DispatchQueue.main.async {
+			self.vWait.isHidden = true
+			if error != nil { self.showError(error: error!) } else { self.showError(error: NSLocalizedString("SellError", comment: "SellError")) }
+		}
+	}
+	
 	func updateSellRate() {
 		DispatchQueue.main.async {
 			self._amount = (self._otherAmount! as NSDecimalNumber).doubleValue / self.app.model!.sellRate
@@ -476,6 +488,10 @@ class SendViewController : BaseViewController, ModelRootDelegate, UITextFieldDel
 	}
 	
 	func buyComplete() {
+		
+	}
+	
+	func buyError(error: String?) {
 		
 	}
 	

@@ -199,6 +199,9 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	func sellComplete() {
 	}
 
+	func sellError(error: String?) {
+	}
+	
 	func updateSellRate() {
 	}
 	
@@ -207,6 +210,10 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 	}
 	
 	func buyComplete() {
+		
+	}
+	
+	func buyError(error: String?) {
 		
 	}
 	

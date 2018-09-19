@@ -64,3 +64,5 @@
 "SupportSubject" = "Question about SIBCoin Wallet for iOS";
 "MailTitle" = "Mail send";
 "MailServicesAreNotAvailable" = "Mail services are not available.";
+"BuyError" = "Purchase can't complete. Please try again later.";
+"SellError" = "Sell can't complete. Please try again later.";

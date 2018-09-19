@@ -640,6 +640,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		})
 	}
 	
+	func sellError(error: String?) {
+		if error != nil { showError(error: error!) } else { showError(error: NSLocalizedString("SellError", comment: "SellError")) }
+	}
+
 	func updateSellRate() {
 		DispatchQueue.main.sync {
 			self.lblSellRate.text = " 1 SIB ~ \(String(format: "%.2f", app.model!.sellRate)) " + app.model!.currency.symbol() + " \n " + NSLocalizedString(app.model!.currency.rawValue+"Commission", comment: "commission text")
@@ -664,6 +668,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		checkOpComplete(app.model!.buyState)
 	}
 	
+	func buyError(error: String?) {
+		if error != nil { showError(error: error!) } else { showError(error: NSLocalizedString("BuyError", comment: "BuyError")) }
+	}
+
 	func updateBuyRate() {
 		DispatchQueue.main.sync {
 			self.lblBuyRate.text = " 1 SIB ~ \(String(format: "%.2f", Double(1) / app.model!.buyRate)) " + app.model!.currency.symbol()
@@ -806,6 +814,10 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		setButtonText(self.btnSIBBuy, NSLocalizedString("BuyButtonText", comment: "BuyButtonText") + String(format: "%.2f", amountBuy * Double(1)/app.model!.buyRate) + " " + app.model!.currency.symbol())
 	}
 	
+	func requestRateForAmount(_ amount: Double) {
+		app.model!.getBuyRateWithAmount(app.model!.currency.rawValue, amount)
+	}
+
 	func updateSellAmount(_ txt: String) {
 		if txt == "" || self.app.model!.sellRate == 0 {
 			setButtonText(self.btnSIBSell, NSLocalizedString("EmptySellButtonText", comment: "EmptySellButtonText"))
@@ -872,6 +884,8 @@ class BalanceViewController: BaseViewController, UITableViewDelegate, UITableVie
 		}
 
 		if textField == self.tfAmount_Buy {
+			let n = Double(txtAfterUpdate.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)) ?? 0
+			requestRateForAmount(n);
 			updateBuyAmount(txtAfterUpdate)
 		}
 		

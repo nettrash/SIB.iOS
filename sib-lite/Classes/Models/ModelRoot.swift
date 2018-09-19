@@ -134,6 +134,10 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 	func getBuyRate(_ currency: String) -> Void {
 		_getBuyRate(currency)
 	}
+	
+	func getBuyRateWithAmount(_ currency: String, _ amount: Double) -> Void {
+		_getBuyRateWithAmount(currency, amount)
+	}
 
 	func sell(_ currency: String, _ amountSIB: Double, _ amount: Double, _ pan: String) -> Void {
 		_processSell(currency, amountSIB, amount, pan)
@@ -422,7 +426,11 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 										//Отправляем sign как rawtx
 										self.broadcastTransaction(sign)
 										self.delegate?.sellComplete()
+									} else {
+										self.delegate?.sellError(error: nil)
 									}
+								} else {
+									self.delegate?.sellError(error: nil)
 								}
 							}
 							task.resume()
@@ -492,7 +500,11 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 						self.buyRedirectUrl = responseJSON["RegisterBuyResult"]!["RedirectUrl"] as! String
 						self.buyState = responseJSON["RegisterBuyResult"]!["State"] as! String
 						self.delegate?.buyComplete()
+					} else {
+						self.delegate?.buyError(error: nil)
 					}
+				} else {
+					self.delegate?.buyError(error: nil)
 				}
 			}
 			
@@ -791,7 +803,6 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 		}
 	}
 
-	
 	private func _getSellRate(_ currency: String) -> Void {
 		DispatchQueue.global().async {
 			// prepare auth data
@@ -879,6 +890,55 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 					//Обрабатываем результат
 					if responseJSON["BuyRateResult"]!["Success"] as! Bool {
 						self.buyRate = responseJSON["BuyRateResult"]?["Rate"] as! Double
+						self.delegate?.updateBuyRate()
+					}
+				}
+			}
+			
+			task.resume()
+		}
+	}
+
+	private func _getBuyRateWithAmount(_ currency: String, _ amount: Double) -> Void {
+		DispatchQueue.global().async {
+			// prepare auth data
+			let ServiceName = "SIB"
+			let ServiceSecret = "E0FB115E-80D8-4F4E-9701-E655AF9E84EB"
+			let md5src = "\(ServiceName)\(ServiceSecret)"
+			let md5digest = Crypto.md5(md5src)
+			let ServicePassword = md5digest.map { String(format: "%02hhx", $0) }.joined()
+			let base64Data = "\(ServiceName):\(ServicePassword)".data(using: String.Encoding.utf8)?.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+			
+			// prepare json data
+			var json: [String:Any] = ["currency": currency]
+			json["amount"] = amount
+
+			let jsonData = try? JSONSerialization.data(withJSONObject: json)
+			
+			// create post request
+			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/buyRateWithAmount")!
+			var request = URLRequest(url: url)
+			request.httpMethod = "POST"
+			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+			request.addValue("application/json", forHTTPHeaderField: "Accept")
+			request.addValue("Basic \(base64Data ?? "")", forHTTPHeaderField: "Authorization")
+			
+			// insert json data to the request
+			request.httpBody = jsonData
+			
+			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+				guard let data = data, error == nil else {
+					print(error?.localizedDescription ?? "No data")
+					return
+				}
+				let responseString = String(data: data, encoding: String.Encoding.utf8)
+				print(responseString ?? "nil")
+				let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+				if let responseJSON = responseJSON as? [String: [String: Any]] {
+					print(responseJSON)
+					//Обрабатываем результат
+					if responseJSON["BuyRateWithAmountResult"]!["Success"] as! Bool {
+						self.buyRate = responseJSON["BuyRateWithAmountResult"]?["Rate"] as! Double
 						self.delegate?.updateBuyRate()
 					}
 				}
@@ -1166,9 +1226,11 @@ protocol ModelRootDelegate {
 	func broadcastTransactionResult(_ result: Bool, _ txid: String?, _ message: String?)
 	func sellStart()
 	func sellComplete()
+	func sellError(error: String?)
 	func updateSellRate()
 	func buyStart()
 	func buyComplete()
+	func buyError(error: String?)
 	func updateBuyRate()
 	func checkOpComplete(_ process: String)
 	func newBitPayAddressComplete(_ address: String?)
