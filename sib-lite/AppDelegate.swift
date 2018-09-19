@@ -19,14 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var openUrl: URL? = nil
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         model = ModelRoot(self)
         
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let components = URLComponents.init(url: url, resolvingAgainstBaseURL: true)
         if components?.scheme?.lowercased() != "sibcoin" &&
             components?.scheme?.lowercased() != "biocoin" &&
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let vc = UIApplication.topViewController()
             
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = vc!.view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

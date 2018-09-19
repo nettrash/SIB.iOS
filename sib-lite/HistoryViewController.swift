@@ -148,7 +148,7 @@ class HistoryViewController : BaseViewController, ModelRootDelegate, UITableView
 			selectedIndex = nil
 		}
 		tableView.deselectRow(at: indexPath, animated: true)
-		tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+		tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
 	}
 	
 	//ModelRootDelegate

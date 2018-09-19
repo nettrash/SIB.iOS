@@ -17,12 +17,4 @@ extension UIImage {
 		UIImage(ciImage: ciImage).draw(in: CGRect(origin: .zero, size: size))
 		return UIGraphicsGetImageFromCurrentImageContext()
 	}
-	
-	var pngData: Data? {
-		UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
-		defer { UIGraphicsEndImageContext() }
-		UIImage(ciImage: self.ciImage!).draw(in: CGRect(origin: .zero, size: self.size))
-		guard let redraw = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-		return UIImagePNGRepresentation(redraw)
-	}
 }

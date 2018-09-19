@@ -1209,7 +1209,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 				let transformedImage = qrcodeImage!.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
 				
 				let image = UIImage(ciImage: transformedImage)
-				session.sendMessageData(image.pngData!, replyHandler: nil, errorHandler: nil)
+				session.sendMessageData(image.pngData()!, replyHandler: nil, errorHandler: nil)
 			}
 		}
 	}
