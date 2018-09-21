@@ -301,7 +301,11 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 					print(responseJSON)
 					if responseJSON["CheckOpResult"]?["Success"] as? Bool ?? false {
 						self.delegate?.checkOpComplete(responseJSON["CheckOpResult"]!["State"] as! String)
+					} else {
+						self.delegate?.checkOpComplete("ERROR")
 					}
+				} else {
+					self.delegate?.checkOpComplete("ERROR")
 				}
 			}
 			
@@ -565,6 +569,9 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 						//Запрашиваем историю
 						self._loadTransactionsData()
 					}
+				} else {
+					self.isRefresh = false
+					self.delegate?.stopBalanceUpdate(error: "No data")
 				}
 			}
 		
@@ -624,6 +631,9 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 						self.HistoryItems.load(txs!, addresses: self.Addresses)
 					}
 					self._loadMemoryPoolData()
+				} else {
+					self.delegate?.stopHistoryUpdate()
+					self.isHistoryRefresh = false
 				}
 			}
 			
@@ -727,8 +737,8 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let task = URLSession.shared.dataTask(with: request) { data, response, error in
 				guard let data = data, error == nil else {
 					print(error?.localizedDescription ?? "No data")
-					self.delegate?.stopHistoryUpdate()
 					self.isHistoryRefresh = false
+					self.delegate?.stopHistoryUpdate()
 					return
 				}
 				let responseString = String(data: data, encoding: String.Encoding.utf8)
@@ -742,8 +752,11 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 						self.MemoryPool.load(mempoolItems!, addresses: self.Addresses)
 					}
 					//Инициализируем историю
-					self.delegate?.stopHistoryUpdate()
 					self.isHistoryRefresh = false
+					self.delegate?.stopHistoryUpdate()
+				} else {
+					self.isHistoryRefresh = false
+					self.delegate?.stopHistoryUpdate()
 				}
 			}
 			
