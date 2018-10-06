@@ -1215,14 +1215,20 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 				filter!.setValue("Q", forKey: "inputCorrectionLevel")
 				
 				let qrcodeImage = filter!.outputImage
-				
+				if (qrcodeImage == nil) {
+					return
+				}
 				let scaleX = 110.0 / qrcodeImage!.extent.size.width
 				let scaleY = 110.0 / qrcodeImage!.extent.size.height
 				
 				let transformedImage = qrcodeImage!.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
 				
 				let image = UIImage(ciImage: transformedImage)
-				session.sendMessageData(image.pngData()!, replyHandler: nil, errorHandler: nil)
+				let imgData = image.pngData()
+				if (imgData == nil) {
+					return
+				}
+				session.sendMessageData(data, replyHandler: nil, errorHandler: nil)
 			}
 		}
 	}
