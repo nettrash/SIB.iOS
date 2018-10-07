@@ -79,6 +79,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 		} catch {
 		}
 	}
+	
 	func initWatch() {
 		if WCSession.isSupported() {
 			session = WCSession.default
@@ -1209,26 +1210,31 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			}
 			if commands["ReceiveQR"] == "Incoming" {
 				let data = (SIB!.URIScheme + AddressesForIncoming[AddressesForIncoming.count-1].address).data(using: String.Encoding.ascii)
-				let filter = CIFilter(name: "CIQRCodeGenerator")
 				
+				let filter = CIFilter(name: "CIQRCodeGenerator")
+				filter!.setDefaults()
 				filter!.setValue(data, forKey: "inputMessage")
-				filter!.setValue("Q", forKey: "inputCorrectionLevel")
+				filter!.setValue("H", forKey: "inputCorrectionLevel")
 				
 				let qrcodeImage = filter!.outputImage
-				if (qrcodeImage == nil) {
-					return
-				}
+				if qrcodeImage == nil { return }
+				
+				
 				let scaleX = 110.0 / qrcodeImage!.extent.size.width
 				let scaleY = 110.0 / qrcodeImage!.extent.size.height
 				
-				let transformedImage = qrcodeImage!.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+				let output = CGSize(width: 110, height: 110)
+				let matrix = CGAffineTransform(scaleX: scaleX, y: scaleY)
 				
-				let image = UIImage(ciImage: transformedImage)
-				let imgData = image.pngData()
-				if (imgData == nil) {
-					return
-				}
-				session.sendMessageData(data, replyHandler: nil, errorHandler: nil)
+				UIGraphicsBeginImageContextWithOptions(output, false, 0)
+				defer { UIGraphicsEndImageContext() }
+				UIImage(ciImage: qrcodeImage!.transformed(by: matrix))
+					.draw(in: CGRect(origin: .zero, size: output))
+				let image = UIGraphicsGetImageFromCurrentImageContext()
+				if image == nil { return }
+				let png = image!.pngData()
+				if png == nil { return }
+				session.sendMessageData(png!, replyHandler: nil, errorHandler: nil)
 			}
 		}
 	}

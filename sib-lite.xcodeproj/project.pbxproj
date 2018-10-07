@@ -222,6 +222,10 @@
 		E5BC8D951F90DC3800BE78A9 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BC8D941F90DC3700BE78A9 /* LocalAuthentication.framework */; };
 		E5BC8D971F90DC6000BE78A9 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BC8D961F90DC5F00BE78A9 /* CoreFoundation.framework */; };
 		E5BC8D991F90DCC400BE78A9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BC8D981F90DCC400BE78A9 /* Security.framework */; };
+		E5C0577E2169540100F12C3C /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E53BA4061FCEB347007386AE /* CoreImage.framework */; };
+		E5C057842169541400F12C3C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C057832169541400F12C3C /* CoreGraphics.framework */; };
+		E5C0578C2169E28900F12C3C /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C0578B2169E28900F12C3C /* WatchKit.framework */; };
+		E5C0578E2169E2A000F12C3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5C0578D2169E2A000F12C3C /* UIKit.framework */; };
 		E5C0C4FD1FD18FD10039D1BC /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0C4FA1FD18FC10039D1BC /* back@3x.png */; };
 		E5C0C4FE1FD18FD10039D1BC /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0C4FB1FD18FC80039D1BC /* back@2x.png */; };
 		E5C0C4FF1FD18FD10039D1BC /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0C4FC1FD18FCC0039D1BC /* back.png */; };
@@ -578,6 +582,12 @@
 		E5BC8D941F90DC3700BE78A9 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		E5BC8D961F90DC5F00BE78A9 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E5BC8D981F90DCC400BE78A9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E5C057832169541400F12C3C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E5C057852169DEE800F12C3C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		E5C057872169E25B00F12C3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		E5C057892169E26800F12C3C /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.0.sdk/System/Library/Frameworks/WatchKit.framework; sourceTree = DEVELOPER_DIR; };
+		E5C0578B2169E28900F12C3C /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
+		E5C0578D2169E2A000F12C3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E5C0C4FA1FD18FC10039D1BC /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
 		E5C0C4FB1FD18FC80039D1BC /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		E5C0C4FC1FD18FCC0039D1BC /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
@@ -634,6 +644,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5C0578E2169E2A000F12C3C /* UIKit.framework in Frameworks */,
+				E5C0578C2169E28900F12C3C /* WatchKit.framework in Frameworks */,
+				E5C057842169541400F12C3C /* CoreGraphics.framework in Frameworks */,
+				E5C0577E2169540100F12C3C /* CoreImage.framework in Frameworks */,
 				E5B3A4892058291200897D0D /* MessageUI.framework in Frameworks */,
 				E53A4501200B7309002F93AC /* WatchConnectivity.framework in Frameworks */,
 				E594F3681FED50DC0042C256 /* CardIO.framework in Frameworks */,
@@ -803,6 +817,12 @@
 		E56EC0B61F765A9000EDE756 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5C0578D2169E2A000F12C3C /* UIKit.framework */,
+				E5C057892169E26800F12C3C /* WatchKit.framework */,
+				E5C0578B2169E28900F12C3C /* WatchKit.framework */,
+				E5C057872169E25B00F12C3C /* UIKit.framework */,
+				E5C057832169541400F12C3C /* CoreGraphics.framework */,
+				E5C057852169DEE800F12C3C /* CoreGraphics.framework */,
 				E5B3A4842058291200897D0D /* MessageUI.framework */,
 				E58D55E6200F64790092AA8C /* Intents.framework */,
 				E53A4500200B7309002F93AC /* WatchConnectivity.framework */,

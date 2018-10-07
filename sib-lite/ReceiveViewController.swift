@@ -82,17 +82,22 @@ class ReceiveViewController : BaseViewController, UITextFieldDelegate {
 		let filter = CIFilter(name: "CIQRCodeGenerator")
 	
 		filter!.setValue(data, forKey: "inputMessage")
-		filter!.setValue("Q", forKey: "inputCorrectionLevel")
+		filter!.setValue("H", forKey: "inputCorrectionLevel")
 		
 		let qrcodeImage = filter!.outputImage
 		
 		let scaleX = imgQR.frame.size.width / qrcodeImage!.extent.size.width
 		let scaleY = imgQR.frame.size.height / qrcodeImage!.extent.size.height
 		
-		let transformedImage = qrcodeImage!.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+		let output = CGSize(width: 110, height: 110)
+		let matrix = CGAffineTransform(scaleX: scaleX, y: scaleY)
 		
-		imgQR.image = UIImage(ciImage: transformedImage)
-		
+		UIGraphicsBeginImageContextWithOptions(output, false, 0)
+		defer { UIGraphicsEndImageContext() }
+		UIImage(ciImage: qrcodeImage!.transformed(by: matrix))
+			.draw(in: CGRect(origin: .zero, size: output))
+		imgQR.image = UIGraphicsGetImageFromCurrentImageContext()
+
 		aiWait.stopAnimating()
 	}
 		
