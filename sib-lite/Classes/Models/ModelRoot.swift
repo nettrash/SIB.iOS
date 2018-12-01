@@ -184,7 +184,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/payInvoice")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/payInvoice")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -235,7 +235,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/getNewBitPayAddress")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/getNewBitPayAddress")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -283,7 +283,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/checkOp")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/checkOp")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -350,7 +350,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/registerSell")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/registerSell")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -391,7 +391,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 							let jsonData = try? JSONSerialization.data(withJSONObject: json)
 							
 							// create post request
-							let url = URL(string: "https://api.sib.moe/wallet/sib.svc/unspentTransactions")!
+							let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/unspentTransactions")!
 							var request = URLRequest(url: url)
 							request.httpMethod = "POST"
 							request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -491,7 +491,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/registerBuy")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/registerBuy")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -557,7 +557,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 		
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/balance")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/balance")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -621,7 +621,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/transactions")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/transactions")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -684,7 +684,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/transactions")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/transactions")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -743,7 +743,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/mempool")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/mempool")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -804,7 +804,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/hasInput")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/hasInput")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -851,7 +851,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/sellRate")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/sellRate")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -899,7 +899,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/buyRate")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/buyRate")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -948,7 +948,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/buyRateWithAmount")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/buyRateWithAmount")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -998,7 +998,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/unspentTransactions")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/unspentTransactions")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1050,7 +1050,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/broadcastTransaction")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/broadcastTransaction")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1108,7 +1108,7 @@ public class ModelRoot: NSObject, WCSessionDelegate {
 			let jsonData = try? JSONSerialization.data(withJSONObject: json)
 			
 			// create post request
-			let url = URL(string: "https://api.sib.moe/wallet/sib.svc/currentRates")!
+			let url = URL(string: "https://service.biocoin.pro/wallet/sib/sib.svc/currentRates")!
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.addValue("application/json", forHTTPHeaderField: "Content-Type")
