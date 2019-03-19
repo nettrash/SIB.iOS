@@ -2,10 +2,10 @@
 
 SIBCoin is a blockchain platform created back in 2015.  Its code is based on Dash blockchain improved by the project’s specialists.
 Sibcoin’s mission is to make the digital tokens accessible to the general public and usable in daily routines.Sibcoin protocol allows users to issue their own "colored coins" – tokens based on Sibcoin blockchain in just a few clicks. Such tokens will have all the values of blockchain-based assets:
-– decentralization
-– safe storage
-– transaction speed
-– transparency
+- decentralization
+- safe storage
+- transaction speed
+- transparency
 
 SIBCoin-based tokens are primarily addressing the follwing business needs:
 - issuing utility tokens for ICO
