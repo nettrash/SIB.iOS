@@ -437,6 +437,7 @@
 		E52C9DC11FB8D71D00DEC76E /* forest-001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "forest-001.jpg"; sourceTree = "<group>"; };
 		E531B5FE1FA0EFAD00DA76E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E531B6001FA0EFDB00DA76E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		E53634FE224101B1002A7C2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E536E0061FF2213100F3BBE8 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		E536E00C1FF2AF1A00F3BBE8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E53A44E7200A465E002F93AC /* watchKitExtension Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "watchKitExtension Extension-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -713,6 +714,7 @@
 				E50165CC1F7657A200855FBC /* Products */,
 				E56EC0B91F765E9600EDE756 /* Content */,
 				E56EC0B61F765A9000EDE756 /* Frameworks */,
+				E53634FE224101B1002A7C2E /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
