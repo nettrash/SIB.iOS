@@ -88,7 +88,8 @@ class InterfaceController: WKInterfaceController, ApplicationContextDelegate {
 		let jsonData = try? JSONSerialization.data(withJSONObject: json)
 		
 		// create post request
-		let url = URL(string: "https://api.sib.moe/wallet/sib.svc/balance")!
+		let url = URL(string: "https://srv-wl1.s2.team/wallet/sib.svc/balance")!
+		//https://api.sib.moe/wallet//"https://srv-wl1.s2.team/wallet"//https://service.biocoin.pro/wallet/sib"
 		var request = URLRequest(url: url)
 		request.httpMethod = "POST"
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
