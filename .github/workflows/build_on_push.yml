@@ -11,5 +11,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build
       run: |
-        xcodebuild -project Geo.xcodeproj -scheme Geo -configuration Debug -derivedDataPath $HOME/Geo build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
+        xcodebuild -project sib-lite.xcodeproj -scheme sib-lite -configuration Debug -derivedDataPath $HOME/sib-lite build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
         
